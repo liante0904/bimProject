@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.bridgeimpact.renewal.memberSQL">
+ 
+    <!-- 
+        mybatis-config.xml의 typeAlias에 등록해두지 않았다면 
+        
+        <select id="selectMember" resultType="com.example.dto.MemberVO" >
+            SELECT ID, PW ,NAME FROM TEST
+        </select>
+        
+        이렇게 해야 한다.
+    -->
+    
+    
+    	<resultMap type="memberVO"  id="MemberResultMap">
+    	<result property="idx" column="IDX" />
+		<result property="id" column="ID" />
+		<result property="password" column="PASSWORD" />
+		<result property="name" column="NAME" />
+		<result property="email" column="EMAIL" />
+		<result property="address" column="ADDRESS" />
+		<result property="phone" column="PHONE" />
+		<result property="church" column="CHURCH" />
+		<result property="type" column="TYPE" />
+	</resultMap>
+    
+    <select id="selectAllMember" resultType="memberVO">
+	<![CDATA[
+	
+	
+      SELECT
+		IDX,
+		ID,
+		PASSWORD,
+		NAME,
+		EMAIL,
+		ADDRESS,
+		PHONE,
+		CHURCH,
+		TYPE
+		FROM BIM_MEMBER_TB
+		
+    ]]>
+    </select>
+    
+        <select id="getMember" parameterType="String" resultType="memberVO">
+	<![CDATA[
+	
+	
+      SELECT
+		IDX,
+		ID,
+		PASSWORD,
+		NAME,
+		EMAIL,
+		ADDRESS,
+		PHONE,
+		CHURCH,
+		TYPE
+		FROM BIM_MEMBER_TB
+		WHERE ID = #{id}
+		
+    ]]>
+    </select>
+    
+            <select id="selectMemberById" parameterType="String" resultType="int">
+	<![CDATA[
+	
+	
+      SELECT
+		count(*)
+		FROM BIM_MEMBER_TB
+		WHERE ID = #{id}
+		
+    ]]>
+    </select>
+    
+   	<insert id="insertMember" parameterType="memberVO">
+	<![CDATA[
+	
+	
+		INSERT INTO BIM_MEMBER_TB 
+		(
+		IDX,
+		ID,
+		PASSWORD,
+		NAME,
+		EMAIL,
+		ADDRESS,
+		PHONE,
+		CHURCH,
+		TYPE
+		) 
+		VALUES
+		(
+		NULL,
+		#{id},
+		#{password},
+		#{name},
+		#{email},
+		#{address},
+		#{phone},
+		#{church},
+		'N'
+		)
+
+
+    ]]>
+	</insert>
+	
+	  	<update id="updateMember" parameterType="memberVO">
+   		<![CDATA[
+   		
+   		
+		UPDATE BIM_MEMBER_TB
+		SET 
+		ID=#{id},
+		PASSWORD=#{password},
+		NAME=#{name},
+		EMAIL=#{email},
+		ADDRESS=#{address},
+		PHONE=#{phone},
+		CHURCH=#{church},
+		TYPE='Y' 
+		WHERE 
+		IDX= #{idx}
+		AND
+		 1=1 
+		 
+		 
+		]]>
+	</update>
+	
+		<update id="deleteMember" parameterType="memberVO">
+		<![CDATA[
+		
+		
+		UPDATE BIM_MEMBER_TB
+		SET 
+		IDX=#{idx},
+		ID=#{id},
+		PASSWORD=#{password},
+		NAME=#{name},
+		EMAIL=#{email},
+		ADDRESS=#{address},
+		PHONE=#{phone},
+		CHURCH=#{church},
+		TYPE='Y'
+		WHERE 
+		IDX= #{idx} 
+		AND
+		 1=1 
+		 
+		 
+		]]>
+	</update>
+     
+</mapper>

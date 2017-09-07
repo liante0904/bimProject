@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.bridgeimpact.renewal.boardSQL">
+ 
+    <!-- 
+        mybatis-config.xml의 typeAlias에 등록해두지 않았다면 
+        
+        <select id="selectMember" resultType="com.example.dto.MemberVO" >
+            SELECT ID, PW ,NAME FROM TEST
+        </select>
+        
+        이렇게 해야 한다.
+    -->
+
+<!--     
+    	<resultMap type="boardVO"  id="BoardResultMap">
+    	<result property="idx" column="IDX" />
+    	<result property="parentIdx" column="PARENT_IDX" />
+		<result property="title" column="TITLE" />
+		<result property="contents" column="CONTENTS" />
+		<result property="hitCnt" column="HIT_CNT" />
+		<result property="delGb" column="DEL_GB" />
+		<result property="writeDt" column="WRITE_DT" />
+		<result property="writeId" column="WRITE_ID" />
+		</resultMap>
+    
+     -->
+    <select id="selectAllBoard" resultType="boardVO">
+	<![CDATA[
+	
+	
+		SELECT   
+		IDX  ,   
+		PARENT_IDX  ,   
+		TITLE  ,   
+		CONTENTS  ,   
+		HIT_CNT  ,   
+		DEL_GB  ,   
+		DATE_FORMAT(WRITE_DT, "%Y-%m-%d ") AS 'WRITE_DT'  ,   
+		WRITE_ID   
+	FROM   BIM_BOARD_TB   
+		WHERE 
+		DEL_GB = 'N'
+	ORDER BY IDX DESC
+
+
+    ]]>
+    </select>
+    
+
+    
+        <select id="selectBoardByIndex" parameterType="int" resultType="boardVO">
+	<![CDATA[
+	
+	
+		SELECT   
+		IDX  ,   
+		PARENT_IDX  ,   
+		TITLE  ,   
+		CONTENTS  ,   
+		HIT_CNT  ,   
+		DEL_GB  ,   
+		DATE_FORMAT(WRITE_DT, "%Y-%m-%d %H:%i:%s") AS 'WRITE_DT'   ,   
+		WRITE_ID   
+		FROM   BIM_BOARD_TB   
+		WHERE IDX = #{index}		
+    ]]>
+    </select>
+    
+   	<insert id="insertBoard" parameterType="boardVO">
+	<![CDATA[
+
+
+	
+	
+		INSERT INTO BIM_BOARD_TB 
+		(
+		IDX  ,   
+		PARENT_IDX  ,   
+		TITLE  ,   
+		CONTENTS  ,   
+		HIT_CNT  ,   
+		DEL_GB  ,   
+		WRITE_DT  ,   
+		WRITE_ID  
+		) 
+		VALUES
+		(
+		NULL,
+		NULL,
+		#{title},
+		#{contents},
+		0,
+		'N',
+		NULL,
+		#{writeId}
+		)
+
+
+    ]]>
+	</insert>
+	
+	  	<update id="updateBoard" parameterType="boardVO">
+   		<![CDATA[
+   		
+   		
+		UPDATE BIM_BOARD_TB
+		SET 
+		TITLE  = #{title},   
+		CONTENTS  = #{contents}  
+		WHERE 
+		IDX =  #{idx} 
+		 
+		 
+		]]>
+	</update>
+	
+		<update id="deleteBoard" parameterType="boardVO">
+		<![CDATA[
+		
+		
+		UPDATE BIM_BOARD_TB
+		SET 
+		DEL_GB = 'Y'
+		WHERE 
+		IDX= #{idx} AND WRITE_ID = #{writeId} 
+		 
+		 
+		]]>
+	</update>
+	
+	
+		<update id="updateHitCntByIndex" parameterType="int">
+		<![CDATA[
+		
+		
+		UPDATE BIM_BOARD_TB
+		SET 
+		HIT_CNT = COALESCE(HIT_CNT, 0) + 1
+		WHERE 
+		IDX= #{idx} 
+		 
+		 
+		]]>
+	</update>
+     
+</mapper>

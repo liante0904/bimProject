@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+<!-- 	
+	<mvc:interceptors>
+		<mvc:interceptor>
+		<beans:bean class="com.bridgeimpact.renewal.service.LoginCheckIntercepter"/>
+		</mvc:interceptor>
+		controller 실행 전이나 후에 실행 될 intercepter 로직 class
+	</mvc:interceptors>
+ 
+ -->
+	 
+
+	 
+<mvc:interceptors>
+        <mvc:interceptor>
+			<mvc:mapping path="/board/writeForm.bim"/>
+			<mvc:mapping path="/member/editForm.bim"/>
+			<mvc:mapping path="/admin/admin.bim"/>
+           <!-- 여러개 컨트롤러 추가 가능 -->
+           <!--
+                <mvc:mapping path="/admin_write"/>
+                <mvc:mapping path="/admin_update"/>
+                <mvc:mapping path="/admin_delete"/>
+                .
+                .
+                .
+           -->
+           <!-- 로그인체크 인터셉터 클래스 -->
+            <beans:bean class="com.bridgeimpact.renewal.service.LoginCheckIntercepter"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
+</beans:beans>
