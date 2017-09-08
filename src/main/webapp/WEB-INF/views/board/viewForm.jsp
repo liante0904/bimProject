@@ -9,37 +9,21 @@
 <script type="text/javascript">
 
 
-function commentEdit(idx) {
-	var idx = idx;
-	 $.ajax({
-	        url : localhost+"/comment/commentEdit.bim",
-	        type: "post",
-	        data: 
-	        		{ 
-	        		"idx" : idx,
-					"contents" : $("#comment").val()
-					},
-	        success : function(data){
-	         if ( data.result == "success") {
-				alert("댓글 작성 완료");
-			}else {
-				alert("댓글 작성 실패");
-			}
-	        }
-	    });
-	 
+
+
+function commentEditInit(idx) {
+	var editDiv = $('div[id=editDiv][data-idx='+idx+']');
+	
+	editDiv.show();
+
 }
 
-function commentDelete(idx) {
-	var idx = idx;	
-	alert(idx);
+function commentDelete(idx){
 	 $.ajax({
 	        url : localhost+"/comment/commentDelete.bim",
 	        type: "post",
-	        data: 
-	        		{ 
+	        data: { 
 	        		"idx" : idx,
-					"contents" : $("#comment").val(),
 					"writeId" : "${sessionScope.loginInfo.id}"
 					},
 	        success : function(data){
@@ -50,13 +34,12 @@ function commentDelete(idx) {
 			}
 	        }
 	    });
+	 
 }
-
-
+ 
+ 
 $(document).ready(function(){ 
 	
-
-
 
 
 	$("#edit").click(function() {
@@ -69,50 +52,24 @@ $(document).ready(function(){
 	$("#list").click(function() {
 		if (confirm("정말로 글쓰기를 취소 하시겠습니까?")) {
 		location.href="${pageContext.request.contextPath }/board/boardList.bim";
-			
 		}
 	})
+	
 	$("#commentWrite").click(function() {
-		var contents = $("#comment").val();
+		/* 
+		var contents = $("#commentWriteContents").val();
 		var comment = {};
 		comment.contents = contents;
 		alert(comment.contents);
-		
+		 */
+		 
 		 $.ajax({
 		        url : localhost+"/comment/commentWrite.bim",
 		        type: "post",
 		        data: 
 		        		{ 
 		        		"parentIdx" : "${sessionScope.boardInfo.idx}",
-						"contents" : $("#comment").val(),
-						"writeId" : "${sessionScope.loginInfo.id}"
-						},
-		        success : function(data){
-		         if ( data.result == "success") {
-					alert("댓글 작성 완료");
-				}else {
-					alert("댓글 작성 실패");
-				}
-		        }
-		    });
-	})
-	
-
-
-	
-		$("#commentDelete").click(function() {
-		var contents = $("#comment").val();
-		var comment = {};
-		comment.contents = contents;
-		alert(comment.contents);
-		
-		 $.ajax({
-		        url : localhost+"/comment/commentWrite.bim",
-		        type: "post",
-		        data: 
-		        		{ 
-		        		"parentIdx" : "${sessionScope.boardInfo.idx}",
-						"contents" : $("#comment").val(),
+						"contents" : $("#commentWriteContents").val(),
 						"writeId" : "${sessionScope.loginInfo.id}"
 						},
 		        success : function(data){
@@ -175,31 +132,30 @@ $(document).ready(function(){
 	작성자 아이디 : "${board.writeId}"
 	
 	
+						<h4>댓글</h4>
 	<c:forEach items="${commentList}" var="comment">
-			<table>
-
-				<tbody>
-
-					<tr>
-						<th>댓글 </th>
-						<td colspan="2" width="300" height="50">작성자 : ${comment.writeId} 댓글번호? : ${comment.idx}  </td>
-						<td width="150" height="50">내용 :${comment.contents}</td>
-						<td width="150">
+					<p>
+						작성자 : ${comment.writeId} 댓글번호 : ${comment.idx}  
+						내용 :${comment.contents}
 						<c:set var="commentWriteId" value="${comment.writeId}" />
 						<c:set var="sessionId" value="${sessionScope.loginInfo.id}" />
 						
 						<c:if test="${commentWriteId == sessionId}">
-						   <input type="button" id="commentEdit" value="댓글수정" onclick="commentEdit(${comment.idx})">
+						   <input type="button" id="commentEditInit" value="댓글수정" onclick="commentEditInit(${comment.idx})" data-idx="${comment.idx}">
 						   <input type="button" id="commentDelete" value="댓글삭제" onclick="commentDelete(${comment.idx})">
 						    
 						</c:if>
-						</td>
-					</tr>
-
-				
-				</tbody>
-			</table>
+					</p>
+						<div id="editDiv"  data-idx="${comment.idx}" style="display:none; margin: 50px 1px 50px 1px">
+							<p>
+						<input type="text" size="40" id="commentEditContents" value="${comment.contents}" placeholder="댓글을 수정하세요"> 
+						<input type="button" onclick="commentEdit(${comment.idx})" value="댓글수정">
+							</p>
+						</div> 
+						
 	</c:forEach>
+
+
 
 
 			<table border="2">
@@ -208,7 +164,7 @@ $(document).ready(function(){
 
 					<tr>
 						<th>댓글 내용</th>
-						<td colspan="5" width="250" height="50"><input type="text" size="40" value="" id="comment" placeholder="댓글을 입력하세요"></td>
+						<td colspan="5" width="250" height="50"><input type="text" size="40" id="commentWriteContents" placeholder="댓글을 입력하세요"></td>
 						<td><input type="button" id="commentWrite" value="댓글작성"></td>
 					</tr>
 

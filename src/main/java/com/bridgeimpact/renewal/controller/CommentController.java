@@ -128,10 +128,10 @@ public class CommentController {
 
 		  if ( resultCnt == 0 ){
 			   result = "success";
-			   resultMsg = "댓글 작성이 완료 되었습니다.";
+			   resultMsg = "댓글 삭제가 완료 되었습니다.";
 			  } else {
 			   result = "failure";
-			   resultMsg = "댓글 작성이 실패 하였습니다.";
+			   resultMsg = "댓글 삭제가 실패 하였습니다.";
 			  }
 
 		  resultMap.put("result", result);
