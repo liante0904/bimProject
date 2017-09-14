@@ -68,7 +68,7 @@ $(document).ready(function(){
 		        type: "post",
 		        data: 
 		        		{ 
-		        		"parentIdx" : "${sessionScope.boardInfo.idx}",
+		        		"parentIdx" : "${sessionScope.articleInfo.idx}",
 						"contents" : $("#commentWriteContents").val(),
 						"writeId" : "${sessionScope.loginInfo.id}"
 						},
@@ -101,27 +101,27 @@ $(document).ready(function(){
 				<tbody>
 					<tr>
 						<th width="50" height="50">작성자</th>
-						<th width="50" height="50">${board.writeId}</th>
+						<th width="50" height="50">${article.writeId}</th>
 						<th width="50" height="50">조회수</th>
-						<th width="50" height="50">${board.hitCnt}</th>
+						<th width="50" height="50">${article.hitCnt}</th>
 						<th width="50" height="50">작성일</th>
-						<th height="50">${board.writeDt}</th>
+						<th height="50">${article.writeDt}</th>
 					</tr>
 
 					<tr>
 						<th>제목</th>
-						<td colspan="5" width="150" height="150">${board.title}</td>
+						<td colspan="5" width="150" height="150">${article.title}</td>
 					</tr>
 
 					<tr>
 						<th>내용</th>
-						<td colspan="5" width="150" height="150">${board.contents}</td>
+						<td colspan="5" width="150" height="150">${article.contents}</td>
 					</tr>
 				</tbody>
 
 			</table>
 		<input type="submit" id="boardSubmit" value="글쓰기 완료" />
-		<c:if test="${sessionScope.loginInfo.id == board.writeId}">
+		<c:if test="${sessionScope.loginInfo.id == article.writeId}">
 		<input type="button" id="edit" value="수정" />
 		<input type="button" id="delete" value="삭제" />
 		</c:if>
@@ -129,7 +129,7 @@ $(document).ready(function(){
 			</form>
 
 	세션 아이디 : "${sessionScope.loginInfo.id}"
-	작성자 아이디 : "${board.writeId}"
+	작성자 아이디 : "${article.writeId}"
 	
 	
 						<h4>댓글</h4>

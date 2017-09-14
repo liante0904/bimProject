@@ -7,17 +7,17 @@ import com.bridgeimpact.renewal.dto.CommentVO;
 
 public interface CommentDAO {
 
-	List<CommentVO> selectAllComment() throws Exception;
+	public List<CommentVO> selectAllComment() throws Exception;
 	
-	List<CommentVO> selectCommentByIndex(int index) throws Exception;
+	public List<CommentVO> selectCommentByIndex(int index) throws Exception;
 
-	void insertComment(CommentVO comment) throws Exception;
+	public void insertComment(CommentVO comment) throws Exception;
 
-	void updateComment(CommentVO comment) throws Exception;
+	public void updateComment(CommentVO comment) throws Exception;
 
-	void deleteComment(CommentVO comment) throws Exception;
+	public void deleteComment(CommentVO comment) throws Exception;
 
-	void updateHitCntByIndex(int index) throws Exception;
+	public void updateHitCntByIndex(int index) throws Exception;
 
 
 

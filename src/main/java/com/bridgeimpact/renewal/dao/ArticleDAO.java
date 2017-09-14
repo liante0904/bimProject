@@ -6,17 +6,17 @@ import com.bridgeimpact.renewal.dto.ArticleVO;
 
 public interface ArticleDAO {
 
-	List<ArticleVO> selectAllArticle() throws Exception;
+	public List<ArticleVO> selectAllArticle() throws Exception;
 	
-	ArticleVO selectArticleByIndex(int index) throws Exception;
+	public ArticleVO selectArticleByIndex(int index) throws Exception;
 
-	void insertArticle(ArticleVO board) throws Exception;
+	public void insertArticle(ArticleVO board) throws Exception;
 
-	void updateArticle(ArticleVO board) throws Exception;
+	public void updateArticle(ArticleVO board) throws Exception;
 
-	void deleteArticle(ArticleVO board) throws Exception;
+	public void deleteArticle(ArticleVO board) throws Exception;
 
-	void updateHitCntByIndex(int index) throws Exception;
+	public void updateHitCntByIndex(int index) throws Exception;
 
 
 

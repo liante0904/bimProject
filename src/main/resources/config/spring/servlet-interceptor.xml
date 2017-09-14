@@ -36,7 +36,7 @@
            -->
            <!-- 로그인체크 인터셉터 클래스 -->
            
-            <beans:bean class="com.bridgeimpact.renewal.service.LoginCheckIntercepter"/>
+            <beans:bean class="com.bridgeimpact.renewal.intercepter.LoginCheckIntercepter"/>
             
         </mvc:interceptor>
         
@@ -52,7 +52,7 @@
                 .
            -->
            <!-- 로그인 사용자 관리자 체크 인터셉터 클래스 -->
-             <beans:bean class="com.bridgeimpact.renewal.service.AdminCheckIntercepter"/>
+             <beans:bean class="com.bridgeimpact.renewal.intercepter.AdminCheckIntercepter"/>
         </mvc:interceptor>
         
     </mvc:interceptors>

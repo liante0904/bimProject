@@ -37,14 +37,14 @@ $(document).ready(function(){
         </thead>
         <tbody>
          
-            <c:forEach items="${boardList}" var="board">
+            <c:forEach items="${articleList}" var="article">
                 <tr>
-                    <td>${board.idx}</td>
-                    <td><a href="${pageContext.request.contextPath }/board/boardView.bim?num=${board.idx}">${board.title}</a></td>
-                    <td>${board.hitCnt}</td>
-                    <td>${board.writeId}</td>
-                    <td>${board.delGb}</td>
-                    <td>${board.writeDt}</td>
+                    <td>${article.idx}</td>
+                    <td><a href="${pageContext.request.contextPath }/board/boardView.bim?num=${article.idx}">${article.title}</a></td>
+                    <td>${article.hitCnt}</td>
+                    <td>${article.writeId}</td>
+                    <td>${article.delGb}</td>
+                    <td>${article.writeDt}</td>
                 </tr>
             </c:forEach>
 

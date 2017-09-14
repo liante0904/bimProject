@@ -42,24 +42,6 @@ public class MemberController {
     
     
 
-    @RequestMapping(value = "member/memberList.bim", method = RequestMethod.GET)
-    public String home(Locale locale, Model model){
- 
-        logger.info("home");
-        List<MemberVO> memberList = null;
-		try {
-			memberList = memberService.selectAllMember();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
-        model.addAttribute("memberList", memberList);
- 
-        return "member/memberList";
-    }
-    
-
 	
 	@RequestMapping(value="member/joinForm.bim")
 	public ModelAndView joinForm(Model model) {

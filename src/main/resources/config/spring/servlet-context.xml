@@ -25,6 +25,7 @@
 	<!-- 컨트롤러 패키지 지정 -->
 	<context:component-scan base-package="com.bridgeimpact.renewal.controller" />
 	<context:component-scan base-package="com.bridgeimpact.renewal.service" />
+	<context:component-scan base-package="com.bridgeimpact.renewal.intercepter" />
 	
 	<context:annotation-config /> 
 

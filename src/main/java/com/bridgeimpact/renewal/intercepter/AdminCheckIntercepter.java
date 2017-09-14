@@ -1,4 +1,4 @@
-package com.bridgeimpact.renewal.service;
+package com.bridgeimpact.renewal.intercepter;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +12,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.bridgeimpact.renewal.dto.MemberVO;
 
 
-@Service
 public class AdminCheckIntercepter extends HandlerInterceptorAdapter {
     
 	/*

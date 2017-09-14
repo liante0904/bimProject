@@ -1,4 +1,4 @@
-package com.bridgeimpact.renewal.service;
+package com.bridgeimpact.renewal.intercepter;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 
-@Service
 public class LoginCheckIntercepter extends HandlerInterceptorAdapter {
     
 	/*
