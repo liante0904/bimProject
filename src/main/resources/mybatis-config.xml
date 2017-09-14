@@ -11,7 +11,7 @@
      	
         <typeAliases>
             <typeAlias type="com.bridgeimpact.renewal.dto.MemberVO" alias="memberVO"/>
-            <typeAlias type="com.bridgeimpact.renewal.dto.BoardVO" alias="boardVO"/>
+            <typeAlias type="com.bridgeimpact.renewal.dto.ArticleVO" alias="articleVO"/>
             <typeAlias type="com.bridgeimpact.renewal.dto.CommentVO" alias="commentVO"/>
         </typeAliases>
         

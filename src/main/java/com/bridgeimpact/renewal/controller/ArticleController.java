@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bridgeimpact.renewal.dto.BoardVO;
+import com.bridgeimpact.renewal.dto.ArticleVO;
 import com.bridgeimpact.renewal.dto.CommentVO;
 import com.bridgeimpact.renewal.dto.MemberVO;
-import com.bridgeimpact.renewal.service.BoardService;
+import com.bridgeimpact.renewal.service.ArticleService;
 import com.bridgeimpact.renewal.service.CommentService;
 import com.bridgeimpact.renewal.service.MemberService;
 
@@ -30,12 +30,12 @@ import com.bridgeimpact.renewal.service.MemberService;
  * Handles requests for the application home page.
  */
 @Controller
-public class BoardController {
+public class ArticleController {
     
-    private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ArticleController.class);
     
     @Autowired
-    private BoardService boardService;
+    private ArticleService articleService;
     
     @Autowired
     private CommentService commentService;
@@ -48,9 +48,9 @@ public class BoardController {
 	
 	@RequestMapping(value="board/boardList.bim")
 	public String boardList(Model model, HttpServletRequest request){
-	       List<BoardVO> boardList = null;
+	       List<ArticleVO> boardList = null;
 		try {
-			boardList = boardService.selectAllBoard();
+			boardList = articleService.selectAllArticle();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -75,11 +75,11 @@ public class BoardController {
 	public ModelAndView boardView(Model model, HttpServletRequest request,HttpSession session){
 		int boardIndex = Integer.parseInt(request.getParameter("num"));
 		ModelAndView mav = new ModelAndView("board/viewForm");
-		BoardVO selectBoardByIndex = null;
+		ArticleVO selectBoardByIndex = null;
 		System.out.println(">>>>>>>>>>>>>"+boardIndex);
 		try {
-			boardService.increseHitCntByIndex(boardIndex);
-			selectBoardByIndex = boardService.selectBoardByIndex(boardIndex);
+			articleService.increseHitCntByIndex(boardIndex);
+			selectBoardByIndex = articleService.selectArticleByIndex(boardIndex);
 			
 			
 		} catch (Exception e) {
@@ -103,13 +103,13 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="board/boardWrite.bim")
-	public ModelAndView boardWrite(Model model,BoardVO board, HttpServletRequest request,HttpSession session){
+	public ModelAndView boardWrite(Model model,ArticleVO board, HttpServletRequest request,HttpSession session){
 		logger.info("글 제목 : "+ board.getTitle() + "\t 글내용 : " + board.getContents() );
 		MemberVO loginMember = (MemberVO)session.getAttribute("loginInfo");
 		board.setWriteId(loginMember.getId());
 		ModelAndView mav = new ModelAndView("redirect:/board/boardList.bim");
 		try {
-			boardService.insertBoard(board);
+			articleService.insertArticle(board);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -118,14 +118,14 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="board/boardEdit.bim")
-	public ModelAndView boardEdit(Model model,BoardVO board, HttpServletRequest request,HttpSession session){
+	public ModelAndView boardEdit(Model model,ArticleVO board, HttpServletRequest request,HttpSession session){
 		logger.info("글 제목 : "+ board.getTitle() + "\t 글내용 : " + board.getContents() );
-		BoardVO sessionBoard = (BoardVO) session.getAttribute("boardInfo");
+		ArticleVO sessionBoard = (ArticleVO) session.getAttribute("boardInfo");
 		board.setIdx(sessionBoard.getIdx());
 		System.out.println("===========>>>"+sessionBoard.getTitle());
 		ModelAndView mav = new ModelAndView("redirect:/board/boardList.bim");
 		try {
-			boardService.editBoard(board);
+			articleService.editArticle(board);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -134,9 +134,9 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="board/boardDelete.bim")
-	public ModelAndView boardDelete(Model model,BoardVO board, HttpServletRequest request,HttpSession session){
+	public ModelAndView boardDelete(Model model,ArticleVO board, HttpServletRequest request,HttpSession session){
 		ModelAndView mav = new ModelAndView("redirect:/board/boardList.bim");
-		BoardVO sessionBoard = (BoardVO) session.getAttribute("boardInfo");
+		ArticleVO sessionBoard = (ArticleVO) session.getAttribute("boardInfo");
 		MemberVO sessionMember = (MemberVO) session.getAttribute("loginInfo");
 		board.setIdx(sessionBoard.getIdx());
 		System.out.println("세션 board"+sessionBoard.getWriteId() +"세션아이디" +sessionMember.getId());
@@ -147,7 +147,7 @@ public class BoardController {
 			System.out.println("삭제시켜줌?=========>>");
 			board.setWriteId(sessionMember.getId());
 			try {
-				boardService.deleteBoard(board);
+				articleService.deleteArticle(board);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

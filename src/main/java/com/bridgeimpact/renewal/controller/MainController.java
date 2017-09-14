@@ -49,12 +49,7 @@ public class MainController {
         return "index";
     }
 
-	@RequestMapping(value="admin/admin.bim")
-	public ModelAndView admin(Model model, Object locale) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		ModelAndView mv = new ModelAndView("admin/admin");
-		return mv;
-	}
+
 	@RequestMapping(value="main/loginForm.bim")
 	public ModelAndView loginForm(Model model) {
 		ModelAndView mv = new ModelAndView("main/loginForm");

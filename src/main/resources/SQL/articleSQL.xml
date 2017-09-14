@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
-<mapper namespace="com.bridgeimpact.renewal.boardSQL">
+<mapper namespace="com.bridgeimpact.renewal.articleSQL">
  
     <!-- 
         mybatis-config.xml의 typeAlias에 등록해두지 않았다면 
@@ -16,7 +16,7 @@
     -->
 
 <!--     
-    	<resultMap type="boardVO"  id="BoardResultMap">
+    	<resultMap type="articleVO"  id="BoardResultMap">
     	<result property="idx" column="IDX" />
     	<result property="parentIdx" column="PARENT_IDX" />
 		<result property="title" column="TITLE" />
@@ -28,7 +28,7 @@
 		</resultMap>
     
      -->
-    <select id="selectAllBoard" resultType="boardVO">
+    <select id="selectAllArticle" resultType="articleVO">
 	<![CDATA[
 	
 	
@@ -41,7 +41,7 @@
 		DEL_GB  ,   
 		DATE_FORMAT(WRITE_DT, "%Y-%m-%d ") AS 'WRITE_DT'  ,   
 		WRITE_ID   
-	FROM   BIM_BOARD_TB   
+	FROM   BIM_ARTICLE_TB   
 		WHERE 
 		DEL_GB = 'N'
 	ORDER BY IDX DESC
@@ -52,7 +52,7 @@
     
 
     
-        <select id="selectBoardByIndex" parameterType="int" resultType="boardVO">
+        <select id="selectArticleByIndex" parameterType="int" resultType="articleVO">
 	<![CDATA[
 	
 	
@@ -65,18 +65,18 @@
 		DEL_GB  ,   
 		DATE_FORMAT(WRITE_DT, "%Y-%m-%d %H:%i:%s") AS 'WRITE_DT'   ,   
 		WRITE_ID   
-		FROM   BIM_BOARD_TB   
+		FROM   BIM_ARTICLE_TB   
 		WHERE IDX = #{index}		
     ]]>
     </select>
     
-   	<insert id="insertBoard" parameterType="boardVO">
+   	<insert id="insertArticle" parameterType="articleVO">
 	<![CDATA[
 
 
 	
 	
-		INSERT INTO BIM_BOARD_TB 
+		INSERT INTO BIM_ARTICLE_TB 
 		(
 		IDX  ,   
 		PARENT_IDX  ,   
@@ -103,11 +103,11 @@
     ]]>
 	</insert>
 	
-	  	<update id="updateBoard" parameterType="boardVO">
+	  	<update id="updateArticle" parameterType="articleVO">
    		<![CDATA[
    		
    		
-		UPDATE BIM_BOARD_TB
+		UPDATE BIM_ARTICLE_TB
 		SET 
 		TITLE  = #{title},   
 		CONTENTS  = #{contents}  
@@ -118,11 +118,11 @@
 		]]>
 	</update>
 	
-		<update id="deleteBoard" parameterType="boardVO">
+		<update id="deleteArticle" parameterType="articleVO">
 		<![CDATA[
 		
 		
-		UPDATE BIM_BOARD_TB
+		UPDATE BIM_ARTICLE_TB
 		SET 
 		DEL_GB = 'Y'
 		WHERE 
@@ -137,7 +137,7 @@
 		<![CDATA[
 		
 		
-		UPDATE BIM_BOARD_TB
+		UPDATE BIM_ARTICLE_TB
 		SET 
 		HIT_CNT = COALESCE(HIT_CNT, 0) + 1
 		WHERE 

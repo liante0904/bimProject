@@ -25,7 +25,6 @@
         <mvc:interceptor>
 			<mvc:mapping path="/board/writeForm.bim"/>
 			<mvc:mapping path="/member/editForm.bim"/>
-			<mvc:mapping path="/admin/admin.bim"/>
            <!-- 여러개 컨트롤러 추가 가능 -->
            <!--
                 <mvc:mapping path="/admin_write"/>
@@ -36,8 +35,26 @@
                 .
            -->
            <!-- 로그인체크 인터셉터 클래스 -->
+           
             <beans:bean class="com.bridgeimpact.renewal.service.LoginCheckIntercepter"/>
+            
         </mvc:interceptor>
+        
+                <mvc:interceptor>
+			<mvc:mapping path="/admin/admin.bim"/>
+           <!-- 여러개 컨트롤러 추가 가능 -->
+           <!--
+                <mvc:mapping path="/admin_write"/>
+                <mvc:mapping path="/admin_update"/>
+                <mvc:mapping path="/admin_delete"/>
+                .
+                .
+                .
+           -->
+           <!-- 로그인 사용자 관리자 체크 인터셉터 클래스 -->
+             <beans:bean class="com.bridgeimpact.renewal.service.AdminCheckIntercepter"/>
+        </mvc:interceptor>
+        
     </mvc:interceptors>
 
 

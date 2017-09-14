@@ -2,7 +2,7 @@ package com.bridgeimpact.renewal.dao;
 
 import java.util.List;
 
-import com.bridgeimpact.renewal.dto.BoardVO;
+import com.bridgeimpact.renewal.dto.ArticleVO;
 import com.bridgeimpact.renewal.dto.CommentVO;
 
 public interface CommentDAO {

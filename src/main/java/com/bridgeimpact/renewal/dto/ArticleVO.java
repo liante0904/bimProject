@@ -5,7 +5,7 @@ import java.sql.Time;
 import java.sql.Timestamp;
 
 
-public class BoardVO {
+public class ArticleVO {
 
 	private int idx;  
 	private int parentIdx;  
@@ -16,7 +16,7 @@ public class BoardVO {
 	private String writeDt;  
 	private String writeId;
 	
-	public BoardVO() {
+	public ArticleVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
