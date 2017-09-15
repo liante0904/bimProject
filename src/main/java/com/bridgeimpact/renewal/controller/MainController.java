@@ -18,8 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bridgeimpact.renewal.dto.BoardVO;
 import com.bridgeimpact.renewal.dto.MemberVO;
+import com.bridgeimpact.renewal.service.ArticleService;
+import com.bridgeimpact.renewal.service.BoardService;
 import com.bridgeimpact.renewal.service.MemberService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
  
@@ -34,18 +38,32 @@ public class MainController {
     @Autowired
     private MemberService memberService;
     
+	@Autowired
+	private BoardService boardService;
+
+    
     /**
      * Simply selects the home view to render by returning its name.
      */
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(Locale locale, Model model) throws Exception{
- 
-        return "index";
+    public String index(Locale locale, Model model,HttpSession session) throws Exception{
+/*
+		List<BoardVO> boardList = null;
+		try {
+			boardList = boardService.selectAllBoard();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		model.addAttribute("boardList", boardList);
+		*/
+		
+    	return "index";
     }
     @RequestMapping(value = "/index.bim", method = RequestMethod.GET)
     public String indexbim(Locale locale, Model model) throws Exception{
- 
         return "index";
     }
 
@@ -55,6 +73,8 @@ public class MainController {
 		ModelAndView mv = new ModelAndView("main/loginForm");
 		return mv;
 	}
+	
+	
 	//로그인, 세션처리
 	@RequestMapping(value="main/login.bim")
 	public String loginSubmit(Model model,MemberVO member, HttpServletRequest request,HttpSession session){
@@ -81,11 +101,36 @@ public class MainController {
 			System.out.println(">>>>>>> 아이디없음");
 			return "main/loginForm";
 		}
-
 	}
 	
 	
+	
+	@RequestMapping(value="/getBoardList.bim",method = RequestMethod.GET,produces = "application/json; charset=utf8")
+	@ResponseBody
+	public String getBoardList(Model model,String id, HttpServletRequest request,HttpServletResponse response){
+		List<BoardVO> boardList = null;
+		try {
+			boardList = boardService.selectAllBoard();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonList ="";
+		try {
+			jsonList = mapper.writeValueAsString(boardList);
+		} catch (JsonProcessingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		logger.info(jsonList);
+		model.addAttribute("boardList", boardList);
+
+		  return jsonList;
+	}
+
  
+	
 }
 
 

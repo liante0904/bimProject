@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 public class ArticleVO {
 
 	private int idx;  
-	private int parentIdx;  
+	private String boardName;  
 	private String title;  
 	private String contents;  
 	private int hitCnt;  
@@ -26,7 +26,7 @@ public class ArticleVO {
 	
 	@Override
 	public String toString() {
-		return "BoardVO [idx=" + idx + ", parentIdx=" + parentIdx + ", title=" + title + ", contents=" + contents
+		return "BoardVO [idx=" + idx + ", boardName=" + boardName + ", title=" + title + ", contents=" + contents
 				+ ", hitCnt=" + hitCnt + ", delGb=" + delGb + ", writeDt=" + writeDt + ", writeId=" + writeId + "]";
 	}
 
@@ -43,13 +43,13 @@ public class ArticleVO {
 	}
 
 
-	public int getParentIdx() {
-		return parentIdx;
+	public String getboardName() {
+		return boardName;
 	}
 
 
-	public void setParentIdx(int parentIdx) {
-		this.parentIdx = parentIdx;
+	public void setboardName(String boardName) {
+		this.boardName = boardName;
 	}
 
 

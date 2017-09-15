@@ -25,7 +25,6 @@ public class AdminCheckIntercepter extends HandlerInterceptorAdapter {
    @Override
    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 	   String msg = "";
-	   System.out.println(">>>>>>>>>>>>>여기왔나");
 	   try {
            //loginInfo이라는 세션key를 가진 정보가 널일경우 로그인페이지로 이동
     	   MemberVO sessionMember = (MemberVO) request.getSession().getAttribute("loginInfo");

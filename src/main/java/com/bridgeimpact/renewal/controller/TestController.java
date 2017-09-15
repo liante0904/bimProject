@@ -20,7 +20,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bridgeimpact.renewal.dto.ArticleVO;
+import com.bridgeimpact.renewal.dto.BoardVO;
 import com.bridgeimpact.renewal.dto.MemberVO;
+import com.bridgeimpact.renewal.service.ArticleService;
+import com.bridgeimpact.renewal.service.BoardService;
+import com.bridgeimpact.renewal.service.CommentService;
 import com.bridgeimpact.renewal.service.MemberService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -29,18 +34,65 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * Handles requests for the application home page.
  */
 @Controller
+@RequestMapping(value = "/test")
 public class TestController {
     
     private static final Logger logger = LoggerFactory.getLogger(TestController.class);
     
-    @Autowired
-    private MemberService memberService;
+	@Autowired
+	private ArticleService articleService;
+
+	@Autowired
+	private CommentService commentService;
+
+	@Autowired
+	private MemberService memberService;
+
+	@Autowired
+	private BoardService boardService;
     
     /**
      * Simply selects the home view to render by returning its name.
      */
     
+	@RequestMapping(value="/view.bim", method= RequestMethod.GET)
+	public String boardEdit(Model model,ArticleVO article, HttpServletRequest request,HttpSession session){
+		String result = request.getParameter("id"); 
+	//	int paramId = Integer.parseInt();
+
+		List<BoardVO> boardList = null;
+		try {
+			boardList = boardService.selectAllBoard();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		model.addAttribute("boardList", boardList);
+		 
+		logger.info(result);
+		return "test/test";
+	}
+	
     
+	@RequestMapping(value="/boardView.bim", method= RequestMethod.GET)
+	public String boardView(Model model,ArticleVO article, HttpServletRequest request,HttpSession session){
+		String result = request.getParameter("id"); 
+	//	int paramId = Integer.parseInt();
+
+		List<BoardVO> boardList = null;
+		try {
+			boardList = boardService.selectAllBoard();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		model.addAttribute("boardList", boardList);
+		 
+		logger.info(result+"게시판 요청");
+		return "test/test";
+	}
 
     @RequestMapping("/login")
     public String login(HttpServletRequest request){
@@ -59,6 +111,11 @@ public class TestController {
         return returnURL;
     }
        
+    
+	@RequestMapping(value="/writeForm.bim")
+	public String writeForm(Model model, HttpServletRequest request){
+		return "/test/writeForm";
+	}
 
     /**
      * 관리자메인 컨트롤러

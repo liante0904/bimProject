@@ -12,9 +12,10 @@
 	<h2> 로그인 상태 : ${msg} ${sessionScope.msg}</h2>
 	<form action="${pageContext.request.contextPath}/main/login.bim" method="POST">
 		
-		id:		<input type="text" id="id" name="id"><br>
-		 password:	<input type="password" id="password" name="password"><br> <input type="submit" value="로그인"> 
-			
+		<pre>
+ID:	<input type="text" id="id" name="id">
+PASSWORD: <input type="password" id="password" name="password"> <input type="submit" value="로그인"> 
+		</pre>	
 
 	</form>
 </body>

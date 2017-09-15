@@ -28,11 +28,12 @@ $(document).ready(function(){
         <thead>
             <tr>
                 <th>글번호</th>
+                <th>게시판 구분</th>
                 <th>제목</th>
                 <th>조회수</th>
 				<th>작성자</th>
-                <th>삭제여부</th>
                 <th>날짜</th>
+                <th>삭제여부</th>
             </tr>
         </thead>
         <tbody>
@@ -40,11 +41,12 @@ $(document).ready(function(){
             <c:forEach items="${articleList}" var="article">
                 <tr>
                     <td>${article.idx}</td>
+                    <td>${article.boardName}</td>
                     <td><a href="${pageContext.request.contextPath }/board/boardView.bim?num=${article.idx}">${article.title}</a></td>
-                    <td>${article.hitCnt}</td>
                     <td>${article.writeId}</td>
-                    <td>${article.delGb}</td>
+                    <td>${article.hitCnt}</td>
                     <td>${article.writeDt}</td>
+                    <td>${article.delGb}</td>
                 </tr>
             </c:forEach>
 

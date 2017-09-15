@@ -112,7 +112,7 @@ public class MemberController {
 	}
 	
 	
-	@RequestMapping(value="member/memberIdCheck.bim",method = RequestMethod.GET)
+	@RequestMapping(value="member/memberIdCheck.bim",method = RequestMethod.GET,produces = "application/json; charset=utf8")
 	@ResponseBody
 	public Map<String, String> memberIdCheck(Model model,String id, HttpServletRequest request,HttpServletResponse response){
 		System.out.println(id);

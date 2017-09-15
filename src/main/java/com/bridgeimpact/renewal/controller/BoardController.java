@@ -72,6 +72,39 @@ public class BoardController {
 		return "/board/boardList";
 	}
 	
+	
+
+	@RequestMapping(value="/view.bim", method= RequestMethod.GET)
+	public ModelAndView view(Model model, HttpServletRequest request,HttpSession session){
+		int articleIndex = Integer.parseInt(request.getParameter("num"));
+		ModelAndView mav = new ModelAndView("/board/view");
+		ArticleVO selectArticleByIndex = null;
+		System.out.println(">>>>>>>>>>>>>"+articleIndex);
+		try {
+			articleService.increseHitCntByIndex(articleIndex);
+			selectArticleByIndex = articleService.selectArticleByIndex(articleIndex);
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		List<CommentVO> selectCommentByIndex = null;
+		
+		try {
+			selectCommentByIndex = commentService.selectCommentByIndex(articleIndex);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		mav.addObject("article" , selectArticleByIndex);
+		mav.addObject("commentList" , selectCommentByIndex);
+		session.setAttribute("articleInfo", selectArticleByIndex);
+		
+		return mav;
+	}
+	
 
 	@RequestMapping(value="/boardView.bim", method= RequestMethod.GET)
 	public ModelAndView boardView(Model model, HttpServletRequest request,HttpSession session){

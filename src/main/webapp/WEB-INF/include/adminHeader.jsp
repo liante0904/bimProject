@@ -11,6 +11,7 @@ var localhost = '${pageContext.request.contextPath }';
 <body>
 <div style="background-color:#aaaa00;height:150px;">
 
+<p>
 <a href="${pageContext.request.contextPath }/admin/memberList.bim">회원관리 (회원리스트, 회원가입설정)</a>
 <a href="${pageContext.request.contextPath }/admin/boardList.bim">홈페이지 관리(게시판 관리)</a>
 <a href="#this">메인 사진 등록 시스템(메인 사진 등록 관리)</a>
@@ -19,7 +20,12 @@ var localhost = '${pageContext.request.contextPath }';
 
 
 <a href="http://www.bridgeimpact.com/">이전 BIM 페이지</a>
+</p>
 
+<p>
+<a href="${pageContext.request.contextPath }/board/boardList.bim">통합 게시판 관리</a>
+<a href="${pageContext.request.contextPath }/test/writeForm.bim">통합 글쓰기</a>
+</p>
 
 </div>
 

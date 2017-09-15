@@ -38,12 +38,10 @@
 		NAME  ,   
 		DEL_GB    
 	FROM   BIM_BOARD_TB   
-	ORDER BY IDX DESC
-
 
     ]]>
     </select>
-    
+
     
     
 <!-- 

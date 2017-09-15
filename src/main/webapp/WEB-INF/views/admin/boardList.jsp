@@ -17,7 +17,7 @@
 </style>
 </head>
 <body>
-    <h1>Hello world!</h1>
+    <h1>게시판 관리</h1>
 
  
  
@@ -28,6 +28,7 @@
                 <th>아이디</th>
                 <th>이름</th>
                 <th>삭제 구분</th>
+				<th>보기</th>
             </tr>
         </thead>
         <tbody>
@@ -37,6 +38,7 @@
                     <td>${board.id}</td>
                     <td>${board.name}</td>
                     <td>${board.delGb}</td>
+					<td><a href="${pageContext.request.contextPath }/test/boardView.bim?id=${board.id}">${board.id} 게시판 이동</a></td>
                 </tr>
             </c:forEach>
         </tbody>
