@@ -46,151 +46,22 @@ public class BoardController {
      */
     
 	
-	@RequestMapping(value="/writeForm.bim")
-	public String writeForm(Model model, HttpServletRequest request){
-		return "/board/writeForm";
-	}
-	@RequestMapping(value="/editForm.bim")
-	public String editForm(Model model, HttpServletRequest request,HttpSession session){
-		// session.setAttribute(name, value);
-		return "/board/editForm";
-	}
+	@RequestMapping(value="/viewList.bim", method= RequestMethod.GET)
+	public String boardView(Model model,String id, HttpServletRequest request,HttpSession session){
 	
-	
-	@RequestMapping(value="/boardList.bim")
-	public String boardList(Model model, HttpServletRequest request){
-	       List<ArticleVO> articleList = null;
+		List<ArticleVO> articleList = null;
 		try {
-			articleList = articleService.selectAllArticle();
+			articleList = articleService.selectArticleByBoardName(id);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	        
-	        model.addAttribute("articleList", articleList);
-	 
-		return "/board/boardList";
-	}
-	
-	
 
-	@RequestMapping(value="/view.bim", method= RequestMethod.GET)
-	public ModelAndView view(Model model, HttpServletRequest request,HttpSession session){
-		int articleIndex = Integer.parseInt(request.getParameter("num"));
-		ModelAndView mav = new ModelAndView("/board/view");
-		ArticleVO selectArticleByIndex = null;
-		System.out.println(">>>>>>>>>>>>>"+articleIndex);
-		try {
-			articleService.increseHitCntByIndex(articleIndex);
-			selectArticleByIndex = articleService.selectArticleByIndex(articleIndex);
-			
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		List<CommentVO> selectCommentByIndex = null;
-		
-		try {
-			selectCommentByIndex = commentService.selectCommentByIndex(articleIndex);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		mav.addObject("article" , selectArticleByIndex);
-		mav.addObject("commentList" , selectCommentByIndex);
-		session.setAttribute("articleInfo", selectArticleByIndex);
-		
-		return mav;
+		model.addAttribute("articleList", articleList);
+		 
+		logger.info(id+"게시판 요청");
+		return "board/articleList";
 	}
-	
-
-	@RequestMapping(value="/boardView.bim", method= RequestMethod.GET)
-	public ModelAndView boardView(Model model, HttpServletRequest request,HttpSession session){
-		int articleIndex = Integer.parseInt(request.getParameter("num"));
-		ModelAndView mav = new ModelAndView("/board/viewForm");
-		ArticleVO selectArticleByIndex = null;
-		System.out.println(">>>>>>>>>>>>>"+articleIndex);
-		try {
-			articleService.increseHitCntByIndex(articleIndex);
-			selectArticleByIndex = articleService.selectArticleByIndex(articleIndex);
-			
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		List<CommentVO> selectCommentByIndex = null;
-		
-		try {
-			selectCommentByIndex = commentService.selectCommentByIndex(articleIndex);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		mav.addObject("article" , selectArticleByIndex);
-		mav.addObject("commentList" , selectCommentByIndex);
-		session.setAttribute("articleInfo", selectArticleByIndex);
-		
-		return mav;
-	}
-	
-	@RequestMapping(value="/boardWrite.bim")
-	public ModelAndView boardWrite(Model model,ArticleVO article, HttpServletRequest request,HttpSession session){
-		logger.info("글 제목 : "+ article.getTitle() + "\t 글내용 : " + article.getContents() );
-		MemberVO loginMember = (MemberVO)session.getAttribute("loginInfo");
-		article.setWriteId(loginMember.getId());
-		ModelAndView mav = new ModelAndView("redirect:/board/boardList.bim");
-		try {
-			articleService.insertArticle(article);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return mav;
-	}
-	
-	@RequestMapping(value="/boardEdit.bim")
-	public ModelAndView boardEdit(Model model,ArticleVO article, HttpServletRequest request,HttpSession session){
-		logger.info("글 제목 : "+ article.getTitle() + "\t 글내용 : " + article.getContents() );
-		ArticleVO sessionBoard = (ArticleVO) session.getAttribute("articleInfo");
-		article.setIdx(sessionBoard.getIdx());
-		System.out.println("===========>>>"+sessionBoard.getTitle());
-		ModelAndView mav = new ModelAndView("redirect:/board/boardList.bim");
-		try {
-			articleService.editArticle(article);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return mav;
-	}
-	
-	@RequestMapping(value="/boardDelete.bim")
-	public ModelAndView boardDelete(Model model,ArticleVO article, HttpServletRequest request,HttpSession session){
-		ModelAndView mav = new ModelAndView("redirect:/board/boardList.bim");
-		ArticleVO sessionBoard = (ArticleVO) session.getAttribute("articleInfo");
-		MemberVO sessionMember = (MemberVO) session.getAttribute("loginInfo");
-		article.setIdx(sessionBoard.getIdx());
-		System.out.println("세션 board"+sessionBoard.getWriteId() +"세션아이디" +sessionMember.getId());
-		if (!sessionBoard.getWriteId().equals(sessionMember.getId())) {
-			System.out.println(sessionBoard.getWriteId().equals(sessionMember.getId()));
-			return mav;
-		}else {
-			article.setWriteId(sessionMember.getId());
-			try {
-				articleService.deleteArticle(article);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
-		return mav;
-	}
-    
 }
 
 

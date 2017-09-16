@@ -8,6 +8,8 @@
 var localhost = '${pageContext.request.contextPath }';
 
 $(document).ready(function(){
+	getMenuInfo();
+/* 	
 	var sessionInitCheck = sessionStorage.getItem("boardList");
 	console.log(sessionInitCheck);
 	
@@ -28,13 +30,29 @@ $(document).ready(function(){
 	            console.log(data[0].idx);
 	            var session = sessionStorage.getItem("boardList");
 	             console.log("세션 테스트"+session);
-
+	             initBoard(data);
 	        }
 
 		});
 		
 	}
-
+ */
+	function getMenuInfo() {
+		$.get(localhost + "/getBoardList.bim", function(data, status) {
+			var str = "";
+			$(data).each(
+				function() {
+					str += "<li><a href='" + localhost + "/board/viewList.bim?id=" + this.id + "'>" + this.name + "</a></li>";
+			});
+			$('#board').html(str);
+//			alert("Data: " + data + "\nStatus: " + status);
+		});
+	}
+ 
+	function initBoard(data){
+		alert("도착");
+		$("#board").append("<b>Hello Test</b>");
+	} 
 	
 	$("#logout").click(function(){
 		$.ajax({
@@ -51,8 +69,10 @@ $(document).ready(function(){
 
 		});
 	});
-	 
+
+	
 });
+
 
 </script>
 
@@ -80,24 +100,13 @@ $(document).ready(function(){
 <a href="#this">등록안내 신청서</a>
 
  -->
- 			 <c:set var="board" value="${boardList }"/>
- 			 <c:out value="${board}" default="NULL"/>
-             <c:forEach items="${board}" var="board">
-             <a href="${pageContext.request.contextPath }/board/view.bim?id=${board.id}">${board.name}</a>
-             </c:forEach>
-             
-<%--              
-             <c:set var="board" value="${session.boardList }"></c:set>
-             <a href="${pageContext.request.contextPath }/board/view.bim?id=${board.id}">${board.name}</a>
- --%>
 
-<a href="#this">통합게시판(?)</a>
+<div id="board"></div>
+
 <a href="${pageContext.request.contextPath }/admin/admin.bim">관리자 페이지(예시)</a>
 
 
 <a href="http://www.bridgeimpact.com/">이전 BIM 페이지</a>
-<h4>아이디 : ${sessionScope.boardList}</h4> 
-<h4>세션 아이디 : ${sessionScope.loginInfo.id}</h4>
 
 
 

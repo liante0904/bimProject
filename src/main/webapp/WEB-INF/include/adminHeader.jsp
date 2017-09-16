@@ -23,7 +23,7 @@ var localhost = '${pageContext.request.contextPath }';
 </p>
 
 <p>
-<a href="${pageContext.request.contextPath }/board/boardList.bim">통합 게시판 관리</a>
+
 <a href="${pageContext.request.contextPath }/test/writeForm.bim">통합 글쓰기</a>
 </p>
 

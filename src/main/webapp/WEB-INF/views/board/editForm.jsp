@@ -32,7 +32,7 @@ $(document).ready(function(){
 </head>
 <body>
     <h1>editForm.jsp</h1>
-     <form action="${pageContext.request.contextPath }/board/boardEdit.bim" method="post">
+     <form action="${pageContext.request.contextPath }/board/editArticle.bim" method="post">
         <table>
             <tbody>
                 <tr>

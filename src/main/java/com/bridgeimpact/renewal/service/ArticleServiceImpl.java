@@ -16,43 +16,50 @@ import com.bridgeimpact.renewal.dto.ArticleVO;
 public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
-    private ArticleDAO boardDAO;
+    private ArticleDAO articleDAO;
     
 	
 	@Override
 	public List<ArticleVO> selectAllArticle() throws Exception {
 		// TODO Auto-generated method stub
-		return boardDAO.selectAllArticle();
+		return articleDAO.selectAllArticle();
 	}
 	
 	@Override
 	public ArticleVO selectArticleByIndex(int index) throws Exception {
 		// TODO Auto-generated method stub
-		return  boardDAO.selectArticleByIndex(index);
+		return  articleDAO.selectArticleByIndex(index);
 	}
 
 	@Override
+	public List<ArticleVO> selectArticleByBoardName(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return articleDAO.selectArticleByBoardName(id);
+	}
+	
+	@Override
 	public void insertArticle(ArticleVO board) throws Exception {
 		// TODO Auto-generated method stub
-		boardDAO.insertArticle(board);
+		articleDAO.insertArticle(board);
 	}
 
 	@Override
 	public void editArticle(ArticleVO board) throws Exception {
 		// TODO Auto-generated method stub
-		boardDAO.updateArticle(board);
+		articleDAO.updateArticle(board);
 	}
 
 	@Override
 	public void deleteArticle(ArticleVO board) throws Exception {
 		// TODO Auto-generated method stub
-		boardDAO.deleteArticle(board);
+		articleDAO.deleteArticle(board);
 	}
 
 	@Override
 	public void increseHitCntByIndex(int index) throws Exception {
 		// TODO Auto-generated method stub
-		boardDAO.updateHitCntByIndex(index);
+		articleDAO.updateHitCntByIndex(index);
 	}
+
 
 }

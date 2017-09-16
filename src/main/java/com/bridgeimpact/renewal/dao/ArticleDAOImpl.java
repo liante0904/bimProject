@@ -32,6 +32,12 @@ public class ArticleDAOImpl implements ArticleDAO {
 	}
 
 	@Override
+	public List<ArticleVO> selectArticleByBoardName(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(Namespace+".selectArticleByBoardName", id);
+	}
+
+	@Override
 	public void insertArticle(ArticleVO board) throws Exception {
 		// TODO Auto-generated method stub
 		sqlSession.insert(Namespace+".insertArticle", board);

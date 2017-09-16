@@ -4,7 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+ 
 <%@ include file="/WEB-INF/include/includeHeader.jsp" %>
+ 
+ <%-- 
+<jsp:include page="/WEB-INF/include/includeHeader.jsp"/>
+ --%>
 <%@ include file="/WEB-INF/include/leftSide.jsp" %>
 
 <%-- 

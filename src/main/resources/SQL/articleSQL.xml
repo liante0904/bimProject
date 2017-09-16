@@ -70,6 +70,29 @@
     ]]>
     </select>
     
+    
+        
+        <select id="selectArticleByBoardName" parameterType="String" resultType="articleVO">
+	<![CDATA[
+	
+	
+		SELECT   
+		IDX  ,   
+		BOARD_NAME  ,   
+		TITLE  ,   
+		CONTENTS  ,   
+		HIT_CNT  ,   
+		DEL_GB  ,   
+		DATE_FORMAT(WRITE_DT, "%Y-%m-%d %H:%i:%s") AS 'WRITE_DT'   ,   
+		WRITE_ID   
+		FROM   BIM_ARTICLE_TB   
+		WHERE BOARD_NAME = #{id}		
+    ]]>
+    </select>
+    
+    
+    
+    
    	<insert id="insertArticle" parameterType="articleVO">
 	<![CDATA[
 

@@ -55,62 +55,9 @@ public class TestController {
      * Simply selects the home view to render by returning its name.
      */
     
-	@RequestMapping(value="/view.bim", method= RequestMethod.GET)
-	public String boardEdit(Model model,ArticleVO article, HttpServletRequest request,HttpSession session){
-		String result = request.getParameter("id"); 
-	//	int paramId = Integer.parseInt();
 
-		List<BoardVO> boardList = null;
-		try {
-			boardList = boardService.selectAllBoard();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		model.addAttribute("boardList", boardList);
-		 
-		logger.info(result);
-		return "test/test";
-	}
 	
     
-	@RequestMapping(value="/boardView.bim", method= RequestMethod.GET)
-	public String boardView(Model model,ArticleVO article, HttpServletRequest request,HttpSession session){
-		String result = request.getParameter("id"); 
-	//	int paramId = Integer.parseInt();
-
-		List<BoardVO> boardList = null;
-		try {
-			boardList = boardService.selectAllBoard();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		model.addAttribute("boardList", boardList);
-		 
-		logger.info(result+"게시판 요청");
-		return "test/test";
-	}
-
-    @RequestMapping("/login")
-    public String login(HttpServletRequest request){
-        String returnURL = "";
-        //웹페이지에서받은 아이디,패스워드 일치시 admin 세션key 생성
-        if(request.getParameter("id").equals("admin") && request.getParameter("password").equals("1234")) {
-            Map<String, Object> map = new HashMap<String,Object>();
-            map.put("admin_id", "admin");
-            map.put("admin_name", "관리자");
-            request.getSession().setAttribute("admin", map);
-            returnURL = "redirect:/admin_main";
-        //일치하지 않으면 로그인페이지 재이동
-        }else {
-            returnURL = "/";
-        }
-        return returnURL;
-    }
-       
     
 	@RequestMapping(value="/writeForm.bim")
 	public String writeForm(Model model, HttpServletRequest request){
@@ -121,12 +68,7 @@ public class TestController {
      * 관리자메인 컨트롤러
      * @return
      */
-    @RequestMapping("/admin_main")
-    public String admin_main(){
-        return "admin_main";
-    }
-
-
+   
 
 }
 

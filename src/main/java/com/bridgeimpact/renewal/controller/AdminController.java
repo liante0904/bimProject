@@ -92,4 +92,18 @@ public class AdminController {
 		return "admin/boardList";
 	}
 
+	@RequestMapping(value="/articleList.bim")
+	public String boardList(Model model, HttpServletRequest request){
+	       List<ArticleVO> articleList = null;
+		try {
+			articleList = articleService.selectAllArticle();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	        
+	        model.addAttribute("articleList", articleList);
+	 
+		return "/board/boardList";
+	}
 }

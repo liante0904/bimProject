@@ -31,7 +31,7 @@ $(document).ready(function(){
 </head>
 <body>
     <h1>writeForm.jsp</h1>
-     <form action="${pageContext.request.contextPath }/board/boardWrite.bim" method="post">
+     <form action="${pageContext.request.contextPath }/board/writeArticle.bim" method="post">
         <table class="board_view">
             <tbody>
                 <tr>

@@ -38,7 +38,7 @@
                     <td>${board.id}</td>
                     <td>${board.name}</td>
                     <td>${board.delGb}</td>
-					<td><a href="${pageContext.request.contextPath }/test/boardView.bim?id=${board.id}">${board.id} 게시판 이동</a></td>
+					<td><a href="${pageContext.request.contextPath }/board/viewList.bim?id=${board.id}">${board.id} 게시판 이동</a></td>
                 </tr>
             </c:forEach>
         </tbody>

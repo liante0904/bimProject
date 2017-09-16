@@ -32,6 +32,7 @@ function commentDelete(idx){
 			}else {
 				alert("댓글 삭제 실패");
 			}
+	         
 	        }
 	    });
 	 
@@ -43,11 +44,19 @@ $(document).ready(function(){
 
 
 	$("#edit").click(function() {
-		location.href="${pageContext.request.contextPath }/board/editForm.bim";
+        if (window.sessionStorage) {
+
+           // sessionStorage.setItem('저장할 이름 - 문자열', '저장할 객체');
+            var position = sessionStorage.getItem("articleInfo");
+            console.log(position);
+        }
+
+
+		//location.href="${pageContext.request.contextPath }/board/editForm.bim";
 	})
 	$("#delete").click(function() {
 		if (confirm("정말로 게시물을 삭제 하시겠습니까?")) 
-		location.href="${pageContext.request.contextPath }/board/boardDelete.bim";
+		location.href="${pageContext.request.contextPath }/board/deleteArticle.bim";
 	})
 	$("#list").click(function() {
 		if (confirm("정말로 글쓰기를 취소 하시겠습니까?")) {
