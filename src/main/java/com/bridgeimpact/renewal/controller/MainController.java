@@ -129,7 +129,13 @@ public class MainController {
 		  return jsonList;
 	}
 
- 
+	@RequestMapping(value="/logout.bim",method = RequestMethod.GET,produces = "application/json; charset=utf8")
+	@ResponseBody
+	public String logout(Model model, HttpServletRequest request,HttpServletResponse response, HttpSession session){
+		session.invalidate();
+		model.addAttribute("success", "로그아웃 성공");
+		  return "index";
+	}
 	
 }
 

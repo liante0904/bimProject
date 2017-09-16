@@ -28,7 +28,7 @@ $(document).ready(function(){
 	            console.log(data[0].idx);
 	            var session = sessionStorage.getItem("boardList");
 	             console.log("세션 테스트"+session);
-	            
+
 	        }
 
 		});
@@ -36,16 +36,42 @@ $(document).ready(function(){
 	}
 
 	
+	$("#logout").click(function(){
+		$.ajax({
+	        type : "GET",
+	        url : "/logout.bim",
+	        dataType : "text",
+	        error : function(){
+	            alert('로그아웃 실패!!');
+	        },
+	        success : function(data){
+	            if(confirm("로그아웃 하시겠습니까?") == true)
+	             location.href="${pageContext.request.contextPath }/";
+	        }
 
+		});
+	});
 	 
 });
+
 </script>
 
 <body>
 <div style="background-color:#aaaa00;height:150px;">
 
+
+<c:if test="${empty sessionScope.loginInfo.id }">  <!-- sessionScopre.id가 없으면 -->
 <a href="${pageContext.request.contextPath }/main/loginForm.bim">로그인</a>
 <a href="${pageContext.request.contextPath }/member/joinForm.bim">회원가입</a>
+</c:if>
+
+<c:if test="${not empty sessionScope.loginInfo.id }"> <!-- sessionScopre.id가 있으면(로그인 성공시) -->
+	${sessionScope.loginInfo.name } 님 
+	<a href="#" id="logout">로그아웃</a><br/>
+</c:if>
+
+
+
 <a href="${pageContext.request.contextPath }/board/boardList.bim">게시판</a>
 <!-- 
 <a href="#this">사역원 소개</a>
@@ -71,7 +97,7 @@ $(document).ready(function(){
 
 <a href="http://www.bridgeimpact.com/">이전 BIM 페이지</a>
 <h4>아이디 : ${sessionScope.boardList}</h4> 
-<h4>테스트: ${sessionScope.test}</h4>
+<h4>세션 아이디 : ${sessionScope.loginInfo.id}</h4>
 
 
 
