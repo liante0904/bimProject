@@ -87,12 +87,14 @@ $(document).ready(function(){
 
 <c:if test="${not empty sessionScope.loginInfo.id }"> <!-- sessionScopre.id가 있으면(로그인 성공시) -->
 	${sessionScope.loginInfo.name } 님 
-	<a href="#" id="logout">로그아웃</a><br/>
+	<a href="#" id="logout">로그아웃</a>
 </c:if>
 
 
 
-<a href="${pageContext.request.contextPath }/board/boardList.bim">게시판</a>
+<a href="${pageContext.request.contextPath }/admin/admin.bim">관리자 페이지(예시)</a>
+<a href="http://www.bridgeimpact.com/">이전 BIM 페이지</a>
+
 <!-- 
 <a href="#this">사역원 소개</a>
 <a href="#this">캠프</a>
@@ -103,10 +105,6 @@ $(document).ready(function(){
 
 <div id="board"></div>
 
-<a href="${pageContext.request.contextPath }/admin/admin.bim">관리자 페이지(예시)</a>
-
-
-<a href="http://www.bridgeimpact.com/">이전 BIM 페이지</a>
 
 
 

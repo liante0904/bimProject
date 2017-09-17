@@ -81,13 +81,24 @@ public class AdminController {
 	public String boardList(Locale locale, Model model) {
 
 		List<BoardVO> boardList = null;
+		List<ArticleVO> articleList = null;
 		try {
 			boardList = boardService.selectAllBoard();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		try {
+			articleList = articleService.selectAllArticle();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	        
+	 
 
+		model.addAttribute("articleList", articleList);
 		model.addAttribute("boardList", boardList);
 		return "admin/boardList";
 	}

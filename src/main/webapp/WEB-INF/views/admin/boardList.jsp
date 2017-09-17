@@ -17,6 +17,8 @@
 </style>
 </head>
 <body>
+
+<div style="border: 1px solid black; float: left; width:49%;">
     <h1>게시판 관리</h1>
 
  
@@ -43,8 +45,39 @@
             </c:forEach>
         </tbody>
     </table>
+ </div>
  
- 
+<div style="border: 1px solid black; float: left; width:49%;">
+<h1>게시글 현황</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>글번호</th>
+                <th>게시판 구분</th>
+                <th>제목</th>
+                <th>조회수</th>
+				<th>작성자</th>
+                <th>날짜</th>
+                <th>삭제여부</th>
+            </tr>
+        </thead>
+        <tbody>
+         
+            <c:forEach items="${articleList}" var="article">
+                <tr>
+                    <td>${article.idx}</td>
+                    <td>${article.boardName}</td>
+                    <td><a href="${pageContext.request.contextPath }/board/viewArticle.bim?id=${article.boardName}&num=${article.idx}">${article.title}</a></td>
+                    <td>${article.writeId}</td>
+                    <td>${article.hitCnt}</td>
+                    <td>${article.writeDt}</td>
+                    <td>${article.delGb}</td>
+                </tr>
+            </c:forEach>
+
+        </tbody>
+    </table>
+</div> 
 </body>
 </html>
 

@@ -5,13 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="/WEB-INF/include/includeHeader.jsp" %>
+<%@ include file="/WEB-INF/include/articleHeader.jsp" %>
 <title>Home</title>
 <script type="text/javascript">
 
 $(document).ready(function(){ 
-
+	
 	$("#write").click(function() {
-		location.href="${pageContext.request.contextPath }/board/writeForm.bim";
+		var paramIdValue = getParameters('id');
+		location.href="${pageContext.request.contextPath }/board/writeForm.bim?id="+ paramIdValue;
 	})
 
 	

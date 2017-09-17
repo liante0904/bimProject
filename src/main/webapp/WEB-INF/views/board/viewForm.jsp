@@ -40,8 +40,27 @@ function commentDelete(idx){
  
  
 $(document).ready(function(){ 
-	
+	var getParameters = function (paramName) {
+	    // 리턴값을 위한 변수 선언
+	    var returnValue;
 
+	    // 현재 URL 가져오기
+	    var url = location.href;
+
+	    // get 파라미터 값을 가져올 수 있는 ? 를 기점으로 slice 한 후 split 으로 나눔
+	    var parameters = (url.slice(url.indexOf('?') + 1, url.length)).split('&');
+
+	    // 나누어진 값의 비교를 통해 paramName 으로 요청된 데이터의 값만 return
+	    for (var i = 0; i < parameters.length; i++) {
+	        var varName = parameters[i].split('=')[0];
+	        if (varName.toUpperCase() == paramName.toUpperCase()) {
+	            returnValue = parameters[i].split('=')[1];
+	            return decodeURIComponent(returnValue);
+	        }
+	    }
+	};
+	alert(getParameters('id'));
+	console.log(getParameters('id'));
 
 	$("#edit").click(function() {
         if (window.sessionStorage) {
@@ -50,10 +69,9 @@ $(document).ready(function(){
             var position = sessionStorage.getItem("articleInfo");
             console.log(position);
         }
-
-
 		//location.href="${pageContext.request.contextPath }/board/editForm.bim";
 	})
+	
 	$("#delete").click(function() {
 		if (confirm("정말로 게시물을 삭제 하시겠습니까?")) 
 		location.href="${pageContext.request.contextPath }/board/deleteArticle.bim";
@@ -129,7 +147,6 @@ $(document).ready(function(){
 				</tbody>
 
 			</table>
-		<input type="submit" id="boardSubmit" value="글쓰기 완료" />
 		<c:if test="${sessionScope.loginInfo.id == article.writeId}">
 		<input type="button" id="edit" value="수정" />
 		<input type="button" id="delete" value="삭제" />

@@ -2,9 +2,11 @@ package com.bridgeimpact.renewal.controller;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
- 
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bridgeimpact.renewal.dto.ArticleVO;
@@ -102,19 +105,24 @@ public class ArticleController {
 	 * @param session
 	 * @return
 	 */
+	
 	@RequestMapping(value="/writeArticle.bim")
-	public ModelAndView boardWrite(Model model,ArticleVO article, HttpServletRequest request,HttpSession session){
+	@ResponseBody
+	public Map<String, String> boardWrite(Model model,ArticleVO article, HttpServletRequest request,HttpSession session){
+		Map<String, String> resultMap = new HashMap<String, String>();
 		logger.info("글 제목 : "+ article.getTitle() + "\t 글내용 : " + article.getContents() );
+		System.out.println(">>>>>>>>>>>>>>"+article.getboardName());
 		MemberVO loginMember = (MemberVO)session.getAttribute("loginInfo");
 		article.setWriteId(loginMember.getId());
-		ModelAndView mav = new ModelAndView("redirect:/board/viewList.bim");
 		try {
 			articleService.insertArticle(article);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return mav;
+		String result = "success";
+		resultMap.put("result", result);
+		return resultMap;
 	}
 	
 	/***
@@ -157,9 +165,9 @@ public class ArticleController {
 		ArticleVO sessionBoard = (ArticleVO) session.getAttribute("articleInfo");
 		MemberVO sessionMember = (MemberVO) session.getAttribute("loginInfo");
 		article.setIdx(sessionBoard.getIdx());
-		System.out.println("세션 board"+sessionBoard.getWriteId() +"세션아이디" +sessionMember.getId());
+		System.out.println("세션 board : "+sessionBoard.getWriteId() +"세션아이디 : " +sessionMember.getId());
+		
 		if (!sessionBoard.getWriteId().equals(sessionMember.getId())) {
-			System.out.println(sessionBoard.getWriteId().equals(sessionMember.getId()));
 			return mav;
 		}else {
 			article.setWriteId(sessionMember.getId());
