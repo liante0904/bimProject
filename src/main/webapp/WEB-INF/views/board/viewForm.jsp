@@ -11,16 +11,36 @@
 
 
 
-function commentEditInit(idx) {
+function editCommentInit(idx) {
 	var editDiv = $('div[id=editDiv][data-idx='+idx+']');
-	
 	editDiv.show();
 
 }
 
-function commentDelete(idx){
+function editComment(idx){
 	 $.ajax({
-	        url : localhost+"/comment/commentDelete.bim",
+	        url : localhost+"/comment/editComment.bim",
+	        type: "post",
+	        data: { 
+	        		"idx" : idx, 
+	        		"contents" : $("#editCommentContents").val(),
+					"writeId" : "${sessionScope.loginInfo.id}"
+					},
+	        success : function(data){
+	         if ( data.result == "success") {
+				alert("댓글 수정 완료");
+			}else {
+				alert("댓글 수정 실패");
+			}
+	         
+	        }
+	    });
+	 
+}
+
+function deleteComment(idx){
+	 $.ajax({
+	        url : localhost+"/comment/deleteComment.bim",
 	        type: "post",
 	        data: { 
 	        		"idx" : idx,
@@ -40,27 +60,6 @@ function commentDelete(idx){
  
  
 $(document).ready(function(){ 
-	var getParameters = function (paramName) {
-	    // 리턴값을 위한 변수 선언
-	    var returnValue;
-
-	    // 현재 URL 가져오기
-	    var url = location.href;
-
-	    // get 파라미터 값을 가져올 수 있는 ? 를 기점으로 slice 한 후 split 으로 나눔
-	    var parameters = (url.slice(url.indexOf('?') + 1, url.length)).split('&');
-
-	    // 나누어진 값의 비교를 통해 paramName 으로 요청된 데이터의 값만 return
-	    for (var i = 0; i < parameters.length; i++) {
-	        var varName = parameters[i].split('=')[0];
-	        if (varName.toUpperCase() == paramName.toUpperCase()) {
-	            returnValue = parameters[i].split('=')[1];
-	            return decodeURIComponent(returnValue);
-	        }
-	    }
-	};
-	alert(getParameters('id'));
-	console.log(getParameters('id'));
 
 	$("#edit").click(function() {
         if (window.sessionStorage) {
@@ -82,21 +81,14 @@ $(document).ready(function(){
 		}
 	})
 	
-	$("#commentWrite").click(function() {
-		/* 
-		var contents = $("#commentWriteContents").val();
-		var comment = {};
-		comment.contents = contents;
-		alert(comment.contents);
-		 */
-		 
+	$("#writeComment").click(function() {
 		 $.ajax({
-		        url : localhost+"/comment/commentWrite.bim",
+		        url : localhost+"/comment/writeComment.bim",
 		        type: "post",
 		        data: 
 		        		{ 
 		        		"parentIdx" : "${sessionScope.articleInfo.idx}",
-						"contents" : $("#commentWriteContents").val(),
+						"contents" : $("#writeCommentContents").val(),
 						"writeId" : "${sessionScope.loginInfo.id}"
 						},
 		        success : function(data){
@@ -163,19 +155,19 @@ $(document).ready(function(){
 					<p>
 						작성자 : ${comment.writeId} 댓글번호 : ${comment.idx}  
 						내용 :${comment.contents}
-						<c:set var="commentWriteId" value="${comment.writeId}" />
+						<c:set var="writeCommentId" value="${comment.writeId}" />
 						<c:set var="sessionId" value="${sessionScope.loginInfo.id}" />
 						
-						<c:if test="${commentWriteId == sessionId}">
-						   <input type="button" id="commentEditInit" value="댓글수정" onclick="commentEditInit(${comment.idx})" data-idx="${comment.idx}">
-						   <input type="button" id="commentDelete" value="댓글삭제" onclick="commentDelete(${comment.idx})">
+						<c:if test="${writeCommentId == sessionId}">
+						   <input type="button" id="editCommentInit" value="댓글수정" onclick="editCommentInit(${comment.idx})" data-idx="${comment.idx}">
+						   <input type="button" id="deleteComment" value="댓글삭제" onclick="deleteComment(${comment.idx})">
 						    
 						</c:if>
 					</p>
 						<div id="editDiv"  data-idx="${comment.idx}" style="display:none; margin: 50px 1px 50px 1px">
 							<p>
-						<input type="text" size="40" id="commentEditContents" value="${comment.contents}" placeholder="댓글을 수정하세요"> 
-						<input type="button" onclick="commentEdit(${comment.idx})" value="댓글수정">
+						<input type="text" size="40" id="editCommentContents" value="${comment.contents}" placeholder="댓글을 수정하세요"> 
+						<input type="button" onclick="editComment(${comment.idx})" value="댓글수정">
 							</p>
 						</div> 
 						
@@ -190,8 +182,8 @@ $(document).ready(function(){
 
 					<tr>
 						<th>댓글 내용</th>
-						<td colspan="5" width="250" height="50"><input type="text" size="40" id="commentWriteContents" placeholder="댓글을 입력하세요"></td>
-						<td><input type="button" id="commentWrite" value="댓글작성"></td>
+						<td colspan="5" width="250" height="50"><input type="text" size="40" id="writeCommentContents" placeholder="댓글을 입력하세요"></td>
+						<td><input type="button" id="writeComment" value="댓글작성"></td>
 					</tr>
 
 				

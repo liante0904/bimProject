@@ -45,9 +45,9 @@ public class CommentController {
      */
     
     
-	@RequestMapping(value="comment/commentWrite.bim")
+	@RequestMapping(value="comment/writeComment.bim")
 	@ResponseBody
-	public Map<String, String> commentWrite(Model model,CommentVO commentVO, HttpServletRequest request,HttpServletResponse response){
+	public Map<String, String> writeComment(Model model,CommentVO commentVO, HttpServletRequest request,HttpServletResponse response){
 		
 		
 		Map<String, String> resultMap = new HashMap<String, String>();
@@ -77,9 +77,9 @@ public class CommentController {
 		  return resultMap;
 	}
 	
-	@RequestMapping(value="comment/commentEdit.bim")
+	@RequestMapping(value="comment/editComment.bim")
 	@ResponseBody
-	public Map<String, String> commentEdit(Model model,CommentVO commentVO, HttpServletRequest request,HttpServletResponse response){
+	public Map<String, String> editComment(Model model,CommentVO commentVO, HttpServletRequest request,HttpServletResponse response){
 		
 		
 		Map<String, String> resultMap = new HashMap<String, String>();
@@ -96,10 +96,10 @@ public class CommentController {
 
 		  if ( resultCnt == 0 ){
 			   result = "success";
-			   resultMsg = "댓글 작성이 완료 되었습니다.";
+			   resultMsg = "댓글 수정이 완료 되었습니다.";
 			  } else {
 			   result = "failure";
-			   resultMsg = "댓글 작성이 실패 하였습니다.";
+			   resultMsg = "댓글 수정이 실패 하였습니다.";
 			  }
 
 		  resultMap.put("result", result);
@@ -109,9 +109,9 @@ public class CommentController {
 		  return resultMap;
 	}
 	
-	@RequestMapping(value="comment/commentDelete.bim")
+	@RequestMapping(value="comment/deleteComment.bim")
 	@ResponseBody
-	public Map<String, String> commentDelete(Model model,CommentVO commentVO, HttpServletRequest request,HttpServletResponse response){
+	public Map<String, String> deleteComment(Model model,CommentVO commentVO, HttpServletRequest request,HttpServletResponse response){
 		
 		
 		Map<String, String> resultMap = new HashMap<String, String>();
