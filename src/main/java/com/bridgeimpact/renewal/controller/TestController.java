@@ -55,13 +55,10 @@ public class TestController {
      * Simply selects the home view to render by returning its name.
      */
     
-
-	
     
-    
-	@RequestMapping(value="/writeForm.bim")
+	@RequestMapping(value="/test.bim")
 	public String writeForm(Model model, HttpServletRequest request){
-		return "/test/writeForm";
+		return "/member/test";
 	}
 
     /**

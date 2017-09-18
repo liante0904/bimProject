@@ -9,34 +9,24 @@ var localhost = '${pageContext.request.contextPath }';
 
 $(document).ready(function(){
 	getMenuInfo();
-/* 	
-	var sessionInitCheck = sessionStorage.getItem("boardList");
-	console.log(sessionInitCheck);
 	
-	if(sessionInitCheck == null){
+    $("#test").click(function() {
 		$.ajax({
 	        type : "GET",
-	        url : "/getBoardList.bim",
-	        dataType : "JSON",
+	        url : "/board/viewList.bim?id=test2",
+//	        url : "/test/test.bim",
+	        dataType : "text",
 	        error : function(){
-	            alert('통신실패!!');
+	            alert(' 실패!!');
 	        },
 	        success : function(data){
-	            // alert("통신데이터 값 : " + data) ;
-	            $("#dataArea").html(data);
-	          //  var jsonObj = JSON.parse(data);
-	          sessionStorage.setItem("boardList", data);
-	            alert(data);
-	            console.log(data[0].idx);
-	            var session = sessionStorage.getItem("boardList");
-	             console.log("세션 테스트"+session);
-	             initBoard(data);
+	           	alert('성공');
+	           	$("#context").html(data);
 	        }
 
 		});
-		
-	}
- */
+     });
+    
 	function getMenuInfo() {
 		$.get(localhost + "/getBoardList.bim", function(data, status) {
 			var str = "";
@@ -94,6 +84,7 @@ $(document).ready(function(){
 
 <a href="${pageContext.request.contextPath }/admin/admin.bim">관리자 페이지(예시)</a>
 <a href="http://www.bridgeimpact.com/">이전 BIM 페이지</a>
+<a href="#" id="test">ajax page test</a>
 
 <!-- 
 <a href="#this">사역원 소개</a>

@@ -86,7 +86,8 @@
 		DATE_FORMAT(WRITE_DT, "%Y-%m-%d %H:%i:%s") AS 'WRITE_DT'   ,   
 		WRITE_ID   
 		FROM   BIM_ARTICLE_TB   
-		WHERE BOARD_NAME = #{id} AND DEL_GB = 'N'		
+		WHERE BOARD_NAME = #{id} AND DEL_GB = 'N'
+		ORDER BY IDX DESC		
     ]]>
     </select>
     

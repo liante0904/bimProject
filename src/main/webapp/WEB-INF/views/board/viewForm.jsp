@@ -61,12 +61,13 @@ function deleteComment(idx){
  
  
 $(document).ready(function(){ 
+		var idParam = "?" + "id=" + getParameters('id');
+		var param =  idParam +"&num=" + getParameters('num');
+		
 
 	$("#edit").click(function() {
 		var sessionId = "${sessionScope.loginInfo.id}";
 		var writerId =  "${article.writeId}";
-		var param = "?"+ "id=" + getParameters('id') +"&num=" + getParameters('num');
-		
         if (sessionId == writerId) {
         	location.href="${pageContext.request.contextPath }/board/editForm.bim"+param;
         }else{
@@ -77,11 +78,11 @@ $(document).ready(function(){
 	
 	$("#delete").click(function() {
 		if (confirm("정말로 게시물을 삭제 하시겠습니까?")) 
-		location.href="${pageContext.request.contextPath }/board/deleteArticle.bim";
+		location.href="${pageContext.request.contextPath }/board/deleteArticle.bim"+param;
 	})
 	$("#list").click(function() {
 		if (confirm("정말로 글쓰기를 취소 하시겠습니까?")) {
-		location.href="${pageContext.request.contextPath }/board/boardList.bim";
+		location.href="${pageContext.request.contextPath }/board/viewList.bim"+idParam;
 		}
 	})
 	

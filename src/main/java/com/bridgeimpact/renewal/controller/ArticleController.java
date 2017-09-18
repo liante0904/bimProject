@@ -68,15 +68,20 @@ public class ArticleController {
  */
 
 	@RequestMapping(value="/viewArticle.bim", method= RequestMethod.GET)
-	public ModelAndView boardView(int num,Model model,HttpSession session){
+	public ModelAndView boardView(String id,int num,Model model,HttpSession session){
+		String URL = "/board/viewForm";
 		int articleIndex = num;
-		ModelAndView mav = new ModelAndView("/board/viewForm");
+		ModelAndView mav = new ModelAndView(URL);
 		ArticleVO selectArticleByIndex = null;
 		List<CommentVO> selectCommentByIndex = null;
 		try {
 			articleService.increseHitCntByIndex(articleIndex);
 			selectArticleByIndex = articleService.selectArticleByIndex(articleIndex);
-			
+			if ("Y".equals(selectArticleByIndex.getDelGb())) { // 잘못된 접근 (이미 삭제된 글을 읽는 요청)
+				URL = "redirect:/board/viewList.bim?id="+id;
+				mav.setViewName(URL);
+				return mav;
+			}
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -163,14 +168,14 @@ public class ArticleController {
 	 */
 	
 	@RequestMapping(value="/deleteArticle.bim")
-	public ModelAndView boardDelete(Model model,ArticleVO article, HttpServletRequest request,HttpSession session){
-		ModelAndView mav = new ModelAndView("redirect:/board/viewList.bim");
+	public ModelAndView boardDelete(String id,int num,Model model,ArticleVO article, HttpServletRequest request,HttpSession session){
+		ModelAndView mav = new ModelAndView("redirect:/board/viewList.bim?id="+id);
 		ArticleVO sessionBoard = (ArticleVO) session.getAttribute("articleInfo");
 		MemberVO sessionMember = (MemberVO) session.getAttribute("loginInfo");
-		article.setIdx(sessionBoard.getIdx());
+		article.setIdx(num);
 		System.out.println("세션 board : "+sessionBoard.getWriteId() +"세션아이디 : " +sessionMember.getId());
 		
-		if (!sessionBoard.getWriteId().equals(sessionMember.getId())) {
+		if (!sessionBoard.getWriteId().equals(sessionMember.getId())) { // 잘못된 접근 (로그인 사용자와 글 작성자가 다른 요청)
 			return mav;
 		}else {
 			article.setWriteId(sessionMember.getId());

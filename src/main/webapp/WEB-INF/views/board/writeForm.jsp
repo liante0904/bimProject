@@ -33,7 +33,6 @@ $(document).ready(function(){
 		        },
 		        success : function(data){
 		         if ( data.result == "success") {
-					alert("글 작성 성공");
 					backPage();
 				}
 		        }
