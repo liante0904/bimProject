@@ -22,4 +22,11 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.selectAllBoard();
 	}
 
+
+	@Override
+	public void insertBoard(BoardVO board) throws Exception {
+		// TODO Auto-generated method stub
+		boardDAO.insertBoard(board);
+	}
+
 }

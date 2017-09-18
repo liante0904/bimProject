@@ -5,6 +5,28 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="/WEB-INF/include/includeHeader.jsp" %>
+<script type="text/javascript">
+$(function(){
+    $("#add").click(function(){           
+		 $.ajax({
+		        url : "/board/insertBoard.bim",
+		        type: "post",
+		        data : { 
+		        	"id" : "게시판테스트 생성",
+		        	"name" : "게시판 테스트생성",
+		        },
+		        success : function(data){
+		         if ( data.result == "success") {
+					alert("게시판 생성  성공");
+					backPage();
+				}
+		        }
+		    });
+    });
+});
+
+</script>
+<%@ include file="/WEB-INF/include/includeHeader.jsp" %>
 <title>Home</title>
  <style>
   table {
@@ -45,6 +67,8 @@
             </c:forEach>
         </tbody>
     </table>
+    
+    <input type="button" id="add" value="생성">     <input type="button" id="edit" value="편집"> <input type="button" id="delete" value="삭제?">
  </div>
  
 <div style="border: 1px solid black; float: left; width:49%;">

@@ -24,4 +24,12 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectList(Namespace+".selectAllBoard");
 	}
 
+
+
+	@Override
+	public void insertBoard(BoardVO board) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.insert(Namespace+".insertBoard", board);
+	}
+
 }

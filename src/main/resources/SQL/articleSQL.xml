@@ -41,10 +41,8 @@
 		DEL_GB  ,   
 		DATE_FORMAT(WRITE_DT, "%Y-%m-%d ") AS 'WRITE_DT'  ,   
 		WRITE_ID   
-	FROM   BIM_ARTICLE_TB   
-		WHERE 
-		DEL_GB = 'N'
-	ORDER BY IDX DESC
+		FROM   BIM_ARTICLE_TB   
+		ORDER BY IDX DESC
 
 
     ]]>

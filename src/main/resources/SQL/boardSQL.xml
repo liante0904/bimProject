@@ -37,13 +37,37 @@
 		ID  ,   
 		NAME  ,   
 		DEL_GB    
-	FROM   BIM_BOARD_TB   
+		FROM   BIM_BOARD_TB   
 
     ]]>
     </select>
 
     
     
+    
+   	<insert id="insertBoard" parameterType="boardVO">
+	<![CDATA[
+
+	
+		INSERT INTO BIM_BOARD_TB 
+		(
+		IDX ,
+		ID ,  
+		NAME ,  
+		DEL_GB   
+		) 
+		VALUES
+		(
+		NULL,
+		#{id},
+		#{name},
+		'N'
+		)
+
+
+    ]]>
+	</insert>
+	
 <!-- 
 
     
@@ -64,39 +88,6 @@
 		WHERE IDX = #{index}		
     ]]>
     </select>
-    
-   	<insert id="insertArticle" parameterType="articleVO">
-	<![CDATA[
-
-
-	
-	
-		INSERT INTO BIM_ARTICLE_TB 
-		(
-		IDX  ,   
-		PARENT_IDX  ,   
-		TITLE  ,   
-		CONTENTS  ,   
-		HIT_CNT  ,   
-		DEL_GB  ,   
-		WRITE_DT  ,   
-		WRITE_ID  
-		) 
-		VALUES
-		(
-		NULL,
-		NULL,
-		#{title},
-		#{contents},
-		0,
-		'N',
-		NULL,
-		#{writeId}
-		)
-
-
-    ]]>
-	</insert>
 	
 	  	<update id="updateArticle" parameterType="articleVO">
    		<![CDATA[
