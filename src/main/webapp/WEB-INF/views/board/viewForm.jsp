@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="/WEB-INF/include/includeHeader.jsp" %>
+<%@ include file="/WEB-INF/include/articleHeader.jsp" %>
 <title>Home</title>
 <script type="text/javascript">
 
@@ -62,13 +63,16 @@ function deleteComment(idx){
 $(document).ready(function(){ 
 
 	$("#edit").click(function() {
-        if (window.sessionStorage) {
-
-           // sessionStorage.setItem('저장할 이름 - 문자열', '저장할 객체');
-            var position = sessionStorage.getItem("articleInfo");
-            console.log(position);
+		var sessionId = "${sessionScope.loginInfo.id}";
+		var writerId =  "${article.writeId}";
+		var param = "?"+ "id=" + getParameters('id') +"&num=" + getParameters('num');
+		
+        if (sessionId == writerId) {
+        	location.href="${pageContext.request.contextPath }/board/editForm.bim"+param;
+        }else{
+        	alert("잘못된 접근 입니다.");
+        	location.href="${pageContext.request.contextPath }/board/viewArticle.bim"+param;
         }
-		//location.href="${pageContext.request.contextPath }/board/editForm.bim";
 	})
 	
 	$("#delete").click(function() {

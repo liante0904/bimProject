@@ -5,15 +5,42 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="/WEB-INF/include/includeHeader.jsp" %>
+<%@ include file="/WEB-INF/include/articleHeader.jsp" %>
 <title>Home</title>
 <script type="text/javascript">
-$(document).ready(function(){ 
+function backPage(){
+	var paramIdValue = getParameters('id');
+	var URL = "${pageContext.request.contextPath }/board/viewList.bim?id="+paramIdValue;
+	location.href= URL;
+}
 
+
+$(document).ready(function(){ 
 	$("#edit").click(function() {
-		$('this')
-		location.href="${pageContext.request.contextPath }/board/writeForm.bim";
 		
-	})
+		
+		var paramIdValue = getParameters('id');
+		var paramTitleValue = $("#title").val();
+		var paramContentsValue = $("#contents").val();
+		
+		
+		 $.ajax({
+		        url : "/board/editArticle.bim",
+		        type: "post",
+		        data : { 
+		        	"boardName" : paramIdValue,
+		        	"title" : paramTitleValue,
+		        	"contents" : paramContentsValue
+		        },
+		        success : function(data){
+		         if ( data.result == "success") {
+					alert("글 작성 성공");
+					backPage();
+				}
+		        }
+		    });
+
+	});
 
 
 	$("#list").click(function() {
@@ -46,7 +73,7 @@ $(document).ready(function(){
                 </tr>
             </tbody>
         </table>
- <input type="submit" id="edit" value="수정"/>
+ <input type="button" id="edit" value="수정"/>
  <input type="button" value="목록"/>
  
     </form>

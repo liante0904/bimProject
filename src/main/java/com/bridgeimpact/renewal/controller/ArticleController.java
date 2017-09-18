@@ -135,19 +135,22 @@ public class ArticleController {
 	 */
 	
 	@RequestMapping(value="/editArticle.bim")
-	public ModelAndView boardEdit(Model model,ArticleVO article, HttpServletRequest request,HttpSession session){
+	@ResponseBody
+	public Map<String, String> boardEdit(Model model,ArticleVO article, HttpServletRequest request,HttpSession session){
 		logger.info("글 제목 : "+ article.getTitle() + "\t 글내용 : " + article.getContents() );
+		Map<String, String> resultMap = new HashMap<String, String>();
 		ArticleVO sessionBoard = (ArticleVO) session.getAttribute("articleInfo");
 		article.setIdx(sessionBoard.getIdx());
 		System.out.println("===========>>>"+sessionBoard.getTitle());
-		ModelAndView mav = new ModelAndView("redirect:/board/viewList.bim");
 		try {
 			articleService.editArticle(article);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return mav;
+		String result = "success";
+		resultMap.put("result", result);
+		return resultMap;
 	}
 	
 	/***
