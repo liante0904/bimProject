@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="/WEB-INF/include/includeHeader.jsp" %>
+<%@ include file="/WEB-INF/include/adminHeader.jsp" %>
 <script type="text/javascript">
 $(function(){
     $("#add").click(function(){           
@@ -12,8 +13,8 @@ $(function(){
 		        url : "/board/insertBoard.bim",
 		        type: "post",
 		        data : { 
-		        	"id" : "게시판테스트 생성",
-		        	"name" : "게시판 테스트생성",
+		        	"id" : "test3",
+		        	"name" : "테스트3 게시판",
 		        },
 		        success : function(data){
 		         if ( data.result == "success") {
@@ -26,7 +27,6 @@ $(function(){
 });
 
 </script>
-<%@ include file="/WEB-INF/include/includeHeader.jsp" %>
 <title>Home</title>
  <style>
   table {

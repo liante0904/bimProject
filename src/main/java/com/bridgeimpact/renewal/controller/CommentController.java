@@ -33,6 +33,7 @@ import com.bridgeimpact.renewal.service.MemberService;
  * Handles requests for the application home page.
  */
 @Controller
+@RequestMapping(value="/comment")
 public class CommentController {
     
     private static final Logger logger = LoggerFactory.getLogger(CommentController.class);
@@ -45,7 +46,7 @@ public class CommentController {
      */
     
     
-	@RequestMapping(value="comment/writeComment.bim")
+	@RequestMapping(value="/writeComment.bim")
 	@ResponseBody
 	public Map<String, String> writeComment(Model model,CommentVO commentVO, HttpServletRequest request,HttpServletResponse response){
 		
@@ -77,7 +78,7 @@ public class CommentController {
 		  return resultMap;
 	}
 	
-	@RequestMapping(value="comment/editComment.bim")
+	@RequestMapping(value="/editComment.bim")
 	@ResponseBody
 	public Map<String, String> editComment(Model model,CommentVO commentVO, HttpServletRequest request,HttpServletResponse response){
 		
@@ -109,7 +110,7 @@ public class CommentController {
 		  return resultMap;
 	}
 	
-	@RequestMapping(value="comment/deleteComment.bim")
+	@RequestMapping(value="/deleteComment.bim")
 	@ResponseBody
 	public Map<String, String> deleteComment(Model model,CommentVO commentVO, HttpServletRequest request,HttpServletResponse response){
 		
@@ -142,7 +143,7 @@ public class CommentController {
 	}
 	
 	
-	@RequestMapping(value="comment/commentList.bim")
+	@RequestMapping(value="/commentList.bim")
 	public String boardList(Model model, HttpServletRequest request){
 	       List<CommentVO> commentList = null;
 		try {
@@ -157,17 +158,17 @@ public class CommentController {
 		return "comment/commentList";
 	}
 	
-	@RequestMapping(value="comment/writeForm.bim")
+	@RequestMapping(value="/writeForm.bim")
 	public String writeForm(Model model, HttpServletRequest request){
 		return "comment/writeForm";
 	}
-	@RequestMapping(value="comment/editForm.bim")
+	@RequestMapping(value="/editForm.bim")
 	public String editForm(Model model, HttpServletRequest request,HttpSession session){
 		// session.setAttribute(name, value);
 		return "comment/editForm";
 	}
 	
-	@RequestMapping(value="comment/boardView.bim", method= RequestMethod.GET)
+	@RequestMapping(value="/boardView.bim", method= RequestMethod.GET)
 	public ModelAndView boardView(Model model, HttpServletRequest request,HttpSession session){
 		ModelAndView mav = new ModelAndView("comment/viewForm");
 		/*
