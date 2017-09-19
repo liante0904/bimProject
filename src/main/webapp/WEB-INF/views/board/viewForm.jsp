@@ -205,7 +205,7 @@ function deleteComment(idx){
 						</div> 
 						
 	</c:forEach>
-
+		<c:if test="${!empty sessionScope.loginInfo}">
 			<table border="2">
 				<tbody>
 					<tr>
@@ -215,7 +215,7 @@ function deleteComment(idx){
 					</tr>
 				</tbody>
 			</table>
-			
+		</c:if>
 </body>
 </html>
 

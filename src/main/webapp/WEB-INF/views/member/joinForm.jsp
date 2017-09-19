@@ -10,12 +10,35 @@
 <script type="text/javascript"></script>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <script type="text/javascript">
-
+$(document).ready(function(){
+	$("#id").keyup(function(){
+		if($(this).val().length > 2){
+			var id = $(this).val();
+			console.log(id);
+			 $.ajax({
+			        url : "/member/memberIdCheck.bim",
+			        type: "get",
+			        data : { "id" : id },
+			        success : function(data){
+			         if ( data.result == "success") {
+						console.log("사용 가능한 아이디");
+						$("#idchkResult").html("사용 가능한 아이디");
+					}else {
+						console.log("중복 아이디");
+						$("#idchkResult").html("중복된 아이디");
+					}
+			        }
+			    });
+			
+		}
+	});
+	
+});
 $(function(){
 	$('#idChk').click(function(){
 		
 		 $.ajax({
-		        url : localhost+"/member/memberIdCheck.bim",
+		        url : "/member/memberIdCheck.bim",
 		        type: "get",
 		        data : { "id" : $("#id").val() },
 		        success : function(data){
@@ -53,7 +76,7 @@ $(function(){
 
   <div>
     <pre>
-아이디 :  <input type="text" id="id" name="id"><span id="idchk"></span> <input type="button" id="idChk" value="중복체크" > 
+아이디 :  <input type="text" id="id" name="id"> 중복 체크 결과: <span id="idchkResult">???</span>  <input type="button" id="idChk" value="중복체크" > 
 패스워드 <input type="password" name="password" >
 이름 <input type="text" name="name" >
 E - MAIL<input type="text" name="email">
