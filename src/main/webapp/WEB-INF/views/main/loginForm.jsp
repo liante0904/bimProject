@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="/WEB-INF/include/includeHeader.jsp" %>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+});
+</script>
 <title>Insert title here</title>
 </head>
 <body>

@@ -10,13 +10,13 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-		 paramIdValue = getParameters('id');
-		 paramTitleValue = $("#title").val();
-		 paramContentsValue = $("#contents").val();
 	
 }); 
 
 $(function(){
+	var	 paramIdValue = getParameters('id');
+	var	 paramTitleValue = $("#title").val();
+	var	 paramContentsValue = $("#contents").val();
 	
 	$("#list").click(function() {
 		if (confirm("정말로 글쓰기를 취소 하시겠습니까?")) {
@@ -26,6 +26,9 @@ $(function(){
 	});
 
 	$("#edit").click(function() {
+		var	 paramIdValue = getParameters('id');
+		var	 paramTitleValue = $("#title").val();
+		var	 paramContentsValue = $("#contents").val();
 		 $.ajax({
 		        url : "/board/editArticle.bim",
 		        type: "post",
@@ -37,7 +40,7 @@ $(function(){
 		        success : function(data){
 		         if ( data.result == "success") {
 					alert("글 작성 성공");
-					location.href = "${pageContext.request.contextPath }/board/viewList.bim?id=" + paramIdValue; 
+					location.href =  document.referrer; 
 				}
 		        }
 		    });

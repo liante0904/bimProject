@@ -10,13 +10,13 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-	 idParam = "?" + "id=" + getParameters('id');
-	 param =  idParam +"&num=" + getParameters('num');
 
 }); 
 
 
 $(function(){
+	var idParam = "?" + "id=" + getParameters('id');
+	var param =  idParam +"&num=" + getParameters('num');
 	$("#edit").click(function() {
 		var sessionId = "${sessionScope.loginInfo.id}";
 		var writerId =  "${article.writeId}";

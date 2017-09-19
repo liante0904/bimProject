@@ -10,11 +10,11 @@
 <script type="text/javascript">
 
 $(document).ready(function(){ 
-		 paramIdValue = getParameters('id');
 	
 }); 
 
 $(function(){
+	var	 paramIdValue = getParameters('id');
 	$("#write").click(function() {
 		location.href="${pageContext.request.contextPath }/board/writeForm.bim?id="+ paramIdValue;
 	})

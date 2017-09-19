@@ -10,14 +10,10 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-		
-	function backPage(){
-		var paramIdValue = getParameters('id');
-		var URL = "${pageContext.request.contextPath }/board/viewList.bim?id="+paramIdValue;
-		location.href= URL;
-	}
 
+}); 
 
+$(function(){
 	$("#write").click(function() {
 		var paramIdValue = getParameters('id');
 		var paramTitleValue = $("#title").val();
@@ -33,25 +29,21 @@ $(document).ready(function(){
 		        },
 		        success : function(data){
 		         if ( data.result == "success") {
-					backPage();
+		     		location.href=  "${pageContext.request.contextPath }/board/viewList.bim?id="+paramIdValue;
 				}
 		        }
 		    });
 		
-	})
-
-
-	$("#list").click(function() {
-		if (confirm("정말로 글쓰기를 취소 하시겠습니까?")) {
-			backPage();
-			
-		}
-	})
+	});
 
 	
-}); 
+	$("#list").click(function() {
+		if (confirm("정말로 글쓰기를 취소 하시겠습니까?")) {
+     		location.href=  "${pageContext.request.contextPath }/board/viewList.bim?id="+paramIdValue;
+		}
+	});
 
-
+});
 
 </script>
 </head>
