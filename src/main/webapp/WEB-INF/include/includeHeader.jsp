@@ -13,7 +13,7 @@ $(document).ready(function(){
     $("#test").click(function() {
 		$.ajax({
 	        type : "GET",
-	        url : "/board/viewList.bim?id=test2",
+	        url : "${pageContext.request.contextPath }/board/viewList.bim?id=test2",
 //	        url : "/test/test.bim",
 	        dataType : "text",
 	        error : function(){
@@ -47,7 +47,7 @@ $(document).ready(function(){
 	$("#logout").click(function(){
 		$.ajax({
 	        type : "GET",
-	        url : "/logout.bim",
+	        url : "${pageContext.request.contextPath }/logout.bim",
 	        dataType : "text",
 	        error : function(){
 	            alert('로그아웃 실패!!');
