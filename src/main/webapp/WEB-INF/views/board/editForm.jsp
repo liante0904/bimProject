@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +30,7 @@ $(function(){
 		var	 paramTitleValue = $("#title").val();
 		var	 paramContentsValue = $("#contents").val();
 		 $.ajax({
-		        url : "/board/editArticle.bim",
+		        url : "${pageContext.request.contextPath }/board/editArticle.bim",
 		        type: "post",
 		        data : { 
 		        	"boardName" : paramIdValue,

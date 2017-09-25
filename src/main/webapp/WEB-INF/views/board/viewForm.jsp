@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,7 +41,7 @@ $(function(){
 
 	$("#writeComment").click(function() {
 		 $.ajax({
-		        url : "/comment/writeComment.bim",
+		        url : "${pageContext.request.contextPath }/comment/writeComment.bim",
 		        type: "post",
 		        data: 
 		        		{ 
@@ -81,12 +81,9 @@ function editCommentInit(idx) {
 }
 
 function editComment(idx){
-
-
-	
 	
 	 $.ajax({
-	        url : "/comment/editComment.bim",
+	        url : "${pageContext.request.contextPath }/comment/editComment.bim",
 	        type: "post",
 	        data: { 
 	        		"idx" : idx, 
@@ -119,7 +116,7 @@ function editCommentAction(idx){
 
 function deleteComment(idx){
 	 $.ajax({
-	        url : "/comment/deleteComment.bim",
+	        url : "${pageContext.request.contextPath }/comment/deleteComment.bim",
 	        type: "post",
 	        data: { 
 	        		"idx" : idx,

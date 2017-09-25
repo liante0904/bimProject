@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +10,7 @@
 $(function(){
     $("#add").click(function(){           
 		 $.ajax({
-		        url : "/board/insertBoard.bim",
+		        url : "${pageContext.request.contextPath }/board/insertBoard.bim",
 		        type: "post",
 		        data : { 
 		        	"id" : "test3",

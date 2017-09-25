@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isELIgnored="false" isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +16,7 @@ $(document).ready(function(){
 			var id = $(this).val();
 			console.log(id);
 			 $.ajax({
-			        url : "/member/memberIdCheck.bim",
+			        url : "${pageContext.request.contextPath}/member/memberIdCheck.bim",
 			        type: "get",
 			        data : { "id" : id },
 			        success : function(data){
@@ -38,7 +38,7 @@ $(function(){
 	$('#idChk').click(function(){
 		
 		 $.ajax({
-		        url : "/member/memberIdCheck.bim",
+		        url : "${pageContext.request.contextPath }/member/memberIdCheck.bim",
 		        type: "get",
 		        data : { "id" : $("#id").val() },
 		        success : function(data){
