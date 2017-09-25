@@ -31,7 +31,7 @@ public class AdminCheckIntercepter extends HandlerInterceptorAdapter {
            if(sessionMember == null ){
         	   		msg = "ㅎㅎ";
         	   		request.setAttribute("msg", msg);
-                   response.sendRedirect("/main/loginForm.bim");
+                   response.sendRedirect(request.getContextPath() + "/main/loginForm.bim");
                    return false;
            }
        } catch (Exception e) {

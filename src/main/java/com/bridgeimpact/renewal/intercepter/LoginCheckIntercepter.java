@@ -27,7 +27,7 @@ public class LoginCheckIntercepter extends HandlerInterceptorAdapter {
 
            if(request.getSession().getAttribute("loginInfo") == null ){
         	   
-                   response.sendRedirect("/main/loginForm.bim");
+                   response.sendRedirect(request.getContextPath() + "/main/loginForm.bim");
                    return false;
            }
        } catch (Exception e) {
