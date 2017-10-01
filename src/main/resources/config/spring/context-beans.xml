@@ -21,14 +21,17 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	
+
 	<!-- Bean 등록(Component, Repository, Service, Controller) -->
-	<context:component-scan base-package="com.bridgeimpact.renewal.controller" />
-	<context:component-scan base-package="com.bridgeimpact.renewal.service" />
-	<context:component-scan base-package="com.bridgeimpact.renewal.intercepter" />
+	<context:component-scan base-package="com.bridgeimpact.renewal.dao"/>
+	<context:component-scan base-package="com.bridgeimpact.renewal.dto"/>
 	
+		
 	<!-- Spring Annotation 설정 -->
 	<context:annotation-config /> 
+	
+	<!-- Resource 접근 설정 -->
+	<resources mapping="/**" location="/resources/" />
 
 
 </beans:beans>
