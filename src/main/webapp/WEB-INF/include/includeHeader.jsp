@@ -10,7 +10,7 @@ var localhost = '${pageContext.request.contextPath }';
 $(document).ready(function(){
 	getMenuInfo();
 	
-    $("#test").click(function() {
+    $("#test").click(function() {// ajax 페이지 이동  test
 		$.ajax({
 	        type : "GET",
 	        url : "${pageContext.request.contextPath }/board/viewList.bim?id=test2",
@@ -85,6 +85,7 @@ $(document).ready(function(){
 <a href="${pageContext.request.contextPath }/admin/admin.bim">관리자 페이지(예시)</a>
 <a href="http://www.bridgeimpact.com/">이전 BIM 페이지</a>
 <a href="#" id="test">ajax page test</a>
+<a href="${pageContext.request.contextPath }/test/171002">file upload test</a>
 
 <!-- 
 <a href="#this">사역원 소개</a>
@@ -94,7 +95,7 @@ $(document).ready(function(){
 
  -->
 
-<div id="board"></div>
+<ul id="board"></ul>
 
 
 
