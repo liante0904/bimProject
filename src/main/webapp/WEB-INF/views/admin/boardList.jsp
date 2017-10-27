@@ -8,24 +8,7 @@
 <%@ include file="/WEB-INF/include/adminHeader.jsp" %>
 <script type="text/javascript">
 $(function(){
-	
-    $("#addBoard").click(function(){
-    	location.href="${pageContext.request.contextPath }/admin/board/addBoard.bim";
-
-    	$.ajax({
-		        url : "${pageContext.request.contextPath }/admin/board/addBoard.bim",
-		        type: "get",
-		        data : { 
-		        	"id" : "test3",
-		        	"name" : "테스트3 게시판",
-		        },
-		        success : function(data){
-		        alert("??")	
-		        }
-		    });
-   });
-	
-    $("#add").click(function(){
+    $("#add").click(function(){           
 		 $.ajax({
 		        url : "${pageContext.request.contextPath }/board/insertBoard.bim",
 		        type: "post",
@@ -41,16 +24,6 @@ $(function(){
 		        }
 		    });
     });
-    
-    $("#checkAll").click(function() {
-		if ($("#checkAll").prop("checked")) { //체크를 했을때
-			$("input[name=checkBox]").prop("checked",true);
-		
-		}else{// 체크를 풀었을때
-			$("input[name=checkBox]").prop("checked",false);
-		}
-	})
-    
 });
 
 </script>
@@ -75,31 +48,27 @@ $(function(){
     <table>
         <thead>
             <tr>
-            	<th><input type="checkbox" id="checkAll"> </th>
-                <th>번호</th>
+                <th>회원번호</th>
                 <th>아이디</th>
                 <th>이름</th>
                 <th>삭제 구분</th>
 				<th>보기</th>
-				<th>관리</th>
             </tr>
         </thead>
         <tbody>
             <c:forEach items="${boardList}" var="board">
                 <tr>
-                    <td><input type="checkbox" name="checkBox"></td>
                     <td>${board.idx}</td>
                     <td>${board.id}</td>
                     <td>${board.name}</td>
                     <td>${board.delGb}</td>
-					<td><a href="${pageContext.request.contextPath }/board/viewList.bim?id=${board.id}">${board.id} </a></td>
-                    <td><input type="button" id="edit" value="편집"> <input type="button" id="delete" value="삭제"></td>
+					<td><a href="${pageContext.request.contextPath }/board/viewList.bim?id=${board.id}">${board.id} 게시판 이동</a></td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
-    <input type="button" id="addBoard" value="게시판 추가하기">
-    <input type="button" id="add" value="게시판 생성(쿼리 테스트)">     
+    
+    <input type="button" id="add" value="생성">     <input type="button" id="edit" value="편집"> <input type="button" id="delete" value="삭제?">
  </div>
  
 <div style="border: 1px solid black; float: left; width:49%;">
