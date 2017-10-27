@@ -8,7 +8,24 @@
 <%@ include file="/WEB-INF/include/adminHeader.jsp" %>
 <script type="text/javascript">
 $(function(){
-    $("#add").click(function(){           
+	
+    $("#addBoard").click(function(){
+    	location.href="${pageContext.request.contextPath }/admin/board/addBoard.bim";
+
+    	$.ajax({
+		        url : "${pageContext.request.contextPath }/admin/board/addBoard.bim",
+		        type: "get",
+		        data : { 
+		        	"id" : "test3",
+		        	"name" : "테스트3 게시판",
+		        },
+		        success : function(data){
+		        alert("??")	
+		        }
+		    });
+   });
+	
+    $("#add").click(function(){
 		 $.ajax({
 		        url : "${pageContext.request.contextPath }/board/insertBoard.bim",
 		        type: "post",
