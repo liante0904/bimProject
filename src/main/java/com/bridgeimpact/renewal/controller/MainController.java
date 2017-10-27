@@ -46,6 +46,15 @@ public class MainController {
      * Simply selects the home view to render by returning its name.
      */
     
+	
+	/***
+	 * 메인 페이지 init & 로그인 페이지 이동 맵핑
+	 * @param locale
+	 * @param model
+	 * @param session
+	 * @return
+	 * @throws Exception
+	 */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Locale locale, Model model,HttpSession session) throws Exception{
 /*
@@ -66,8 +75,6 @@ public class MainController {
     public String indexbim(Locale locale, Model model) throws Exception{
         return "index";
     }
-
-
 	@RequestMapping(value="main/loginForm.bim")
 	public ModelAndView loginForm(Model model) {
 		ModelAndView mv = new ModelAndView("main/loginForm");
@@ -75,7 +82,14 @@ public class MainController {
 	}
 	
 	
-	//로그인, 세션처리
+	/***
+	 * 로그인 페이지에서 로그인 요청 
+	 * @param model
+	 * @param member
+	 * @param request
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value="main/login.bim")
 	public String loginSubmit(Model model,MemberVO member, HttpServletRequest request,HttpSession session){
 		MemberVO dbMember = null;
@@ -104,7 +118,14 @@ public class MainController {
 	}
 	
 	
-	
+	/***
+	 * 메인 페이지의 게시판 정보를 요청
+	 * @param model
+	 * @param id
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value="/getBoardList.bim",method = RequestMethod.GET,produces = "application/json; charset=utf8")
 	@ResponseBody
 	public String getBoardList(Model model,String id, HttpServletRequest request,HttpServletResponse response){
@@ -129,6 +150,14 @@ public class MainController {
 		  return jsonList;
 	}
 
+	/***
+	 * 로그아웃 요청
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value="/logout.bim",method = RequestMethod.GET,produces = "application/json; charset=utf8")
 	@ResponseBody
 	public String logout(Model model, HttpServletRequest request,HttpServletResponse response, HttpSession session){

@@ -53,14 +53,40 @@ public class AdminController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 
+	
+	/***
+	 * 관리자 페이지로 이동 맵핑
+	 * @param model
+	 * @param locale
+	 * @return
+	 */
 	@RequestMapping(value = "/admin.bim")
 	public ModelAndView admin(Model model, Object locale) {
 		ModelAndView mv = new ModelAndView("admin/admin");
 		return mv;
 	}
+	
+	/***
+	 * 관리자가 게시판을 생성하기 위해, 게시판 생성 페이지로 이동(맵핑)
+	 * @param model
+	 * @param id
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value="/board/addBoard.bim", method= RequestMethod.GET)
+	public ModelAndView addBoard(Model model,String id, HttpServletRequest request,HttpSession session){
+		ModelAndView mv = new ModelAndView("admin/board/addBoard");
+		return mv;
+	}
 
 
-
+	/***
+	 * 관리자 페이지에서 회원 관리 페이지 이동 맵핑
+	 * @param locale
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/memberList.bim", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 
@@ -77,6 +103,12 @@ public class AdminController {
 		return "admin/memberList";
 	}
 
+	/***
+	 * 관리자 페이지에서 게시판 관리 페이지 이동 맵핑(현재 게시판과, 게시글을 함께 표시)
+	 * @param locale
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/boardList.bim", method = RequestMethod.GET)
 	public String boardList(Locale locale, Model model) {
 
@@ -96,25 +128,10 @@ public class AdminController {
 			e.printStackTrace();
 		}
 	        
-	 
-
 		model.addAttribute("articleList", articleList);
 		model.addAttribute("boardList", boardList);
 		return "admin/boardList";
 	}
 
-	@RequestMapping(value="/articleList.bim")
-	public String boardList(Model model, HttpServletRequest request){
-	       List<ArticleVO> articleList = null;
-		try {
-			articleList = articleService.selectAllArticle();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	        
-	        model.addAttribute("articleList", articleList);
-	 
-		return "/board/boardList";
-	}
+
 }

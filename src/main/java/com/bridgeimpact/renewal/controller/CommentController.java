@@ -45,7 +45,14 @@ public class CommentController {
      * Simply selects the home view to render by returning its name.
      */
     
-    
+    /***
+     * 이용자의 댓글 작성 요청
+     * @param model
+     * @param commentVO
+     * @param request
+     * @param response
+     * @return
+     */
 	@RequestMapping(value="/writeComment.bim")
 	@ResponseBody
 	public Map<String, String> writeComment(Model model,CommentVO commentVO, HttpServletRequest request,HttpServletResponse response){
@@ -78,6 +85,14 @@ public class CommentController {
 		  return resultMap;
 	}
 	
+	/**
+	 * 이용자의 댓글 수정 요청
+	 * @param model
+	 * @param commentVO
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value="/editComment.bim")
 	@ResponseBody
 	public Map<String, String> editComment(Model model,CommentVO commentVO, HttpServletRequest request,HttpServletResponse response){
@@ -110,6 +125,14 @@ public class CommentController {
 		  return resultMap;
 	}
 	
+	/**
+	 * 이용자의 댓글 삭제 요청
+	 * @param model
+	 * @param commentVO
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value="/deleteComment.bim")
 	@ResponseBody
 	public Map<String, String> deleteComment(Model model,CommentVO commentVO, HttpServletRequest request,HttpServletResponse response){
@@ -142,7 +165,12 @@ public class CommentController {
 		  return resultMap;
 	}
 	
-	
+	/**
+	 * 댓글 전체 리스트 (현재 작성만 되어있으며 사용중인 페이지 없음)
+	 * @param model
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/commentList.bim")
 	public String boardList(Model model, HttpServletRequest request){
 	       List<CommentVO> commentList = null;
@@ -157,17 +185,7 @@ public class CommentController {
 	 
 		return "comment/commentList";
 	}
-	
-	@RequestMapping(value="/writeForm.bim")
-	public String writeForm(Model model, HttpServletRequest request){
-		return "comment/writeForm";
-	}
-	@RequestMapping(value="/editForm.bim")
-	public String editForm(Model model, HttpServletRequest request,HttpSession session){
-		// session.setAttribute(name, value);
-		return "comment/editForm";
-	}
-	
+
 	@RequestMapping(value="/boardView.bim", method= RequestMethod.GET)
 	public ModelAndView boardView(Model model, HttpServletRequest request,HttpSession session){
 		ModelAndView mav = new ModelAndView("comment/viewForm");

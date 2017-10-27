@@ -52,6 +52,16 @@ public class BoardController {
      */
     
 	
+    
+    /***
+     * id 파라미터를 이용해 게시판에 접근합니다.
+     * 
+     * @param model
+     * @param id 
+     * @param request
+     * @param session
+     * @return
+     */
 	@RequestMapping(value="/viewList.bim", method= RequestMethod.GET)
 	public String boardView(Model model,String id, HttpServletRequest request,HttpSession session){
 	
@@ -70,6 +80,15 @@ public class BoardController {
 	}
 	
 	
+	
+	/***
+	 * 게시판 생성 페이지에서 게시판 생성 요청
+	 * @param model
+	 * @param board
+	 * @param request
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value="/insertBoard.bim")
 	@ResponseBody
 	public Map<String, String> insertBoard(Model model,BoardVO board, HttpServletRequest request,HttpSession session){

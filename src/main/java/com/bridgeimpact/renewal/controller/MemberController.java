@@ -42,7 +42,11 @@ public class MemberController {
     
     
 
-	
+	/***
+	 * 회원가입, 회원수정 페이지 이동 맵핑
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="member/joinForm.bim")
 	public ModelAndView joinForm(Model model) {
 		ModelAndView mv = new ModelAndView("member/joinForm");
@@ -53,7 +57,15 @@ public class MemberController {
 		ModelAndView mv = new ModelAndView("member/editForm");
 		return mv;
 	}
+
 	
+	/***
+	 * 회원 수정 페이지에서 작성된 요청 반영 요청
+	 * @param model
+	 * @param session
+	 * @param inputMember
+	 * @return
+	 */
 	@RequestMapping(value="member/editSubmit.bim")
 	public ModelAndView editSubmit(Model model,HttpSession session,MemberVO inputMember) {
 		ModelAndView mv = new ModelAndView("main/mainForm");
@@ -72,6 +84,12 @@ public class MemberController {
 	}
 
 
+	/***
+	 * 회원가입 페이지에서 작성된 데이터 반영 요청
+	 * @param model
+	 * @param member
+	 * @return
+	 */
 	@RequestMapping(value="member/joinSubmit.bim")
 	public String joinSubmit(Model model,MemberVO member){
 		
@@ -96,6 +114,13 @@ public class MemberController {
 		return "member/loginForm";
 	}
 	
+	/***
+	 * 회원 탈퇴 요청 데이터 반영
+	 * @param model
+	 * @param member
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value="member/deleteSubmit.bim")
 	public String deleteSubmit(Model model,MemberVO member, HttpSession session){
 		
@@ -112,6 +137,14 @@ public class MemberController {
 	}
 	
 	
+	/***
+	 * 회원가입 페이지에서 아이디 중복체크 ajax 요청
+	 * @param model
+	 * @param id
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value="member/memberIdCheck.bim",method = RequestMethod.GET,produces = "application/json; charset=utf8")
 	@ResponseBody
 	public Map<String, String> memberIdCheck(Model model,String id, HttpServletRequest request,HttpServletResponse response){

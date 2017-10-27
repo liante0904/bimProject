@@ -48,7 +48,12 @@ public class ArticleController {
      * Simply selects the home view to render by returning its name.
      */
     
-	
+	/***
+	 * 게시판 글 작성,편집  페이지 이동 맵핑
+	 * @param model
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/writeForm.bim")
 	public String writeForm(Model model, HttpServletRequest request){
 		return "/board/writeForm";
@@ -59,13 +64,14 @@ public class ArticleController {
 		return "/board/editForm";
 	}
 	 
-/***
- * 게시판에서 사용자가 선택한 글을 보여주는 매핑
- * @param num 글번호 (idx)
- * @param model
- * @param session
- * @return
- */
+	
+	/***
+	 * 게시판에서 사용자가 선택한 글을 보여주는 매핑
+	 * @param num 글번호 (idx)
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 
 	@RequestMapping(value="/viewArticle.bim", method= RequestMethod.GET)
 	public ModelAndView boardView(String id,int num,Model model,HttpSession session){
@@ -102,8 +108,9 @@ public class ArticleController {
 		return mav;
 	}
 	
+	
 	/***
-	 * 사용자의 글쓰기 요청을 받아 DB에 처리하는 매핑
+	 * 사용자의 글쓰기 요청을 받아 DB에 처리
 	 * @param model
 	 * @param article
 	 * @param request
@@ -131,7 +138,7 @@ public class ArticleController {
 	}
 	
 	/***
-	 * 사용자의 글수정 요청을 받아 DB에 처리하는 매핑
+	 * 사용자의 글수정 요청을 받아 DB에 처리
 	 * @param model
 	 * @param article
 	 * @param request
@@ -159,7 +166,7 @@ public class ArticleController {
 	}
 	
 	/***
-	 * 사용자의 글삭제 요청을 받아 DB에 처리하는 매핑
+	 * 사용자의 글삭제 요청을 받아 DB에 처리
 	 * @param model
 	 * @param article
 	 * @param request
