@@ -11,36 +11,8 @@ $(function(){
 	
     $("#addBoard").click(function(){
     	location.href="${pageContext.request.contextPath }/admin/board/addBoard.bim";
-
-    	$.ajax({
-		        url : "${pageContext.request.contextPath }/admin/board/addBoard.bim",
-		        type: "get",
-		        data : { 
-		        	"id" : "test3",
-		        	"name" : "테스트3 게시판",
-		        },
-		        success : function(data){
-		        alert("??")	
-		        }
-		    });
    });
 	
-    $("#add").click(function(){
-		 $.ajax({
-		        url : "${pageContext.request.contextPath }/board/insertBoard.bim",
-		        type: "post",
-		        data : { 
-		        	"id" : "test3",
-		        	"name" : "테스트3 게시판",
-		        },
-		        success : function(data){
-		         if ( data.result == "success") {
-					alert("게시판 생성  성공");
-					backPage();
-				}
-		        }
-		    });
-    });
     
     $("#checkAll").click(function() {
 		if ($("#checkAll").prop("checked")) { //체크를 했을때
@@ -99,7 +71,6 @@ $(function(){
         </tbody>
     </table>
     <input type="button" id="addBoard" value="게시판 추가하기">
-    <input type="button" id="add" value="게시판 생성(쿼리 테스트)">     
  </div>
  
 <div style="border: 1px solid black; float: left; width:49%;">

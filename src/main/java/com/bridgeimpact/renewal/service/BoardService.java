@@ -10,4 +10,6 @@ public interface BoardService {
 
 	public void insertBoard(BoardVO board) throws Exception;
 
+	public int boardIdCheck(String Id) throws Exception;
+
 }

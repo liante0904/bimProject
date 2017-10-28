@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.collections.map.HashedMap;
@@ -110,6 +111,45 @@ public class BoardController {
 		   resultMap.put("result", result);
 		   resultMap.put("resultMsg", resultMsg);
 		   return resultMap;
+	}
+	
+	
+	
+	/***
+	 * 게시판 추가 페이지에서 게시판 URL 중복체크 ajax 요청
+	 * @param model
+	 * @param id
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/boardIdCheck.bim",method = RequestMethod.GET,produces = "application/json; charset=utf8")
+	@ResponseBody
+	public Map<String, String> boardUrlCheck(Model model,String id, HttpServletRequest request,HttpServletResponse response){
+		 Map<String, String> resultMap = new HashMap<String, String>();
+		 int resultCnt = 0;
+		try {
+			resultCnt = boardService.boardIdCheck(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		  String result = "";
+		  String resultMsg = "";
+
+		  if ( resultCnt == 0 ){
+			   result = "success";
+			   resultMsg = "사용가능한 URL입니다.";
+			  } else {
+			   result = "failure";
+			   resultMsg = "이미 사용중인 URL입니다.";
+			  }
+
+		  resultMap.put("result", result);
+		  resultMap.put("resultMsg", resultMsg);
+		    response.setContentType("text/plain");
+		    response.setCharacterEncoding("UTF-8");
+		  return resultMap;
 	}
 }
 

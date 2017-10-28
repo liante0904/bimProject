@@ -29,4 +29,11 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.insertBoard(board);
 	}
 
+
+	@Override
+	public int boardIdCheck(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return boardDAO.selectBoardById(id);
+	}
+
 }

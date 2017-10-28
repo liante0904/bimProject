@@ -5,29 +5,16 @@
  
 <mapper namespace="com.bridgeimpact.renewal.boardSQL">
  
-    <!-- 
-        mybatis-config.xml의 typeAlias에 등록해두지 않았다면 
-        
-        <select id="selectMember" resultType="com.example.dto.MemberVO" >
-            SELECT ID, PW ,NAME FROM TEST
-        </select>
-        
-        이렇게 해야 한다.
-    -->
 
-<!--     
-    	<resultMap type="articleVO"  id="BoardResultMap">
+ 
+    	<resultMap type="boardVO"  id="BoardResultMap">
     	<result property="idx" column="IDX" />
-    	<result property="parentIdx" column="PARENT_IDX" />
-		<result property="title" column="TITLE" />
-		<result property="contents" column="CONTENTS" />
-		<result property="hitCnt" column="HIT_CNT" />
-		<result property="delGb" column="DEL_GB" />
-		<result property="writeDt" column="WRITE_DT" />
-		<result property="writeId" column="WRITE_ID" />
+    	<result property="id" column="ID" />
+		<result property="name" column="NAME" />
+		<result property="delGb" column="DELGB" />
 		</resultMap>
-    
-     -->
+     
+     
     <select id="selectAllBoard" resultType="boardVO">
 	<![CDATA[
 	
@@ -67,6 +54,18 @@
 
     ]]>
 	</insert>
+	
+	
+	 <select id="selectBoardById" parameterType="String" resultType="int">
+	<![CDATA[
+	
+	
+		SELECT   
+		count(*)
+		FROM   BIM_BOARD_TB   
+		WHERE ID = #{id}		
+    ]]>
+    </select>
 	
 <!-- 
 

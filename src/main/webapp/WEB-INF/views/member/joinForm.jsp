@@ -22,10 +22,10 @@ $(document).ready(function(){
 			        success : function(data){
 			         if ( data.result == "success") {
 						console.log("사용 가능한 아이디");
-						$("#idchkResult").html("사용 가능한 아이디");
+						$("#result").html("사용 가능한 아이디");
 					}else {
 						console.log("중복 아이디");
-						$("#idchkResult").html("중복된 아이디");
+						$("#result").html("중복된 아이디");
 					}
 			        }
 			    });
@@ -76,7 +76,7 @@ $(function(){
 
   <div>
     <pre>
-아이디 :  <input type="text" id="id" name="id"> 중복 체크 결과: <span id="idchkResult">???</span>  <input type="button" id="idChk" value="중복체크" > 
+아이디 :  <input type="text" id="id" name="id"> 중복 체크 결과: <span id="result">아이디를 입력해주세요.</span>  <input type="button" id="idChk" value="중복체크" > 
 패스워드 <input type="password" name="password" >
 이름 <input type="text" name="name" >
 E - MAIL<input type="text" name="email">

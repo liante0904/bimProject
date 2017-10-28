@@ -10,5 +10,7 @@ public interface BoardDAO {
 
 	public void insertBoard(BoardVO board) throws Exception;
 
+	public int selectBoardById(String Id) throws Exception;
+
 
 }
