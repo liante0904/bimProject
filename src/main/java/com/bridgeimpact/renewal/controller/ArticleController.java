@@ -146,7 +146,7 @@ public class ArticleController {
 	 * @return
 	 */
 	
-	@RequestMapping(value="/editArticle.bim")
+	@RequestMapping(value="/editArticleAjax.bim")
 	@ResponseBody
 	public Map<String, String> boardEdit(Model model,ArticleVO article, HttpServletRequest request,HttpSession session){
 		logger.info("글 제목 : "+ article.getTitle() + "\t 글내용 : " + article.getContents() );

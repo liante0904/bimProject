@@ -41,7 +41,7 @@ $(function(){
 
 	$("#writeComment").click(function() {
 		 $.ajax({
-		        url : "${pageContext.request.contextPath }/comment/writeComment.bim",
+		        url : "${pageContext.request.contextPath }/comment/writeCommentAjax.bim",
 		        type: "post",
 		        data: 
 		        		{ 
@@ -83,7 +83,7 @@ function editCommentInit(idx) {
 function editComment(idx){
 	
 	 $.ajax({
-	        url : "${pageContext.request.contextPath }/comment/editComment.bim",
+	        url : "${pageContext.request.contextPath }/comment/editCommentAjax.bim",
 	        type: "post",
 	        data: { 
 	        		"idx" : idx, 
@@ -116,7 +116,7 @@ function editCommentAction(idx){
 
 function deleteComment(idx){
 	 $.ajax({
-	        url : "${pageContext.request.contextPath }/comment/deleteComment.bim",
+	        url : "${pageContext.request.contextPath }/comment/deleteCommentAjax.bim",
 	        type: "post",
 	        data: { 
 	        		"idx" : idx,

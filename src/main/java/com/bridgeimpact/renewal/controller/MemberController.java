@@ -145,7 +145,7 @@ public class MemberController {
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value="member/memberIdCheck.bim",method = RequestMethod.GET,produces = "application/json; charset=utf8")
+	@RequestMapping(value="member/memberIdCheckAjax.bim",method = RequestMethod.GET,produces = "application/json; charset=utf8")
 	@ResponseBody
 	public Map<String, String> memberIdCheck(Model model,String id, HttpServletRequest request,HttpServletResponse response){
 		System.out.println(id);

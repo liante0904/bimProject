@@ -7,6 +7,10 @@
 <%@ include file="/WEB-INF/include/includeHeader.jsp" %>
 <%@ include file="/WEB-INF/include/adminHeader.jsp" %>
 <script type="text/javascript">
+$(document).ready(function(){
+
+}); 
+
 $(function(){
 	
     $("#addBoard").click(function(){
@@ -23,7 +27,35 @@ $(function(){
 		}
 	})
     
+
 });
+
+
+function editBoard(boardId) {
+	var id = boardId;
+	alert(id);
+}
+
+function deleteBoard(boardId) {
+	var id = boardId;
+	var boardName = $('td[data-name='+id+']').text();
+	if (confirm("정말로 게시판 "+ boardName + "을 비공개 처리 하시겠습니까?" ) == true) {
+		 $.ajax({
+		        url : "${pageContext.request.contextPath}/board/deleteBoardAjax.bim",
+		        type: "get",
+		        data : { "id" : id },
+		        success : function(data){
+		         if ( data.result == "success") {
+		        	 alert(data.resultMsg);
+					$("#result").html("사용 가능한 URL입니다.");
+				}else {
+					alert(data.resultMsg);
+					$("#result").html("중복된 URL입니다.");
+				}
+		        }
+		    });
+	}
+}
 
 </script>
 <title>Home</title>
@@ -62,10 +94,10 @@ $(function(){
                     <td><input type="checkbox" name="checkBox"></td>
                     <td>${board.idx}</td>
                     <td>${board.id}</td>
-                    <td>${board.name}</td>
+                    <td data-name="${board.id}">${board.name}</td>
                     <td>${board.delGb}</td>
 					<td><a href="${pageContext.request.contextPath }/board/viewList.bim?id=${board.id}">${board.id} </a></td>
-                    <td><input type="button" id="edit" value="편집"> <input type="button" id="delete" value="삭제"></td>
+                    <td><input type="button" id="edit" value="편집" onclick="editBoard('${board.id}')"> <input type="button" id="delete" value="삭제" onclick="deleteBoard('${board.id}')"></td>
                 </tr>
             </c:forEach>
         </tbody>

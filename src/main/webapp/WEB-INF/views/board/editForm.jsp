@@ -30,7 +30,7 @@ $(function(){
 		var	 paramTitleValue = $("#title").val();
 		var	 paramContentsValue = $("#contents").val();
 		 $.ajax({
-		        url : "${pageContext.request.contextPath }/board/editArticle.bim",
+		        url : "${pageContext.request.contextPath }/board/editArticleAjax.bim",
 		        type: "post",
 		        data : { 
 		        	"boardName" : paramIdValue,

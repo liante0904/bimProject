@@ -46,14 +46,14 @@ public class CommentController {
      */
     
     /***
-     * 이용자의 댓글 작성 요청
+     * 이용자의 댓글 작성 ajax요청
      * @param model
      * @param commentVO
      * @param request
      * @param response
      * @return
      */
-	@RequestMapping(value="/writeComment.bim")
+	@RequestMapping(value="/writeCommentAjax.bim")
 	@ResponseBody
 	public Map<String, String> writeComment(Model model,CommentVO commentVO, HttpServletRequest request,HttpServletResponse response){
 		
@@ -86,14 +86,14 @@ public class CommentController {
 	}
 	
 	/**
-	 * 이용자의 댓글 수정 요청
+	 * 이용자의 댓글 수정 ajax요청
 	 * @param model
 	 * @param commentVO
 	 * @param request
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value="/editComment.bim")
+	@RequestMapping(value="/editCommentAjax.bim")
 	@ResponseBody
 	public Map<String, String> editComment(Model model,CommentVO commentVO, HttpServletRequest request,HttpServletResponse response){
 		
@@ -102,7 +102,7 @@ public class CommentController {
 		 int resultCnt = 0;
 		 
 		try {
-			 commentService.editComment(commentVO);
+			resultCnt  = commentService.editComment(commentVO);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -110,7 +110,7 @@ public class CommentController {
 		  String result = "";
 		  String resultMsg = "";
 
-		  if ( resultCnt == 0 ){
+		  if ( resultCnt == 1 ){
 			   result = "success";
 			   resultMsg = "댓글 수정이 완료 되었습니다.";
 			  } else {
@@ -126,14 +126,14 @@ public class CommentController {
 	}
 	
 	/**
-	 * 이용자의 댓글 삭제 요청
+	 * 이용자의 댓글 삭제 ajax요청
 	 * @param model
 	 * @param commentVO
 	 * @param request
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value="/deleteComment.bim")
+	@RequestMapping(value="/deleteCommentAjax.bim")
 	@ResponseBody
 	public Map<String, String> deleteComment(Model model,CommentVO commentVO, HttpServletRequest request,HttpServletResponse response){
 		
@@ -142,7 +142,7 @@ public class CommentController {
 		 int resultCnt = 0;
 		 
 		try {
-			 commentService.deleteComment(commentVO);
+			resultCnt =  commentService.deleteComment(commentVO);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -150,7 +150,7 @@ public class CommentController {
 		  String result = "";
 		  String resultMsg = "";
 
-		  if ( resultCnt == 0 ){
+		  if ( resultCnt == 1 ){
 			   result = "success";
 			   resultMsg = "댓글 삭제가 완료 되었습니다.";
 			  } else {
