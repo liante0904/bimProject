@@ -39,15 +39,15 @@ public class CommentDAOImpl implements CommentDAO {
 	}
 
 	@Override
-	public void updateComment(CommentVO comment) throws Exception {
+	public int updateComment(CommentVO comment) throws Exception {
 		// TODO Auto-generated method stub
-		sqlSession.update(Namespace+".updateComment", comment);
+		return sqlSession.update(Namespace+".updateComment", comment);
 	}
 
 	@Override
-	public void deleteComment(CommentVO comment) throws Exception {
+	public int deleteComment(CommentVO comment) throws Exception {
 		// TODO Auto-generated method stub
-		sqlSession.delete(Namespace+".deleteComment", comment);
+		return sqlSession.delete(Namespace+".deleteComment", comment);
 	}
 
 	@Override

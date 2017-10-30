@@ -13,9 +13,9 @@ public interface CommentService {
 
     public void insertComment(CommentVO comment) throws Exception;
 
-	public void editComment(CommentVO comment)throws Exception;
+	public int editComment(CommentVO comment)throws Exception;
 
-	public void deleteComment(CommentVO comment) throws Exception;
+	public int deleteComment(CommentVO comment) throws Exception;
 
 	public void increseHitCntByIndex(int index) throws Exception;
 

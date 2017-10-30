@@ -37,15 +37,15 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public void editComment(CommentVO comment) throws Exception {
+	public int editComment(CommentVO comment) throws Exception {
 		// TODO Auto-generated method stub
-		commentDAO.updateComment(comment);
+		return commentDAO.updateComment(comment);
 	}
 
 	@Override
-	public void deleteComment(CommentVO comment) throws Exception {
+	public int deleteComment(CommentVO comment) throws Exception {
 		// TODO Auto-generated method stub
-		commentDAO.deleteComment(comment);
+		return commentDAO.deleteComment(comment);
 	}
 
 	@Override

@@ -13,9 +13,9 @@ public interface CommentDAO {
 
 	public void insertComment(CommentVO comment) throws Exception;
 
-	public void updateComment(CommentVO comment) throws Exception;
+	public int updateComment(CommentVO comment) throws Exception;
 
-	public void deleteComment(CommentVO comment) throws Exception;
+	public int deleteComment(CommentVO comment) throws Exception;
 
 	public void updateHitCntByIndex(int index) throws Exception;
 
