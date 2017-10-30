@@ -6,10 +6,15 @@ import com.bridgeimpact.renewal.dto.BoardVO;
 
 public interface BoardService {
 
-	public List<BoardVO> selectAllBoard() throws Exception;
+	public List<BoardVO> selectAllBoard(String delGb) throws Exception;
 
+	public List<BoardVO> selectAllBoard() throws Exception;
+	
 	public void insertBoard(BoardVO board) throws Exception;
 
-	public int boardIdCheck(String Id) throws Exception;
+	public int checkBoardId(String id) throws Exception;
+
+	public int deleteBoard(String id) throws Exception;
+
 
 }

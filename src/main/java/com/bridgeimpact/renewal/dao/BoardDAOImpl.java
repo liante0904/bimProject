@@ -20,11 +20,16 @@ public class BoardDAOImpl implements BoardDAO {
     
 	
 	@Override
-	public List<BoardVO> selectAllBoard() {
-		return sqlSession.selectList(Namespace+".selectAllBoard");
+	public List<BoardVO> selectAllBoard(String delGb) {
+		return sqlSession.selectList(Namespace+".selectAllBoard", delGb);
 	}
 
-
+	
+	@Override
+	public List<BoardVO> selectAllBoard() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(Namespace+".selectAllBoard");
+	}
 
 	@Override
 	public void insertBoard(BoardVO board) throws Exception {
@@ -39,5 +44,17 @@ public class BoardDAOImpl implements BoardDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(Namespace+".selectBoardById", id);
 	}
+
+
+
+	@Override
+	public int deleteBoardById(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.update(Namespace+".deleteBoardById", id);
+	}
+
+
+
+
 
 }

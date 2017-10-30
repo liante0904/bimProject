@@ -131,7 +131,8 @@ public class MainController {
 	public String getBoardList(Model model,String id, HttpServletRequest request,HttpServletResponse response){
 		List<BoardVO> boardList = null;
 		try {
-			boardList = boardService.selectAllBoard();
+			String delGb = "N";
+			boardList = boardService.selectAllBoard(delGb);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

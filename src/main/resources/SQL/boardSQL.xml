@@ -15,18 +15,22 @@
 		</resultMap>
      
      
-    <select id="selectAllBoard" resultType="boardVO">
+    <select id="selectAllBoard" parameterType="String" resultType="boardVO">
 	<![CDATA[
-	
 	
 		SELECT   
 		IDX  ,   
 		ID  ,   
 		NAME  ,   
 		DEL_GB    
-		FROM   BIM_BOARD_TB   
-
+		FROM   BIM_BOARD_TB 
     ]]>
+    
+		<if test="value != null">
+		WHERE 
+		DEL_GB  = #{value}
+		</if>
+		
     </select>
 
     
@@ -63,9 +67,25 @@
 		SELECT   
 		count(*)
 		FROM   BIM_BOARD_TB   
-		WHERE ID = #{id}		
+		WHERE 
+		ID = #{id}		
     ]]>
     </select>
+    
+    
+    		<update id="deleteBoardById" parameterType="String">
+		<![CDATA[
+		
+		
+		UPDATE BIM_BOARD_TB
+		SET 
+		DEL_GB = 'Y'
+		WHERE 
+		ID = #{id} 
+		 
+		 
+		]]>
+	</update>
 	
 <!-- 
 

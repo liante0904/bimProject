@@ -17,8 +17,14 @@ public class BoardServiceImpl implements BoardService {
     
 	
 	@Override
-	public List<BoardVO> selectAllBoard() throws Exception {
+	public List<BoardVO> selectAllBoard(String delGb) throws Exception {
 		// TODO Auto-generated method stub
+		return boardDAO.selectAllBoard(delGb);
+	}
+	
+
+	@Override
+	public List<BoardVO> selectAllBoard() throws Exception {
 		return boardDAO.selectAllBoard();
 	}
 
@@ -31,9 +37,18 @@ public class BoardServiceImpl implements BoardService {
 
 
 	@Override
-	public int boardIdCheck(String id) throws Exception {
+	public int checkBoardId(String id) throws Exception {
 		// TODO Auto-generated method stub
 		return boardDAO.selectBoardById(id);
 	}
+
+
+	@Override
+	public int deleteBoard(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return boardDAO.deleteBoardById(id);
+	}
+
+
 
 }
