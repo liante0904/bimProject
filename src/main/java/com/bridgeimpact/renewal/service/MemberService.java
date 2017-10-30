@@ -16,7 +16,7 @@ public interface MemberService {
 
 	public MemberVO loginMember(MemberVO member)throws Exception;
 
-	public int idChkMember(MemberVO member)throws Exception;
+	public int checkMemberId(MemberVO member)throws Exception;
 }
 
 

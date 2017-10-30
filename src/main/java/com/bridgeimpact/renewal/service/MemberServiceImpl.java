@@ -47,7 +47,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int idChkMember(MemberVO member) throws Exception {
+	public int checkMemberId(MemberVO member) throws Exception {
 		// TODO Auto-generated method stub
 		return memberDAO.selectMemberById(member);
 	}

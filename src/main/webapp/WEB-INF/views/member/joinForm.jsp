@@ -16,7 +16,7 @@ $(document).ready(function(){
 			var id = $(this).val();
 			console.log(id);
 			 $.ajax({
-			        url : "${pageContext.request.contextPath}/member/memberIdCheckAjax.bim",
+			        url : "${pageContext.request.contextPath}/member/checkMemberIdAjax.bim",
 			        type: "get",
 			        data : { "id" : id },
 			        success : function(data){

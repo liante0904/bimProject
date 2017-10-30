@@ -145,7 +145,7 @@ public class MemberController {
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value="member/memberIdCheckAjax.bim",method = RequestMethod.GET,produces = "application/json; charset=utf8")
+	@RequestMapping(value="member/checkMemberIdAjax.bim",method = RequestMethod.GET,produces = "application/json; charset=utf8")
 	@ResponseBody
 	public Map<String, String> memberIdCheck(Model model,String id, HttpServletRequest request,HttpServletResponse response){
 		System.out.println(id);
@@ -154,7 +154,7 @@ public class MemberController {
 		 Map<String, String> resultMap = new HashMap<String, String>();
 		 int resultCnt = 0;
 		try {
-			resultCnt = memberService.idChkMember(member);
+			resultCnt = memberService.checkMemberId(member);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
