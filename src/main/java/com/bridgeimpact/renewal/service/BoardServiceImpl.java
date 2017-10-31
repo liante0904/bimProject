@@ -44,9 +44,16 @@ public class BoardServiceImpl implements BoardService {
 
 
 	@Override
-	public int deleteBoard(String id) throws Exception {
+	public int closeBoard(String id) throws Exception {
 		// TODO Auto-generated method stub
 		return boardDAO.deleteBoardById(id);
+	}
+
+
+	@Override
+	public int openBoard(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return boardDAO.unDeleteBoardById(id);
 	}
 
 

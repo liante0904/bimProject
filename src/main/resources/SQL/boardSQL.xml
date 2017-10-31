@@ -73,13 +73,27 @@
     </select>
     
     
-    		<update id="deleteBoardById" parameterType="String">
+    <update id="deleteBoardById" parameterType="String">
 		<![CDATA[
 		
 		
 		UPDATE BIM_BOARD_TB
 		SET 
 		DEL_GB = 'Y'
+		WHERE 
+		ID = #{id} 
+		 
+		 
+		]]>
+	</update>
+	
+	    <update id="unDeleteBoardById" parameterType="String">
+		<![CDATA[
+		
+		
+		UPDATE BIM_BOARD_TB
+		SET 
+		DEL_GB = 'N'
 		WHERE 
 		ID = #{id} 
 		 

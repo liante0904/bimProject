@@ -155,20 +155,20 @@ public class BoardController {
 	
 	
 	/***
-	 * 게시판 관리 페이지에서 게시판 삭제 ajax 요청
+	 * 게시판 관리 페이지에서 게시판 비공개 ajax 요청
 	 * @param model
 	 * @param id
 	 * @param request
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value="/deleteBoardAjax.bim",method = RequestMethod.GET,produces = "application/json; charset=utf8")
+	@RequestMapping(value="/closeBoardAjax.bim",method = RequestMethod.GET,produces = "application/json; charset=utf8")
 	@ResponseBody
-	public Map<String, String> deleteBoard(Model model,String id, HttpServletRequest request,HttpServletResponse response){
+	public Map<String, String> closeBoardAjax(Model model,String id, HttpServletRequest request,HttpServletResponse response){
 		 Map<String, String> resultMap = new HashMap<String, String>();
 		 int resultCnt = 0;
 		try {
-			resultCnt = boardService.deleteBoard(id);
+			resultCnt = boardService.closeBoard(id);
 			logger.info(">>>>>>>>>>>>>"+String.valueOf(resultCnt));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -183,6 +183,45 @@ public class BoardController {
 			  } else {
 			   result = "failure";
 			   resultMsg = "게시판 비공개 요청이 실패하였습니다..";
+			  }
+
+		  resultMap.put("result", result);
+		  resultMap.put("resultMsg", resultMsg);
+		    response.setContentType("text/plain");
+		    response.setCharacterEncoding("UTF-8");
+		  return resultMap;
+	}
+	
+	
+	/***
+	 * 게시판 관리 페이지에서 게시판 삭제 ajax 요청
+	 * @param model
+	 * @param id
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/openBoardAjax.bim",method = RequestMethod.GET,produces = "application/json; charset=utf8")
+	@ResponseBody
+	public Map<String, String> openBoardAjax(Model model,String id, HttpServletRequest request,HttpServletResponse response){
+		 Map<String, String> resultMap = new HashMap<String, String>();
+		 int resultCnt = 0;
+		try {
+			resultCnt = boardService.openBoard(id);
+			logger.info(">>>>>>>>>>>>>"+String.valueOf(resultCnt));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		  String result = "";
+		  String resultMsg = "";
+
+		  if ( resultCnt == 1 ){
+			   result = "success";
+			   resultMsg = "게시판이 공개 되었습니다..";
+			  } else {
+			   result = "failure";
+			   resultMsg = "게시판 공개 요청이 실패하였습니다..";
 			  }
 
 		  resultMap.put("result", result);

@@ -54,7 +54,11 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 
-
+	@Override
+	public int unDeleteBoardById(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.update(Namespace+".unDeleteBoardById", id);
+	}
 
 
 }
