@@ -83,10 +83,21 @@ public class ArticleController {
 		try {
 			articleService.increseHitCntByIndex(articleIndex);
 			selectArticleByIndex = articleService.selectArticleByIndex(articleIndex);
-			if ("Y".equals(selectArticleByIndex.getDelGb())) { // 잘못된 접근 (이미 삭제된 글을 읽는 요청)
+			
+			// 게시물 접근여부 판별
+			if ("Y".equals(selectArticleByIndex.getBoardDelGb())) { // 게시판 비공개 여부
+
 				URL = "redirect:/board/viewList.bim?id="+id;
 				mav.setViewName(URL);
+				System.out.println("★★★★★>>> 게시판 비공개 시 ");
 				return mav;
+				
+			}else if ("Y".equals(selectArticleByIndex.getDelGb())) { // 게시글 삭제 여부
+				URL = "redirect:/board/viewList.bim?id="+id;
+				mav.setViewName(URL);
+				System.out.println("★★★★★>>> 게시글 삭제시 ");
+				return mav;
+				
 			}
 			
 		} catch (Exception e) {
@@ -123,7 +134,7 @@ public class ArticleController {
 	public Map<String, String> boardWrite(Model model,ArticleVO article, HttpServletRequest request,HttpSession session){
 		Map<String, String> resultMap = new HashMap<String, String>();
 		logger.info("글 제목 : "+ article.getTitle() + "\t 글내용 : " + article.getContents() );
-		System.out.println(">>>>>>>>>>>>>>"+article.getboardName());
+		System.out.println(">>>>>>>>>>>>>>"+article.getBoardName());
 		MemberVO loginMember = (MemberVO)session.getAttribute("loginInfo");
 		article.setWriteId(loginMember.getId());
 		try {

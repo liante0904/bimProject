@@ -15,19 +15,21 @@
         이렇게 해야 한다.
     -->
 
-<!--     
-    	<resultMap type="articleVO"  id="BoardResultMap">
+  
+    	<resultMap type="articleVO"  id="ArticleResultMap">
     	<result property="idx" column="IDX" />
-    	<result property="parentIdx" column="BOARD_NAME" />
+    	<result property="boardName" column="BOARD_NAME" />
 		<result property="title" column="TITLE" />
 		<result property="contents" column="CONTENTS" />
 		<result property="hitCnt" column="HIT_CNT" />
 		<result property="delGb" column="DEL_GB" />
 		<result property="writeDt" column="WRITE_DT" />
 		<result property="writeId" column="WRITE_ID" />
+		<result property="boardDelGb" column="BOARD_DEL_GB" />
 		</resultMap>
     
-     -->
+    
+     
     <select id="selectAllArticle" resultType="articleVO">
 	<![CDATA[
 	
@@ -55,16 +57,20 @@
 	
 	
 		SELECT   
-		IDX  ,   
-		BOARD_NAME  ,   
-		TITLE  ,   
-		CONTENTS  ,   
-		HIT_CNT  ,   
-		DEL_GB  ,   
-		DATE_FORMAT(WRITE_DT, "%Y-%m-%d %H:%i:%s") AS 'WRITE_DT'   ,   
-		WRITE_ID   
-		FROM   BIM_ARTICLE_TB   
-		WHERE IDX = #{index}		
+		article.IDX  ,   
+		article.BOARD_NAME  ,   
+		board.DEL_GB AS 'BOARD_DEL_GB' ,
+		article.TITLE  ,   
+		article.CONTENTS  ,   
+		article.HIT_CNT  ,   
+		article.DEL_GB  ,   
+		article.WRITE_DT,
+		article.WRITE_ID   
+		FROM
+		BIM_BOARD_TB  board,  BIM_ARTICLE_TB article  WHERE  board.id =  article.board_name AND article.idx = #{index};
+
+		
+			
     ]]>
     </select>
     

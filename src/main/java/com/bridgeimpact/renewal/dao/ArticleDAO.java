@@ -20,6 +20,4 @@ public interface ArticleDAO {
 
 	public void updateHitCntByIndex(int index) throws Exception;
 
-
-
 }

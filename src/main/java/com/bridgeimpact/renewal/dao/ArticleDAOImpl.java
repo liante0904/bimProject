@@ -61,7 +61,4 @@ public class ArticleDAOImpl implements ArticleDAO {
 		sqlSession.update(Namespace+".updateHitCntByIndex", index);
 		
 	}
-
-
-
 }
