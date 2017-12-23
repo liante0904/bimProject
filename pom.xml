@@ -16,7 +16,7 @@
 
 	<dependencies>
 
-	
+
 
 		<!-- Spring -->
 		<dependency>
@@ -120,20 +120,20 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-	
+
 		<!-- json -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.5.0</version>
 		</dependency>
-	
+
 		<dependency>
 			<groupId>net.sf.json-lib</groupId>
 			<artifactId>json-lib-ext-spring</artifactId>
 			<version>1.0.2</version>
 		</dependency>
-	
+
 		<!-- MySQL -->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -150,16 +150,17 @@
 
 		<!-- MultipartHttpServletRequset -->
 		<dependency>
-		    <groupId>commons-io</groupId>
-		    <artifactId>commons-io</artifactId>
-		    <version>2.0.1</version>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.0.1</version>
 		</dependency>
-		 
+
 		<dependency>
-		    <groupId>commons-fileupload</groupId>
-		    <artifactId>commons-fileupload</artifactId>
-		    <version>1.2.2</version>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.2</version>
 		</dependency>
+
 
 
 
@@ -171,13 +172,13 @@
 			<version>3.4.1</version>
 		</dependency>
 
-        <!-- Mybatis log -->
-        <!-- https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4.1 -->
-        <dependency>
-            <groupId>org.bgee.log4jdbc-log4j2</groupId>
-            <artifactId>log4jdbc-log4j2-jdbc4</artifactId>
-            <version>1.16</version>
-        </dependency>
+		<!-- Mybatis log -->
+		<!-- https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4.1 -->
+		<dependency>
+			<groupId>org.bgee.log4jdbc-log4j2</groupId>
+			<artifactId>log4jdbc-log4j2-jdbc4</artifactId>
+			<version>1.16</version>
+		</dependency>
 
 
 		<!-- MyBatis-Spring -->
@@ -203,9 +204,9 @@
 			<artifactId>spring-test</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		
+
 	</dependencies>
-	
+
 	<build>
 		<plugins>
 			<plugin>

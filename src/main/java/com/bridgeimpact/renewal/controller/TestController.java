@@ -60,16 +60,11 @@ public class TestController {
      */
     
     
-	@RequestMapping(value="/171002")
+	@RequestMapping(value="/page")
 	public String writeForm(Model model, HttpServletRequest request){
-		return "/test/171002/writeForm";
+		return "/test/writeForm";
 	}
 
-    /**
-     * 관리자메인 컨트롤러
-     * @return
-     */
-   
 	
 	/**
 	 * 파일 업로드 요청 처리(현재 파일 업로드 자체만 동작)
@@ -78,7 +73,6 @@ public class TestController {
 	 */
     @RequestMapping(value = "/fileUpload")
     public String fileUp(MultipartHttpServletRequest multi) {
-         
         // 저장 경로 설정
         String root = multi.getSession().getServletContext().getRealPath("/");
         String path = root+"resources/upload/";
@@ -86,8 +80,11 @@ public class TestController {
         String newFileName = ""; // 업로드 되는 파일명
          
         File dir = new File(path);
+        System.out.println("경로 여부 확인 : "+dir.isDirectory());
+        System.out.println(path);
         if(!dir.isDirectory()){
-            dir.mkdir();
+            dir.mkdirs();
+            System.out.println("디렉토리 생성 완료");
         }
          
         Iterator<String> files = multi.getFileNames();
@@ -110,7 +107,7 @@ public class TestController {
         System.out.println("id : " + multi.getParameter("id"));
         System.out.println("pw : " + multi.getParameter("pw"));
          
-        return "/test/171002/writeForm";
+        return "/test/writeForm";
     }
 
 
