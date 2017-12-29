@@ -50,6 +50,22 @@
     ]]>
     </select>
     
+     
+    <select id="selectTotalCntByArticle" parameterType="String" resultType="int">
+	<![CDATA[
+	
+	
+		SELECT   
+		count(*)   
+		FROM   BIM_ARTICLE_TB   
+		WHERE 
+		DEL_GB = 'N'	AND		BOARD_NAME = #{board_name};
+
+
+    ]]>
+    </select>
+    
+
 
     
         <select id="selectArticleByIndex" parameterType="int" resultType="articleVO">
@@ -97,11 +113,8 @@
     
     
     
-    
    	<insert id="insertArticle" parameterType="articleVO">
 	<![CDATA[
-
-
 	
 	
 		INSERT INTO BIM_ARTICLE_TB 

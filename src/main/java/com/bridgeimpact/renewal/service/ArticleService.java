@@ -9,6 +9,8 @@ public interface ArticleService {
     public List<ArticleVO> selectAllArticle() throws Exception;
 
     public ArticleVO selectArticleByIndex(int index) throws Exception;
+    
+    public int selectTotalCntByArticle(String board_name) throws Exception;
 
     public List<ArticleVO> selectArticleByBoardName(String id) throws Exception;
 

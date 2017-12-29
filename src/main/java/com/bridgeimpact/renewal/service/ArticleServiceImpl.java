@@ -61,5 +61,11 @@ public class ArticleServiceImpl implements ArticleService {
 		articleDAO.updateHitCntByIndex(index);
 	}
 
+	@Override
+	public int selectTotalCntByArticle(String board_name) throws Exception {
+		// TODO Auto-generated method stub
+		return articleDAO.selectTotalCntByArticle(board_name);
+	}
+
 
 }
