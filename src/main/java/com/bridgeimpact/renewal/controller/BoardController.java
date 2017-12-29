@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bridgeimpact.renewal.common.PageUtil;
 import com.bridgeimpact.renewal.dto.ArticleVO;
 import com.bridgeimpact.renewal.dto.BoardVO;
 import com.bridgeimpact.renewal.dto.CommentVO;
@@ -55,10 +56,10 @@ public class BoardController {
 	
     
     /***
-     * id 파라미터를 이용해 게시판에 접근합니다.
+     * id(게시판) 파라미터를 이용해 게시판에 접근합니다.
      * 
      * @param model
-     * @param id 
+     * @param id : 게시판 구분자 ID
      * @param request
      * @param session
      * @return
@@ -67,6 +68,14 @@ public class BoardController {
 	public String boardView(Model model,String id, HttpServletRequest request,HttpSession session){
 	
 		List<ArticleVO> articleList = null;
+		int ArticleTotalCnt = 0;
+
+		PageUtil pageUtil = new PageUtil();
+		ArticleTotalCnt = pageUtil.getTotalArticleCntByBoardName(articleService,id);
+		int PageCntByBoard = pageUtil.getDisplayPageCnt();
+		
+		System.out.println("최종 도달 지점 게시판 총갯수 : " + ArticleTotalCnt);
+		System.out.println(PageCntByBoard);
 		try {
 			articleList = articleService.selectArticleByBoardName(id);
 		} catch (Exception e) {
@@ -118,7 +127,7 @@ public class BoardController {
 	/***
 	 * 게시판 추가 페이지에서 게시판 URL 중복체크 ajax 요청
 	 * @param model
-	 * @param id
+	 * @param id : 중복확인을 하고자 하는 ID
 	 * @param request
 	 * @param response
 	 * @return
@@ -157,7 +166,7 @@ public class BoardController {
 	/***
 	 * 게시판 관리 페이지에서 게시판 비공개 ajax 요청
 	 * @param model
-	 * @param id
+	 * @param id : 게시판 구분ID
 	 * @param request
 	 * @param response
 	 * @return
@@ -196,7 +205,7 @@ public class BoardController {
 	/***
 	 * 게시판 관리 페이지에서 게시판 삭제 ajax 요청
 	 * @param model
-	 * @param id
+	 * @param id : 게시판 구분 ID
 	 * @param request
 	 * @param response
 	 * @return

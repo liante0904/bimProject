@@ -61,4 +61,10 @@ public class ArticleDAOImpl implements ArticleDAO {
 		sqlSession.update(Namespace+".updateHitCntByIndex", index);
 		
 	}
+
+	@Override
+	public int selectTotalCntByArticle(String board_name) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(Namespace+".selectTotalCntByArticle", board_name);
+	}
 }
