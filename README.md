@@ -14,7 +14,7 @@
 ##
 
 #### RDBMS : MariaDB 5.5.57
-#### Language : Java(Jsp), SDK 8
+#### Language : Java(Jsp), JDK 8
 #### WAS : Tomcat 8
 #### etc : Spring Framework 4.3.10.RELEASE (사실 대부분의 코드는 3기반 ㅠㅠ)
 ####     : Javascript, jQuery 1.11.2 (google CDN), CSS, Bootstrap (테스트중)
