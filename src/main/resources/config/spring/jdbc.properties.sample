@@ -1,0 +1,5 @@
+위 파일은 샘플파일입니다 .sample 확장자와 해당 라인은 삭제하여 사용합니다.
+jdbc.driverClassName=org.mariadb.jdbc.Driver
+jdbc.url=jdbc:mysql://<ip or dns>:3306/<DatabaseName>?useUnicode=true&characterEncoding=utf8
+jdbc.username=<dbUserName>
+jdbc.password=<dbPassword>

@@ -42,7 +42,7 @@ $(function(){
         </thead>
         <tbody>
          
-            <c:forEach items="${articleList}" var="article">
+            <c:forEach items="${articleList}" var="article" begin="0" end="${DisplayArticleCnt }">
                 <tr>
                     <td>${article.idx}</td>
                     <td>${article.boardName}</td>
@@ -52,13 +52,14 @@ $(function(){
                     <td>${article.writeDt}</td>
                     <td>${article.delGb}</td>
                 </tr>
+                
             </c:forEach>
 
         </tbody>
-    </table>
- 
+    </table>		
  <input type="button" id="write" value="글쓰기"/>
  
+<%@ include file="/WEB-INF/views/common/pageUtil.jsp" %>
 </body>
 </html>
 

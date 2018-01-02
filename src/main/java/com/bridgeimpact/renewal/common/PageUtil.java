@@ -13,7 +13,7 @@ import com.bridgeimpact.renewal.service.ArticleService;
 public class PageUtil {
 
 	private int totalArticleCnt;
-	private final int displayArticleCnt = 10;
+	private final int displayArticleCnt = 3;
 	private int displayPageCnt;
 	
 	
@@ -41,6 +41,10 @@ public class PageUtil {
 
 	public int getDisplayPageCnt() {
 		return displayPageCnt;
+	}
+	
+	public int getDisplayArticleCnt() {
+		return displayArticleCnt;
 	}
 
 

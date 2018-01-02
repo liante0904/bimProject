@@ -61,6 +61,10 @@ $(function(){
 					<th>내용</th>                   
                        <td> <textarea rows="20" cols="100"  id="contents" name="contents"></textarea></td>
                 </tr>
+                <tr>
+                <th>첨부파일</th>
+                <td><input type="file"></td>
+                </tr>
             </tbody>
         </table>
  <input type="button" id="write" value="글쓰기"/>

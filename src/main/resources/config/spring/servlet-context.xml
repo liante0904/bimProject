@@ -26,7 +26,8 @@
 	<context:component-scan base-package="com.bridgeimpact.renewal.controller" />
 	<context:component-scan base-package="com.bridgeimpact.renewal.service" />
 	<context:component-scan base-package="com.bridgeimpact.renewal.intercepter" />
-	
+
+		
 	<!-- Spring Annotation 설정 -->
 	<context:annotation-config /> 
 
