@@ -66,37 +66,35 @@ public class BoardController {
      */
 	@RequestMapping(value="/viewList.bim", method= RequestMethod.GET)
 	public String boardView(String id,Model model, HttpServletRequest request,HttpSession session){
-		int pageParam;
-		int ArticleTotalCnt;
-		if (request.getParameter("page") == null) {
-			pageParam = 1;
-		}else {
-			pageParam = Integer.parseInt(request.getParameter("page").toString());
-		}
-		System.out.println("현재 페이지 : " + pageParam);
-
-		List<ArticleVO> articleList = null;
-
+		// 현재 페이지 세팅
 		PageUtil pageUtil = new PageUtil();
-		ArticleTotalCnt = pageUtil.getTotalArticleCntByBoardName(articleService,id);
-		int PageCntByBoard = pageUtil.getDisplayPageCnt();
-		int endPage;
-		endPage = pageParam;
-		System.out.println(id +"게시판 글 수 : " + ArticleTotalCnt);
-		System.out.println("게시판 페이지 수 : "+PageCntByBoard);
+		System.out.println(request.getParameter("page"));
+		if (request.getParameter("page") == null || "".equals(request.getParameter("page"))) {
+			// 파리미터가 없을때
+			pageUtil.setCurrentPage(1);
+		}else {
+			pageUtil.setCurrentPage(Integer.parseInt(request.getParameter("page").toString()));
+		}
+		System.out.println("현재 페이지 : " + pageUtil.getCurrentPage());
+
+		// 게시판 페이지 세팅
 		
+		pageUtil.setTotalArticleCnt(articleService,id);
+		System.out.println(id +"게시판 글 수 : " + pageUtil.getTotalArticleCnt());
+		System.out.println("게시판 페이지 수 : "+ pageUtil.getTotalPageCnt());
+		
+		List<ArticleVO> articleList = null;
 		try {
 			articleList = articleService.selectArticleByBoardName(id);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		System.out.println("출력될 게시글 수 : " + pageUtil.getDisplayArticleCnt());
 		model.addAttribute("articleList", articleList);
+		model.addAttribute("pageUtil", pageUtil);
 		model.addAttribute("DisplayArticleCnt", pageUtil.getDisplayArticleCnt());
-		model.addAttribute("PageCntByBoard", PageCntByBoard);
 		model.addAttribute("boardName", id);
-		model.addAttribute("pageParam",pageParam);
 		//request.setAttribute("DisplayArticleCnt", pageUtil.getDisplayArticleCnt());
 
 		logger.info(id+"게시판 요청");
