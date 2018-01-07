@@ -10,17 +10,28 @@
 </head>
 <body>
             <div>
-            	<c:set var="currentPage" value="${pageUtil.totalPageCnt }" scope="page"/>
-            	출력 : ${currentPage }
+            	<c:set var="displayPageCnt" value="${pageUtil.totalPageCnt }" scope="page"/>
+				<c:set var="displayEndPageCnt" value="${pageUtil.totalPageCnt }" scope="page"/>
+            	현재 게시판 페이지 갯수  : ${displayPageCnt } <br>
            	
+
+           		<!-- (처음) 버튼 판별  --> 	
+           		<c:if test="${pageUtil.currentPage != 1 and displayPageCnt > 10}">
+					<a href="${pageContext.request.contextPath }/board/viewList.bim?id=${boardName }&page=${status.current }">처음</a>
+	           
+           		</c:if>
+           		
+           	
+            	<!-- 게시판의 페이지 수를 통해, 보여질 게시판 갯수 검증 -->
             	<c:choose>
-            	<c:when test="${currentPage > 10 }"><c:set var="currentPage" value="10"/></c:when>
+            	<c:when test="${displayPageCnt > 10 }"><c:set var="displayPageCnt" value="11"/></c:when>
+            	
 				<c:otherwise>
-				<c:set var="currentPage" value="${pageUtil.totalPageCnt }"/>
+				<c:set var="displayPageCnt" value="${pageUtil.totalPageCnt }"/>
 				</c:otherwise>
             	</c:choose>
  
-                <c:forEach var="PageCntByBoard" begin="1" end="${currentPage}" varStatus="status">
+                <c:forEach var="PageCntByBoard" begin="1" end="${displayPageCnt-1}" varStatus="status">
 	                <c:choose >	
 	                	<c:when test="${status.current eq pageUtil.currentPage }">
 	                		<font color="red">${status.current }</font>
@@ -30,8 +41,19 @@
 	                		</c:otherwise>
 	                		
 	                </c:choose>
+	                
                 </c:forEach>
+	                <c:if test="${displayPageCnt > 10}"><a href="${pageContext.request.contextPath }/board/viewList.bim?id=${boardName }&page=${displayEndPageCnt }">끝</a></c:if>
+                
+                
+                ${pageUtil.currentPage } , ${displayPageCnt }
+                
             </div>
+             		<!-- (처음) 버튼 판별  --> 	
+           		<c:if test="${pageUtil.currentPage != 1 and displayPageCnt > 10}">
+					
+	           
+           		</c:if>
             
             <div>현재 페이지 : ${pageUtil.currentPage}</div>
 

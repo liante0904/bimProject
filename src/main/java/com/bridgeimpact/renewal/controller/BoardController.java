@@ -1,18 +1,11 @@
 package com.bridgeimpact.renewal.controller;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.bridgeimpact.renewal.common.PageUtil;
 import com.bridgeimpact.renewal.dto.ArticleVO;
 import com.bridgeimpact.renewal.dto.BoardVO;
-import com.bridgeimpact.renewal.dto.CommentVO;
-import com.bridgeimpact.renewal.dto.MemberVO;
 import com.bridgeimpact.renewal.service.ArticleService;
 import com.bridgeimpact.renewal.service.BoardService;
-import com.bridgeimpact.renewal.service.CommentService;
-import com.bridgeimpact.renewal.service.MemberService;
 
  
 /**
@@ -66,7 +53,7 @@ public class BoardController {
      */
 	@RequestMapping(value="/viewList.bim", method= RequestMethod.GET)
 	public String boardView(String id,Model model, HttpServletRequest request,HttpSession session){
-		// 현재 페이지 세팅
+		// 이용자의 요청 페이지 세팅
 		PageUtil pageUtil = new PageUtil();
 		System.out.println(request.getParameter("page"));
 		if (request.getParameter("page") == null || "".equals(request.getParameter("page"))) {
@@ -76,13 +63,19 @@ public class BoardController {
 			pageUtil.setCurrentPage(Integer.parseInt(request.getParameter("page").toString()));
 		}
 		System.out.println("현재 페이지 : " + pageUtil.getCurrentPage());
-
-		// 게시판 페이지 세팅
+		//TODO 게시판의 범위를 벗어나는 페이지 접속시도시 리턴적용 
+		
+		
+		// 접근 게시판 페이지 세팅
 		
 		pageUtil.setTotalArticleCnt(articleService,id);
 		System.out.println(id +"게시판 글 수 : " + pageUtil.getTotalArticleCnt());
-		System.out.println("게시판 페이지 수 : "+ pageUtil.getTotalPageCnt());
-		
+		System.out.println("게시판의 총  페이지 갯 수 : "+ pageUtil.getTotalPageCnt());
+		System.out.println(pageUtil.getCurrentPage());
+		if ("".equals(id)) {
+			//TODO 유효하지 않는 게시판 리턴
+			return "board/articleList";
+		}
 		List<ArticleVO> articleList = null;
 		try {
 			articleList = articleService.selectArticleByBoardName(id);
@@ -91,6 +84,7 @@ public class BoardController {
 			e.printStackTrace();
 		}
 		System.out.println("출력될 게시글 수 : " + pageUtil.getDisplayArticleCnt());
+		
 		model.addAttribute("articleList", articleList);
 		model.addAttribute("pageUtil", pageUtil);
 		model.addAttribute("DisplayArticleCnt", pageUtil.getDisplayArticleCnt());
