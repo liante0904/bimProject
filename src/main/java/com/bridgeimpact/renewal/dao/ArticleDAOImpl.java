@@ -70,9 +70,9 @@ public class ArticleDAOImpl implements ArticleDAO {
 	}
 
 	@Override
-	public List<ArticleVO> selectTotalCntByPage(PageUtil pageUtil) throws Exception {
+	public List<ArticleVO> selectArticleByPage(PageUtil pageUtil) throws Exception {
 		// TODO Auto-generated method stub
 		
-		return sqlSession.selectList(Namespace+".selectTotalCntByPage",pageUtil);
+		return sqlSession.selectList(Namespace+".selectArticleByPage",pageUtil);
 	}
 }

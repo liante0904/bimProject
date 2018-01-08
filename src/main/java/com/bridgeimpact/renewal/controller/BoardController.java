@@ -81,8 +81,10 @@ public class BoardController {
 		List<ArticleVO> articleList = null;
 		if (pageUtil.getCurrentPage() == 1) {
 			paramMap.put("currentPage", pageUtil.getCurrentPage());
+			System.out.println("쿼리 날리기전에 데이터  확인 : "+ pageUtil.getDisplayArticleCnt() +"," + pageUtil.getTotalArticleCnt() );
 			try {
 				articleList = articleService.selectArticleByPage(pageUtil);
+				System.out.println(articleList.size()+"이거냐 ㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
