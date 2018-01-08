@@ -2,6 +2,7 @@ package com.bridgeimpact.renewal.service;
 
 import java.util.List;
 
+import com.bridgeimpact.renewal.common.PageUtil;
 import com.bridgeimpact.renewal.dto.ArticleVO;
 
 public interface ArticleService {
@@ -22,7 +23,7 @@ public interface ArticleService {
 
 	public void increseHitCntByIndex(int index) throws Exception;
 
-	public List<ArticleVO> selectArticleByPage(int currentPage) throws Exception;
+	public List<ArticleVO> selectArticleByPage(PageUtil pageUtil) throws Exception;
 
 
 

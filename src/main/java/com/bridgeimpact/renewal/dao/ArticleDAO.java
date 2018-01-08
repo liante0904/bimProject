@@ -2,6 +2,7 @@ package com.bridgeimpact.renewal.dao;
 
 import java.util.List;
 
+import com.bridgeimpact.renewal.common.PageUtil;
 import com.bridgeimpact.renewal.dto.ArticleVO;
 
 public interface ArticleDAO {
@@ -22,6 +23,6 @@ public interface ArticleDAO {
 
 	public int selectTotalCntByArticle(String board_name)throws Exception;
 
-	public List<ArticleVO> selectTotalCntByPage(int currentPage)throws Exception;
+	public List<ArticleVO> selectTotalCntByPage(PageUtil pageUtil)throws Exception;
 
 }

@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bridgeimpact.renewal.common.PageUtil;
 import com.bridgeimpact.renewal.dao.ArticleDAO;
 import com.bridgeimpact.renewal.dto.ArticleVO;
 
@@ -68,9 +69,9 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public List<ArticleVO> selectArticleByPage(int currentPage) throws Exception {
+	public List<ArticleVO> selectArticleByPage(PageUtil pageUtil) throws Exception {
 		// TODO Auto-generated method stub
-		return articleDAO.selectTotalCntByPage(currentPage);
+		return articleDAO.selectTotalCntByPage(pageUtil);
 	}
 
 

@@ -8,6 +8,7 @@ import org.apache.ibatis.cursor.Cursor;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.bridgeimpact.renewal.common.PageUtil;
 import com.bridgeimpact.renewal.dto.ArticleVO;
 
 @Repository
@@ -69,8 +70,9 @@ public class ArticleDAOImpl implements ArticleDAO {
 	}
 
 	@Override
-	public List<ArticleVO> selectTotalCntByPage(int currentPage) throws Exception {
+	public List<ArticleVO> selectTotalCntByPage(PageUtil pageUtil) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(Namespace+".selectTotalCntByPage");
+		
+		return sqlSession.selectList(Namespace+".selectTotalCntByPage",pageUtil);
 	}
 }

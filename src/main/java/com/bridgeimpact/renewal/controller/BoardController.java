@@ -75,12 +75,14 @@ public class BoardController {
 			//TODO 유효하지 않는 게시판 리턴
 			return "board/articleList";
 		}
+		// 일단 안써도 되서 보류
+		HashMap<String, Integer> paramMap = new HashMap<String, Integer>();
 		
 		List<ArticleVO> articleList = null;
 		if (pageUtil.getCurrentPage() == 1) {
-			
+			paramMap.put("currentPage", pageUtil.getCurrentPage());
 			try {
-				articleList = articleService.selectArticleByPage(pageUtil.getCurrentPage());
+				articleList = articleService.selectArticleByPage(pageUtil);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
