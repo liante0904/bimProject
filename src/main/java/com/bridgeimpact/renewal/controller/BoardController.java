@@ -55,7 +55,6 @@ public class BoardController {
 	public String boardView(String id,Model model, HttpServletRequest request,HttpSession session){
 		// 이용자의 요청 페이지 세팅
 		PageUtil pageUtil = new PageUtil();
-		System.out.println(request.getParameter("page"));
 		if (request.getParameter("page") == null || "".equals(request.getParameter("page"))) {
 			// 파리미터가 없을때
 			pageUtil.setCurrentPage(1);
@@ -76,7 +75,19 @@ public class BoardController {
 			//TODO 유효하지 않는 게시판 리턴
 			return "board/articleList";
 		}
+		
 		List<ArticleVO> articleList = null;
+		if (pageUtil.getCurrentPage() == 1) {
+			
+			try {
+				articleList = articleService.selectArticleByPage(pageUtil.getCurrentPage());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		// 구별없이 전체리스트 가져오기 예시
 		try {
 			articleList = articleService.selectArticleByBoardName(id);
 		} catch (Exception e) {
@@ -87,7 +98,6 @@ public class BoardController {
 		
 		model.addAttribute("articleList", articleList);
 		model.addAttribute("pageUtil", pageUtil);
-		model.addAttribute("DisplayArticleCnt", pageUtil.getDisplayArticleCnt());
 		model.addAttribute("boardName", id);
 		//request.setAttribute("DisplayArticleCnt", pageUtil.getDisplayArticleCnt());
 

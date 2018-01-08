@@ -31,6 +31,7 @@
 				</c:otherwise>
             	</c:choose>
  
+ 				<!-- 게시글 출력 부분 -->
                 <c:forEach var="PageCntByBoard" begin="1" end="${displayPageCnt-1}" varStatus="status">
 	                <c:choose >	
 	                	<c:when test="${status.current eq pageUtil.currentPage }">
@@ -46,8 +47,6 @@
 	                <c:if test="${displayPageCnt > 10}"><a href="${pageContext.request.contextPath }/board/viewList.bim?id=${boardName }&page=${displayEndPageCnt }">끝</a></c:if>
                 
                 
-                ${pageUtil.currentPage } , ${displayPageCnt }
-                
             </div>
              		<!-- (처음) 버튼 판별  --> 	
            		<c:if test="${pageUtil.currentPage != 1 and displayPageCnt > 10}">
@@ -56,7 +55,8 @@
            		</c:if>
             
             <div>현재 페이지 : ${pageUtil.currentPage}</div>
-
+            <div>보여질 게시글 갯수 : ${pageUtil.displayArticleCnt}</div>
+           
 
 </body>
 </html>

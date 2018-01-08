@@ -28,6 +28,8 @@ $(function(){
 <body>
     <h1>boardList.jsp</h1>
  
+ 
+ <div>페이지당 보여질 게시물 갯수 : ${pageUtil.displayArticleCnt }</div>
     <table>
         <thead>
             <tr>
@@ -42,7 +44,7 @@ $(function(){
         </thead>
         <tbody>
          
-            <c:forEach items="${articleList}" var="article" begin="0" end="${DisplayArticleCnt }">
+            <c:forEach items="${articleList}" var="article" begin="1" end="${pageUtil.displayArticleCnt }">
                 <tr>
                     <td>${article.idx}</td>
                     <td>${article.boardName}</td>

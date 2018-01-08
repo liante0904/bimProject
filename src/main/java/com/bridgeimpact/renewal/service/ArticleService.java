@@ -22,6 +22,8 @@ public interface ArticleService {
 
 	public void increseHitCntByIndex(int index) throws Exception;
 
+	public List<ArticleVO> selectArticleByPage(int currentPage) throws Exception;
+
 
 
 }

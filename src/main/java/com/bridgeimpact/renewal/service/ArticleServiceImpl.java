@@ -67,5 +67,11 @@ public class ArticleServiceImpl implements ArticleService {
 		return articleDAO.selectTotalCntByArticle(board_name);
 	}
 
+	@Override
+	public List<ArticleVO> selectArticleByPage(int currentPage) throws Exception {
+		// TODO Auto-generated method stub
+		return articleDAO.selectTotalCntByPage(currentPage);
+	}
+
 
 }

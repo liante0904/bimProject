@@ -67,4 +67,10 @@ public class ArticleDAOImpl implements ArticleDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(Namespace+".selectTotalCntByArticle", board_name);
 	}
+
+	@Override
+	public List<ArticleVO> selectTotalCntByPage(int currentPage) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(Namespace+".selectTotalCntByPage");
+	}
 }

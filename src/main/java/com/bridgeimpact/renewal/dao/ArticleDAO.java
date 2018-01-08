@@ -22,4 +22,6 @@ public interface ArticleDAO {
 
 	public int selectTotalCntByArticle(String board_name)throws Exception;
 
+	public List<ArticleVO> selectTotalCntByPage(int currentPage)throws Exception;
+
 }

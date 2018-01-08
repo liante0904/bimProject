@@ -112,6 +112,32 @@
     </select>
     
     
+            <select id="selectArticleByPage" parameterType="int" resultType="java.util.HashMap">
+	<![CDATA[
+	
+	
+		SELECT   
+		IDX  ,   
+		BOARD_NAME  ,   
+		TITLE  ,   
+		CONTENTS  ,   
+		HIT_CNT  ,   
+		DEL_GB  ,   
+		DATE_FORMAT(WRITE_DT, "%Y-%m-%d ") AS 'WRITE_DT'  ,   
+		WRITE_ID   
+		FROM   BIM_ARTICLE_TB   
+		ORDER BY IDX DESC
+		
+		LIMIT 
+		
+    ]]>
+    
+    		<if test="value = 1">
+    		
+		</if>
+		
+    </select>
+    
     
    	<insert id="insertArticle" parameterType="articleVO">
 	<![CDATA[

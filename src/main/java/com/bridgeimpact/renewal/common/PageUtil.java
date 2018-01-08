@@ -19,27 +19,6 @@ public class PageUtil {
 	
     private static final Logger logger = LoggerFactory.getLogger(PageUtil.class);
     
-    
-/*    
-	public int getTotalArticleCntByBoardName(ArticleService articleService,String board_name) {
-		try {
-			 totalArticleCnt = articleService.selectTotalCntByArticle(board_name);
-	//		 totalArticleCnt = sqlSession.selectOne(Namespace+".selectTotalCntByArticle", board_name);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		if (totalArticleCnt != 0) {
-			displayPageCnt = totalArticleCnt / displayArticleCnt;
-			
-			if (totalArticleCnt % displayArticleCnt != 0) {
-				displayPageCnt = displayPageCnt + 1;
-			}
-		}
-			return totalArticleCnt;
-	}
-*/
 
 	
 	
