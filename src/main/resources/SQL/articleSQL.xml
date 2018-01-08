@@ -28,22 +28,12 @@
 		<result property="boardDelGb" column="BOARD_DEL_GB" />
 		</resultMap>
     
-    
-      
-    	<resultMap type="PageUtil"  id="PageUtilResultMap">
-    	<result property="idx" column="IDX" />
-    	<result property="boardName" column="BOARD_NAME" />
-		<result property="title" column="TITLE" />
-		<result property="contents" column="CONTENTS" />
-		<result property="hitCnt" column="HIT_CNT" />
-		<result property="delGb" column="DEL_GB" />
-		<result property="writeDt" column="WRITE_DT" />
-		<result property="writeId" column="WRITE_ID" />
-		<result property="boardDelGb" column="BOARD_DEL_GB" />
+        <resultMap type="pageUtil"  id="PageUtilResultMap">
+    	<result property="currentPage" column="CURRENTPAGE" />
+    	<result property="displayArticleCnt" column="DISPLAYARTICLECNT" />
+		<result property="totalPageCnt" column="TOTALPAGECNT" />
 		</resultMap>
     
-    
-     
      
     <select id="selectAllArticle" resultType="articleVO">
 	<![CDATA[
@@ -127,7 +117,7 @@
     </select>
     
     
-            <select id="selectArticleByPage" parameterType="com.bridgeimpact.renewal.common" resultType="java.util.HashMap">
+            <select id="selectArticleByPage" parameterType="pageUtil" resultType="articleVO">
 	<![CDATA[
 	
 	
@@ -144,13 +134,10 @@
 		ORDER BY IDX DESC
 		
 		LIMIT 
+		#{displayArticleCnt} , #{totalArticleCnt}
 		
     ]]>
     
-    		<if test="value = 1">
-    		
-		</if>
-		
     </select>
     
     
