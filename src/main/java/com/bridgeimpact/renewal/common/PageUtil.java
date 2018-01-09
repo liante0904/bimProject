@@ -85,7 +85,6 @@ public class PageUtil {
 			}
 			 System.out.println("pageRangeCnt: "+pageRangeCnt);
 		}
-		 1~10 
 	}
 
 
