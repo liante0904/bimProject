@@ -29,22 +29,21 @@ $(function(){
     <h1>boardList.jsp</h1>
  
  
- <div>페이지당 보여질 게시물 갯수 : ${pageUtil.displayArticleCnt }</div>
     <table>
         <thead>
             <tr>
                 <th>글번호</th>
                 <th>게시판 구분</th>
                 <th>제목</th>
-                <th>조회수</th>
 				<th>작성자</th>
+                <th>조회수</th>
                 <th>날짜</th>
                 <th>삭제여부</th>
             </tr>
         </thead>
         <tbody>
          
-            <c:forEach items="${articleList}" var="article" begin="1" end="${pageUtil.displayArticleCnt }">
+            <c:forEach items="${articleList}" var="article" begin="0" end="${pageUtil.displayArticleCnt }">
                 <tr>
                     <td>${article.idx}</td>
                     <td>${article.boardName}</td>

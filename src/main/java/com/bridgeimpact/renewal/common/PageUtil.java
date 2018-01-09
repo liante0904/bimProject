@@ -1,23 +1,50 @@
 package com.bridgeimpact.renewal.common;
 
-import javax.inject.Inject;
 
-import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 
 import com.bridgeimpact.renewal.service.ArticleService;
 
 public class PageUtil {
 
 	private int totalArticleCnt;
+	private final int displayArticleCnt = 2;
 	private int currentPage;
-	private final int displayArticleCnt = 3;
 	private int totalPageCnt;
+	private int startArticleCnt;
+	private int pageRangeCnt;
 	
-    private static final Logger logger = LoggerFactory.getLogger(PageUtil.class);
+	
+	
+	
+    public int getPageRangeCnt() {
+		return pageRangeCnt;
+	}
+
+
+	public void setPageRangeCnt(int pageRangeCnt) {
+		this.pageRangeCnt = pageRangeCnt;
+	}
+
+
+
+
+	public int getStartArticleCnt() {
+		return startArticleCnt;
+	}
+
+
+	public void setStartArticleCnt() {
+		
+		if (currentPage != 0) {
+			startArticleCnt = currentPage * displayArticleCnt;
+		}
+		this.startArticleCnt = startArticleCnt;
+	}
+
+
+	private static final Logger logger = LoggerFactory.getLogger(PageUtil.class);
     
 
 	
@@ -44,6 +71,19 @@ public class PageUtil {
 			if (totalArticleCnt % displayArticleCnt != 0) {
 				totalPageCnt = totalPageCnt + 1;
 			}
+		}
+		
+		// 현재 페이지의 표시될 페이지의 범위를 계산
+		
+		 if (currentPage != 0) {
+			
+			 if (currentPage < 11) {
+				pageRangeCnt = 0;
+				 
+			}else {
+				pageRangeCnt = (currentPage / 10) * 10;
+			}
+			 System.out.println("pageRangeCnt: "+pageRangeCnt);
 		}
 	}
 

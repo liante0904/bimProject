@@ -133,10 +133,20 @@
 		FROM   BIM_ARTICLE_TB   
 		ORDER BY IDX DESC
 		
-		LIMIT 
-		#{displayArticleCnt} , #{totalArticleCnt}
-		
+			LIMIT 
     ]]>
+    
+		<choose>
+			<when test="currentPage =! 1"> <!-- 1페이지가 아닐때 -->
+			 #{currentPage} * #{displayArticleCnt},   #{displayArticleCnt}
+			</when>
+		
+				<otherwise>
+
+				#{startArticleCnt} , #{displayArticleCnt}
+				
+				</otherwise>
+		</choose>
     
     </select>
     
