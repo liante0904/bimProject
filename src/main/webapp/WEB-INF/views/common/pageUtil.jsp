@@ -12,17 +12,21 @@
 	<div>
 		<c:set var="displayPageCnt" value="${pageUtil.totalPageCnt }" scope="page" /><!-- 처음이랑 끝버튼에만 쓰고 있음 -->
 
-		<c:set var="displayEndPageCnt" value="${pageUtil.totalPageCnt }" scope="page" />
+		<c:set var="endPageCnt" value="${pageUtil.totalPageCnt }" scope="page" />
 		
 		
-		<c:if test="${pageUtil.currentPage < 11 }">
-			<c:if test="${pageUtil.pageRangeCnt+ 10 <= pageUtil.totalPageCnt   }">
-				<c:set var="displayEndPageCnt" value="${pageUtil.pageRangeCnt+10 }"
-					scope="page" />
-			</c:if>
-		</c:if>
+		<c:if test="${pageUtil.currentPage < 11 }"></c:if>
 
-
+		<!-- 현재페이지가 1 ~ 10페이지 일때 -->
+		<c:choose>
+			<c:when test="${pageUtil.currentPage < 11 }">
+				<c:set var="endPageCnt" value="${pageUtil.pageRangeCnt + 10 }" scope="page" />
+			</c:when>
+				<c:otherwise>
+					<c:set var="endPageCnt" value="${pageUtil.pageRangeCnt }" scope="page" />
+				</c:otherwise>
+		</c:choose>
+		
 		<!-- (처음) 버튼 판별  -->
 		<c:if test="${pageUtil.currentPage != 1 and displayPageCnt > 10}">
 			<a
@@ -31,8 +35,10 @@
 		</c:if>
 
 
-		<!-- 이전 버트  -->
-
+		<!-- 이전 버튼  -->
+		<c:if test="${ pageUtil.currentPage ne '1'}">
+			<a href="${pageContext.request.contextPath }/board/viewList.bim?id=${boardName }&page=${pageUtil.pageRangeCnt + 1 + 10 }">이전</a>
+		</c:if>
 
 
 
@@ -42,39 +48,37 @@
 
 
 		<!-- 페이지 출력 부분 -->
-		<c:forEach var="PageCntByBoard" begin="${pageUtil.pageRangeCnt+1  }"
-			end="${displayEndPageCnt}" varStatus="status">
+		<c:forEach var="PageCntByBoard" begin="${pageUtil.pageRangeCnt + 1  }" end="${pageUtil.pageRangeCnt  + 10 }" varStatus="status">
 			<c:choose>
 				<c:when test="${status.current eq pageUtil.currentPage }">
 					<font color="red">${status.current }</font>
 				</c:when>
-				<c:otherwise>
-					<a
-						href="${pageContext.request.contextPath }/board/viewList.bim?id=${boardName }&page=${status.current }">${status.current }</a>
-				</c:otherwise>
+				<c:when test="${status.current ne pageUtil.currentPage  and status.current <= pageUtil.totalPageCnt }">
+					<a href="${pageContext.request.contextPath }/board/viewList.bim?id=${boardName }&page=${status.current }">${status.current }</a>
+				</c:when>
 
 			</c:choose>
 
 		</c:forEach>
 
 		<!-- 다음 버튼 -->
-
+		<c:if test="${displayPageCnt > 10 and pageUtil.totalPageCnt != pageUtil.currentPage}">
+			<a href="${pageContext.request.contextPath }/board/viewList.bim?id=${boardName }&page=${pageUtil.pageRangeCnt + 1 + 10 }">다음</a>
+		</c:if>
 		<!-- 끝 버튼  판별-->
 		<c:if test="${displayPageCnt > 10 and displayPageCnt  != pageUtil.currentPage}">
-			<a
-				href="${pageContext.request.contextPath }/board/viewList.bim?id=${boardName }&page=${displayEndPageCnt }">끝</a>
+			<a href="${pageContext.request.contextPath }/board/viewList.bim?id=${boardName }&page=${displayPageCnt }">끝</a>
 		</c:if>
 
 
 	</div>
 
-
+	<div>	jspt(endPageCnt) : ${endPageCnt }</div>
 	<div>pageRangeCnt: ${pageUtil.pageRangeCnt }</div>
 	<div>displayPageCnt : ${displayPageCnt }</div>
 	<div>
 		현재 게시판의 총 페이지 갯수 : ${pageUtil.totalPageCnt } <br>
 	</div>
-	<div>현재페이지 ${pageUtil.currentPage }</div>
 	<div>현재 페이지 : ${pageUtil.currentPage}</div>
 	<div>보여질 게시글 갯수 : ${pageUtil.displayArticleCnt}</div>
 
