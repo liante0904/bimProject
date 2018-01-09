@@ -77,14 +77,15 @@ public class PageUtil {
 		
 		 if (currentPage != 0) {
 			
-			 if (currentPage < 11) {
+			 if (currentPage < 11) { //현재 페이지가 첫페이지 일 경우
 				pageRangeCnt = 0;
 				 
-			}else {
+			}else { //이외의 페이지일 경우
 				pageRangeCnt = (currentPage / 10) * 10;
 			}
 			 System.out.println("pageRangeCnt: "+pageRangeCnt);
 		}
+		 1~10 
 	}
 
 
