@@ -43,7 +43,8 @@
 
 
 		<!-- 게시판의 페이지 수를 통해, 보여질 게시판 갯수 검증 -->
-
+		
+		<c:if test="${pageUtil.pageRangeCnt  == pageUtil.currentPage}">이거 컨트롤러에서 해도 됨</c:if>
 
 
 
@@ -72,6 +73,10 @@
 
 
 	</div>
+	
+	<br>
+	
+	<div> begin : ${pageUtil.pageRangeCnt + 1  }  end="${pageUtil.pageRangeCnt  + 10 }" </div>
 
 	<div>	jspt(endPageCnt) : ${endPageCnt }</div>
 	<div>pageRangeCnt: ${pageUtil.pageRangeCnt }</div>
