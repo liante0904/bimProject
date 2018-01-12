@@ -76,12 +76,16 @@ public class PageUtil {
 		// 현재 페이지의 표시될 페이지의 범위를 계산
 		
 		 if (currentPage != 0) {
-			
-			 if (currentPage < 11) { //현재 페이지가 첫페이지 일 경우
+			 if (currentPage < 11) { //현재 페이지가 첫페이지 일 경우(1~10페이지)
 				pageRangeCnt = 0;
-				 
-			}else { //이외의 페이지일 경우
+			}else { //11페이지 이상일 경우
 				pageRangeCnt = (currentPage / 10) * 10;
+				if (currentPage == pageRangeCnt) {
+					
+					pageRangeCnt = pageRangeCnt - 10;
+					System.out.println("current랑 rangeCnt랑 같으면 -10" + pageRangeCnt);
+				}
+				
 			}
 			 System.out.println("pageRangeCnt: "+pageRangeCnt);
 		}
