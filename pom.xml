@@ -243,6 +243,18 @@
 					<mainClass>org.test.int1.Main</mainClass>
 				</configuration>
 			</plugin>
+			<!-- tomcat deploy setting (debug mode) -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<url>http://localhost</url>
+					<path>/</path>
+					<port>9999</port>
+					<contextReloadable>true</contextReloadable>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>
