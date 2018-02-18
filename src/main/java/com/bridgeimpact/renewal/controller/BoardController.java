@@ -53,6 +53,14 @@ public class BoardController {
      */
 	@RequestMapping(value="/viewList.bim", method= RequestMethod.GET)
 	public String boardView(String id,Model model, HttpServletRequest request,HttpSession session){
+		if (String.valueOf(id) == null) {
+			//TODO 유효하지 않는 게시판 접근시 로직
+			return "board/articleList";
+		}
+		/***
+		 * 게시판의 페이징 세팅 
+		 */
+		
 		// 이용자의 요청 페이지 세팅
 		PageUtil pageUtil = new PageUtil();
 		if (request.getParameter("page") == null || "".equals(request.getParameter("page"))) {
@@ -62,24 +70,31 @@ public class BoardController {
 			pageUtil.setCurrentPage(Integer.parseInt(request.getParameter("page").toString()));
 		}
 		System.out.println("현재 페이지 : " + pageUtil.getCurrentPage());
-		//TODO 게시판의 범위를 벗어나는 페이지 접속시도시 리턴적용 
 		
-		
-		// 접근 게시판 페이지 세팅
 		
 		pageUtil.setTotalArticleCnt(articleService,id);
+		int pageTotalPage = pageUtil.getTotalPageCnt();
+		if (pageUtil.getCurrentPage() > pageTotalPage) {
+			//TODO 유효하지 않은 페이지 범위 접근시
+		String url = "redirect:/board/viewList.bim?id=" + id + "&page=" + pageUtil.getTotalPageCnt();
+			return 	url;
+		}
 		System.out.println(id +"게시판 글 수 : " + pageUtil.getTotalArticleCnt());
 		System.out.println("게시판의 총  페이지 갯 수 : "+ pageUtil.getTotalPageCnt());
 		System.out.println(pageUtil.getCurrentPage());
-		if ("".equals(id)) {
-			//TODO 유효하지 않는 게시판 리턴
-			return "board/articleList";
-		}
+
 		// 일단 안써도 되서 보류
 		HashMap<String, Integer> paramMap = new HashMap<String, Integer>();
 		paramMap.put("currentPage", pageUtil.getCurrentPage());
 		
+		/***
+		 * 요청 게시판의 게시글 세팅
+		 */
+		
+		//TODO 계산된 페이지의 글만 가져오기(id, param만 구별후 페이지 객체를 이용해 구현)
 		List<ArticleVO> articleList = null;
+		
+		/*		
 		try {
 			articleList = articleService.selectArticleByPage(pageUtil);
 		} catch (Exception e) {
@@ -87,9 +102,9 @@ public class BoardController {
 			e.printStackTrace();
 		}
 
+		*/
 		
-		/*
-		// 구별없이 전체리스트 가져오기 예시
+		// 게시판 전체 글 가져오기 
 		try {
 			articleList = articleService.selectArticleByBoardName(id);
 		} catch (Exception e) {
@@ -97,13 +112,12 @@ public class BoardController {
 			e.printStackTrace();
 		}
 		
-		*/
+		
 		System.out.println("출력될 게시글 수 : " + pageUtil.getDisplayArticleCnt());
 		
 		model.addAttribute("articleList", articleList);
 		model.addAttribute("pageUtil", pageUtil);
 		model.addAttribute("boardName", id);
-		//request.setAttribute("DisplayArticleCnt", pageUtil.getDisplayArticleCnt());
 
 		logger.info(id+"게시판 요청");
 		return "board/articleList";
