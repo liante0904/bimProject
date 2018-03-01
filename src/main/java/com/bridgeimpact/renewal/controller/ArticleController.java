@@ -2,7 +2,10 @@ package com.bridgeimpact.renewal.controller;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -19,6 +22,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bridgeimpact.renewal.dto.ArticleVO;
@@ -131,12 +136,17 @@ public class ArticleController {
 	
 	@RequestMapping(value="/writeArticle.bim")
 	@ResponseBody
-	public Map<String, String> boardWrite(Model model,ArticleVO article, HttpServletRequest request,HttpSession session){
+	public ModelAndView boardWrite(Model model,ArticleVO article, HttpServletRequest request,HttpSession session,MultipartHttpServletRequest multipart){
+		String boardName = article.getBoardName();
 		Map<String, String> resultMap = new HashMap<String, String>();
 		logger.info("글 제목 : "+ article.getTitle() + "\t 글내용 : " + article.getContents() );
-		System.out.println(">>>>>>>>>>>>>>"+article.getBoardName());
+		
+		/*
+		 *  Article DB반영전 로직
+		 */
 		MemberVO loginMember = (MemberVO)session.getAttribute("loginInfo");
 		article.setWriteId(loginMember.getId());
+		
 		try {
 			articleService.insertArticle(article);
 		} catch (Exception e) {
@@ -145,7 +155,48 @@ public class ArticleController {
 		}
 		String result = "success";
 		resultMap.put("result", result);
-		return resultMap;
+
+		/*
+		 * 파일 업로드 로직구간
+		 */
+		MultipartFile uploadFile = article.getFiles();
+		String fileName = uploadFile.getOriginalFilename();
+		String path = request.getSession().getServletContext().getRealPath("/");
+		
+		System.out.println("UtilFile fileUpload uploadPath : " + path);
+        System.out.println("UtilFile fileUpload fileName : " + fileName);
+        
+
+        
+		if (article.getFiles().isEmpty()) {
+			try {
+				byte[] fileData = article.getFiles().getBytes();
+				System.out.println("?????????"+fileData);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		   
+        Iterator<String> files = multipart.getFileNames();
+        while(files.hasNext()){
+            String uploadFile_ = files.next();
+            String newFileName = "";
+            MultipartFile mFile = multipart.getFile(uploadFile_);
+            String fileName_ = mFile.getOriginalFilename();
+            System.out.println("실제 파일 이름 : " +fileName);
+            newFileName = System.currentTimeMillis()+"."
+                    +fileName_.substring(fileName_.lastIndexOf(".")+1);
+             
+            try {
+                mFile.transferTo(new File(path+newFileName));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+		ModelAndView mav = new ModelAndView("/board/viewList.bim?id="+boardName);
+		return mav;
 	}
 	
 	/***

@@ -14,7 +14,11 @@ $(document).ready(function(){
 }); 
 
 $(function(){
-	$("#write").click(function() {
+	$("#write").on("click", function(e) {
+		e.preventDefault();
+		$("form").submit();
+		
+		/* 
 		var paramIdValue = getParameters('id');
 		var paramTitleValue = $("#title").val();
 		var paramContentsValue = $("#contents").val();
@@ -33,6 +37,8 @@ $(function(){
 				}
 		        }
 		    });
+		 
+		 */ 
 		
 	});
 
@@ -49,7 +55,7 @@ $(function(){
 </head>
 <body>
     <h1>writeForm.jsp</h1>
-     <form id="writeForm" action="${pageContext.request.contextPath }/board/writeArticle.bim" method="post">
+     <form id="writeForm" action="${pageContext.request.contextPath }/board/writeArticle.bim" method="post" enctype="multipart/form-data">
         <table>
             <tbody>
                 <tr>
@@ -63,12 +69,13 @@ $(function(){
                 </tr>
                 <tr>
                 <th>첨부파일</th>
-                <td><input type="file"></td>
+                <td><input type="file" name="files"></td>
                 </tr>
             </tbody>
         </table>
  <input type="button" id="write" value="글쓰기"/>
  <input type="button" id="list" value="목록"/>
+ <input type="hidden" id="boardName" name="boardName" value="${param.id }"/>
  
     </form>
 

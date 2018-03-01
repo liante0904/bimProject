@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 
+import org.springframework.web.multipart.MultipartFile;
+
 
 public class ArticleVO {
 
@@ -16,6 +18,7 @@ public class ArticleVO {
 	private String writeDt;  
 	private String writeId;
 	private String boardDelGb;
+	private MultipartFile files;
 	
 	public ArticleVO() {
 		super();
@@ -29,7 +32,11 @@ public class ArticleVO {
 	public String toString() {
 		return "ArticleVO [idx=" + idx + ", boardName=" + boardName + ", title=" + title + ", contents=" + contents
 				+ ", hitCnt=" + hitCnt + ", delGb=" + delGb + ", writeDt=" + writeDt + ", writeId=" + writeId
-				+ ", boardDelGb=" + boardDelGb + "]";
+				+ ", boardDelGb=" + boardDelGb + ", files=" + files + ", getIdx()=" + getIdx() + ", getBoardName()="
+				+ getBoardName() + ", getTitle()=" + getTitle() + ", getContents()=" + getContents() + ", getHitCnt()="
+				+ getHitCnt() + ", getDelGb()=" + getDelGb() + ", getWriteDt()=" + getWriteDt() + ", getWriteId()="
+				+ getWriteId() + ", getBoardDelGb()=" + getBoardDelGb() + ", getFiles()=" + getFiles() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
 
 
@@ -105,6 +112,20 @@ public class ArticleVO {
 
 	public void setBoardDelGb(String boardDelGb) {
 		this.boardDelGb = boardDelGb;
+	}
+
+
+
+
+	public MultipartFile getFiles() {
+		return files;
+	}
+
+
+
+
+	public void setFiles(MultipartFile files) {
+		this.files = files;
 	}
 
 
