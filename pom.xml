@@ -161,8 +161,12 @@
 			<version>1.2.2</version>
 		</dependency>
 
-
-
+		<!-- log4j sql log -->
+		<dependency>
+			<groupId>org.lazyluke</groupId>
+			<artifactId>log4jdbc-remix</artifactId>
+			<version>0.2.7</version>
+		</dependency>
 
 		<!-- MyBatis 3.4.1 -->
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->

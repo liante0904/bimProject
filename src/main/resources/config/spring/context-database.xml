@@ -39,10 +39,15 @@
 	</bean>
  -->
 
+	<!-- jdbc properties 파일 로드 -->
+	<!-- src/resources/config/spring/jdbc.properties 파일을 생성하여 이용 -->
+		
+ 	<context:property-placeholder location="classpath:config/spring/jdbc.properties" />
 
 
 	<!-- MySQL dataSource -->
-	<bean id="dataSource"
+	<!-- SQL logging을 위해 dataSource -> dataSourceSpied 변경 -->
+	<bean id="dataSourceSpied"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${jdbc.driverClassName}"></property>
 		<property name="url" value="${jdbc.url}"></property>
@@ -50,10 +55,18 @@
 		<property name="password" value="${jdbc.password}"></property>
 	</bean>
 	
-	<!-- jdbc properties 파일 로드 -->
-	<!-- src/resources/config/spring/jdbc.properties 파일을 생성하여 이용 -->
-		
- 	<context:property-placeholder location="classpath:config/spring/jdbc.properties" />
+	<!-- SQL logging property  -->
+	<!-- log 출력 후 dataSourceSpied  -->
+    <bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+        <constructor-arg ref="dataSourceSpied" />
+        <property name="logFormatter">
+            <bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+                <property name="loggingType" value="MULTI_LINE" />
+                <property name="sqlPrefix" value="SQL         :  "/>
+            </bean>
+        </property>
+    </bean>
+
 
 
     <!-- mybatis SqlSessionFactoryBean -->
