@@ -8,7 +8,6 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-
     <!-- MultipartResolver 설정 (업로드) -->
     <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <beans:property name="maxUploadSize" value="100000000" />
@@ -16,16 +15,20 @@
     </beans:bean>
 
 
-	<!-- 다운로드 -->
-	<beans:bean id="fileViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
-		<beans:property name="order" value="0" />
+
+	<!-- 모든 경로는 지정한 경로명이 붙으므로 해당 경로를 피하기 위해 업로드 파일들을 resources/ 폴더 아래 넣음 -->
+	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/"/>
+		<beans:property name="suffix" value=".jsp"/>
+		<beans:property name="order" value="1"/>
 	</beans:bean>
 
-	<!--custom view 클래스 -->
-	<beans:bean id="downloadView" class="com.bridgeimpact.renewal.common.FileDownloadView"/>
 
 
-	<!-- JSON result  -->
+
+
+
+	<!-- json result  -->
 	 <beans:bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView">
 	  <!-- <property name="contentType" value="application/json;charset=UTF-8"/> -->
 	  <beans:property name="contentType" value="text/html; charset=UTF-8" />
