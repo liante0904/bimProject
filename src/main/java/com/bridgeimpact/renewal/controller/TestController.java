@@ -110,6 +110,24 @@ public class TestController {
         return "/test/writeForm";
     }
 
+    @RequestMapping(value = "/download.bim")
+    public ModelAndView download(
+            HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        String vanillaPath = "C:\\upload\\";
+        vanillaPath += "4e624c22518285.gif";
+        logger.debug("callDownload : " + vanillaPath);
+
+        System.out.println(vanillaPath);
+        File downloadFile = new File(vanillaPath);
+
+        if (!downloadFile.canRead()) {
+            throw new Exception("File can't read(파일을 찾을 수 없습니다)");
+        }
+           return new ModelAndView("downloadView", "downloadFile", downloadFile);
+        // 첫번째 인자 : beanName(id), 두번쨰 인자 :  File Object,
+    }
 
 
 }

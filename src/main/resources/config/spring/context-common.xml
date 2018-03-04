@@ -8,14 +8,27 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- MultipartResolver 설정 -->
+    <!-- MultipartResolver 설정 (업로드) -->
     <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <beans:property name="maxUploadSize" value="100000000" />
         <beans:property name="maxInMemorySize" value="100000000" />
     </beans:bean>
 
 
-	 <!-- json result  -->
+
+	<!-- 모든 경로는 지정한 경로명이 붙으므로 해당 경로를 피하기 위해 업로드 파일들을 resources/ 폴더 아래 넣음 -->
+	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/"/>
+		<beans:property name="suffix" value=".jsp"/>
+		<beans:property name="order" value="1"/>
+	</beans:bean>
+
+
+
+
+
+
+	<!-- json result  -->
 	 <beans:bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView">
 	  <!-- <property name="contentType" value="application/json;charset=UTF-8"/> -->
 	  <beans:property name="contentType" value="text/html; charset=UTF-8" />
