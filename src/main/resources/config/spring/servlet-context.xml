@@ -10,26 +10,22 @@
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
-	<!-- Enables the Spring MVC @Controller programming model -->
+	<!-- Enables the Spring MVC @Controller programming model --> 	
+	<!-- Spring Annotation 설정 -->
 	<annotation-driven />
+	
+	
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<!-- Resource 접근 설정 -->
 	<resources mapping="/resources/**" location="/resources/" />
 
+	<!-- 모든 경로는 지정한 경로명이 붙으므로 해당 경로를 피하기 위해 업로드 파일들을 resources/ 폴더 아래 넣음 -->
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/WEB-INF/views/" />
+        <beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+        <beans:property name="order" value="1" />
 	</beans:bean>
+
 	
-	
-	<!-- Bean 등록(Component, Repository, Service, Controller) -->
-	<context:component-scan base-package="com.bridgeimpact.renewal.controller" />
-	<context:component-scan base-package="com.bridgeimpact.renewal.service" />
-	<context:component-scan base-package="com.bridgeimpact.renewal.intercepter" />
-
-		
-	<!-- Spring Annotation 설정 -->
-	<context:annotation-config /> 
-
-
 </beans:beans>

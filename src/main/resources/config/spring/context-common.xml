@@ -8,14 +8,24 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- MultipartResolver 설정 -->
+
+    <!-- MultipartResolver 설정 (업로드) -->
     <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <beans:property name="maxUploadSize" value="100000000" />
         <beans:property name="maxInMemorySize" value="100000000" />
     </beans:bean>
 
 
-	 <!-- json result  -->
+	<!-- 다운로드 -->
+	<beans:bean id="fileViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<beans:property name="order" value="0" />
+	</beans:bean>
+
+	<!--custom view 클래스 -->
+	<beans:bean id="downloadView" class="com.bridgeimpact.renewal.common.FileDownloadView"/>
+
+
+	<!-- JSON result  -->
 	 <beans:bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView">
 	  <!-- <property name="contentType" value="application/json;charset=UTF-8"/> -->
 	  <beans:property name="contentType" value="text/html; charset=UTF-8" />
