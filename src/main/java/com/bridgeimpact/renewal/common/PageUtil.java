@@ -14,11 +14,23 @@ public class PageUtil {
 	private int totalPageCnt;
 	private int startArticleCnt;
 	private int pageRangeCnt;
+	private String board_name;
 	
 	
 	
 	
-    public int getPageRangeCnt() {
+	
+    public String getBoard_name() {
+		return board_name;
+	}
+
+
+	public void setBoard_name(String board_name) {
+		this.board_name = board_name;
+	}
+
+
+	public int getPageRangeCnt() {
 		return pageRangeCnt;
 	}
 
@@ -56,6 +68,7 @@ public class PageUtil {
      */
     
 	public void setTotalArticleCnt(ArticleService articleService,String board_name) {
+		this.board_name = board_name;
 		// 게시글 총 갯수 조회
 		try {
 			 totalArticleCnt = articleService.selectTotalCntByArticle(board_name);
@@ -64,7 +77,7 @@ public class PageUtil {
 			e.printStackTrace();
 		}
 		
-		// 총 페이지수 게산
+		// 총 페이지수 계산
 		if (totalArticleCnt != 0) {
 			totalPageCnt = totalArticleCnt / displayArticleCnt;
 			
@@ -76,11 +89,11 @@ public class PageUtil {
 		// 현재 페이지의 표시될 페이지의 범위를 계산
 		
 		 if (currentPage != 0) {
-			 if (currentPage < 11) { //현재 페이지가 첫페이지 일 경우(1~10페이지)
+			 if (currentPage + 1 < 10) { //현재 페이지가 첫페이지 일 경우(1~10페이지)
 				pageRangeCnt = 0;
 			}else { //11페이지 이상일 경우
 				pageRangeCnt = (currentPage / 10) * 10;
-				if (currentPage == pageRangeCnt) {
+				if (currentPage + 1 == pageRangeCnt) {
 					
 					pageRangeCnt = pageRangeCnt - 10;
 					System.out.println("current랑 rangeCnt랑 같으면 -10" + pageRangeCnt);

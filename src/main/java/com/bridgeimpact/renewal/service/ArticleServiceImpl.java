@@ -71,9 +71,6 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public List<ArticleVO> selectArticleByPage(PageUtil pageUtil) throws Exception {
 		// TODO Auto-generated method stub
-		if (pageUtil.getCurrentPage() != 1) {
-			pageUtil.setStartArticleCnt();
-		}
 		return articleDAO.selectArticleByPage(pageUtil);
 	}
 

@@ -64,12 +64,13 @@ public class BoardController {
 		// 이용자의 요청 페이지 세팅
 		PageUtil pageUtil = new PageUtil();
 		if (request.getParameter("page") == null || "".equals(request.getParameter("page"))) {
-			// 파리미터가 없을때
-			pageUtil.setCurrentPage(1);
+			// 페이지 파리미터가 없을때
+			pageUtil.setCurrentPage(0);
 		}else {
-			pageUtil.setCurrentPage(Integer.parseInt(request.getParameter("page").toString()));
+			int page = Integer.parseInt(request.getParameter("page").toString()) - 1;
+			pageUtil.setCurrentPage(page);
 		}
-		System.out.println("현재 페이지 : " + pageUtil.getCurrentPage());
+		System.out.println("현재 페이지(실제 페이지보다 -1) : " + pageUtil.getCurrentPage());
 		
 		
 		pageUtil.setTotalArticleCnt(articleService,id);
@@ -81,37 +82,20 @@ public class BoardController {
 		}
 		System.out.println(id +"게시판 글 수 : " + pageUtil.getTotalArticleCnt());
 		System.out.println("게시판의 총  페이지 갯 수 : "+ pageUtil.getTotalPageCnt());
-		System.out.println(pageUtil.getCurrentPage());
 
-		// 일단 안써도 되서 보류
-		HashMap<String, Integer> paramMap = new HashMap<String, Integer>();
-		paramMap.put("currentPage", pageUtil.getCurrentPage());
-		
 		/***
 		 * 요청 게시판의 게시글 세팅
 		 */
 		
-		//TODO 계산된 페이지의 글만 가져오기(id, param만 구별후 페이지 객체를 이용해 구현)
 		List<ArticleVO> articleList = null;
 		
-		/*		
+		// 계산된 게시글 가져오기		
 		try {
 			articleList = articleService.selectArticleByPage(pageUtil);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-
-		*/
-		
-		// 게시판 전체 글 가져오기 
-		try {
-			articleList = articleService.selectArticleByBoardName(id);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		} 
 		
 		System.out.println("출력될 게시글 수 : " + pageUtil.getDisplayArticleCnt());
 		

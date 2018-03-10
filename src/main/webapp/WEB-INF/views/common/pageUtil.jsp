@@ -19,7 +19,7 @@
 
 		<!-- 현재페이지가 1 ~ 10페이지 일때, 분기점 -->
 		<c:choose>
-			<c:when test="${pageUtil.currentPage < 11 }">
+			<c:when test="${pageUtil.currentPage + 1 < 10 }">
 				<c:set var="endPageCnt" value="${pageUtil.pageRangeCnt + 10 }" scope="page" />
 			</c:when>
 				<c:otherwise>
@@ -28,33 +28,26 @@
 		</c:choose>
 		
 		<!-- (처음) 버튼 판별  (첫페이지가 아니거나 10페이지 이상일때)-->
-		<c:if test="${pageUtil.currentPage ne 1 and displayPageCnt > 10}">
+		<c:if test="${pageUtil.currentPage +1 ne 1 and displayPageCnt > 10}">
 			<a href="${pageContext.request.contextPath }/board/viewList.bim?id=${boardName }&page=${status.current }">처음</a>
 		</c:if>
 
 
 		<!-- 이전 버튼  (첫페이지가 아닐때)-->
-		<c:if test="${ pageUtil.currentPage ne 1}">
+		<c:if test="${ pageUtil.currentPage +1 ne 1}">
 			<a href="${pageContext.request.contextPath }/board/viewList.bim?id=${boardName }&page=${pageUtil.pageRangeCnt + 1 - 10 }">이전</a>
 		</c:if>
-
-
-
-		<!-- 게시판의 페이지 수를 통해, 보여질 게시판 갯수 검증 -->
-		
-		<c:if test="${pageUtil.pageRangeCnt  == pageUtil.currentPage}">이거 컨트롤러에서 해도 됨</c:if>
-
 
 
 		<!-- 페이지 출력 부분 -->
 		<c:forEach var="PageCntByBoard" begin="${pageUtil.pageRangeCnt + 1  }" end="${pageUtil.pageRangeCnt  + 10 }" varStatus="status">
 				<!-- 현재 페이지를 음영처리 -->
 			<c:choose>
-				<c:when test="${status.current eq pageUtil.currentPage }">
+				<c:when test="${status.current eq pageUtil.currentPage +1 }">
 					<font color="red">${status.current }</font>
 				</c:when>
 				
-				<c:when test="${status.current ne pageUtil.currentPage  and status.current <= pageUtil.totalPageCnt }">
+				<c:when test="${status.current ne pageUtil.currentPage +1  and status.current <= pageUtil.totalPageCnt }">
 					<a href="${pageContext.request.contextPath }/board/viewList.bim?id=${boardName }&page=${status.current }">${status.current }</a>
 				</c:when>
 
@@ -63,15 +56,15 @@
 		</c:forEach>
 
 		<!-- 다음 버튼 -->
-		<c:if test="${displayPageCnt > 10 and pageUtil.totalPageCnt ne pageUtil.currentPage}">
-			<fmt:parseNumber var="var1" value="${pageUtil.currentPage / 10}" integerOnly="true" />
+		<c:if test="${displayPageCnt > 10 and pageUtil.totalPageCnt ne pageUtil.currentPage +1}">
+			<fmt:parseNumber var="var1" value="${pageUtil.currentPage +1 / 10}" integerOnly="true" />
 			<fmt:parseNumber var="var2" value="${pageUtil.totalPageCnt  / 10}" integerOnly="true" />
 				<c:if test="${var1 ne var2}">
 					<a href="${pageContext.request.contextPath }/board/viewList.bim?id=${boardName }&page=${pageUtil.pageRangeCnt + 1 + 10 }">다음</a>
 				</c:if>
 		</c:if>
 		<!-- 끝 버튼  판별-->
-		<c:if test="${displayPageCnt > 10 and displayPageCnt  ne pageUtil.currentPage}">
+		<c:if test="${displayPageCnt > 10 and displayPageCnt  ne pageUtil.currentPage +1}">
 			<a href="${pageContext.request.contextPath }/board/viewList.bim?id=${boardName }&page=${displayPageCnt }">끝</a>
 		</c:if>
 
@@ -88,7 +81,7 @@
 	<div>
 		현재 게시판의 총 페이지 갯수 : ${pageUtil.totalPageCnt } <br>
 	</div>
-	<div>현재 페이지 : ${pageUtil.currentPage}</div>
+	<div>현재 페이지 : ${pageUtil.currentPage +1}</div>
 	<div>보여질 게시글 갯수 : ${pageUtil.displayArticleCnt}</div>
 
 

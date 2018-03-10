@@ -117,7 +117,7 @@
     </select>
     
     
-            <select id="selectArticleByPage" parameterType="pageUtil" resultType="articleVO">
+		 <select id="selectArticleByPage" parameterType="PageUtil" resultType="articleVO">
 	<![CDATA[
 	
 	
@@ -131,13 +131,14 @@
 		DATE_FORMAT(WRITE_DT, "%Y-%m-%d ") AS 'WRITE_DT'  ,   
 		WRITE_ID   
 		FROM   BIM_ARTICLE_TB   
+		WHERE BOARD_NAME = #{board_name} AND DEL_GB = 'N'
 		ORDER BY IDX DESC
 		
-			LIMIT 
+		LIMIT  #{displayArticleCnt} OFFSET #{currentPage }   
     ]]>
-    
+ <!--    
 		<choose>
-			<when test="currentPage =! 1"> <!-- 1페이지가 아닐때 -->
+			<when test="currentPage =! 1"> 1페이지가 아닐때
 			 #{currentPage} * #{displayArticleCnt},   #{displayArticleCnt}
 			</when>
 		
@@ -147,7 +148,7 @@
 				
 				</otherwise>
 		</choose>
-    
+     -->
     </select>
     
     
