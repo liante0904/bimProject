@@ -118,7 +118,7 @@
     
     
 		 <select id="selectArticleByPage" parameterType="PageUtil" resultType="articleVO">
-	<![CDATA[
+	
 	
 	
 		SELECT   
@@ -134,21 +134,20 @@
 		WHERE BOARD_NAME = #{board_name} AND DEL_GB = 'N'
 		ORDER BY IDX DESC
 		
-		LIMIT  #{displayArticleCnt} OFFSET #{currentPage }   
-    ]]>
- <!--    
+		LIMIT  
+				#{startArticleCnt} , #{displayArticleCnt}
+<!-- 
 		<choose>
-			<when test="currentPage =! 1"> 1페이지가 아닐때
-			 #{currentPage} * #{displayArticleCnt},   #{displayArticleCnt}
+			<when test="currentPage == 0"> 1페이지가 아닐때
+			 #{currentPage} ,  #{displayArticleCnt}
 			</when>
 		
 				<otherwise>
 
-				#{startArticleCnt} , #{displayArticleCnt}
 				
 				</otherwise>
 		</choose>
-     -->
+ -->    
     </select>
     
     

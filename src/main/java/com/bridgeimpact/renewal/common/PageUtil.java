@@ -49,10 +49,11 @@ public class PageUtil {
 
 	public void setStartArticleCnt() {
 		
-		if (currentPage != 0) {
-			startArticleCnt = currentPage * displayArticleCnt;
+		if (currentPage == 0) {
+			this.startArticleCnt = currentPage;
+		}else {
+			this.startArticleCnt =  displayArticleCnt * currentPage ;
 		}
-		this.startArticleCnt = startArticleCnt;
 	}
 
 
@@ -132,6 +133,7 @@ public class PageUtil {
 
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
+		this.setStartArticleCnt();
 	}
 
 
