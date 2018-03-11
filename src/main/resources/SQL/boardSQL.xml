@@ -8,11 +8,11 @@
 
  
     	<resultMap type="boardVO"  id="BoardResultMap">
-    	<result property="idx" column="IDX" />
-    	<result property="id" column="ID" />
+   	 	<result property="idx" column="IDX" />
+    		<result property="id" column="ID" />
 		<result property="name" column="NAME" />
 		<result property="delGb" column="DELGB" />
-		</resultMap>
+	</resultMap>
      
      
     <select id="selectAllBoard" parameterType="String" resultType="boardVO">

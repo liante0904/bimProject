@@ -1,9 +1,7 @@
 package com.bridgeimpact.renewal.service;
 
+import java.util.HashMap;
 import java.util.List;
-
-
-import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,6 +70,12 @@ public class ArticleServiceImpl implements ArticleService {
 	public List<ArticleVO> selectArticleByPage(PageUtil pageUtil) throws Exception {
 		// TODO Auto-generated method stub
 		return articleDAO.selectArticleByPage(pageUtil);
+	}
+
+	@Override
+	public List<ArticleVO> selectArticleByKeyword(HashMap<String, Object> paramMap)  throws Exception {
+		// TODO Auto-generated method stub
+		return articleDAO.selectArticleByKeyword(paramMap);
 	}
 
 

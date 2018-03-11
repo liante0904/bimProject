@@ -10,7 +10,9 @@
 <script type="text/javascript">
 
 $(document).ready(function(){ 
-	
+
+	var	 paramIdValue = getParameters('id');
+	$("#id").val(paramIdValue);
 }); 
 
 $(function(){
@@ -20,7 +22,6 @@ $(function(){
 	})
 	
 });
-
 
 
 </script>
@@ -43,7 +44,7 @@ $(function(){
         </thead>
         <tbody>
          
-            <c:forEach items="${articleList}" var="article" begin="0" end="${pageUtil.displayArticleCnt }">
+            <c:forEach items="${articleList}" var="article" begin="0" end="${pageUtil.displayArticleCnt - 1}">
                 <tr>
                     <td>${article.idx}</td>
                     <td>${article.boardName}</td>
@@ -61,6 +62,10 @@ $(function(){
  <input type="button" id="write" value="글쓰기"/>
  
 <%@ include file="/WEB-INF/views/common/pageUtil.jsp" %>
+<%@ include file="/WEB-INF/views/board/searchForm.jsp" %>
+
+
+
 </body>
 </html>
 

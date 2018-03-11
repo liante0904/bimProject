@@ -1,5 +1,6 @@
 package com.bridgeimpact.renewal.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.bridgeimpact.renewal.common.PageUtil;
@@ -24,5 +25,7 @@ public interface ArticleDAO {
 	public int selectTotalCntByArticle(String board_name)throws Exception;
 
 	public List<ArticleVO> selectArticleByPage(PageUtil pageUtil)throws Exception;
+
+	public List<ArticleVO> selectArticleByKeyword(HashMap<String, Object> paramMap) throws Exception ;
 
 }

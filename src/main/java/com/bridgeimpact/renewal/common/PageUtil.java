@@ -1,6 +1,8 @@
 package com.bridgeimpact.renewal.common;
 
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,19 +16,40 @@ public class PageUtil {
 	private int totalPageCnt;
 	private int startArticleCnt;
 	private int pageRangeCnt;
-	private String board_name;
+	private String boardName;
 	
 	
 	
 	
-	
-    public String getBoard_name() {
-		return board_name;
+
+
+	public PageUtil(HttpServletRequest request, ArticleService articleService) {
+		boardName = String.valueOf(request.getParameter("id"));
+		if (request.getParameter("page") == null || "".equals(request.getParameter("page"))) {
+			// 페이지 파리미터가 없을때
+			this.setCurrentPage(0);
+		}else {
+			int page = Integer.parseInt(request.getParameter("page").toString()) - 1;
+			this.setCurrentPage(page);
+		}
+		System.out.println("현재 페이지(실제 페이지보다 -1) : " + this.getCurrentPage());
+		this.setTotalArticleCnt(articleService,boardName);
+		
+
+		System.out.println(boardName +"게시판 글 수 : " + this.getTotalArticleCnt());
+		System.out.println("게시판의 총  페이지 갯 수 : "+ this.getTotalPageCnt());
+
+
 	}
 
 
-	public void setBoard_name(String board_name) {
-		this.board_name = board_name;
+	public String getboardName() {
+		return boardName;
+	}
+
+
+	public void setboardName(String boardName) {
+		this.boardName = boardName;
 	}
 
 
@@ -52,7 +75,7 @@ public class PageUtil {
 		if (currentPage == 0) {
 			this.startArticleCnt = currentPage;
 		}else {
-			this.startArticleCnt =  displayArticleCnt * currentPage ;
+			this.startArticleCnt =  displayArticleCnt * currentPage;
 		}
 	}
 
@@ -65,14 +88,14 @@ public class PageUtil {
     /***
      * 현재 게시판의 총 게시물 갯수를 요청하고, 총 페이지 수를 계산합니다.
      * @param articleService	DAO접근을 위한 객체
-     * @param board_name		현재 접근하는 게시판
+     * @param boardName		현재 접근하는 게시판
      */
     
-	public void setTotalArticleCnt(ArticleService articleService,String board_name) {
-		this.board_name = board_name;
+	public void setTotalArticleCnt(ArticleService articleService,String boardName) {
+		this.boardName = boardName;
 		// 게시글 총 갯수 조회
 		try {
-			 totalArticleCnt = articleService.selectTotalCntByArticle(board_name);
+			 totalArticleCnt = articleService.selectTotalCntByArticle(boardName);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

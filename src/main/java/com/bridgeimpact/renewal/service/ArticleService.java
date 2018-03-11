@@ -1,5 +1,6 @@
 package com.bridgeimpact.renewal.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.bridgeimpact.renewal.common.PageUtil;
@@ -24,6 +25,8 @@ public interface ArticleService {
 	public void increseHitCntByIndex(int index) throws Exception;
 
 	public List<ArticleVO> selectArticleByPage(PageUtil pageUtil) throws Exception;
+
+	public List<ArticleVO> selectArticleByKeyword(HashMap<String, Object> paramMap) throws Exception;
 
 
 

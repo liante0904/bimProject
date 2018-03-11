@@ -62,27 +62,14 @@ public class BoardController {
 		 */
 		
 		// 이용자의 요청 페이지 세팅
-		PageUtil pageUtil = new PageUtil();
-		if (request.getParameter("page") == null || "".equals(request.getParameter("page"))) {
-			// 페이지 파리미터가 없을때
-			pageUtil.setCurrentPage(0);
-		}else {
-			int page = Integer.parseInt(request.getParameter("page").toString()) - 1;
-			pageUtil.setCurrentPage(page);
-		}
-		System.out.println("현재 페이지(실제 페이지보다 -1) : " + pageUtil.getCurrentPage());
+		PageUtil pageUtil = new PageUtil(request,articleService);
 		
 		
-		pageUtil.setTotalArticleCnt(articleService,id);
-		int pageTotalPage = pageUtil.getTotalPageCnt();
-		if (pageUtil.getCurrentPage() > pageTotalPage) {
+		if (pageUtil.getCurrentPage() > pageUtil.getTotalPageCnt()) {
 			//TODO 유효하지 않은 페이지 범위 접근시
 		String url = "redirect:/board/viewList.bim?id=" + id + "&page=" + pageUtil.getTotalPageCnt();
 			return 	url;
 		}
-		System.out.println(id +"게시판 글 수 : " + pageUtil.getTotalArticleCnt());
-		System.out.println("게시판의 총  페이지 갯 수 : "+ pageUtil.getTotalPageCnt());
-
 		/***
 		 * 요청 게시판의 게시글 세팅
 		 */
@@ -101,7 +88,6 @@ public class BoardController {
 		
 		model.addAttribute("articleList", articleList);
 		model.addAttribute("pageUtil", pageUtil);
-		model.addAttribute("boardName", id);
 
 		logger.info(id+"게시판 요청");
 		return "board/articleList";

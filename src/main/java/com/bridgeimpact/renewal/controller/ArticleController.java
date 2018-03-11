@@ -1,16 +1,13 @@
 package com.bridgeimpact.renewal.controller;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
 import java.io.File;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
+import java.util.TreeMap;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -26,12 +23,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bridgeimpact.renewal.common.PageUtil;
 import com.bridgeimpact.renewal.dto.ArticleVO;
 import com.bridgeimpact.renewal.dto.CommentVO;
 import com.bridgeimpact.renewal.dto.MemberVO;
 import com.bridgeimpact.renewal.service.ArticleService;
 import com.bridgeimpact.renewal.service.CommentService;
-import com.bridgeimpact.renewal.service.MemberService;
 
  
 /**
@@ -257,6 +254,90 @@ public class ArticleController {
 		}
 		
 		return mav;
+	}
+	
+	
+    /***
+     * 사용자의 게시판 검색 요청을 처리 합니다.
+     * 
+     * @param model
+     * @param id : 게시판 구분자 ID
+     * @param request
+     * @param session
+     * @return
+     */
+	@RequestMapping(value="/search.bim", method= RequestMethod.GET)
+	public String searchView(String id,String searchKeyword,String searchType,Model model, HttpServletRequest request,HttpSession session){
+	
+		/***
+		 * 파라미터 체크 구간
+		 */
+		Enumeration eNames = request.getParameterNames();
+		if (eNames.hasMoreElements()) {
+			String title = "Parameters";
+			Map entries = new TreeMap();
+			while (eNames.hasMoreElements()) {
+				String name = (String) eNames.nextElement();
+				String[] values = request.getParameterValues(name);
+				if (values.length > 0) {
+					String value = values[0];
+					for (int i = 1; i < values.length; i++) {
+						value += "," + values[i];
+					}
+					logger.info(name+" : "+value);
+				}
+			}
+		}
+
+		
+		if (String.valueOf(id) == null) {
+			//TODO 유효하지 않는 게시판 접근시 로직
+			return "board/articleList";
+		}
+		/***
+		 * 게시판의 페이징 세팅 
+		 */
+		
+		// 이용자의 요청 페이지 세팅
+		PageUtil pageUtil = new PageUtil(request, articleService);
+		
+		
+		/***
+		 * 검색할 게시판의 게시글 세팅
+		 */
+
+
+	    /***
+	     * 사용자의 게시판 검색 파라미터를 설정 합니다.
+	     * 
+	     * @param boardName : 검색 요청 게시판
+	     * @param searchType :검색 요청 타입
+	     * @param searchKeyword : 검색어 
+	     * @return paramMap : HashMap
+	     */
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("boardName", id);
+		paramMap.put("searchType", searchType);
+		paramMap.put("searchKeyword", searchKeyword);
+		
+		List<ArticleVO> articleList = null;
+		
+		try {
+			articleList = articleService.selectArticleByKeyword(paramMap);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+		
+		System.out.println("출력될 게시글 수 : " + pageUtil.getDisplayArticleCnt());
+		
+		model.addAttribute("articleList", articleList);
+		model.addAttribute("pageUtil", pageUtil);
+
+		logger.info(id+"게시판 요청");
+		return "board/articleList";
 	}
     
 }

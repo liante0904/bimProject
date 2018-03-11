@@ -1,5 +1,6 @@
 package com.bridgeimpact.renewal.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -74,5 +75,11 @@ public class ArticleDAOImpl implements ArticleDAO {
 		// TODO Auto-generated method stub
 		
 		return sqlSession.selectList(Namespace+".selectArticleByPage",pageUtil);
+	}
+
+	@Override
+	public List<ArticleVO> selectArticleByKeyword(HashMap<String, Object> paramMap) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(Namespace+".selectArticleByKeyword", paramMap);
 	}
 }
