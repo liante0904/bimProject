@@ -5,6 +5,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <meta charset="UTF-8">
 <script type="text/javascript">
+
 var localhost = '${pageContext.request.contextPath }';
 
 	var getParameters = function (paramName) {
@@ -28,7 +29,24 @@ var localhost = '${pageContext.request.contextPath }';
 	};
 	// 파라미터 호출 예시 (id) console.log(getParameters('id'));
 	
-
+	function getCommentList(){
+		
+		var num = getParameters('num');
+		var data = { num : num };
+			$.ajax({
+		        type : "POST",
+		        url : "${pageContext.request.contextPath }/comment/getCommentList.bim",
+		        data : data,
+		        dataType : "html",
+		        success : function(data){
+		           	$("#commentContent").html(data);
+		        },
+		        error : function(){
+		            alert(' 실패!!');
+		        }
+			});
+			
+		}
 
 
 </script>

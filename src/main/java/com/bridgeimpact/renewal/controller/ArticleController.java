@@ -87,21 +87,24 @@ public class ArticleController {
 			selectArticleByIndex = articleService.selectArticleByIndex(articleIndex);
 			
 			// 게시물 접근여부 판별
-			if ("Y".equals(selectArticleByIndex.getBoardDelGb())) { // 게시판 비공개 여부
+			if ("Y".equals(selectArticleByIndex.getBoardDelGb()) ||
+					"Y".equals(selectArticleByIndex.getDelGb())) { // 게시글 삭제 여부 혹은 게시판 비공개 여부
 
 				URL = "redirect:/board/viewList.bim?id="+id;
 				mav.setViewName(URL);
 				System.out.println("★★★★★>>> 게시판 비공개 시 ");
 				return mav;
 				
-			}else if ("Y".equals(selectArticleByIndex.getDelGb())) { // 게시글 삭제 여부
+			}
+			
+			/*else if ("Y".equals(selectArticleByIndex.getDelGb())) { // 게시글 삭제 여부
 				URL = "redirect:/board/viewList.bim?id="+id;
 				mav.setViewName(URL);
 				System.out.println("★★★★★>>> 게시글 삭제시 ");
 				return mav;
 				
 			}
-			
+			*/
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,17 +1,10 @@
 package com.bridgeimpact.renewal.controller;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.bridgeimpact.renewal.dto.ArticleVO;
 import com.bridgeimpact.renewal.dto.CommentVO;
-import com.bridgeimpact.renewal.dto.MemberVO;
 import com.bridgeimpact.renewal.service.CommentService;
-import com.bridgeimpact.renewal.service.MemberService;
 
  
 /**
@@ -44,6 +33,43 @@ public class CommentController {
     /**
      * Simply selects the home view to render by returning its name.
      */
+    
+    
+    /***
+     * 이용자의 댓글 작성 ajax요청
+     * @param model
+     * @param commentVO
+     * @param request
+     * @param response
+     * @return
+     */
+	@RequestMapping(value="/getCommentList.bim", method= RequestMethod.POST)
+	public ModelAndView getCommentList(Model model, HttpServletRequest request,HttpSession session){
+		ModelAndView mav = new ModelAndView("board/commentForm");
+		System.out.println("num 찾기 :"+request.getParameter("num"));
+		int index = Integer.parseInt(request.getParameter("num"));
+		List<CommentVO> commentList = null;
+		try {
+			commentList = commentService.selectCommentByIndex(index);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		mav.addObject("commentList", commentList);
+		/*
+		CommentVO selectCommentByIndex = null;
+		try {
+			commentService.increseHitCntByIndex(Integer.parseInt(request.getParameter("num")));
+			selectCommentByIndex = commentService.selectCommentByIndex(Integer.parseInt(request.getParameter("num")));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		mav.addObject("comment" , selectCommentByIndex);
+		session.setAttribute("commentInfo", selectCommentByIndex);
+		*/
+		return mav;
+	}
     
     /***
      * 이용자의 댓글 작성 ajax요청

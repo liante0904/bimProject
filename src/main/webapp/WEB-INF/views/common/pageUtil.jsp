@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -29,13 +29,13 @@
 		
 		<!-- (처음) 버튼 판별  (첫페이지가 아니거나 10페이지 이상일때)-->
 		<c:if test="${pageUtil.currentPage +1 ne 1 and displayPageCnt > 10}">
-			<a href="${pageContext.request.contextPath }/board/viewList.bim?id=${boardName }&page=${status.current }">처음</a>
+			<a href="${pageContext.request.contextPath }/board/viewList.bim?id=${pageUtil.boardName }&page=${status.current }">처음</a>
 		</c:if>
 
 
 		<!-- 이전 버튼  (첫페이지가 아닐때)-->
 		<c:if test="${ pageUtil.currentPage +1 ne 1}">
-			<a href="${pageContext.request.contextPath }/board/viewList.bim?id=${boardName }&page=${pageUtil.pageRangeCnt + 1 - 10 }">이전</a>
+			<a href="${pageContext.request.contextPath }/board/viewList.bim?id=${pageUtil.boardName }&page=${pageUtil.pageRangeCnt + 1 - 10 }">이전</a>
 		</c:if>
 
 
@@ -48,7 +48,7 @@
 				</c:when>
 				
 				<c:when test="${status.current ne pageUtil.currentPage +1  and status.current <= pageUtil.totalPageCnt }">
-					<a href="${pageContext.request.contextPath }/board/viewList.bim?id=${boardName }&page=${status.current }">${status.current }</a>
+					<a href="${pageContext.request.contextPath }/board/viewList.bim?id=${pageUtil.boardName }&page=${status.current }">${status.current }</a>
 				</c:when>
 
 			</c:choose>
@@ -60,12 +60,12 @@
 			<fmt:parseNumber var="var1" value="${pageUtil.currentPage +1 / 10}" integerOnly="true" />
 			<fmt:parseNumber var="var2" value="${pageUtil.totalPageCnt  / 10}" integerOnly="true" />
 				<c:if test="${var1 ne var2}">
-					<a href="${pageContext.request.contextPath }/board/viewList.bim?id=${boardName }&page=${pageUtil.pageRangeCnt + 1 + 10 }">다음</a>
+					<a href="${pageContext.request.contextPath }/board/viewList.bim?id=${pageUtil.boardName }&page=${pageUtil.pageRangeCnt + 1 + 10 }">다음</a>
 				</c:if>
 		</c:if>
 		<!-- 끝 버튼  판별-->
 		<c:if test="${displayPageCnt > 10 and displayPageCnt  ne pageUtil.currentPage +1}">
-			<a href="${pageContext.request.contextPath }/board/viewList.bim?id=${boardName }&page=${displayPageCnt }">끝</a>
+			<a href="${pageContext.request.contextPath }/board/viewList.bim?id=${pageUtil.boardName }&page=${displayPageCnt }">끝</a>
 		</c:if>
 
 
