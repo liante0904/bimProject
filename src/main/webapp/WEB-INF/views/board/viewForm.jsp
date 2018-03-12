@@ -14,7 +14,7 @@ $(document).ready(function(){
 $(function(){
 	var idParam = "?" + "id=" + getParameters('id');
 	var param =  idParam +"&num=" + getParameters('num');
-	$("#edit").click(function() {
+	$("#edit").on('click',function() {
 		var sessionId = "${sessionScope.loginInfo.id}";
 		var writerId =  "${article.writeId}";
 	    if (sessionId == writerId) {
@@ -24,107 +24,19 @@ $(function(){
 	    	location.href="${pageContext.request.contextPath }/board/viewArticle.bim"+param;
 	    }
 	});
-	$("#delete").click(function() {
+	$("#delete").on('click',function() {
 		if (confirm("정말로 게시물을 삭제 하시겠습니까?")) 
 		location.href="${pageContext.request.contextPath }/board/deleteArticle.bim"+param;
 	});
 	
-	$("#list").click(function() {
+	$("#list").on('click',function() {
 		if (confirm("정말로 글쓰기를 취소 하시겠습니까?")) {
 		location.href="${pageContext.request.contextPath }/board/viewList.bim"+idParam;
 		}
 	});
 	
-	
-	$("#writeComment").on('click', function() {
-		alert
-		 $.ajax({
-		        url : "${pageContext.request.contextPath }/comment/writeCommentAjax.bim",
-		        type: "post",
-		        data: 
-		        		{ 
-		        		"parentIdx" : "${sessionScope.articleInfo.idx}",
-						"contents" : $("#writeCommentContents").val(),
-						"writeId" : "${sessionScope.loginInfo.id}"
-						},
-		        success : function(data){
-		         if ( data.result == "success") {
-					alert("댓글 작성 완료");
-					getCommentList();
-				}else {
-					alert("댓글 작성 실패");
-				}
-		        }
-		    });
-	});
 });
-function editCommentInit(idx) {
-	var editDiv = $('div[id=editDiv][data-idx='+idx+']');
-	editDiv.show();
-	
-	var selectComment= $('p[data-idx='+idx+']');
-	var selectCommentValue = selectComment.text();
-	
-	var beforeComment = $('#editCommentContents[data-idx='+idx+']');
-	var beforeCommentValue = beforeComment.val();
-	
-	console.log(selectCommentValue);
-	console.log(beforeCommentValue);
-}
-function editComment(idx){
-	
-	 $.ajax({
-	        url : "${pageContext.request.contextPath }/comment/editCommentAjax.bim",
-	        type: "post",
-	        data: { 
-	        		"idx" : idx, 
-	        		"contents" : $("#editCommentContents").val(),
-					"writeId" : "${sessionScope.loginInfo.id}"
-					},
-	        success : function(data){
-	         if ( data.result == "success") {
-				alert("댓글 수정 완료");
-				editCommentAction(idx);
-				getCommentList();
-			}else {
-				alert("댓글 수정 실패");
-			}
-	         
-	        }
-	    });
-	 
-}
-function editCommentAction(idx){
-	var selectComment= $('p[data-idx='+idx+']');
-	var selectCommentValue = selectComment.text();
-	
-	var beforeComment = $('#editCommentContents[data-idx='+idx+']');
-	var beforeCommentValue = beforeComment.val();
-	
-	console.log(selectCommentValue);
-	console.log(beforeCommentValue);
-};
-function deleteComment(idx){
-	 $.ajax({
-	        url : "${pageContext.request.contextPath }/comment/deleteCommentAjax.bim",
-	        type: "post",
-	        data: { 
-	        		"idx" : idx,
-					"writeId" : "${sessionScope.loginInfo.id}"
-					},
-	        success : function(data){
-	         if ( data.result == "success") {
-				alert("댓글 삭제 완료");
-				getCommentList();
-			}else {
-				alert("댓글 삭제 실패");
-			}
-	         
-	        }
-	    });
-	 
-}
- 
+
  
 </script>
 </head>

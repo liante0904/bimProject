@@ -9,8 +9,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-
-	$("#writeComment").click(function() {
+	$("#writeComment").on('click',function() {
 		 $.ajax({
 		        url : "${pageContext.request.contextPath }/comment/writeCommentAjax.bim",
 		        type: "POST",
@@ -23,15 +22,97 @@ $(document).ready(function() {
 		        success : function(data){
 		         if ( data.result == "success") {
 					console.log("댓글 작성 완료");
-					getCommentList();
-				}else {
-					console.log("댓글 작성 실패");
 				}
+		        },
+		        error : function(error){
+		        	alert("댓글 등록 실패");
+		        },
+		        complete : function(){
+					getCommentList();
 		        }
 		    });
 	});
 
 });
+
+
+function editCommentInit(idx) {
+	var editDiv = $('div[id=editDiv][data-idx='+idx+']');
+	editDiv.show();
+	
+	var selectComment= $('p[data-idx='+idx+']');
+	var selectCommentValue = selectComment.text();
+	
+	var beforeComment = $('#editCommentContents[data-idx='+idx+']');
+	var beforeCommentValue = beforeComment.val();
+	beforeComment.focus();
+	console.log(selectCommentValue);
+	console.log(beforeCommentValue);
+}
+function editComment(idx){
+	
+	 $.ajax({
+	        url : "${pageContext.request.contextPath }/comment/editCommentAjax.bim",
+	        type: "post",
+	        data: { 
+	        		"idx" : idx, 
+	        		"contents" : $("#editCommentContents").val(),
+					"writeId" : "${sessionScope.loginInfo.id}"
+					},
+	        success : function(data){
+	         if ( data.result == "success") {
+				editCommentAction(idx);
+			}else {
+				alert("댓글 수정 실패");
+			}
+	         
+	        },
+	        error : function(error){
+	        	alert("댓글 수정 실패");
+	        },
+	        complete : function(){
+				getCommentList();
+	        }
+	    });
+	 
+}
+function editCommentAction(idx){
+	var selectComment= $('p[data-idx='+idx+']');
+	var selectCommentValue = selectComment.text();
+	
+	var beforeComment = $('#editCommentContents[data-idx='+idx+']');
+	var beforeCommentValue = beforeComment.val();
+	
+	console.log(selectCommentValue);
+	console.log(beforeCommentValue);
+};
+function deleteComment(idx){
+	 $.ajax({
+	        url : "${pageContext.request.contextPath }/comment/deleteCommentAjax.bim",
+	        type: "post",
+	        data: { 
+	        		"idx" : idx,
+					"writeId" : "${sessionScope.loginInfo.id}"
+					},
+	        success : function(data){
+	         if ( data.result == "success") {
+				console.log("댓글 삭제 완료");
+			}else {
+				alert("댓글 삭제 실패");
+			}
+	         
+	        },
+	        error : function(error){
+	        	alert("댓글 삭제 실패");
+	        },
+	        complete : function(){
+				getCommentList();
+	        }
+	    });
+	 
+}
+ 
+ 
 </script>
 </head>
 <body>
