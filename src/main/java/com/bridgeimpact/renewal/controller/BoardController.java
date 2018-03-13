@@ -78,7 +78,7 @@ public class BoardController {
 		
 		// 계산된 게시글 가져오기		
 		try {
-			articleList = articleService.selectArticleByPage(pageUtil);
+			articleList = articleService.selectArticleByPage(pageUtil.getParamMap());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

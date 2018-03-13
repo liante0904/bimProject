@@ -56,18 +56,19 @@
     </select>
     
      
-    <select id="selectTotalCntByArticle" parameterType="String" resultType="int">
-		<![CDATA[
-	
-	
+    <select id="selectTotalCntByArticle" parameterType="Map" resultType="int">
+
 		SELECT   
-		count(*)   
+		count(*)    
 		FROM   BIM_ARTICLE_TB   
-		WHERE 
-		DEL_GB = 'N'		AND		BOARD_NAME = #{boardName};
+		WHERE BOARD_NAME = #{boardName}
+		AND	DEL_GB = 'N'
+		<if test="searchKeyword != null">
+		AND	${searchType}  LIKE CONCAT(#{searchKeyword} ,'%')
+		</if>
+		ORDER BY IDX DESC
+	
 
-
-   		 ]]>
     </select>
     
     <select id="selectArticleCntByMap" parameterType="Map" resultType="int">
@@ -148,9 +149,8 @@
     </select>
     
     
-	 <select id="selectArticleByPage" parameterType="PageUtil" resultType="articleVO">
+	 <select id="selectArticleByPage" parameterType="Map" resultType="articleVO">
 	
-		<![CDATA[	
 		SELECT   
 		IDX  ,   
 		BOARD_NAME  ,   
@@ -162,11 +162,13 @@
 		WRITE_ID   
 		FROM   BIM_ARTICLE_TB   
 		WHERE BOARD_NAME = #{boardName} AND DEL_GB = 'N'
+		<if test="searchKeyword != null">
+		AND	${searchType}  LIKE CONCAT('%',#{searchKeyword} ,'%')
+		</if>
 		ORDER BY IDX DESC
 		
 		LIMIT  
 			#{startArticleCnt} , #{displayArticleCnt}
-		]]>
     </select>
     
     

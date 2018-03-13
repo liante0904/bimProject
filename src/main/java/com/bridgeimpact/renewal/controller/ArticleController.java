@@ -260,18 +260,21 @@ public class ArticleController {
 	}
 	
 	
-    /***
-     * 사용자의 게시판 검색 요청을 처리 합니다.
-     * 
-     * @param model
-     * @param id : 게시판 구분자 ID
-     * @param request
-     * @param session
-     * @return
-     */
+ 
+	/***
+	 * 사용자의 검색 요청을 처리합니다.
+	 * @param id : 게시판 구분
+	 * @param searchKeyword	: 검색 키워드
+	 * @param searchType	 : 검색 타입
+	 * @param model
+	 * @param request
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value="/search.bim", method= RequestMethod.GET)
 	public String searchView(String id,String searchKeyword,String searchType,Model model, HttpServletRequest request,HttpSession session){
-	
+		logger.info(request.getRequestURI().toString());
+		logger.info(request.getRequestURL().toString());
 		/***
 		 * 파라미터 체크 구간
 		 */
@@ -326,7 +329,8 @@ public class ArticleController {
 		List<ArticleVO> articleList = null;
 		
 		try {
-			articleList = articleService.selectArticleByKeyword(paramMap);
+//			articleList = articleService.selectArticleByKeyword(paramMap);
+			articleList = articleService.selectArticleByPage(pageUtil.getParamMap());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

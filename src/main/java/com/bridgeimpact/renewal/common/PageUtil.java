@@ -1,6 +1,8 @@
 package com.bridgeimpact.renewal.common;
 
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -17,14 +19,35 @@ public class PageUtil {
 	private int startArticleCnt;
 	private int pageRangeCnt;
 	private String boardName;
-	
-	
-	
+	private 	HashMap<String, Object> paramMap = new HashMap<String, Object>();
 	
 
 
+	private static final Logger logger = LoggerFactory.getLogger(PageUtil.class);
+
+
+	/***
+	 * pageUtil 생성자 게시판 요청시 페이지 처리를 합니다.
+	 * 사용자의 request를 이용해 검색, 글 조회를 우선 판단한 뒤
+	 * 조건에 맞는 글을 쿼리하여 페이징 처리합니다. 
+	 * @param request
+	 * @param articleService
+	 */
 	public PageUtil(HttpServletRequest request, ArticleService articleService) {
-		boardName = String.valueOf(request.getParameter("id"));
+		/***
+		 * 사용자가 요청한 조건의 게시글을 Map으로 구현
+		 */
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("boardName", request.getParameter("id"));
+		paramMap.put("searchType", request.getParameter("searchType"));
+		paramMap.put("searchKeyword", request.getParameter("searchKeyword"));
+
+		this.setboardName(String.valueOf(paramMap.get("boardName")));
+		this.setTotalArticleCnt(articleService,request,paramMap);
+		this.setTotalPageCnt();
+		this.setPageRangeCnt();
+		
+		// 페이지 요청 처리
 		if (request.getParameter("page") == null || "".equals(request.getParameter("page"))) {
 			// 페이지 파리미터가 없을때
 			this.setCurrentPage(0);
@@ -32,14 +55,33 @@ public class PageUtil {
 			int page = Integer.parseInt(request.getParameter("page").toString()) - 1;
 			this.setCurrentPage(page);
 		}
+		
+		paramMap.put("startArticleCnt", this.getStartArticleCnt());
+		paramMap.put("displayArticleCnt", this.getDisplayArticleCnt());
+		this.setParamMap(paramMap);
 		System.out.println("현재 페이지(실제 페이지보다 -1) : " + this.getCurrentPage());
-		this.setTotalArticleCnt(articleService,boardName);
 		
 
 		System.out.println(boardName +"게시판 글 수 : " + this.getTotalArticleCnt());
 		System.out.println("게시판의 총  페이지 갯 수 : "+ this.getTotalPageCnt());
 
 
+	}
+
+
+	/***
+	 * 사용자가 요청한 게시글의 갯수를 구합니다.
+	 * @param articleService
+	 * @param request
+	 * @param paramMap : 게시판 구분, 검색 타입, 검색 키워드를 포함합니다.
+	 */
+	private void setTotalArticleCnt(ArticleService articleService, HttpServletRequest request, HashMap<String, Object> paramMap) {
+		try {
+			totalArticleCnt = articleService.selectTotalCntByArticle(paramMap);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 
@@ -58,8 +100,23 @@ public class PageUtil {
 	}
 
 
-	public void setPageRangeCnt(int pageRangeCnt) {
-		this.pageRangeCnt = pageRangeCnt;
+	public void setPageRangeCnt() {
+		// 현재 페이지의 표시될 페이지의 범위를 계산
+		
+		 if (currentPage != 0) {
+			 if (currentPage + 1 < 10) { //현재 페이지가 첫페이지 일 경우(1~10페이지)
+				pageRangeCnt = 0;
+			}else { //11페이지 이상일 경우
+				pageRangeCnt = (currentPage / 10) * 10;
+				if (currentPage + 1 == pageRangeCnt) {
+					
+					pageRangeCnt = pageRangeCnt - 10;
+					System.out.println("current랑 rangeCnt랑 같으면 -10" + pageRangeCnt);
+				}
+				
+			}
+			 System.out.println("pageRangeCnt: "+pageRangeCnt);
+		}
 	}
 
 
@@ -80,57 +137,7 @@ public class PageUtil {
 	}
 
 
-	private static final Logger logger = LoggerFactory.getLogger(PageUtil.class);
-    
-
-	
-	
-    /***
-     * 현재 게시판의 총 게시물 갯수를 요청하고, 총 페이지 수를 계산합니다.
-     * @param articleService	DAO접근을 위한 객체
-     * @param boardName		현재 접근하는 게시판
-     */
-    
-	public void setTotalArticleCnt(ArticleService articleService,String boardName) {
-		this.boardName = boardName;
-		// 게시글 총 갯수 조회
-		try {
-			 totalArticleCnt = articleService.selectTotalCntByArticle(boardName);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		// 총 페이지수 계산
-		if (totalArticleCnt != 0) {
-			totalPageCnt = totalArticleCnt / displayArticleCnt;
-			
-			if (totalArticleCnt % displayArticleCnt != 0) {
-				totalPageCnt = totalPageCnt + 1;
-			}
-		}
-		
-		// 현재 페이지의 표시될 페이지의 범위를 계산
-		
-		 if (currentPage != 0) {
-			 if (currentPage + 1 < 10) { //현재 페이지가 첫페이지 일 경우(1~10페이지)
-				pageRangeCnt = 0;
-			}else { //11페이지 이상일 경우
-				pageRangeCnt = (currentPage / 10) * 10;
-				if (currentPage + 1 == pageRangeCnt) {
-					
-					pageRangeCnt = pageRangeCnt - 10;
-					System.out.println("current랑 rangeCnt랑 같으면 -10" + pageRangeCnt);
-				}
-				
-			}
-			 System.out.println("pageRangeCnt: "+pageRangeCnt);
-		}
-	}
-
-
 	public int getTotalArticleCnt() {
-		
 		return totalArticleCnt;
 	}
 
@@ -140,8 +147,15 @@ public class PageUtil {
 		return totalPageCnt;
 	}
 
-	public void setTotalPageCnt(int totalPageCnt) {
-		this.totalPageCnt = totalPageCnt;
+	public void setTotalPageCnt() {
+		// 총 페이지수 계산
+		if (totalArticleCnt != 0) {
+			totalPageCnt = totalArticleCnt / displayArticleCnt;
+			
+			if (totalArticleCnt % displayArticleCnt != 0) {
+				totalPageCnt = totalPageCnt + 1;
+			}
+		}
 	}
 
 	public int getDisplayArticleCnt() {
@@ -165,6 +179,14 @@ public class PageUtil {
 	}
 
 	
+	public HashMap<String, Object> getParamMap() {
+		return paramMap;
+	}
+
+
+	public void setParamMap(HashMap<String, Object> paramMap) {
+		this.paramMap = paramMap;
+	}
 
 
 

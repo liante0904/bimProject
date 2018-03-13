@@ -61,15 +61,15 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public int selectTotalCntByArticle(String board_name) throws Exception {
+	public int selectTotalCntByArticle(HashMap<String, Object> paramMap) throws Exception {
 		// TODO Auto-generated method stub
-		return articleDAO.selectTotalCntByArticle(board_name);
+		return articleDAO.selectTotalCntByArticle(paramMap);
 	}
 
 	@Override
-	public List<ArticleVO> selectArticleByPage(PageUtil pageUtil) throws Exception {
+	public List<ArticleVO> selectArticleByPage(HashMap<String, Object> paramMap) throws Exception {
 		// TODO Auto-generated method stub
-		return articleDAO.selectArticleByPage(pageUtil);
+		return articleDAO.selectArticleByPage(paramMap);
 	}
 
 	@Override

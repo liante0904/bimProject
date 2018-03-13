@@ -11,13 +11,13 @@
 </head>
 <body>
 	<div>
-		<c:set var="displayPageCnt" value="${pageUtil.totalPageCnt }" scope="page" /><!-- 처음이랑 끝버튼에만 쓰고 있음 -->
-
+<!-- 		<c:set var="displayPageCnt" value="${pageUtil.totalPageCnt }" scope="page" />처음이랑 끝버튼에만 쓰고 있음
+		
 		<c:set var="endPageCnt" value="${pageUtil.totalPageCnt }" scope="page" />
 		
 		
-
-		<!-- 현재페이지가 1 ~ 10페이지 일때, 분기점 -->
+		pageRangeCnt로 대체 부분
+		현재페이지가 첫번째 범위 (1 ~ 10페이지) 일때, 분기점
 		<c:choose>
 			<c:when test="${pageUtil.currentPage + 1 < 10 }">
 				<c:set var="endPageCnt" value="${pageUtil.pageRangeCnt + 10 }" scope="page" />
@@ -26,16 +26,21 @@
 					<c:set var="endPageCnt" value="${pageUtil.pageRangeCnt }" scope="page" />
 				</c:otherwise>
 		</c:choose>
+		 -->
 		
+		<c:set var="requestURI" value="${requestScope['javax.servlet.forward.servlet_path']}" /> 
+
+ 
+		 
 		<!-- (처음) 버튼 판별  (첫페이지가 아니거나 10페이지 이상일때)-->
-		<c:if test="${pageUtil.currentPage +1 ne 1 and displayPageCnt > 10}">
-			<a href="${pageContext.request.contextPath }/board/viewList.bim?id=${pageUtil.boardName }&page=${status.current }">처음</a>
+		<c:if test="${pageUtil.currentPage +1 ne 1 and pageUtil.totalPageCnt > 10}">
+			<a href="${pageContext.request.contextPath } ${requestURI}?id=${param.id }&page=${status.current }">처음</a>
 		</c:if>
 
 
 		<!-- 이전 버튼  (첫페이지가 아닐때)-->
 		<c:if test="${ pageUtil.currentPage +1 ne 1}">
-			<a href="${pageContext.request.contextPath }/board/viewList.bim?id=${pageUtil.boardName }&page=${pageUtil.pageRangeCnt + 1 - 10 }">이전</a>
+			<a href="${pageContext.request.contextPath } ${requestURI}?id=${param.id }&page=${pageUtil.currentPage  }">이전</a>
 		</c:if>
 
 
@@ -48,26 +53,24 @@
 				</c:when>
 				
 				<c:when test="${status.current ne pageUtil.currentPage +1  and status.current <= pageUtil.totalPageCnt }">
-					<a href="${pageContext.request.contextPath }/board/viewList.bim?id=${pageUtil.boardName }&page=${status.current }">${status.current }</a>
+					<a href="${pageContext.request.contextPath } ${requestURI}?id=${param.id }&page=${status.current }<c:if test="${!empty param.searchKeyword  || param.searchKeyword ne null }">&searchType=${param.searchType }&searchKeyword=${param.searchKeyword }</c:if>">${status.current }</a>
 				</c:when>
 
 			</c:choose>
-
 		</c:forEach>
 
 		<!-- 다음 버튼 -->
-		<c:if test="${displayPageCnt > 10 and pageUtil.totalPageCnt ne pageUtil.currentPage +1}">
+		<c:if test="${pageUtil.totalPageCnt > 10 and pageUtil.totalPageCnt ne pageUtil.currentPage +1}">
 			<fmt:parseNumber var="var1" value="${pageUtil.currentPage +1 / 10}" integerOnly="true" />
 			<fmt:parseNumber var="var2" value="${pageUtil.totalPageCnt  / 10}" integerOnly="true" />
 				<c:if test="${var1 ne var2}">
-					<a href="${pageContext.request.contextPath }/board/viewList.bim?id=${pageUtil.boardName }&page=${pageUtil.pageRangeCnt + 1 + 10 }">다음</a>
+					<a href="${pageContext.request.contextPath } ${requestURI}?id=${param.id }&page=${pageUtil.pageRangeCnt + 1 + 10 }">다음</a>
 				</c:if>
 		</c:if>
 		<!-- 끝 버튼  판별-->
-		<c:if test="${displayPageCnt > 10 and displayPageCnt  ne pageUtil.currentPage +1}">
-			<a href="${pageContext.request.contextPath }/board/viewList.bim?id=${pageUtil.boardName }&page=${displayPageCnt }">끝</a>
+		<c:if test="${pageUtil.totalPageCnt > 10 and pageUtil.totalPageCnt  ne pageUtil.currentPage +1}">
+			<a href="${pageContext.request.contextPath } ${requestURI}?id=${param.id }&page=${pageUtil.totalPageCnt }">끝</a>
 		</c:if>
-
 
 	</div>
 	
@@ -83,8 +86,6 @@
 	</div>
 	<div>현재 페이지 : ${pageUtil.currentPage +1}</div>
 	<div>보여질 게시글 갯수 : ${pageUtil.displayArticleCnt}</div>
-
-
 
 	
 	<div>현재 범위 : ${ var1 + 10 } </div>

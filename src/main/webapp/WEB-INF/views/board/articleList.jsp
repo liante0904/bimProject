@@ -10,16 +10,16 @@
 <script type="text/javascript">
 
 $(document).ready(function(){ 
-
 	var	 paramIdValue = getParameters('id');
 	$("#id").val(paramIdValue);
+	
 }); 
 
 $(function(){
 	var	 paramIdValue = getParameters('id');
 	$("#write").click(function() {
 		location.href="${pageContext.request.contextPath }/board/writeForm.bim?id="+ paramIdValue;
-	})
+	});
 	
 });
 

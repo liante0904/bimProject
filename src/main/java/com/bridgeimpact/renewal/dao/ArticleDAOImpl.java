@@ -65,16 +65,16 @@ public class ArticleDAOImpl implements ArticleDAO {
 	}
 
 	@Override
-	public int selectTotalCntByArticle(String board_name) throws Exception {
+	public int selectTotalCntByArticle(HashMap<String, Object> paramMap) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(Namespace+".selectTotalCntByArticle", board_name);
+		return sqlSession.selectOne(Namespace+".selectTotalCntByArticle", paramMap);
 	}
 
 	@Override
-	public List<ArticleVO> selectArticleByPage(PageUtil pageUtil) throws Exception {
+	public List<ArticleVO> selectArticleByPage(HashMap<String, Object> paramMap) throws Exception {
 		// TODO Auto-generated method stub
 		
-		return sqlSession.selectList(Namespace+".selectArticleByPage",pageUtil);
+		return sqlSession.selectList(Namespace+".selectArticleByPage",paramMap);
 	}
 
 	@Override

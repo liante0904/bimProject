@@ -22,9 +22,9 @@ public interface ArticleDAO {
 
 	public void updateHitCntByIndex(int index) throws Exception;
 
-	public int selectTotalCntByArticle(String board_name)throws Exception;
+	public int selectTotalCntByArticle(HashMap<String, Object> paramMap)throws Exception;
 
-	public List<ArticleVO> selectArticleByPage(PageUtil pageUtil)throws Exception;
+	public List<ArticleVO> selectArticleByPage(HashMap<String, Object> paramMap)throws Exception;
 
 	public List<ArticleVO> selectArticleByKeyword(HashMap<String, Object> paramMap) throws Exception ;
 

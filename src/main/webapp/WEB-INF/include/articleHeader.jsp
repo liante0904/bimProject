@@ -41,7 +41,7 @@ var localhost = '${pageContext.request.contextPath }';
 		        success : function(data){
 		           	$("#commentContent").html(data);
 		        },
-		        error : function(){
+		        error : function(data){
 		            alert(' 실패!!');
 		        }
 			});
