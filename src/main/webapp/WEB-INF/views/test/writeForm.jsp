@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <%@ include file="/WEB-INF/include/includeHeader.jsp" %>
-<%@ include file="/WEB-INF/include/articleHeader.jsp" %>
+ 
 </head>
  
     <form id="fileForm" action="/test/fileUpload" method="post"

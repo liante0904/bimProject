@@ -5,12 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="/WEB-INF/include/includeHeader.jsp" %>
-<%@ include file="/WEB-INF/include/articleHeader.jsp" %>
+ 
 <title>Home</title>
 <script type="text/javascript">
 $(document).ready(function(){
 	getCommentList();
 }); 
+
 $(function(){
 	var idParam = "?" + "id=" + getParameters('id');
 	var param =  idParam +"&num=" + getParameters('num');
@@ -37,7 +38,25 @@ $(function(){
 	
 });
 
- 
+function getCommentList(){
+	
+	var num = getParameters('num');
+	var data = { num : num };
+		$.ajax({
+	        type : "POST",
+	        url : "${pageContext.request.contextPath }/comment/getCommentList.bim",
+	        data : data,
+	        dataType : "html",
+	        success : function(data){
+	           	$("#commentContent").html(data);
+	        },
+	        error : function(data){
+	            alert(' 실패!!');
+	        }
+		});
+		
+	}
+
 </script>
 </head>
 <body>

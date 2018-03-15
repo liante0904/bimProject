@@ -10,9 +10,9 @@
 <title>Insert title here</title>
 </head>
 <h1>this is index.jsp </h1>
-<body id="context">
+<body>
 
-
+<div id="context"></div>
 
 
 </body>

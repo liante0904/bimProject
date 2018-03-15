@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="/WEB-INF/include/includeHeader.jsp" %>
-<%@ include file="/WEB-INF/include/articleHeader.jsp" %>
+ 
 <title>Home</title>
 <script type="text/javascript">
 

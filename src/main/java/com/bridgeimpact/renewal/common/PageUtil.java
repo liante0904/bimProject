@@ -26,6 +26,22 @@ public class PageUtil {
 	private static final Logger logger = LoggerFactory.getLogger(PageUtil.class);
 
 
+	private void init(HttpServletRequest request, ArticleService articleService) {
+		
+		// 페이지 요청 처리
+		if (request.getParameter("page") == null || "".equals(request.getParameter("page"))) {
+			// 페이지 파리미터가 없을때
+			this.setCurrentPage(0);
+		}else {
+			int page = Integer.parseInt(request.getParameter("page").toString()) - 1;
+			this.setCurrentPage(page);
+		}
+		
+
+		
+		
+	}
+
 	/***
 	 * pageUtil 생성자 게시판 요청시 페이지 처리를 합니다.
 	 * 사용자의 request를 이용해 검색, 글 조회를 우선 판단한 뒤
@@ -34,6 +50,12 @@ public class PageUtil {
 	 * @param articleService
 	 */
 	public PageUtil(HttpServletRequest request, ArticleService articleService) {
+		/***
+		 * 사용자의 요청 페이지수 계산 구간
+		 */
+		this.init(request, articleService);
+
+		
 		/***
 		 * 사용자가 요청한 조건의 게시글을 Map으로 구현
 		 */
@@ -47,15 +69,6 @@ public class PageUtil {
 		this.setTotalPageCnt();
 		this.setPageRangeCnt();
 		
-		// 페이지 요청 처리
-		if (request.getParameter("page") == null || "".equals(request.getParameter("page"))) {
-			// 페이지 파리미터가 없을때
-			this.setCurrentPage(0);
-		}else {
-			int page = Integer.parseInt(request.getParameter("page").toString()) - 1;
-			this.setCurrentPage(page);
-		}
-		
 		paramMap.put("startArticleCnt", this.getStartArticleCnt());
 		paramMap.put("displayArticleCnt", this.getDisplayArticleCnt());
 		this.setParamMap(paramMap);
@@ -67,6 +80,8 @@ public class PageUtil {
 
 
 	}
+
+
 
 
 	/***
@@ -102,9 +117,8 @@ public class PageUtil {
 
 	public void setPageRangeCnt() {
 		// 현재 페이지의 표시될 페이지의 범위를 계산
-		
-		 if (currentPage != 0) {
-			 if (currentPage + 1 < 10) { //현재 페이지가 첫페이지 일 경우(1~10페이지)
+		System.out.println("pageRangeCnt: 구간에서 " +currentPage);
+			 if (currentPage + 1 < 11) { //현재 페이지가 첫페이지 일 경우(1~10페이지)
 				pageRangeCnt = 0;
 			}else { //11페이지 이상일 경우
 				pageRangeCnt = (currentPage / 10) * 10;
@@ -113,10 +127,9 @@ public class PageUtil {
 					pageRangeCnt = pageRangeCnt - 10;
 					System.out.println("current랑 rangeCnt랑 같으면 -10" + pageRangeCnt);
 				}
-				
 			}
+			 
 			 System.out.println("pageRangeCnt: "+pageRangeCnt);
-		}
 	}
 
 
