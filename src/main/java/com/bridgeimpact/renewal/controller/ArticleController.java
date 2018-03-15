@@ -109,8 +109,8 @@ public class ArticleController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
+
 		try {
 			selectCommentByIndex = commentService.selectCommentByIndex(articleIndex);
 		} catch (Exception e) {
@@ -120,7 +120,7 @@ public class ArticleController {
 		mav.addObject("article" , selectArticleByIndex);
 		mav.addObject("commentList" , selectCommentByIndex);
 		session.setAttribute("articleInfo", selectArticleByIndex);
-		
+
 		return mav;
 	}
 	
@@ -136,7 +136,7 @@ public class ArticleController {
 	
 	@RequestMapping(value="/writeArticle.bim")
 	@ResponseBody
-	public ModelAndView boardWrite(Model model,ArticleVO article, HttpServletRequest request,HttpSession session,MultipartHttpServletRequest multipart){
+	public ModelAndView boardWrite(Model model,ArticleVO article, HttpServletRequest request,HttpSession session,MultipartHttpServletRequest multipartHttpServletRequest){
 		String boardName = article.getBoardName();
 		Map<String, String> resultMap = new HashMap<String, String>();
 		logger.info("글 제목 : "+ article.getTitle() + "\t 글내용 : " + article.getContents() );
@@ -157,8 +157,10 @@ public class ArticleController {
 		resultMap.put("result", result);
 
 		/*
-		 * 파일 업로드 로직구간
-		 */
+		 * 파일 업로드 로직구간 (단일)
+		 * 
+		 * 		
+		 * 
 		MultipartFile uploadFile = article.getFiles();
 		String fileName = uploadFile.getOriginalFilename();
 		String path = request.getSession().getServletContext().getRealPath("/");
@@ -195,6 +197,52 @@ public class ArticleController {
                 e.printStackTrace();
             }
         }
+		 */
+		
+		// 다중파일 로직구간
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest)request;
+		java.util.Iterator<String> fileNames = multipartRequest.getFileNames();
+		while(fileNames.hasNext())
+		{
+			String fileName = fileNames.next();
+			MultipartFile mFile = multipartRequest.getFile(fileName);
+			String path = request.getSession().getServletContext().getRealPath("/");
+			logger.info(path + mFile.getOriginalFilename());
+			File file = new File(path + mFile.getOriginalFilename());
+			
+			if (mFile.getSize() != 0) // File Null Check
+			{
+				if (!file.exists()) // 경로상에 파일이 존재하지 않을 경우
+				{
+					if (file.getParentFile().mkdirs()) // 경로에 해당하는 디렉토리들을 생성
+					{
+						try {
+							file.createNewFile(); // 이후 파일 생성
+							logger.info(file.getAbsolutePath() + file.getName());
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+
+				try {
+					mFile.transferTo(file); //임시로 저장된 multipartFile을 실제 파일로 전송
+				} catch (IllegalStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+		}
+
+
+
+
+		
 		ModelAndView mav = new ModelAndView("/board/viewList.bim?id="+boardName);
 		return mav;
 	}

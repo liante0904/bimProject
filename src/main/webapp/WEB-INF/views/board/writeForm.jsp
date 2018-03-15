@@ -68,8 +68,17 @@ $(function(){
                        <td> <textarea rows="20" cols="100"  id="contents" name="contents"></textarea></td>
                 </tr>
                 <tr>
-                <th>첨부파일</th>
-                <td><input type="file" name="files"></td>
+                <th rowspan="5">첨부파일</th>
+                <td><input type="file" name="files1"></td>
+                </tr>
+                <tr>
+                		<td><input type="file" name="files2"></td>
+                </tr>
+                <tr>
+                		<td><input type="file" name="files3"></td>
+                </tr>
+                <tr>
+                		<td><input type="file" name="files4"></td>
                 </tr>
             </tbody>
         </table>
