@@ -4,12 +4,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%@ include file="/WEB-INF/include/includeHeader.jsp" %>
- 
+<%@ include file="/WEB-INF/include/mainHeader.jsp" %>
+<%@ include file="/WEB-INF/include/common.jsp" %>
 <title>Home</title>
 <script type="text/javascript">
 $(document).ready(function(){
 	getCommentList();
+
+function getCommentList(){
+	var num = getParameters('num');
+	var data = { num : num };
+		$.ajax({
+	        type : "POST",
+	        url : "${pageContext.request.contextPath }/comment/getCommentList.bim",
+	        data : data,
+	        dataType : "html",
+	        success : function(data){
+	           	$("#commentContent").html(data);
+	        },
+	        error : function(data){
+	            alert(' 실패!!');
+	        }
+		});
+		
+	}
 }); 
 
 $(function(){
@@ -38,24 +56,6 @@ $(function(){
 	
 });
 
-function getCommentList(){
-	
-	var num = getParameters('num');
-	var data = { num : num };
-		$.ajax({
-	        type : "POST",
-	        url : "${pageContext.request.contextPath }/comment/getCommentList.bim",
-	        data : data,
-	        dataType : "html",
-	        success : function(data){
-	           	$("#commentContent").html(data);
-	        },
-	        error : function(data){
-	            alert(' 실패!!');
-	        }
-		});
-		
-	}
 
 </script>
 </head>
