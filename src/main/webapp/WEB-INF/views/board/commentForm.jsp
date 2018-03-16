@@ -13,7 +13,6 @@ $(document).ready(function() {
 
 });
 
-$(function(){
 	
 	$("#writeComment").on('click',function() {
 		 $.ajax({
@@ -133,10 +132,6 @@ $(function(){
 		    });
 		 
 	}
-});
-
-
- 
  
 </script>
 </head>
