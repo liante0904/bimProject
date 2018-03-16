@@ -206,10 +206,12 @@ public class TestController {
 
         String vanillaPath = "C:\\upload\\";
         vanillaPath += "4e624c22518285.gif";
-        logger.debug("callDownload : " + vanillaPath);
+		String serverPath = request.getSession().getServletContext().getRealPath("/");
+        serverPath += "zb_ad_106_1.png";
+		logger.info("callDownload : " + serverPath);
 
-        System.out.println(vanillaPath);
-        File downloadFile = new File(vanillaPath);
+        System.out.println(serverPath);
+        File downloadFile = new File(serverPath);
 
         if (!downloadFile.canRead()) {
             throw new Exception("File can't read(파일을 찾을 수 없습니다)");

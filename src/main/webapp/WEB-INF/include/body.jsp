@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="/WEB-INF/include/common.jsp" %>
 <!-- 게시판 관리 기능에 의하여 게시판의 추가, 삭제, 변경 등에 대한 처리를 하는 javascript 파일 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/resources/js/header.js"></script>

@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%@ include file="/WEB-INF/include/includeHeader.jsp" %>
+<%@ include file="/WEB-INF/include/mainHeader.jsp" %>
+<%@ include file="/WEB-INF/include/common.jsp" %>
 <script type="text/javascript">
 $(document).ready(function(){
 	
