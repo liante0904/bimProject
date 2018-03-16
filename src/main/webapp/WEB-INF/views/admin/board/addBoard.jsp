@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@ include file="/WEB-INF/include/mainHeader.jsp" %>
+<%@ include file="/WEB-INF/include/includeHeader.jsp" %>
 <!-- header 영역 작성중 -->
 <script type="text/javascript"></script>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
