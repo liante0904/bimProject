@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.bridgeimpact.renewal.fileSQL">
+ 
+
+ 
+    	<resultMap type="fileVO"  id="fileResultMap">
+   	 	<result property="idx" column="IDX" />
+    		<result property="articleIdx" column="ARTICLE_IDX" />
+		<result property="originalFileName" column="ORIGINAL_FILE_NAME" />
+		<result property="storedFileName" column="STORED_FILE_NAME" />
+		<result property="fileSize" column="FILE_SIZE" />
+		<result property="creaDtm" column="CREA_DTM" />
+		<result property="creaId" column="CREA_ID" />
+		<result property="delGb" column="DELGB" />
+	</resultMap>
+     
+     
+     
+    
+   	<insert id="insertFile" parameterType="fileVO">
+	<![CDATA[
+
+	
+	INSERT INTO BIM_FILE_TB  
+	(
+	IDX ,
+	ARTICLE_IDX ,
+	ORIGINAL_FILE_NAME ,
+	STORED_FILE_NAME ,
+	FILE_SIZE ,
+	CREA_DTM ,
+	CREA_ID ,
+	DEL_GB
+	)
+	VALUES
+	(
+	NULL ,
+	#{articleIdx } ,
+	#{originalFileName } ,
+	#{storedFileName } ,
+	#{fileSize } ,
+	NULL ,
+	#{creaId } ,
+	'N'
+	)
+
+
+
+
+    ]]>
+	</insert>
+	
+     
+     
+    <select id="selectAllBoard" parameterType="String" resultType="boardVO">
+	<![CDATA[
+	
+		SELECT   
+		IDX  ,   
+		ID  ,   
+		NAME  ,   
+		DEL_GB    
+		FROM   BIM_BOARD_TB 
+    ]]>
+    
+		<if test="value != null">
+		WHERE 
+		DEL_GB  = #{value}
+		</if>
+		
+    </select>
+
+    
+    	
+	 <select id="selectBoardById" parameterType="String" resultType="int">
+	<![CDATA[
+	
+	
+		SELECT   
+		count(*)
+		FROM   BIM_BOARD_TB   
+		WHERE 
+		ID = #{id}		
+    ]]>
+    </select>
+    
+    
+    <update id="deleteBoardById" parameterType="String">
+		<![CDATA[
+		
+		
+		UPDATE BIM_BOARD_TB
+		SET 
+		DEL_GB = 'Y'
+		WHERE 
+		ID = #{id} 
+		 
+		 
+		]]>
+	</update>
+	
+	    <update id="unDeleteBoardById" parameterType="String">
+		<![CDATA[
+		
+		
+		UPDATE BIM_BOARD_TB
+		SET 
+		DEL_GB = 'N'
+		WHERE 
+		ID = #{id} 
+		 
+		 
+		]]>
+	</update>
+	
+<!-- 
+
+    
+        <select id="selectArticleByIndex" parameterType="int" resultType="articleVO">
+	<![CDATA[
+	
+	
+		SELECT   
+		IDX  ,   
+		PARENT_IDX  ,   
+		TITLE  ,   
+		CONTENTS  ,   
+		HIT_CNT  ,   
+		DEL_GB  ,   
+		DATE_FORMAT(WRITE_DT, "%Y-%m-%d %H:%i:%s") AS 'WRITE_DT'   ,   
+		WRITE_ID   
+		FROM   BIM_ARTICLE_TB   
+		WHERE IDX = #{index}		
+    ]]>
+    </select>
+	
+	  	<update id="updateArticle" parameterType="articleVO">
+   		<![CDATA[
+   		
+   		
+		UPDATE BIM_ARTICLE_TB
+		SET 
+		TITLE  = #{title},   
+		CONTENTS  = #{contents}  
+		WHERE 
+		IDX =  #{idx} 
+		 
+		 
+		]]>
+	</update>
+	
+		<update id="deleteArticle" parameterType="articleVO">
+		<![CDATA[
+		
+		
+		UPDATE BIM_ARTICLE_TB
+		SET 
+		DEL_GB = 'Y'
+		WHERE 
+		IDX= #{idx} AND WRITE_ID = #{writeId} 
+		 
+		 
+		]]>
+	</update>
+	
+	
+		<update id="updateHitCntByIndex" parameterType="int">
+		<![CDATA[
+		
+		
+		UPDATE BIM_ARTICLE_TB
+		SET 
+		HIT_CNT = COALESCE(HIT_CNT, 0) + 1
+		WHERE 
+		IDX= #{idx} 
+		 
+		 
+		]]>
+	</update>
+      -->
+</mapper>

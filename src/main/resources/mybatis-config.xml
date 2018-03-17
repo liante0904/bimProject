@@ -14,6 +14,7 @@
             <typeAlias type="com.bridgeimpact.renewal.dto.ArticleVO" alias="articleVO"/>
             <typeAlias type="com.bridgeimpact.renewal.dto.CommentVO" alias="commentVO"/>
             <typeAlias type="com.bridgeimpact.renewal.dto.BoardVO" alias="boardVO"/>
+            <typeAlias type="com.bridgeimpact.renewal.dto.FileVO" alias="fileVO"/>
             <typeAlias type="com.bridgeimpact.renewal.common.PageUtil" alias="pageUtil"/>
         
         </typeAliases>

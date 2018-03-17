@@ -26,9 +26,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bridgeimpact.renewal.common.PageUtil;
 import com.bridgeimpact.renewal.dto.ArticleVO;
 import com.bridgeimpact.renewal.dto.CommentVO;
+import com.bridgeimpact.renewal.dto.FileVO;
 import com.bridgeimpact.renewal.dto.MemberVO;
 import com.bridgeimpact.renewal.service.ArticleService;
 import com.bridgeimpact.renewal.service.CommentService;
+import com.bridgeimpact.renewal.service.FileService;
 
  
 /**
@@ -45,6 +47,9 @@ public class ArticleController {
     
     @Autowired
     private CommentService commentService;
+    
+    @Autowired
+    private FileService fileService;
     
     /**
      * Simply selects the home view to render by returning its name.
@@ -135,7 +140,6 @@ public class ArticleController {
 	 */
 	
 	@RequestMapping(value="/writeArticle.bim")
-	@ResponseBody
 	public ModelAndView boardWrite(Model model,ArticleVO article, HttpServletRequest request,HttpSession session,MultipartHttpServletRequest multipartHttpServletRequest){
 		String boardName = article.getBoardName();
 		Map<String, String> resultMap = new HashMap<String, String>();
@@ -204,10 +208,30 @@ public class ArticleController {
 		java.util.Iterator<String> fileNames = multipartRequest.getFileNames();
 		while(fileNames.hasNext())
 		{
+			// fileVO 세팅
 			String fileName = fileNames.next();
 			MultipartFile mFile = multipartRequest.getFile(fileName);
+			if (!mFile.isEmpty()) {
+			String newFileName = "";
 			String path = request.getSession().getServletContext().getRealPath("/");
+			newFileName = System.currentTimeMillis()+"."
+					+mFile.getOriginalFilename().substring(mFile.getOriginalFilename().lastIndexOf(".")+1);
+			logger.info(fileName);
 			logger.info(path + mFile.getOriginalFilename());
+			logger.info(newFileName);
+			FileVO fileVO = new FileVO();
+			fileVO.setOriginalFileName(mFile.getOriginalFilename());
+			fileVO.setStoredFileName(newFileName);
+			fileVO.setFileSize((int)mFile.getSize());
+			fileVO.setArticleIdx(article.getIdx());
+			fileVO.setCreaId(article.getWriteId());
+			try {
+				fileService.insertFile(fileVO);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 			File file = new File(path + mFile.getOriginalFilename());
 			
 			if (mFile.getSize() != 0) // File Null Check
@@ -236,14 +260,11 @@ public class ArticleController {
 					e.printStackTrace();
 				}
 			}
-
+			}
 		}
 
-
-
-
 		
-		ModelAndView mav = new ModelAndView("/board/viewList.bim?id="+boardName);
+		ModelAndView mav = new ModelAndView("redirect:/board/viewList.bim?id="+boardName);
 		return mav;
 	}
 	
