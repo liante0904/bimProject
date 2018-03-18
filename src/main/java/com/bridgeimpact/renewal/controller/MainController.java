@@ -1,8 +1,7 @@
 package com.bridgeimpact.renewal.controller;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bridgeimpact.renewal.dto.BoardVO;
 import com.bridgeimpact.renewal.dto.MemberVO;
-import com.bridgeimpact.renewal.service.ArticleService;
 import com.bridgeimpact.renewal.service.BoardService;
 import com.bridgeimpact.renewal.service.MemberService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -41,6 +39,8 @@ public class MainController {
 	@Autowired
 	private BoardService boardService;
 
+    @Autowired
+    BCryptPasswordEncoder passwordEncoder;
     
     /**
      * Simply selects the home view to render by returning its name.
@@ -100,7 +100,9 @@ public class MainController {
 			e.printStackTrace();
 		}
 		if (dbMember != null) {// 로그인 성공
-			if (member.getId().equals(dbMember.getId()) && member.getPassword().equals(dbMember.getPassword())) {
+			logger.info("TypePassword : " + member.getPassword() + "\t dbPassword : " + dbMember.getPassword());
+			System.out.println("passwordCheck : " +passwordEncoder.matches(member.getPassword(), dbMember.getPassword()));
+			if (member.getId().equals(dbMember.getId()) && passwordEncoder.matches(member.getPassword(), dbMember.getPassword())) {
 				model.addAttribute("msg", "로그인 성공");
 				session.setAttribute("loginInfo", dbMember);
 				return "main/mainForm";

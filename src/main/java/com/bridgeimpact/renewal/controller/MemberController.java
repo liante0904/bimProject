@@ -1,10 +1,7 @@
 package com.bridgeimpact.renewal.controller;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-
 import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bridgeimpact.renewal.dto.MemberVO;
 import com.bridgeimpact.renewal.service.MemberService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
  
 /**
@@ -36,6 +32,9 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
     
+    @Autowired
+    BCryptPasswordEncoder passwordEncoder;
+
     /**
      * Simply selects the home view to render by returning its name.
      */
@@ -50,6 +49,12 @@ public class MemberController {
 	@RequestMapping(value="member/joinForm.bim")
 	public ModelAndView joinForm(Model model) {
 		ModelAndView mv = new ModelAndView("member/joinForm");
+		String password ="1234";
+		String encryptPassword = passwordEncoder.encode(password);
+		logger.info("encryptPassword: " + encryptPassword);
+		System.out.println(encryptPassword);
+		System.out.println(passwordEncoder.matches(password, encryptPassword));
+
 		return mv;
 	}
 	@RequestMapping(value="member/editForm.bim")
@@ -102,7 +107,13 @@ public class MemberController {
 			e.printStackTrace();
 		}
 */		
+		String password = member.getPassword();
+		String encryptPassword = passwordEncoder.encode(password);
+		logger.info("encryptPassword: " + encryptPassword);
+		System.out.println(encryptPassword);
+		System.out.println(passwordEncoder.matches(password, encryptPassword));
 		System.out.println(member.getId());
+		member.setPassword(encryptPassword);
 		try {
 			memberService.insertMember(member);
 		} catch (Exception e) {
@@ -111,7 +122,7 @@ public class MemberController {
 			return "error";
 		}
 		
-		return "member/loginForm";
+		return "redirect:/main/loginForm.bim";
 	}
 	
 	/***
