@@ -10,7 +10,7 @@
 - JSP
 - jQuery 1.11.2
 - CSS
-- ~~Bootstrap (Expected)~~
+- Bootstrap 3
 
 ### Server
 - Java 8 & Spring Framework
