@@ -10,7 +10,7 @@
 - JSP
 - jQuery 1.11.2
 - CSS
-- Bootstrap 3
+- Bootstrap 3 (Testing)
 
 ### Server
 - Java 8 & Spring Framework
@@ -30,7 +30,7 @@
 ### Testing
 - 파일 IO (다중 파일 업로드 처리 구현완료, DB반영 구현중)
 - 관리자 인터셉터 구현(구체화)
-- DB암호화 (회원가입, 로그인 부분 테스트중, 클래스 생성 필요) 
+- DB암호화 (회원가입, 로그인 완료, 클래스 생성 필요) 
 
 ## TODOList
 - 온라인 신청페이지

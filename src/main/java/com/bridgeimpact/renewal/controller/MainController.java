@@ -91,32 +91,45 @@ public class MainController {
 	 * @return
 	 */
 	@RequestMapping(value="main/login.bim")
-	public String loginSubmit(Model model,MemberVO member, HttpServletRequest request,HttpSession session){
-		MemberVO dbMember = null;
+	public String loginSubmit(Model model,MemberVO userInputMember, HttpServletRequest request,HttpSession session){
+//		MemberVO dbMember = null;
+		int loginResult = 0;
+		String url = "";
+		
+		/***
+		 * 사용자의 로그인 정보를 db 회원정보와 비교
+		 */
 		try {
-			dbMember = memberService.loginMember(member);
+			loginResult = memberService.loginMember(userInputMember);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		if (dbMember != null) {// 로그인 성공
-			logger.info("TypePassword : " + member.getPassword() + "\t dbPassword : " + dbMember.getPassword());
-			System.out.println("passwordCheck : " +passwordEncoder.matches(member.getPassword(), dbMember.getPassword()));
-			if (member.getId().equals(dbMember.getId()) && passwordEncoder.matches(member.getPassword(), dbMember.getPassword())) {
-				model.addAttribute("msg", "로그인 성공");
-				session.setAttribute("loginInfo", dbMember);
-				return "main/mainForm";
-			}else { // 패스워드가 일치하지 않는 경우
-				model.addAttribute("msg", "로그인 실패, 패스워드 불일치");
-				return "main/loginForm";
-			}
+		}finally {
 			
-			
-		}else {//아이디가 존재하지 않는 경우
-			model.addAttribute("msg", "아이디가 존재하지 않음");
-			System.out.println(">>>>>>> 아이디없음");
-			return "main/loginForm";
+			if (loginResult == 1) //	 로그인을 성공한 경우
+				try {
+					{// 로그인 성공
+						model.addAttribute("msg", "로그인 성공");
+						MemberVO loginInfo = memberService.getMemberById(userInputMember.getId());
+						session.setAttribute("loginInfo", loginInfo);
+						url = "main/mainForm";
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			else if(loginResult == 2){ // 패스워드가 일치하지 않는 경우
+					model.addAttribute("msg", "로그인 실패, 패스워드 불일치");
+					url = "main/loginForm";
+				}else if(loginResult == 0){//아이디가 존재하지 않는 경우
+					model.addAttribute("msg", "아이디가 존재하지 않음");
+					System.out.println(">>>>>>> 아이디없음");
+					url = "main/loginForm";
+				}
 		}
+		
+		System.out.println(url);
+		return url;
 	}
 	
 	

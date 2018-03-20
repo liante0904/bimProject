@@ -40,9 +40,9 @@ public class MemberDAOImpl implements MemberDAO {
 		sqlSession.update(Namespace+".deleteMember", member);
 	}
 	@Override
-	public MemberVO getMember(MemberVO member) {
+	public MemberVO getMemberById(String memberId) {
 		// TODO Auto-generated method stub
-		String id = member.getId();
+		String id = memberId;
 		return (MemberVO)sqlSession.selectOne(Namespace+".getMember", id);
 	}
 

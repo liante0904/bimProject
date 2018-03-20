@@ -14,7 +14,7 @@ public interface MemberDAO {
 
 	public void deleteMember(MemberVO member)throws Exception;
 
-	public MemberVO getMember(MemberVO member)throws Exception;
+	public MemberVO getMemberById(String memberId)throws Exception;
 
 	public int selectMemberById(MemberVO member)throws Exception;
     

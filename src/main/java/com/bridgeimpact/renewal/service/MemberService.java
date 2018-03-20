@@ -10,13 +10,15 @@ public interface MemberService {
 
 	public void insertMember(MemberVO member) throws Exception;
 
-	public void editMember(MemberVO member)throws Exception;
+	public void editMember(MemberVO member) throws Exception;
 
-	public void deleteMember(MemberVO member)throws Exception;
+	public void deleteMember(MemberVO member) throws Exception;
 
-	public MemberVO loginMember(MemberVO member)throws Exception;
+	public int loginMember(MemberVO member) throws Exception;
 
-	public int checkMemberId(MemberVO member)throws Exception;
+	public int checkMemberId(MemberVO member) throws Exception;
+
+	public MemberVO getMemberById(String id) throws Exception;
 }
 
 
