@@ -98,6 +98,8 @@ public class MainController {
 		
 		/***
 		 * 사용자의 로그인 정보를 db 회원정보와 비교
+		 * @return loginResult 0 = 아이디 없음, 1 = 로그인 성공 , 2 = 패스워드 불일치 (아이디 존재) 
+		 * 
 		 */
 		try {
 			loginResult = memberService.loginMember(userInputMember);
@@ -123,12 +125,11 @@ public class MainController {
 					url = "main/loginForm";
 				}else if(loginResult == 0){//아이디가 존재하지 않는 경우
 					model.addAttribute("msg", "아이디가 존재하지 않음");
-					System.out.println(">>>>>>> 아이디없음");
 					url = "main/loginForm";
 				}
 		}
 		
-		System.out.println(url);
+		logger.info(url);
 		return url;
 	}
 	

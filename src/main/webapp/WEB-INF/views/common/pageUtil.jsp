@@ -28,8 +28,7 @@
 		
 		<c:set var="requestURI" value="${requestScope['javax.servlet.forward.servlet_path']}" /> 
 
- 
-		 
+ <ul class="pagination"> 
 		<!-- (처음) 버튼 판별  (첫페이지가 아니거나 10페이지 이상일때)-->
 		<c:if test="${pageUtil.currentPage +1 ne 1 and pageUtil.totalPageCnt > 10}">
 			<a href="${pageContext.request.contextPath } ${requestURI}?id=${param.id }&page=${status.current }<c:if test="${!empty param.searchKeyword  || param.searchKeyword ne null }">&searchType=${param.searchType }&searchKeyword=${param.searchKeyword }</c:if>">처음</a>
@@ -56,7 +55,8 @@
 
 			</c:choose>
 		</c:forEach>
-
+</ul>
+		
 		<!-- 다음 버튼 -->
 		<c:if test="${pageUtil.totalPageCnt > 10 and pageUtil.totalPageCnt ne pageUtil.currentPage +1}">
 			<fmt:parseNumber var="var1" value="${pageUtil.currentPage +1 / 10}" integerOnly="true" />

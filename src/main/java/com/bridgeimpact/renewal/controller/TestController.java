@@ -66,6 +66,11 @@ public class TestController {
 		return "/test/writeForm";
 	}
 
+	@RequestMapping(value="/boot")
+	public String boot(Model model, HttpServletRequest request){
+		return "/test/bootstrap";
+	}
+
 	
 	/**
 	 * 파일 업로드 요청 처리(단일 파일 업로드)

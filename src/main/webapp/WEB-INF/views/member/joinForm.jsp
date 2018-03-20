@@ -12,54 +12,66 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#id").keyup(function(){
-		if($(this).val().length > 2){
-			var id = $(this).val();
-			console.log(id);
-			 $.ajax({
-			        url : "${pageContext.request.contextPath}/member/checkMemberIdAjax.bim",
-			        type: "get",
-			        data : { "id" : id },
-			        success : function(data){
-			         if ( data.result == "success") {
-						console.log("사용 가능한 아이디");
-						$("#result").html("사용 가능한 아이디");
-					}else {
-						console.log("중복 아이디");
-						$("#result").html("중복된 아이디");
-					}
-			        }
-			    });
-			
-		}
-	});
-	
+   var idCheck
+   
+   $("#id").keyup(function(){
+      if($(this).val().length > 2){
+         var id = $(this).val();
+         console.log(id);
+          $.ajax({
+                 url : "${pageContext.request.contextPath}/member/checkMemberIdAjax.bim",
+                 type: "get",
+                 data : { "id" : id },
+                 success : function(data){
+                  if ( data.result == "success") {
+                  console.log("사용 가능한 아이디");
+                  idCheck = 1;
+                  $("#result").html("사용 가능한 아이디");
+               }else {
+                  console.log("중복 아이디");
+                  idCheck = 0;
+                  $("#result").html("중복된 아이디");
+               }
+                 }
+             });
+         
+      }
+   });
+   
+   $('#join').on('click', function(){
+      if (idCheck) {
+         alert('true');
+      }else{
+      alert('false');
+      return false;
+      }
+      alert("hello");
+      $('form').submit();
+   });
+   
+   
 });
 $(function(){
-	$('#idChk').click(function(){
-		
-		 $.ajax({
-		        url : "${pageContext.request.contextPath }/member/memberIdCheck.bim",
-		        type: "get",
-		        data : { "id" : $("#id").val() },
-		        success : function(data){
-		         if ( data.result == "success") {
-					alert("사용 가능한 아이디");
-				}else {
-					alert("중복된 아이디");
-				}
-		        }
-		    });
-		
-		
-		
-		
-		
-		
-		});
-	
-	
-	
+
+   $('#idChk').on('click',function(){
+      
+       $.ajax({
+              url : "${pageContext.request.contextPath }/member/memberIdCheck.bim",
+              type: "get",
+              data : { "id" : $("#id").val() },
+              success : function(data){
+               if ( data.result == "success") {
+               alert("사용 가능한 아이디");
+            }else {
+               alert("중복된 아이디");
+            }
+              }
+          });
+      
+      });
+
+   
+   
 });
 
 
@@ -77,7 +89,7 @@ $(function(){
 
   <div>
     <pre>
-아이디 :  <input type="text" id="id" name="id"> 중복 체크 결과: <span id="result">아이디를 입력해주세요.</span>  <input type="button" id="idChk" value="중복체크" > 
+아이디 :  <input type="text" id="id" name="id"> 중복 체크 결과: <span id="result">아이디를 입력해주세요.</span> <!--  <input type="button" id="idChk" value="중복체크" >  -->
 패스워드 <input type="password" name="password" >
 이름 <input type="text" name="name" >
 E - MAIL<input type="text" name="email">
@@ -91,7 +103,7 @@ E - MAIL<input type="text" name="email">
 
    <div>
    <input type="button" value="취소" onclick="javascript:window.close()" style="align:center">
-   <input type="submit" value="가입" id="join" />
+   <input type="button" value="가입" id="join" />
 
   </div>
  </form>

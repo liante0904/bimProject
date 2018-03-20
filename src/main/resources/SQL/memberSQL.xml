@@ -70,6 +70,7 @@
             <select id="selectMemberById" parameterType="String" resultType="int">
 	<![CDATA[
 	
+	
       SELECT
 		count(*)
 		FROM BIM_MEMBER_TB
@@ -80,6 +81,7 @@
     
    	<insert id="insertMember" parameterType="memberVO">
 	<![CDATA[
+	
 	
 		INSERT INTO BIM_MEMBER_TB 
 		(
@@ -113,6 +115,7 @@
 	  	<update id="updateMember" parameterType="memberVO">
    		<![CDATA[
    		
+   		
 		UPDATE BIM_MEMBER_TB
 		SET 
 		ID=#{id},
@@ -128,11 +131,13 @@
 		AND
 		 1=1 
 		 
+		 
 		]]>
 	</update>
 	
 		<update id="deleteMember" parameterType="memberVO">
 		<![CDATA[
+		
 		
 		UPDATE BIM_MEMBER_TB
 		SET 
@@ -149,6 +154,7 @@
 		IDX= #{idx} 
 		AND
 		 1=1 
+		 
 		 
 		]]>
 	</update>
