@@ -28,6 +28,8 @@ public interface ArticleService {
 
 	public List<ArticleVO> selectArticleByKeyword(HashMap<String, Object> paramMap) throws Exception;
 
+	public Boolean checkValidateArticleByIdx(int num) throws Exception;
+
 
 
 }

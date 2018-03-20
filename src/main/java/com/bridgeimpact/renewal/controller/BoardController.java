@@ -55,7 +55,7 @@ public class BoardController {
 	public String boardView(String id,Model model, HttpServletRequest request,HttpSession session){
 		
 		/***
-		 * 게시판 유효성 체크
+		 * 게시판 유효성 판별
 		 * @param id : 게시판 구분자
 		 * @return checkBoardResult : 게시판 유효성 체크결과 value = 0 비공개 게시판, 1 = 유효 게시판
 		 */

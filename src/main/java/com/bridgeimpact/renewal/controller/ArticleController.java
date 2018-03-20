@@ -3,7 +3,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -29,6 +28,7 @@ import com.bridgeimpact.renewal.dto.CommentVO;
 import com.bridgeimpact.renewal.dto.FileVO;
 import com.bridgeimpact.renewal.dto.MemberVO;
 import com.bridgeimpact.renewal.service.ArticleService;
+import com.bridgeimpact.renewal.service.BoardService;
 import com.bridgeimpact.renewal.service.CommentService;
 import com.bridgeimpact.renewal.service.FileService;
 
@@ -44,6 +44,9 @@ public class ArticleController {
     
     @Autowired
     private ArticleService articleService;
+    
+    @Autowired
+    private BoardService boardService;
     
     @Autowired
     private CommentService commentService;
@@ -73,60 +76,66 @@ public class ArticleController {
 	 
 	
 	/***
-	 * 게시판에서 사용자가 선택한 글을 보여주는 매핑
-	 * @param num 글번호 (idx)
+	 * 게시판에서 사용자가 선택한 글을 조회
+	 * 유효성 판별 후 - 조회수 증가 - 게시글의 댓글 가져오기 - 반환
+	 * @param num : 글번호 (idx)
+	 * @param id : 게시판 구분자
 	 * @param model
 	 * @param session
 	 * @return
 	 */
-
 	@RequestMapping(value="/viewArticle.bim", method= RequestMethod.GET)
 	public ModelAndView boardView(String id,int num,Model model,HttpSession session){
-		String URL = "/board/viewForm";
-		int articleIndex = num;
-		ModelAndView mav = new ModelAndView(URL);
-		ArticleVO selectArticleByIndex = null;
-		List<CommentVO> selectCommentByIndex = null;
+		
+		List<CommentVO> commentList = null;
+		ArticleVO article = null;
+		/***
+		 * 글번호(idx)의 글 조회하여
+		 * 해당 게시판과 글의 유효성 판별
+		 */
 		try {
-			articleService.increseHitCntByIndex(articleIndex);
-			selectArticleByIndex = articleService.selectArticleByIndex(articleIndex);
-			
-			// 게시물 접근여부 판별
-			if ("Y".equals(selectArticleByIndex.getBoardDelGb()) ||
-					"Y".equals(selectArticleByIndex.getDelGb())) { // 게시글 삭제 여부 혹은 게시판 비공개 여부
+			Boolean articleResult = articleService.checkValidateArticleByIdx(num);
+			if (!articleResult) {
+				logger.info("★★★★★>>> 게시판 비공개 혹은 게시글 삭제시 ");
+				return new ModelAndView("main/mainForm");
+			}
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}finally {
+			try {
+				article = articleService.selectArticleByIndex(num);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
-				URL = "redirect:/board/viewList.bim?id="+id;
-				mav.setViewName(URL);
-				System.out.println("★★★★★>>> 게시판 비공개 시 ");
-				return mav;
-				
-			}
-			
-			/*else if ("Y".equals(selectArticleByIndex.getDelGb())) { // 게시글 삭제 여부
-				URL = "redirect:/board/viewList.bim?id="+id;
-				mav.setViewName(URL);
-				System.out.println("★★★★★>>> 게시글 삭제시 ");
-				return mav;
-				
-			}
-			*/
+		/***
+		 * 게시글 조회수 증가
+		 */
+		try {
+			articleService.increseHitCntByIndex(num);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-
+		
+		/***
+		 * 게시글의 댓글 가져오기
+		 */
 		try {
-			selectCommentByIndex = commentService.selectCommentByIndex(articleIndex);
+			commentList = commentService.selectCommentByIndex(num);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		mav.addObject("article" , selectArticleByIndex);
-		mav.addObject("commentList" , selectCommentByIndex);
-		session.setAttribute("articleInfo", selectArticleByIndex);
+		model.addAttribute("article" , article);
+		model.addAttribute("commentList" , commentList);
+		session.setAttribute("articleInfo", article);
 
-		return mav;
+		return new ModelAndView("/board/viewForm");
 	}
 	
 	

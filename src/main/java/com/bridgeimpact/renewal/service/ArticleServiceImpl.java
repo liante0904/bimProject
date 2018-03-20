@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bridgeimpact.renewal.common.PageUtil;
 import com.bridgeimpact.renewal.dao.ArticleDAO;
+import com.bridgeimpact.renewal.dao.BoardDAO;
 import com.bridgeimpact.renewal.dto.ArticleVO;
 
 
@@ -16,6 +17,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
     private ArticleDAO articleDAO;
+
+    @Autowired
+    private BoardDAO boardDAO;
     
 	
 	@Override
@@ -76,6 +80,17 @@ public class ArticleServiceImpl implements ArticleService {
 	public List<ArticleVO> selectArticleByKeyword(HashMap<String, Object> paramMap)  throws Exception {
 		// TODO Auto-generated method stub
 		return articleDAO.selectArticleByKeyword(paramMap);
+	}
+
+	@Override
+	public Boolean checkValidateArticleByIdx(int num) throws Exception {
+		// TODO Auto-generated method stub
+		ArticleVO article = articleDAO.selectArticleByIndex(num);
+		String boardDelgb = boardDAO.selectBoardDelgbById(article.getBoardName());
+		if ("Y".equals(article.getDelGb()) || "Y".equals(boardDelgb)) {
+			return false;
+		}
+		return true;
 	}
 
 
