@@ -68,7 +68,19 @@
 		count(*)
 		FROM   BIM_BOARD_TB   
 		WHERE 
-		ID = #{id}		
+		ID = #{value}		
+    ]]>
+    </select>
+    
+    	 <select id="selectBoardDelgbById" parameterType="String" resultType="String">
+	<![CDATA[
+	
+	
+		SELECT   
+		DEL_GB   
+		FROM   BIM_BOARD_TB   
+		WHERE 
+		ID = #{value}		
     ]]>
     </select>
     
