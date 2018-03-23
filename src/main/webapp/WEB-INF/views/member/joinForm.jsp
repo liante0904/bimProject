@@ -12,8 +12,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <script type="text/javascript">
 $(document).ready(function(){
-   var idCheck
-   	$("#id").keyup(function(){
+	var idCheck
+	
+	$("#id").keyup(function(){
 		if($(this).val().length > 2){
 			var id = $(this).val();
 			console.log(id);
@@ -36,6 +37,18 @@ $(document).ready(function(){
 			
 		}
 	});
+	
+	$('#join').on('click', function(){
+		if (idCheck) {
+			alert('true');
+		}else{
+		alert('false');
+		return false;
+		}
+		alert("hello");
+		$('form').submit();
+	});
+	
 	
 });
 $(function(){

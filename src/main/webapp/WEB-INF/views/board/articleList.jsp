@@ -29,8 +29,8 @@ $(function(){
 <body>
     <h1>boardList.jsp</h1>
  
- 
-    <table>
+ <div class="container">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>글번호</th>
