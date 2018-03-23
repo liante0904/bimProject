@@ -29,8 +29,8 @@ $(function(){
 <body>
     <h1>boardList.jsp</h1>
  
- <div class="container">
-    <table class="table table-hover">
+ 
+    <table>
         <thead>
             <tr>
                 <th>글번호</th>
@@ -59,7 +59,6 @@ $(function(){
 
         </tbody>
     </table>		
-</div>
  <input type="button" id="write" value="글쓰기"/>
  
 <%@ include file="/WEB-INF/views/common/pageUtil.jsp" %>

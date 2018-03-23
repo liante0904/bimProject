@@ -2,8 +2,6 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/WEB-INF/include/common.jsp" %>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/bootstrap/css/bootstrap.css">
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript">
 var localhost = '${pageContext.request.contextPath }';
 

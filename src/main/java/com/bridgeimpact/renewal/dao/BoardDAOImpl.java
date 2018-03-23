@@ -61,11 +61,4 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 
-	@Override
-	public String selectBoardDelgbById(String id) throws Exception {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne(Namespace+".selectBoardDelgbById", id);
-	}
-
-
 }

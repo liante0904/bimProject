@@ -18,7 +18,5 @@ public interface BoardDAO {
 
 	public List<BoardVO> selectAllBoard() throws Exception;
 
-	public String selectBoardDelgbById(String id) throws Exception;
-
 
 }

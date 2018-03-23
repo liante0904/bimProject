@@ -53,26 +53,10 @@ public class BoardController {
      */
 	@RequestMapping(value="/viewList.bim", method= RequestMethod.GET)
 	public String boardView(String id,Model model, HttpServletRequest request,HttpSession session){
-		
-		/***
-		 * 게시판 유효성 판별
-		 * @param id : 게시판 구분자
-		 * @return checkBoardResult : 게시판 유효성 체크결과 value = 0 비공개 게시판, 1 = 유효 게시판
-		 */
-		int checkBoardResult = 0;
-		try {
-			checkBoardResult = boardService.checkBoardStatusById(id);
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}finally {
-			if (String.valueOf(id) == null || checkBoardResult == 0 ) {
-				//TODO 유효하지 않는 게시판 접근시 로직
-				return "main/mainForm";
-			}
+		if (String.valueOf(id) == null) {
+			//TODO 유효하지 않는 게시판 접근시 로직
+			return "board/articleList";
 		}
-
-		
 		/***
 		 * 게시판의 페이징 세팅 
 		 */

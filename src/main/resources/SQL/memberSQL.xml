@@ -62,7 +62,7 @@
 		CHURCH,
 		TYPE
 		FROM BIM_MEMBER_TB
-		WHERE ID = #{value}
+		WHERE ID = #{id}
 		
     ]]>
     </select>

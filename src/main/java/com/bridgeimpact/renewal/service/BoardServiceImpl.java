@@ -57,17 +57,5 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 
-	@Override
-	public int checkBoardStatusById(String id) throws Exception {
-		// TODO Auto-generated method stub
-		int boardDelgbResult = 0;
-		
-		if ("N".equals(boardDAO.selectBoardDelgbById(id))) {
-			boardDelgbResult = 1;
-		}
-		return boardDelgbResult;
-	}
-
-
 
 }
