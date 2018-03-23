@@ -1,8 +1,10 @@
 package com.bridgeimpact.renewal.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.bridgeimpact.renewal.controller.MainController;
 import com.bridgeimpact.renewal.dao.MemberDAO;
 import com.bridgeimpact.renewal.dto.MemberVO;;
  
@@ -34,20 +35,41 @@ public class MemberServiceImpl implements MemberService {
     }
 
 	@Override
-	public void insertMember(MemberVO member) throws Exception {
-		// TODO Auto-generated method stub
-		memberDAO.insertMember(member);
+	public void insertMember(MemberVO inputMember) throws Exception {
+		
+		/***
+		 * DB반영전 패스워드 암호화 로직
+		 */
+		String password = inputMember.getPassword();
+		String encryptPassword = passwordEncoder.encode(password);
+		logger.info("encryptPassword: " + encryptPassword);
+		System.out.println(passwordEncoder.matches(password, encryptPassword));
+		System.out.println(inputMember.getId());
+		inputMember.setPassword(encryptPassword);
+		memberDAO.insertMember(inputMember);
 	}
 
 	@Override
-	public void editMember(MemberVO member) throws Exception {
-		// TODO Auto-generated method stub
-		memberDAO.updateMember(member);
+	public void editMember(HttpSession session,MemberVO inputMember) throws Exception {
+		
+		/***
+		 * 회원수정 DB반영전 로직
+		 * 입력받은 회원정보에 idx, id값 반영
+		 */
+		MemberVO sessionMember = (MemberVO) session.getAttribute("loginInfo");
+		inputMember.setIdx(sessionMember.getIdx());
+		inputMember.setId(sessionMember.getId());
+		String password = inputMember.getPassword();
+		String encryptPassword = passwordEncoder.encode(password);
+		logger.info("encryptPassword: " + encryptPassword);
+		System.out.println(passwordEncoder.matches(password, encryptPassword));
+		System.out.println(inputMember.getId());
+		inputMember.setPassword(encryptPassword);
+		memberDAO.updateMember(inputMember);
 	}
 	
 	@Override
 	public void deleteMember(MemberVO member) throws Exception {
-		// TODO Auto-generated method stub
 		memberDAO.deleteMember(member);
 	}
 
@@ -75,9 +97,26 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int checkMemberId(MemberVO member) throws Exception {
-		// TODO Auto-generated method stub
-		return memberDAO.selectMemberById(member);
+	public Map<String, String> checkMemberById(String id) throws Exception {
+		// TODO SQL param 변경 (object -> String)
+		MemberVO member = new MemberVO();
+		member.setId(id);
+		int resultCnt = memberDAO.selectMemberById(member);
+		  String result = "";
+		  String resultMsg = "";
+
+		  if ( resultCnt == 0 ){
+			   result = "success";
+			   resultMsg = "사용가능한 아이디입니다.";
+			  } else {
+			   result = "failure";
+			   resultMsg = "이미 사용중인 아이디입니다.";
+			  }
+
+		  Map<String, String> resultMap = new HashMap<String, String>();
+		  resultMap.put("result", result);
+		  resultMap.put("resultMsg", resultMsg);
+		return resultMap;
 	}
 
 	@Override

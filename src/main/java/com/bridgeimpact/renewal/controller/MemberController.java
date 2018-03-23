@@ -35,87 +35,53 @@ public class MemberController {
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
 
-    /**
-     * Simply selects the home view to render by returning its name.
-     */
-    
-    
-
 	/***
 	 * 회원가입, 회원수정 페이지 이동 맵핑
-	 * @param model
-	 * @return
+	 * @return 반환 페이지
 	 */
 	@RequestMapping(value="member/joinForm.bim")
-	public ModelAndView joinForm(Model model) {
-		ModelAndView mv = new ModelAndView("member/joinForm");
-		String password ="1234";
-		String encryptPassword = passwordEncoder.encode(password);
-		logger.info("encryptPassword: " + encryptPassword);
-		System.out.println(encryptPassword);
-		System.out.println(passwordEncoder.matches(password, encryptPassword));
-
-		return mv;
+	public String joinForm() {
+		return "member/joinForm";
 	}
 	@RequestMapping(value="member/editForm.bim")
-	public ModelAndView editForm(Model model,HttpSession session) {
-		ModelAndView mv = new ModelAndView("member/editForm");
-		return mv;
+	public String editForm() {
+		return "member/editForm";
 	}
 
 	
 	/***
 	 * 회원 수정 페이지에서 작성된 요청 반영 요청
-	 * @param model
-	 * @param session
-	 * @param inputMember
-	 * @return
+	 * @param session : 로그인 중인 사용자 세션
+	 * @param inputMember : 사용자의 입력값(수정할 데이터)
+	 * @return 반환 페이지
 	 */
 	@RequestMapping(value="member/editSubmit.bim")
-	public ModelAndView editSubmit(Model model,HttpSession session,MemberVO inputMember) {
-		ModelAndView mv = new ModelAndView("main/mainForm");
-		MemberVO sessionMember= (MemberVO) session.getAttribute("loginInfo");
-		inputMember.setIdx(sessionMember.getIdx());
-		inputMember.setId(sessionMember.getId());
-		
+	public ModelAndView editSubmit(HttpSession session,MemberVO inputMember) {
+		ModelAndView mav = new ModelAndView("main/mainForm");
+
 		try {
-			memberService.editMember(inputMember);
+			memberService.editMember(session,inputMember);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			// TODO 회원정보 수정 반영 여부
 		}
         
-		return mv;
+		return mav;
 	}
 
 
 	/***
 	 * 회원가입 페이지에서 작성된 데이터 반영 요청
-	 * @param model
 	 * @param member
-	 * @return
+	 * @return 로그인 페이지 반환
 	 */
 	@RequestMapping(value="member/joinSubmit.bim")
-	public String joinSubmit(Model model,MemberVO member){
-		
-/*		
+	public String joinSubmit(MemberVO inputMember){
+
 		try {
-			request.setCharacterEncoding("UTF-8");
-			System.out.println(member.getId());
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-*/		
-		String password = member.getPassword();
-		String encryptPassword = passwordEncoder.encode(password);
-		logger.info("encryptPassword: " + encryptPassword);
-		System.out.println(encryptPassword);
-		System.out.println(passwordEncoder.matches(password, encryptPassword));
-		System.out.println(member.getId());
-		member.setPassword(encryptPassword);
-		try {
-			memberService.insertMember(member);
+			memberService.insertMember(inputMember);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -127,13 +93,11 @@ public class MemberController {
 	
 	/***
 	 * 회원 탈퇴 요청 데이터 반영
-	 * @param model
-	 * @param member
 	 * @param session
-	 * @return
+	 * @return 
 	 */
 	@RequestMapping(value="member/deleteSubmit.bim")
-	public String deleteSubmit(Model model,MemberVO member, HttpSession session){
+	public String deleteSubmit(HttpSession session){
 		
 		MemberVO sessionMember = (MemberVO) session.getAttribute("loginInfo");
 		
@@ -144,7 +108,7 @@ public class MemberController {
 				e.printStackTrace();
 			}
 		
-		return "main/loginForm";
+		return "index";
 	}
 	
 	
@@ -159,30 +123,14 @@ public class MemberController {
 	@RequestMapping(value="member/checkMemberIdAjax.bim",method = RequestMethod.GET,produces = "application/json; charset=utf8")
 	@ResponseBody
 	public Map<String, String> memberIdCheck(Model model,String id, HttpServletRequest request,HttpServletResponse response){
-		System.out.println(id);
-		MemberVO member = new MemberVO();
-		member.setId(id);
-		 Map<String, String> resultMap = new HashMap<String, String>();
-		 int resultCnt = 0;
+		  Map<String, String> resultMap = new HashMap<String, String>();
 		try {
-			resultCnt = memberService.checkMemberId(member);
+			resultMap = memberService.checkMemberById(id);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		  String result = "";
-		  String resultMsg = "";
 
-		  if ( resultCnt == 0 ){
-			   result = "success";
-			   resultMsg = "사용가능한 아이디입니다.";
-			  } else {
-			   result = "failure";
-			   resultMsg = "이미 사용중인 아이디입니다.";
-			  }
-
-		  resultMap.put("result", result);
-		  resultMap.put("resultMsg", resultMsg);
 		    response.setContentType("text/plain");
 		    response.setCharacterEncoding("UTF-8");
 		  return resultMap;

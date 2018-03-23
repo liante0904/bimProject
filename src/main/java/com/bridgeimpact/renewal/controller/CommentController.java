@@ -46,7 +46,6 @@ public class CommentController {
 	@RequestMapping(value="/getCommentList.bim", method= RequestMethod.POST)
 	public ModelAndView getCommentList(Model model, HttpServletRequest request,HttpSession session){
 		ModelAndView mav = new ModelAndView("board/commentForm");
-		System.out.println("num 찾기 :"+request.getParameter("num"));
 		int index = Integer.parseInt(request.getParameter("num"));
 		List<CommentVO> commentList = null;
 		try {

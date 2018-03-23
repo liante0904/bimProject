@@ -1,12 +1,8 @@
 package com.bridgeimpact.renewal.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
 import java.util.List;
 import java.util.Locale;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -21,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bridgeimpact.renewal.dto.ArticleVO;
 import com.bridgeimpact.renewal.dto.BoardVO;
-import com.bridgeimpact.renewal.dto.CommentVO;
 import com.bridgeimpact.renewal.dto.MemberVO;
 import com.bridgeimpact.renewal.service.ArticleService;
 import com.bridgeimpact.renewal.service.BoardService;

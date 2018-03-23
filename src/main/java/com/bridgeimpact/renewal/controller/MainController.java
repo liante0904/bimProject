@@ -1,6 +1,5 @@
 package com.bridgeimpact.renewal.controller;
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,13 +8,11 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.bridgeimpact.renewal.dto.BoardVO;
 import com.bridgeimpact.renewal.dto.MemberVO;
@@ -39,8 +36,6 @@ public class MainController {
 	@Autowired
 	private BoardService boardService;
 
-    @Autowired
-    BCryptPasswordEncoder passwordEncoder;
     
     /**
      * Simply selects the home view to render by returning its name.
@@ -49,50 +44,30 @@ public class MainController {
 	
 	/***
 	 * 메인 페이지 init & 로그인 페이지 이동 맵핑
-	 * @param locale
 	 * @param model
-	 * @param session
-	 * @return
+	 * @return URL
 	 * @throws Exception
 	 */
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(Locale locale, Model model,HttpSession session) throws Exception{
-/*
-		List<BoardVO> boardList = null;
-		try {
-			boardList = boardService.selectAllBoard();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		model.addAttribute("boardList", boardList);
-		*/
-		
-    	return "index";
-    }
-    @RequestMapping(value = "/index.bim", method = RequestMethod.GET)
-    public String indexbim(Locale locale, Model model) throws Exception{
+    @RequestMapping(value = {"/" ,"/index.bim"} , method = RequestMethod.GET)
+    public String indexForm() {
         return "index";
     }
 	@RequestMapping(value="main/loginForm.bim")
-	public ModelAndView loginForm(Model model) {
-		ModelAndView mv = new ModelAndView("main/loginForm");
-		return mv;
+	public String loginForm() {
+		return "main/loginForm";
 	}
 	
 	
+
 	/***
-	 * 로그인 페이지에서 로그인 요청 
+	 * 
 	 * @param model
-	 * @param member
-	 * @param request
+	 * @param userInputMember : 사용자 로그인 입력값
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping(value="main/login.bim")
-	public String loginSubmit(Model model,MemberVO userInputMember, HttpServletRequest request,HttpSession session){
-//		MemberVO dbMember = null;
+	public String loginSubmit(Model model,MemberVO userInputMember,HttpSession session){
 		int loginResult = 0;
 		String url = "";
 		
@@ -154,7 +129,7 @@ public class MainController {
 			e.printStackTrace();
 		}
 		ObjectMapper mapper = new ObjectMapper();
-		String jsonList ="";
+		String jsonList = "";
 		try {
 			jsonList = mapper.writeValueAsString(boardList);
 		} catch (JsonProcessingException e1) {
@@ -170,14 +145,12 @@ public class MainController {
 	/***
 	 * 로그아웃 요청
 	 * @param model
-	 * @param request
-	 * @param response
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping(value="/logout.bim",method = RequestMethod.GET,produces = "application/json; charset=utf8")
 	@ResponseBody
-	public String logout(Model model, HttpServletRequest request,HttpServletResponse response, HttpSession session){
+	public String logout(Model model, HttpSession session){
 		session.invalidate();
 		model.addAttribute("success", "로그아웃 성공");
 		  return "index";

@@ -22,18 +22,20 @@ public class LoginCheckIntercepter extends HandlerInterceptorAdapter {
 	
    @Override
    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-       try {
+       /***
+        * 로그인 여부를 체크하는 인터셉터
+        * 세션의 loginInfo 객체 판별
+        */
+	   try {
            //loginInfo이라는 세션key를 가진 정보가 널일경우 로그인 페이지로 이동
 
            if(request.getSession().getAttribute("loginInfo") == null ){
-        	   
                    response.sendRedirect(request.getContextPath() + "/main/loginForm.bim");
                    return false;
            }
        } catch (Exception e) {
            e.printStackTrace();
        }
-       //admin 세션key 존재시 main 페이지 이동
        return true;
    }
 
