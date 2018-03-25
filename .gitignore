@@ -15,6 +15,11 @@ local.properties
 .settings/
 .loadpath
 
+# eclipse project file
+.settings
+.classpath
+.project
+
 # External tool builders
 .externalToolBuilders/
 
