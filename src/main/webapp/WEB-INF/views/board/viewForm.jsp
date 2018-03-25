@@ -63,7 +63,8 @@ $(function(){
 	<h1>viewForm.jsp</h1>
 	<form action="${pageContext.request.contextPath }/board/boardWrite.bim"
 		method="post">
-			<table border="2">
+		<div class="table-responsive">
+			<table class="table" border="2">
 
 				<tbody>
 					<tr>
@@ -92,6 +93,7 @@ $(function(){
 		<input type="button" id="delete" value="삭제" />
 		</c:if>
 		<input type="button" id="list" value="목록" />
+		</div>
 			</form>
 
 	세션 아이디 : "${sessionScope.loginInfo.id}"

@@ -17,7 +17,7 @@ $(document).ready(function(){
 				function() {
 					str += "<li><a href='" + localhost + "/board/viewList.bim?id=" + this.id + "'>" + this.name + "</a></li>";
 			});
-			$('#board').html(str);
+			$('#board').prepend(str);
 //			alert("Data: " + data + "\nStatus: " + status);
 		});
 	}
@@ -73,25 +73,7 @@ $(function(){
 </script>
 
 <body>
-<div style="background-color:#aaaa00;height:150px;">
-
-
-<c:if test="${empty sessionScope.loginInfo.id }">  <!-- sessionScopre.id가 없으면 -->
-<a href="${pageContext.request.contextPath }/main/loginForm.bim">로그인</a>
-<a href="${pageContext.request.contextPath }/member/joinForm.bim">회원가입</a>
-</c:if>
-
-<c:if test="${not empty sessionScope.loginInfo.id }"> <!-- sessionScopre.id가 있으면(로그인 성공시) -->
-	${sessionScope.loginInfo.name } 님 
-	<a href="#" id="logout">로그아웃</a>
-</c:if>
-
-
-
-<a href="${pageContext.request.contextPath }/admin/admin.bim">관리자 페이지(예시)</a>
-<a href="http://www.bridgeimpact.com/">이전 BIM 페이지</a>
-<a href="#" id="test">ajax page test</a>
-<a href="${pageContext.request.contextPath }/test/171002">file upload test</a>
+<div style="background-color:#aaaa00;height: 100px;">
 
 <!-- 
 <a href="#this">사역원 소개</a>
@@ -100,13 +82,39 @@ $(function(){
 <a href="#this">등록안내 신청서</a>
 
  -->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul id="board" class="nav navbar-nav">
+					
+					
 
-<ul id="board"></ul>
+<c:if test="${empty sessionScope.loginInfo.id }">  <!-- sessionScopre.id가 없으면 -->
+<li><a href="${pageContext.request.contextPath }/main/loginForm.bim">로그인</a></li>
+<li><a href="${pageContext.request.contextPath }/member/joinForm.bim">회원가입</a></li>
+</c:if>
+
+<c:if test="${not empty sessionScope.loginInfo.id }"> <!-- sessionScopre.id가 있으면(로그인 성공시) -->
+	<li><a href="#"> ${sessionScope.loginInfo.name } 님</a></li> 
+	<li><a href="#" id="logout">로그아웃</a></li>
+</c:if>
+
+
+
+<li><a href="${pageContext.request.contextPath }/admin/admin.bim">관리자 페이지(예시)</a></li>
+<li><a href="http://www.bridgeimpact.com/">이전 BIM 페이지</a></li>
+<li><a href="#" id="test">ajax page test</a></li>
+<li><a href="${pageContext.request.contextPath }/test/171002">file upload test</a></li>
+					
+					</ul>
+				</div>
+			</div>
+		</nav>
 
 
 
 
-</div>
+	</div>
 
 <div id="dataArea"></div>
 

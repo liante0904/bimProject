@@ -59,6 +59,7 @@ $(function(){
 
         </tbody>
     </table>		
+</div>
  <input type="button" id="write" value="글쓰기"/>
  
 <%@ include file="/WEB-INF/views/common/pageUtil.jsp" %>
