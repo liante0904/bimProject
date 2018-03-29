@@ -38,7 +38,7 @@
 
 
 		<mvc:interceptor>
-			<mvc:mapping path="/*" />
+			<mvc:mapping path="/**" />
 			
 			<beans:bean
 				class="com.bridgeimpact.renewal.intercepter.IncomingIntercepter" />
@@ -59,7 +59,7 @@
 		</mvc:interceptor>
 
 		<mvc:interceptor>
-			<mvc:mapping path="/admin/admin.bim" />
+			<mvc:mapping path="/admin/*" />
 			<!-- 여러개 컨트롤러 추가 가능 -->
 			<!-- <mvc:mapping path="/admin_write"/> <mvc:mapping path="/admin_update"/> 
 				<mvc:mapping path="/admin_delete"/> . . . -->
