@@ -8,7 +8,7 @@
 var localhost = '${pageContext.request.contextPath }';
 
 $(document).ready(function(){
-	getMenuInfo();
+//	getMenuInfo();
 	
 	function getMenuInfo() {
 		$.get(localhost + "/getBoardList.bim", function(data, status) {
@@ -89,16 +89,22 @@ $(function(){
 					
 					
 
+
+            <c:forEach items="${boardList}" var="board" >
+<li><a href="${pageContext.request.contextPath }/board/viewList.bim?id=${board.id}">${board.name}</a></li>
+                
+            </c:forEach>
+
 <c:if test="${empty sessionScope.loginInfo.id }">  <!-- sessionScopre.id가 없으면 -->
 <li><a href="${pageContext.request.contextPath }/main/loginForm.bim">로그인</a></li>
 <li><a href="${pageContext.request.contextPath }/member/joinForm.bim">회원가입</a></li>
 </c:if>
 
+
 <c:if test="${not empty sessionScope.loginInfo.id }"> <!-- sessionScopre.id가 있으면(로그인 성공시) -->
 	<li><a href="#"> ${sessionScope.loginInfo.name } 님</a></li> 
 	<li><a href="#" id="logout">로그아웃</a></li>
 </c:if>
-
 
 
 <li><a href="${pageContext.request.contextPath }/admin/admin.bim">관리자 페이지(예시)</a></li>
