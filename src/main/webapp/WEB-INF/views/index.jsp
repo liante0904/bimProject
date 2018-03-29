@@ -15,5 +15,15 @@
 <div id="context"></div>
 
 
+            <c:forEach items="${boardList}" var="board" >
+                <tr>
+                    <td>${board.idx}</td>
+                    <td>${board.id}</td>
+                    <td>${board.name}</td>
+                    <td>${board.delGb}</td>
+                </tr>
+                
+            </c:forEach>
+
 </body>
 </html>
