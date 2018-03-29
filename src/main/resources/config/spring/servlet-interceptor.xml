@@ -37,6 +37,13 @@
  -->
 
 
+		<mvc:interceptor>
+			<mvc:mapping path="/*" />
+			
+			<beans:bean
+				class="com.bridgeimpact.renewal.intercepter.IncomingIntercepter" />
+		</mvc:interceptor>
+
 
 		<mvc:interceptor>
 			<mvc:mapping path="/board/writeForm.bim" />

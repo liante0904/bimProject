@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bridgeimpact.renewal.dto.BoardVO;
 import com.bridgeimpact.renewal.dto.MemberVO;
@@ -57,7 +58,28 @@ public class MainController {
 		return "main/loginForm";
 	}
 	
-	
+	@RequestMapping(value="/boardList.bim")
+	public ModelAndView writeForm(Model model, HttpServletRequest request){
+		List<BoardVO> boardList = null;
+		try {
+			String delGb = "N";
+			boardList = boardService.selectAllBoard(delGb);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonList = "";
+		try {
+			jsonList = mapper.writeValueAsString(boardList);
+		} catch (JsonProcessingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		logger.info(jsonList);
+		model.addAttribute("boardList", boardList);
+		return new ModelAndView("/board/boardList");
+	}
 
 	/***
 	 * 
