@@ -25,28 +25,6 @@ $(document).ready(function(){
 	
 });
 $(function(){
-	
-	
-
-	
-    $("#test").click(function() {// ajax 페이지 이동  test
-		$.ajax({
-	        type : "GET",
-	        url : "${pageContext.request.contextPath }/board/viewList.bim?id=test2",
-//	        url : "/test/test.bim",
-	        dataType : "text",
-	        error : function(){
-	            alert(' 실패!!');
-	        },
-	        success : function(data){
-	           	alert('성공');
-	           	$("#context").html(data);
-	        }
-
-		});
-     });
-    
-
  
 	function initBoard(data){
 		alert("도착");
@@ -109,8 +87,6 @@ $(function(){
 
 <li><a href="${pageContext.request.contextPath }/admin/admin.bim">관리자 페이지(예시)</a></li>
 <li><a href="http://www.bridgeimpact.com/">이전 BIM 페이지</a></li>
-<li><a href="#" id="test">ajax page test</a></li>
-<li><a href="${pageContext.request.contextPath }/test/171002">file upload test</a></li>
 					
 					</ul>
 				</div>
