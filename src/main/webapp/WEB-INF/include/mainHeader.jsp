@@ -87,6 +87,8 @@ $(function(){
 
 <li><a href="${pageContext.request.contextPath }/admin/admin.bim">관리자 페이지(예시)</a></li>
 <li><a href="http://www.bridgeimpact.com/">이전 BIM 페이지</a></li>
+<li><a href="#">test1</a></li>
+<li><a href="#">test2</a></li>
 					
 					</ul>
 				</div>
