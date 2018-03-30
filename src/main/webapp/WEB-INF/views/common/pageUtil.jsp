@@ -9,8 +9,7 @@
 </head>
 <body>
 	<nav>
-		<div>
-
+		<div class="text-center">
 			<c:set var="requestURI"
 				value="${requestScope['javax.servlet.forward.servlet_path']}" />
 

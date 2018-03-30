@@ -34,36 +34,17 @@ public class IncomingIntercepter extends HandlerInterceptorAdapter {
         */
 	   
 	   List<BoardVO> boardList =  (List<BoardVO>) request.getSession().getAttribute("boardList");
-	   System.out.println("여기왔나1");
-
 
    		try {
    			String delGb = "N";
-   			System.out.println("여기는 오냐");
    			boardList = boardDAO.selectAllBoard(delGb);
    		} catch (Exception e) {
    			// TODO Auto-generated catch block
    			e.printStackTrace();
    		}finally {
    			request.getSession().setAttribute("boardList", boardList);
-   			System.out.println("여기왔나2 tostring"+boardList.toString());
 			
 		}
-       
-/*       
-       Cookie sessionCookie = new Cookie("boardList", boardList.toString());
-       sessionCookie.setMaxAge(3600);
-       response.addCookie(sessionCookie);
-       
-
-	   Cookie[] ck = request.getCookies();
-	   if (sessionCookie != null) {
-		for (Cookie c: ck) {
-			System.out.println("name:"+c.getName());
-			System.out.println("value:"+c.getValue());
-		}
-	}
-	   */
 	   
        return true;
    }
