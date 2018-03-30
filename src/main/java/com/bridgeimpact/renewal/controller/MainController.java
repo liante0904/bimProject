@@ -57,7 +57,10 @@ public class MainController {
 	public String loginForm() {
 		return "main/loginForm";
 	}
-	
+    @RequestMapping(value = "/main.bim" , method = RequestMethod.GET)
+    public String main() {
+        return "main";
+    }
 	@RequestMapping(value="/boardList.bim")
 	public ModelAndView writeForm(Model model, HttpServletRequest request){
 		List<BoardVO> boardList = null;

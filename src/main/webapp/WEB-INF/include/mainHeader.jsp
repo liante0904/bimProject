@@ -2,13 +2,20 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/WEB-INF/include/common.jsp" %>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/bootstrap/css/bootstrap.css">
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/bootstrap/js/bootstrap.js"></script>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="/resources/favicon.ico">
+<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.css">    <!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="/resources/bootstrap/css/carousel.css">    <!-- Custom styles for this template -->
+<script type="text/javascript" src="/resources/bootstrap/js/bootstrap.js"></script>	<!-- Bootstrap core js(TODO locate footer) -->
 <script type="text/javascript">
 var localhost = '${pageContext.request.contextPath }';
 
 $(document).ready(function(){
-//	getMenuInfo();
+/* 
+	getMenuInfo();
 	
 	function getMenuInfo() {
 		$.get(localhost + "/getBoardList.bim", function(data, status) {
@@ -22,15 +29,11 @@ $(document).ready(function(){
 		});
 	}
 
-	
+ */	
 });
+
 $(function(){
  
-	function initBoard(data){
-		alert("도착");
-		$("#board").append("<b>Hello Test</b>");
-	} 
-	
 	$("#logout").click(function(){
 		$.ajax({
 	        type : "GET",
@@ -51,49 +54,66 @@ $(function(){
 </script>
 
 <body>
-<div style="background-color:#aaaa00;height: 100px;">
-
-<!-- 
-<a href="#this">사역원 소개</a>
-<a href="#this">캠프</a>
-<a href="#this">교육 세미나</a>
-<a href="#this">등록안내 신청서</a>
-
- -->
-		<nav class="navbar navbar-inverse navbar-fixed-top">
-			<div class="container">
-				<div id="navbar" class="navbar-collapse collapse">
-					<ul id="board" class="nav navbar-nav">
-					
-					
-
-
-            <c:forEach items="${boardList}" var="board" >
-<li><a href="${pageContext.request.contextPath }/board/viewList.bim?id=${board.id}">${board.name}</a></li>
-                
-            </c:forEach>
-
-<c:if test="${empty sessionScope.loginInfo.id }">  <!-- sessionScopre.id가 없으면 -->
-<li><a href="${pageContext.request.contextPath }/main/loginForm.bim">로그인</a></li>
-<li><a href="${pageContext.request.contextPath }/member/joinForm.bim">회원가입</a></li>
-</c:if>
-
-
-<c:if test="${not empty sessionScope.loginInfo.id }"> <!-- sessionScopre.id가 있으면(로그인 성공시) -->
-	<li><a href="#"> ${sessionScope.loginInfo.name } 님</a></li> 
-	<li><a href="#" id="logout">로그아웃</a></li>
-</c:if>
-
-
-<li><a href="${pageContext.request.contextPath }/admin/admin.bim">관리자 페이지(예시)</a></li>
-<li><a href="http://www.bridgeimpact.com/">이전 BIM 페이지</a></li>
-<li><a href="#">test1</a></li>
-<li><a href="#">test2</a></li>
-					
-					</ul>
+<div class="navbar-wrapper" style="height: 100px;">
+		<div class="container">
+			<nav class="navbar navbar-inverse navbar-static-top">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+			                <span class="sr-only">Toggle navigation</span>
+			                <span class="icon-bar"></span>
+			                <span class="icon-bar"></span>
+			                <span class="icon-bar"></span>
+						</button>
+            				<a class="navbar-brand" href="../">Project name</a>	
+					</div>
+						<div id="navbar" class="navbar-collapse collapse">
+							<ul id="board" class="nav navbar-nav">
+		
+								<c:forEach items="${boardList}" var="board">
+									<li><a
+										href="${pageContext.request.contextPath }/board/viewList.bim?id=${board.id}">${board.name}</a></li>
+		
+								</c:forEach>
+		
+								<c:if test="${empty sessionScope.loginInfo.id }">
+									<!-- sessionScopre.id가 없으면 -->
+									<li><a
+										href="${pageContext.request.contextPath }/main/loginForm.bim">로그인</a></li>
+									<li><a
+										href="${pageContext.request.contextPath }/member/joinForm.bim">회원가입</a></li>
+								</c:if>
+		
+		
+								<c:if test="${not empty sessionScope.loginInfo.id }">
+									<!-- sessionScopre.id가 있으면(로그인 성공시) -->
+									<li><a href="#"> ${sessionScope.loginInfo.name } 님</a></li>
+									<li><a href="#" id="logout">로그아웃</a></li>
+								</c:if>
+		
+		
+								<li><a
+									href="${pageContext.request.contextPath }/admin/admin.bim">관리자
+										페이지(예시)</a></li>
+								<li><a href="http://www.bridgeimpact.com/">이전 BIM 페이지</a></li>
+				                <li class="dropdown">
+				                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+				                  <ul class="dropdown-menu" role="menu">
+				                    <li><a href="#">Action</a></li>
+				                    <li><a href="#">Another action</a></li>
+				                    <li><a href="#">Something else here</a></li>
+				                    <li class="divider"></li>
+				                    <li class="dropdown-header">Nav header</li>
+				                    <li><a href="#">Separated link</a></li>
+				                    <li><a href="#">One more separated link</a></li>
+				                  </ul>
+				                </li>
+	
+						</ul>
+					</div>
 				</div>
-			</div>
-		</nav>
+			</nav>
+		</div>
 
 
 
