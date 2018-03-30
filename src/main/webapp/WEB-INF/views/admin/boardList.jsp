@@ -37,8 +37,9 @@ $(function(){
 		console.log(boardName);
 		
 		if (confirm("정말로  '"+ boardName + "' 게시판을 " + eventCheckValue + " 처리 하시겠습니까?" ) == true) {
+			if (eventCheckId === "close") {
 				 $.ajax({
-				        url : "${pageContext.request.contextPath}/board/toggleBoardAjax.bim",
+				        url : "${pageContext.request.contextPath}/board/closeBoardAjax.bim",
 				        type: "get",
 				        data : { "id" : boardId },
 				        success : function(data){
@@ -49,6 +50,21 @@ $(function(){
 						}
 				        }
 				    });
+			}else if (eventCheckId === "open") {
+				 $.ajax({
+				        url : "${pageContext.request.contextPath}/board/openBoardAjax.bim",
+				        type: "get",
+				        data : { "id" : boardId },
+				        success : function(data){
+				         if ( data.result == "success") {
+				        	 alert(data.resultMsg);
+						}else {
+							alert(data.resultMsg);
+						}
+				        }
+				    });
+				
+			}
 
 		}
 	})

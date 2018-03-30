@@ -14,9 +14,11 @@ public interface BoardService {
 
 	public int checkBoardId(String id) throws Exception;
 
-	public int checkBoardStatusById(String id) throws Exception;
+	public int closeBoard(String id) throws Exception;
 
-	public int toogleBoard(String id) throws Exception;
+	public int openBoard(String id) throws Exception;
+
+	public int checkBoardStatusById(String id) throws Exception;
 
 
 }
