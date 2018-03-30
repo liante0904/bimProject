@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bridgeimpact.renewal.dao.BoardDAO;
-import com.bridgeimpact.renewal.dao.CommentDAO;
 import com.bridgeimpact.renewal.dto.BoardVO;
 
 @Service
@@ -44,20 +43,6 @@ public class BoardServiceImpl implements BoardService {
 
 
 	@Override
-	public int closeBoard(String id) throws Exception {
-		// TODO Auto-generated method stub
-		return boardDAO.deleteBoardById(id);
-	}
-
-
-	@Override
-	public int openBoard(String id) throws Exception {
-		// TODO Auto-generated method stub
-		return boardDAO.unDeleteBoardById(id);
-	}
-
-
-	@Override
 	public int checkBoardStatusById(String id) throws Exception {
 		// TODO Auto-generated method stub
 		int boardDelgbResult = 0;
@@ -66,6 +51,19 @@ public class BoardServiceImpl implements BoardService {
 			boardDelgbResult = 1;
 		}
 		return boardDelgbResult;
+	}
+
+
+	@Override
+	public int toogleBoard(String id) throws Exception {
+		String boardResult = boardDAO.selectBoardDelgbById(id);
+		int boardQueryResult = 0;
+		if ("N".equals(boardResult)) {
+			boardQueryResult = boardDAO.deleteBoardById(id);
+		}else {
+			boardQueryResult = boardDAO.unDeleteBoardById(id);
+		}
+		return boardQueryResult;
 	}
 
 

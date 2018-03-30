@@ -60,7 +60,7 @@ $(function(){
         </tbody>
     </table>		
 </div>
- <input type="button" id="write" value="글쓰기"/>
+ <input type="button" id="write" class="pull-right" value="글쓰기"/>
  
 <%@ include file="/WEB-INF/views/common/pageUtil.jsp" %>
 <%@ include file="/WEB-INF/views/board/searchForm.jsp" %>

@@ -2,6 +2,7 @@ package com.bridgeimpact.renewal.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.bridgeimpact.renewal.common.PageUtil;
 import com.bridgeimpact.renewal.dto.ArticleVO;
 import com.bridgeimpact.renewal.dto.BoardVO;
@@ -181,63 +183,30 @@ public class BoardController {
 		  return resultMap;
 	}
 	
-	
-	
 	/***
-	 * 게시판 관리 페이지에서 게시판 비공개 ajax 요청
-	 * @param model
-	 * @param id : 게시판 구분ID
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	@RequestMapping(value="/closeBoardAjax.bim",method = RequestMethod.GET,produces = "application/json; charset=utf8")
-	@ResponseBody
-	public Map<String, String> closeBoardAjax(Model model,String id, HttpServletRequest request,HttpServletResponse response){
-		 Map<String, String> resultMap = new HashMap<String, String>();
-		 int resultCnt = 0;
-		try {
-			resultCnt = boardService.closeBoard(id);
-			logger.info(">>>>>>>>>>>>>"+String.valueOf(resultCnt));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		  String result = "";
-		  String resultMsg = "";
-
-		  if ( resultCnt == 1 ){
-			   result = "success";
-			   resultMsg = "게시판이 비공개 되었습니다..";
-			  } else {
-			   result = "failure";
-			   resultMsg = "게시판 비공개 요청이 실패하였습니다..";
-			  }
-
-		  resultMap.put("result", result);
-		  resultMap.put("resultMsg", resultMsg);
-		    response.setContentType("text/plain");
-		    response.setCharacterEncoding("UTF-8");
-		  return resultMap;
-	}
-	
-	
-	/***
-	 * 게시판 관리 페이지에서 게시판 삭제 ajax 요청
+	 *  관리자페이지의 게시판 관리 요청 
+	 *  (게시판 공개 <-> 비공개 ajax)
 	 * @param model
 	 * @param id : 게시판 구분 ID
 	 * @param request
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value="/openBoardAjax.bim",method = RequestMethod.GET,produces = "application/json; charset=utf8")
+	@RequestMapping(value="/toggleBoardAjax.bim",method = RequestMethod.GET,produces = "application/json; charset=utf8")
 	@ResponseBody
-	public Map<String, String> openBoardAjax(Model model,String id, HttpServletRequest request,HttpServletResponse response){
+	public Map<String, String> toggleBoardAjax(Model model,String id, HttpServletRequest request,HttpServletResponse response){
 		 Map<String, String> resultMap = new HashMap<String, String>();
-		 int resultCnt = 0;
+		 
+		 /**
+		  * resultState 상태 값
+		  * 0: 에러(DB접근 실패), 1: 공개로 변경 성공 , 2: 비공개로 변경 성공
+		  */
+		 int resultState = 0;
 		try {
-			resultCnt = boardService.openBoard(id);
-			logger.info(">>>>>>>>>>>>>"+String.valueOf(resultCnt));
+			//resultCnt = boardService.openBoard(id);
+			resultState = boardService.toogleBoard(id);
+			
+			logger.info(">>>>>>>>>>>>>"+String.valueOf(resultState));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -245,20 +214,25 @@ public class BoardController {
 		  String result = "";
 		  String resultMsg = "";
 
-		  if ( resultCnt == 1 ){
-			   result = "success";
-			   resultMsg = "게시판이 공개 되었습니다..";
-			  } else {
-			   result = "failure";
-			   resultMsg = "게시판 공개 요청이 실패하였습니다..";
-			  }
+		  if (resultState == 0) {
+			  result = "failure";
+			  resultMsg = "게시판 변경을 실패 하였습니다..";
+		  }else if ( resultState == 1 ){
+			  result = "success";
+			  resultMsg = id + "게시판이 공개 되었습니다..";
+		  } else {
+			  result = "success";
+			  resultMsg = id + "게시판이 비공개 되었습니다..";
+		  }
 
 		  resultMap.put("result", result);
 		  resultMap.put("resultMsg", resultMsg);
-		    response.setContentType("text/plain");
-		    response.setCharacterEncoding("UTF-8");
+		  response.setContentType("text/plain");
+		  response.setCharacterEncoding("UTF-8");
 		  return resultMap;
 	}
+	
+
 }
 
 
