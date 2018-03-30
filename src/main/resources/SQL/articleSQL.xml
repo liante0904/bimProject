@@ -172,10 +172,9 @@
     </select>
     
     
-  	<insert id="insertArticle" parameterType="articleVO">
-		<![CDATA[
+  	<insert id="insertArticle" useGeneratedKeys="true" keyProperty="idx" parameterType="articleVO">
 	
-	
+
 		INSERT INTO BIM_ARTICLE_TB 
 		(
 		IDX  ,   
@@ -199,8 +198,6 @@
 		#{writeId}
 		)
 
-
-    ]]>
 	</insert>
 	
   	<update id="updateArticle" parameterType="articleVO">
