@@ -54,8 +54,7 @@ $(function(){
 </script>
 
 <body>
-<div class="navbar-wrapper" style="height: 100px;">
-		<div class="container">
+<div class="navbar-wrapper" style="height: 30px;">
 			<nav class="navbar navbar-inverse navbar-static-top">
 				<div class="container">
 					<div class="navbar-header">
@@ -113,7 +112,6 @@ $(function(){
 					</div>
 				</div>
 			</nav>
-		</div>
 
 
 

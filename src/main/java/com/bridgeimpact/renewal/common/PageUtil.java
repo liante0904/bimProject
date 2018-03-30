@@ -19,7 +19,7 @@ public class PageUtil {
 	private int startArticleCnt;
 	private int pageRangeCnt;
 	private String boardName;
-	private 	HashMap<String, Object> paramMap = new HashMap<String, Object>();
+	private HashMap<String, Object> paramMap = new HashMap<String, Object>();
 	
 
 
