@@ -54,6 +54,7 @@ $(function(){
 </script>
 </head>
 <body>
+<div class="container">
     <h1>writeForm.jsp</h1>
      <form id="writeForm" action="${pageContext.request.contextPath }/board/writeArticle.bim" method="post" enctype="multipart/form-data">
         <table>
@@ -87,7 +88,7 @@ $(function(){
  <input type="hidden" id="boardName" name="boardName" value="${param.id }"/>
  
     </form>
-
+</div>
 
  
 </body>
