@@ -82,8 +82,9 @@ public class MemberServiceImpl implements MemberService {
 		if (dbMember == null) {
 			loginResult = 0;
 			return loginResult;
+		}else if ("Y".equals(dbMember.getType())) {
+			loginResult = 2;
 		}
-		
 		logger.info("TypePassword : " + UserRequest.getPassword() + "\t dbPassword : " + dbMember.getPassword());
 		System.out.println("passwordCheck : " +passwordEncoder.matches(UserRequest.getPassword(), dbMember.getPassword()));
 		Boolean passwordMatchResult = passwordEncoder.matches(UserRequest.getPassword(), dbMember.getPassword());
