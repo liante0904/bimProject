@@ -5,11 +5,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.apache.ibatis.cursor.Cursor;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.bridgeimpact.renewal.common.PageUtil;
 import com.bridgeimpact.renewal.dto.ArticleVO;
 
 @Repository
@@ -40,9 +38,9 @@ public class ArticleDAOImpl implements ArticleDAO {
 	}
 
 	@Override
-	public void insertArticle(ArticleVO board) throws Exception {
+	public int insertArticle(ArticleVO board) throws Exception {
 		// TODO Auto-generated method stub
-		sqlSession.insert(Namespace+".insertArticle", board);
+		return sqlSession.insert(Namespace+".insertArticle", board);
 	}
 
 	@Override

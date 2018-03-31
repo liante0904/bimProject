@@ -1,6 +1,4 @@
 package com.bridgeimpact.renewal.controller;
-import java.io.File;
-import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -18,14 +16,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bridgeimpact.renewal.common.PageUtil;
 import com.bridgeimpact.renewal.dto.ArticleVO;
 import com.bridgeimpact.renewal.dto.CommentVO;
-import com.bridgeimpact.renewal.dto.FileVO;
 import com.bridgeimpact.renewal.dto.MemberVO;
 import com.bridgeimpact.renewal.service.ArticleService;
 import com.bridgeimpact.renewal.service.BoardService;
@@ -153,20 +149,25 @@ public class ArticleController {
 		String boardName = article.getBoardName();
 		Map<String, String> resultMap = new HashMap<String, String>();
 		logger.info("글 제목 : "+ article.getTitle() + "\t 글내용 : " + article.getContents() );
-		
+		String result = "";
 		/*
 		 *  Article DB반영전 로직
 		 */
 		MemberVO loginMember = (MemberVO)session.getAttribute("loginInfo");
 		article.setWriteId(loginMember.getId());
-		
+		int insertArticleResult = 0;
 		try {
-			articleService.insertArticle(article);
+			insertArticleResult = articleService.insertArticle(article);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			if (insertArticleResult == 0) {
+				result = "error";
+				//TODO 글 작성 실패시 처리구간
+			}
 		}
-		String result = "success";
+		result = "success";
 		resultMap.put("result", result);
 
 		/*
@@ -213,6 +214,15 @@ public class ArticleController {
 		 */
 		
 		// 다중파일 로직구간
+		
+			try {
+				fileService.insertFile(request, article);
+			} catch (Exception e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+		
+/*		
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest)request;
 		java.util.Iterator<String> fileNames = multipartRequest.getFileNames();
 		while(fileNames.hasNext())
@@ -235,7 +245,7 @@ public class ArticleController {
 			fileVO.setArticleIdx(article.getIdx());
 			fileVO.setCreaId(article.getWriteId());
 			try {
-				fileService.insertFile(fileVO);
+			//	fileService.insertFile(fileVO);
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -272,7 +282,7 @@ public class ArticleController {
 			}
 		}
 
-		
+		*/
 		ModelAndView mav = new ModelAndView("redirect:/board/viewList.bim?id="+boardName);
 		return mav;
 	}

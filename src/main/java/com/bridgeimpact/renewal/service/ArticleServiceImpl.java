@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bridgeimpact.renewal.common.PageUtil;
 import com.bridgeimpact.renewal.dao.ArticleDAO;
 import com.bridgeimpact.renewal.dao.BoardDAO;
 import com.bridgeimpact.renewal.dto.ArticleVO;
@@ -41,9 +40,8 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 	
 	@Override
-	public void insertArticle(ArticleVO board) throws Exception {
-		// TODO Auto-generated method stub
-		articleDAO.insertArticle(board);
+	public int insertArticle(ArticleVO board) throws Exception {
+		return  articleDAO.insertArticle(board);
 	}
 
 	@Override

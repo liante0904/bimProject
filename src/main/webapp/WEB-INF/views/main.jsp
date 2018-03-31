@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
- 
 <%@ include file="/WEB-INF/include/mainHeader.jsp" %>
+<script src="/resources/bootstrap/js/bootstrap.js"></script>	<!-- Bootstrap core js(TODO locate footer) -->
 <title>Insert title here</title>
 </head>
 <body>

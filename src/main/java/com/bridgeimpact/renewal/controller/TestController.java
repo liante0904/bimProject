@@ -50,6 +50,8 @@ public class TestController {
 
 	@RequestMapping(value="/page")
 	public String writeForm(Model model, HttpServletRequest request){
+        String os = System.getProperty("os.name");
+        System.out.println("Using System Property: " + os);
 		return "/test/writeForm";
 	}
 

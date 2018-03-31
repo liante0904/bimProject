@@ -3,7 +3,6 @@ package com.bridgeimpact.renewal.dao;
 import java.util.HashMap;
 import java.util.List;
 
-import com.bridgeimpact.renewal.common.PageUtil;
 import com.bridgeimpact.renewal.dto.ArticleVO;
 
 public interface ArticleDAO {
@@ -14,7 +13,7 @@ public interface ArticleDAO {
 	
 	public List<ArticleVO> selectArticleByBoardName(String id) throws Exception;
 	
-	public void insertArticle(ArticleVO board) throws Exception;
+	public int insertArticle(ArticleVO board) throws Exception;
 
 	public void updateArticle(ArticleVO board) throws Exception;
 

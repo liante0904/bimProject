@@ -9,7 +9,8 @@
 <link rel="icon" href="/resources/favicon.ico">
 <link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.css">    <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="/resources/bootstrap/css/carousel.css">    <!-- Custom styles for this template -->
-<script type="text/javascript" src="/resources/bootstrap/js/bootstrap.js"></script>	<!-- Bootstrap core js(TODO locate footer) -->
+<link rel="stylesheet" href="/resources/bootstrap/js/bootstrap.js">	<!-- Bootstrap core js(TODO locate footer) -->
+<script src="/resources/bootstrap/js/bootstrap.js"></script>	<!-- Bootstrap core js(TODO locate footer) -->
 <script type="text/javascript">
 var localhost = '${pageContext.request.contextPath }';
 
@@ -54,9 +55,10 @@ $(function(){
 </script>
 
 <body>
-<div class="navbar-wrapper" style="height: 100px;">
+
 		<div class="container">
-			<nav class="navbar navbar-inverse navbar-static-top">
+<!-- 				<nav class="navbar navbar-inverse navbar-static-top"> -->
+				<nav class="container navbar navbar-absolute-top navbar-dark hidden-md-down">
 				<div class="container">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -118,9 +120,7 @@ $(function(){
 
 
 
-	</div>
 
-<div id="dataArea"></div>
 
 
 </body>

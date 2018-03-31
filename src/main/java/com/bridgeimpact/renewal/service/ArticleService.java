@@ -3,7 +3,6 @@ package com.bridgeimpact.renewal.service;
 import java.util.HashMap;
 import java.util.List;
 
-import com.bridgeimpact.renewal.common.PageUtil;
 import com.bridgeimpact.renewal.dto.ArticleVO;
 
 public interface ArticleService {
@@ -16,7 +15,7 @@ public interface ArticleService {
 
     public List<ArticleVO> selectArticleByBoardName(String id) throws Exception;
 
-    public void insertArticle(ArticleVO board) throws Exception;
+    public int insertArticle(ArticleVO board) throws Exception;
 
 	public void editArticle(ArticleVO board)throws Exception;
 
