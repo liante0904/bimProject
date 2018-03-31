@@ -27,9 +27,9 @@ $(function(){
 </script>
 </head>
 <body>
-    <h1>boardList.jsp</h1>
  
  <div class="container">
+   <h1>boardList.jsp</h1>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -60,7 +60,7 @@ $(function(){
         </tbody>
     </table>		
 </div>
- <input type="button" id="write" class="pull-right" value="글쓰기"/>
+ <input type="button" id="write" class="btn btn-primary pull-right" value="글쓰기"/>
  
 <%@ include file="/WEB-INF/views/common/pageUtil.jsp" %>
 <%@ include file="/WEB-INF/views/board/searchForm.jsp" %>

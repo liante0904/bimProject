@@ -89,21 +89,20 @@ $(function(){
 
   <div>
     <pre>
-아이디 :  <input type="text" id="id" name="id"> 중복 체크 결과: <span id="result">아이디를 입력해주세요.</span> <!--  <input type="button" id="idChk" value="중복체크" >  -->
-패스워드 <input type="password" name="password" >
-이름 <input type="text" name="name" >
-E - MAIL<input type="text" name="email">
-휴대전화 <input type="text" name="phone" />
-주소 <input type="text" name="address" />
-출석교회 <input type="text" name="church" />
- 
+아이디 :  <span id="result">아이디를 입력해주세요.</span> <input type="text" id="id" name="id" class="form-control"> 중복 체크 결과: <span id="result">아이디를 입력해주세요.</span> <!--  <input type="button" id="idChk" value="중복체크" >  -->
+패스워드 <input type="password" name="password"  class="form-control">
+이름 <input type="text" name="name"  class="form-control">
+E - MAIL<input type="text" name="email" class="form-control">
+휴대전화 <input type="text" name="phone"  class="form-control"/>
+주소 <input type="text" name="address"  class="form-control"/>
+출석교회 <input type="text" name="church"  class="form-control"/>
 
     </pre>
   </div>
 
    <div>
-   <input type="button" value="취소" onclick="javascript:window.close()" style="align:center">
-   <input type="button" value="가입" id="join" />
+   <input type="button" value="취소" onclick="javascript:window.close()" style="align:center"  class="btn btn-lg btn-primary btn-block"/>
+   <input type="button" value="가입" id="join"  class="btn btn-lg btn-primary btn-block"/>
 
   </div>
  </form>

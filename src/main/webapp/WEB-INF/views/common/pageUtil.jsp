@@ -18,14 +18,14 @@
 				<c:if
 					test="${pageUtil.currentPage +1 ne 1 and pageUtil.totalPageCnt > 10}">
 					<li><a
-						href="${pageContext.request.contextPath } ${requestURI}?id=${param.id }&page=${status.current }<c:if test="${!empty param.searchKeyword  || param.searchKeyword ne null }">&searchType=${param.searchType }&searchKeyword=${param.searchKeyword }</c:if>">처음</a></li>
+						href="../${requestURI}?id=${param.id }&page=${status.current }<c:if test="${!empty param.searchKeyword  || param.searchKeyword ne null }">&searchType=${param.searchType }&searchKeyword=${param.searchKeyword }</c:if>">처음</a></li>
 				</c:if>
 
 
 				<!-- 이전 버튼  (첫페이지가 아닐때)-->
 				<c:if test="${ pageUtil.currentPage +1 ne 1}">
 					<li><a
-						href="${pageContext.request.contextPath } ${requestURI}?id=${param.id }&page=${pageUtil.pageRangeCnt  }<c:if test="${!empty param.searchKeyword  || param.searchKeyword ne null }">&searchType=${param.searchType }&searchKeyword=${param.searchKeyword }</c:if>"
+						href="../${requestURI}?id=${param.id }&page=${pageUtil.pageRangeCnt  }<c:if test="${!empty param.searchKeyword  || param.searchKeyword ne null }">&searchType=${param.searchType }&searchKeyword=${param.searchKeyword }</c:if>"
 						aria-label="Previous"><span aria-hidden="true">이전</span></a></li>
 				</c:if>
 
@@ -44,7 +44,7 @@
 						<c:when
 							test="${status.current ne pageUtil.currentPage +1  and status.current <= pageUtil.totalPageCnt }">
 							<li><a
-								href="${pageContext.request.contextPath } ${requestURI}?id=${param.id }&page=${status.current }<c:if test="${!empty param.searchKeyword  || param.searchKeyword ne null }">&searchType=${param.searchType }&searchKeyword=${param.searchKeyword }</c:if>">${status.current }</a></li>
+								href="../${requestURI}?id=${param.id }&page=${status.current }<c:if test="${!empty param.searchKeyword  || param.searchKeyword ne null }">&searchType=${param.searchType }&searchKeyword=${param.searchKeyword }</c:if>">${status.current }</a></li>
 						</c:when>
 
 					</c:choose>
@@ -59,7 +59,7 @@
 						integerOnly="true" />
 					<c:if test="${var1 ne var2}">
 						<li><a
-							href="${pageContext.request.contextPath } ${requestURI}?id=${param.id }&page=${pageUtil.pageRangeCnt + 1 + 10 }<c:if test="${!empty param.searchKeyword  || param.searchKeyword ne null }">&searchType=${param.searchType }&searchKeyword=${param.searchKeyword }</c:if>"
+							href="../${requestURI}?id=${param.id }&page=${pageUtil.pageRangeCnt + 1 + 10 }<c:if test="${!empty param.searchKeyword  || param.searchKeyword ne null }">&searchType=${param.searchType }&searchKeyword=${param.searchKeyword }</c:if>"
 							aria-label="Next"><span aria-hidden="true">다음</span></a></li>
 					</c:if>
 				</c:if>
@@ -67,7 +67,7 @@
 				<c:if
 					test="${pageUtil.totalPageCnt > 10 and pageUtil.totalPageCnt  ne pageUtil.currentPage +1}">
 					<li><a
-						href="${pageContext.request.contextPath } ${requestURI}?id=${param.id }&page=${pageUtil.totalPageCnt }<c:if test="${!empty param.searchKeyword  || param.searchKeyword ne null }">&searchType=${param.searchType }&searchKeyword=${param.searchKeyword }</c:if>">끝</a></li>
+						href="../${requestURI}?id=${param.id }&page=${pageUtil.totalPageCnt }<c:if test="${!empty param.searchKeyword  || param.searchKeyword ne null }">&searchType=${param.searchType }&searchKeyword=${param.searchKeyword }</c:if>">끝</a></li>
 				</c:if>
 			</ul>
 		</div>

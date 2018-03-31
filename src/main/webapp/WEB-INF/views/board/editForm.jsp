@@ -69,8 +69,8 @@ $(function(){
                 </tr>
             </tbody>
         </table>
- <input type="button" id="edit" value="수정"/>
- <input type="button" value="목록"/>
+ <input type="button" id="edit" value="수정" class="btn btn-primary"/>
+ <input type="button" value="목록" class="btn btn-primary"/>
  
     </form>
 

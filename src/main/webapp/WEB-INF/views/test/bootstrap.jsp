@@ -120,13 +120,13 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-      <img src="${pageContext.request.contextPath }/resources/img/1.png" alt="...">
+      <img src="../resources/img/1.png" alt="...">
       <div class="carousel-caption">
         ...
       </div>
     </div>
     <div class="item">
-      <img src="${pageContext.request.contextPath }/resources/img/1.png" alt="...">
+      <img src="../resources/img/1.png" alt="...">
       <div class="carousel-caption">
         ...
       </div>

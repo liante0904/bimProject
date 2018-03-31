@@ -147,15 +147,15 @@ $(document).ready(function() {
 			<c:set var="sessionId" value="${sessionScope.loginInfo.id}" />
 			
 			<c:if test="${writeCommentId == sessionId}">
-			   <input type="button" id="editCommentInit" value="댓글수정" onclick="editCommentInit(${comment.idx})" data-idx="${comment.idx}">
-			   <input type="button" id="deleteComment" value="댓글삭제" onclick="deleteComment(${comment.idx})">
+			   <input type="button" id="editCommentInit" value="댓글수정" onclick="editCommentInit(${comment.idx})" data-idx="${comment.idx}" class="btn btn-primary">
+			   <input type="button" id="deleteComment" value="댓글삭제" onclick="deleteComment(${comment.idx})" class="btn btn-primary">
 			    
 			</c:if>
 		</p>
 			<div id="editDiv"  data-idx="${comment.idx}" style="display:none; margin: 50px 1px 50px 1px">
 				<p>
-			<input type="text" size="40" id="editCommentContents" value="${comment.contents}" data-idx="${comment.idx}" placeholder="댓글을 수정하세요"> 
-			<input type="button" onclick="editComment(${comment.idx})" value="댓글수정">
+			<input type="text" size="40" id="editCommentContents" value="${comment.contents}" data-idx="${comment.idx}" placeholder="댓글을 수정하세요" class="form-control"> 
+			<input type="button" onclick="editComment(${comment.idx})" value="댓글수정" class="btn btn-primary">
 				</p>
 			</div> 
 	</c:forEach>
@@ -165,8 +165,8 @@ $(document).ready(function() {
 				<tbody>
 					<tr>
 						<th>댓글 내용</th>
-						<td colspan="5" width="250" height="50"><input type="text" size="40" id="writeCommentContents" placeholder="댓글을 입력하세요"></td>
-						<td><input type="button" id="writeComment" value="댓글작성"></td>
+						<td colspan="5" width="250" height="50"><input type="text" size="40" id="writeCommentContents" placeholder="댓글을 입력하세요" class="form-control"></td>
+						<td><input type="button" id="writeComment" value="댓글작성" class="btn btn-primary"></td>
 					</tr>
 				</tbody>
 			</table>

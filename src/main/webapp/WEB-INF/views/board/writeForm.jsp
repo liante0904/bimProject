@@ -43,7 +43,7 @@ $(function(){
 	});
 
 	
-	$("#list").click(function() {
+	$("#writelist").click(function() {
 		if (confirm("정말로 글쓰기를 취소 하시겠습니까?")) {
      		location.href=  "${pageContext.request.contextPath }/board/viewList.bim?id="+paramIdValue;
 		}
@@ -61,30 +61,30 @@ $(function(){
             <tbody>
                 <tr>
                     <th>제목</th>
-                    <td><input type="text" id="title" name="title" class="wdp_90" size="98"/></td>
+                    <td><input type="text" id="title" name="title"  class="form-control"/></td>
                 </tr>
                 
                 <tr>
 					<th>내용</th>                   
-                       <td> <textarea rows="20" cols="100"  id="contents" name="contents"></textarea></td>
+                       <td> <textarea rows="20" cols="100"  id="contents" name="contents" class="form-control"></textarea></td>
                 </tr>
                 <tr>
                 <th rowspan="5">첨부파일</th>
-                <td><input type="file" name="files1"></td>
+                <td><input type="file" name="files1" class="form-control"></td>
                 </tr>
                 <tr>
-                		<td><input type="file" name="files2"></td>
+                		<td><input type="file" name="files2" class="form-control"></td>
                 </tr>
                 <tr>
-                		<td><input type="file" name="files3"></td>
+                		<td><input type="file" name="files3" class="form-control"></td>
                 </tr>
                 <tr>
-                		<td><input type="file" name="files4"></td>
+                		<td><input type="file" name="files4" class="form-control"></td>
                 </tr>
             </tbody>
         </table>
- <input type="button" id="write" value="글쓰기"/>
- <input type="button" id="list" value="목록"/>
+ <input type="button" id="write" value="글쓰기"  class="btn btn-lg btn-primary btn-block"/>
+ <input type="button" id="writelist" value="목록"  class="btn btn-lg btn-primary btn-block"/>
  <input type="hidden" id="boardName" name="boardName" value="${param.id }"/>
  
     </form>

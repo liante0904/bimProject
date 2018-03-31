@@ -3,19 +3,24 @@
 <%@ include file="/WEB-INF/include/common.jsp" %>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no,maximum-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="icon" href="/resources/favicon.ico">
-<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.css">    <!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="/resources/bootstrap/css/carousel.css">    <!-- Custom styles for this template -->
-<link rel="stylesheet" href="/resources/bootstrap/js/bootstrap.js">	<!-- Bootstrap core js(TODO locate footer) -->
-<script src="/resources/bootstrap/js/bootstrap.js"></script>	<!-- Bootstrap core js(TODO locate footer) -->
+<link rel="icon" href="${pageContext.request.contextPath}/resources/favicon.ico">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.css">    <!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bootstrap/css/carousel.css">    <!-- Custom styles for this template -->
+<script src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.js"></script>	<!-- Bootstrap core js(TODO locate footer) -->
 <script type="text/javascript">
 var localhost = '${pageContext.request.contextPath }';
 
 $(document).ready(function(){
-/* 
+	/* 
+	var idParam = $('#' + getParameters('id')).parent();
+	if (idParam) {
+		idParam.attr('class', 'active');
+	}
+	 */
+	/* 
 	getMenuInfo();
 	
 	function getMenuInfo() {
@@ -50,31 +55,32 @@ $(function(){
 
 		});
 	});
+
 	
 });
 </script>
 
 <body>
-
+<div class="navbar-wrapper">
 		<div class="container">
-<!-- 				<nav class="navbar navbar-inverse navbar-static-top"> -->
-				<nav class="container navbar navbar-absolute-top navbar-dark hidden-md-down">
-				<div class="container">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-			                <span class="sr-only">Toggle navigation</span>
-			                <span class="icon-bar"></span>
-			                <span class="icon-bar"></span>
-			                <span class="icon-bar"></span>
-						</button>
-            				<a class="navbar-brand" href="../">Project name</a>	
+ 				<nav class="navbar navbar-fixed-top navbar-inverse">
+<!-- 				<nav class="container navbar navbar-absolute-top navbar-dark hidden-md-down"> -->
+						<div class="container">
+							<div class="navbar-header">
+								<button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					                <span class="sr-only">Toggle navigation</span>
+					                <span class="icon-bar"></span>
+					                <span class="icon-bar"></span>
+					                <span class="icon-bar"></span>
+								</button>
+            				<a class="navbar-brand" href="${pageContext.request.contextPath}/">Bridge impact</a>	
 					</div>
 						<div id="navbar" class="navbar-collapse collapse">
 							<ul id="board" class="nav navbar-nav">
 		
 								<c:forEach items="${boardList}" var="board">
-									<li><a
-										href="${pageContext.request.contextPath }/board/viewList.bim?id=${board.id}">${board.name}</a></li>
+									<li class="<c:if test='${param.id eq board.id }'>active</c:if>"><a
+										href="${pageContext.request.contextPath }/board/viewList.bim?id=${board.id}" id="${board.id}">${board.name}</a></li>
 		
 								</c:forEach>
 		
@@ -89,7 +95,7 @@ $(function(){
 		
 								<c:if test="${not empty sessionScope.loginInfo.id }">
 									<!-- sessionScopre.id가 있으면(로그인 성공시) -->
-									<li><a href="#"> ${sessionScope.loginInfo.name } 님</a></li>
+									<li class="active"><a href="../member/editForm.bim"> ${sessionScope.loginInfo.name } 님</a></li>
 									<li><a href="#" id="logout">로그아웃</a></li>
 								</c:if>
 		
@@ -110,14 +116,12 @@ $(function(){
 				                    <li><a href="#">One more separated link</a></li>
 				                  </ul>
 				                </li>
-	
 						</ul>
 					</div>
 				</div>
-			</nav>
-		</div>
-
-
+			</nav>	<!-- navbar navbar-inverse navbar-static-top -->
+		</div>	<!-- container -->
+</div>	<!-- navbar-wrapper -->
 
 
 

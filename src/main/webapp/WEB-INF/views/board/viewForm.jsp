@@ -89,10 +89,10 @@ $(function(){
 
 			</table>
 		<c:if test="${sessionScope.loginInfo.id == article.writeId}">
-		<input type="button" id="edit" value="수정" />
-		<input type="button" id="delete" value="삭제" />
+		<input type="button" id="edit" value="수정" class="btn btn-primary"/>
+		<input type="button" id="delete" value="삭제" class="btn btn-primary"/>
 		</c:if>
-		<input type="button" id="list" value="목록" />
+		<input type="button" id="list" value="목록" class="btn btn-primary"/>
 		</div>
 			</form>
 

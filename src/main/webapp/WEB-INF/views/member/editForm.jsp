@@ -16,12 +16,12 @@
 
 $(document).ready(function(){ 
 
-/* 	
+
 	$("#edit").click(function() {
 		location.href="${pageContext.request.contextPath }/member/editSubmit.bim";
 	})
 	
-	 */
+	 
 	$("#delete").click(function() {
 		location.href="${pageContext.request.contextPath }/member/deleteSubmit.bim";
 	})
@@ -45,27 +45,21 @@ $(document).ready(function(){
 
   <div>
     <pre>
-아이디 :  <input type="text" name="id" readonly="readonly" value="${sessionScope.loginInfo.id}"> 
-패스워드 <input type="password" name="password" value="">
-이름 <input type="text" name="name" readonly="readonly" value="${sessionScope.loginInfo.name}">
-E - MAIL<input type="text" name="email" value="${sessionScope.loginInfo.email}">
-휴대전화 <input type="text" name="phone" value="${sessionScope.loginInfo.phone}"/>
-주소 <input type="text" name="address" value="${sessionScope.loginInfo.address}" />
-출석교회 <input type="text" name="church" value="${sessionScope.loginInfo.church}"/>
+아이디 :  <input type="text" name="id" readonly="readonly" value="${sessionScope.loginInfo.id}" class="form-control"> 
+패스워드 <input type="password" name="password" value="" class="form-control">
+이름 <input type="text" name="name" readonly="readonly" value="${sessionScope.loginInfo.name}" class="form-control">
+E - MAIL<input type="text" name="email" value="${sessionScope.loginInfo.email}" class="form-control">
+휴대전화 <input type="text" name="phone" value="${sessionScope.loginInfo.phone}" class="form-control"/>
+주소 <input type="text" name="address" value="${sessionScope.loginInfo.address}" class="form-control"/>
+출석교회 <input type="text" name="church" value="${sessionScope.loginInfo.church}" class="form-control"/>
  
-
     </pre>
   </div>
 
    <div>
-   <input type="button" value="취소" onclick="javascript:window.close()" style="align:center">
-   <input type="submit" value="수정" id="edit" />
-
-  </div>
-  
-     <div>
-   <input type="button" value="탈퇴" id="delete" />
-
+	   <input type="button" value="취소" onclick="javascript:window.close()" style="align:center" class="btn btn-lg btn-primary btn-block"/>
+	   <input type="button" value="수정" id="edit" class="btn btn-lg btn-primary btn-block"/>
+	   <input type="button" value="탈퇴" id="delete" class="btn btn-lg btn-primary btn-block"/>
   </div>
  </form>
  
