@@ -1,4 +1,5 @@
 package com.bridgeimpact.renewal.controller;
+import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bridgeimpact.renewal.dto.BoardVO;
+import com.bridgeimpact.renewal.dto.FileVO;
 import com.bridgeimpact.renewal.dto.MemberVO;
 import com.bridgeimpact.renewal.service.BoardService;
+import com.bridgeimpact.renewal.service.FileService;
 import com.bridgeimpact.renewal.service.MemberService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,6 +40,8 @@ public class MainController {
 	@Autowired
 	private BoardService boardService;
 
+	@Autowired
+	private FileService fileService;
     
     /**
      * Simply selects the home view to render by returning its name.
@@ -132,6 +137,36 @@ public class MainController {
 		logger.info(url);
 		return url;
 	}
+	
+
+	@RequestMapping(value = "/download.bim")
+	public ModelAndView download(HttpServletRequest request,HttpServletResponse response, int num) throws Exception {
+		FileVO fileVO = null;
+		try {
+			 fileVO = fileService.selectFileByIndex(num);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		
+//		String vanillaPath = "C:\\upload\\";
+//		vanillaPath += "4e624c22518285.gif";
+		
+		
+		String serverPath = request.getSession().getServletContext().getRealPath("/");
+		serverPath += fileVO.getOriginalFileName();
+		logger.info("callDownload : " + serverPath);
+
+		System.out.println(serverPath);
+		File downloadFile = new File(serverPath);
+
+		if (!downloadFile.canRead()) {
+			throw new Exception("File can't read(파일을 찾을 수 없습니다)");
+		}
+		return new ModelAndView("downloadView", "downloadFile", downloadFile);
+		// 첫번째 인자 : beanName(id), 두번쨰 인자 :  File Object,
+	}
+
 	
 	
 	/***

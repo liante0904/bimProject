@@ -88,6 +88,12 @@ $(function(){
 				</tbody>
 
 			</table>
+			
+				<c:forEach items="${fileList}" var="file">
+				<div id="fileList"><span>첨부파일 : </span>
+					<a href="../download.bim?num=${file.idx }">${file.originalFileName }</a>				
+				</div>
+				</c:forEach>
 		<c:if test="${sessionScope.loginInfo.id == article.writeId}">
 		<input type="button" id="edit" value="수정" class="btn btn-primary"/>
 		<input type="button" id="delete" value="삭제" class="btn btn-primary"/>

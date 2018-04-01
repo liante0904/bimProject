@@ -2,6 +2,7 @@ package com.bridgeimpact.renewal.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -49,7 +50,8 @@ public class FileServiceImpl implements FileService {
 			fileVO.setFileSize((int)mFile.getSize());
 			fileVO.setArticleIdx(article.getIdx());
 			fileVO.setCreaId(article.getWriteId());
-			
+
+
 			File file = new File(path + mFile.getOriginalFilename());
 			
 			if (mFile.getSize() != 0) // File Null Check
@@ -77,11 +79,11 @@ public class FileServiceImpl implements FileService {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				fileDAO.insertFile(fileVO);
 			}
 			}
 		}
 			
-		fileDAO.insertFile(fileVO);
 	}
 
 	@Override
@@ -94,6 +96,18 @@ public class FileServiceImpl implements FileService {
 	public void deleteFile(FileVO file) throws Exception {
 		// TODO Auto-generated method stub
 		fileDAO.deleteFile(file);
+	}
+
+	@Override
+	public List<FileVO> selectAllFileByIndex(int num) throws Exception {
+		// TODO Auto-generated method stub
+		return fileDAO.selectAllFileByIndex(num);
+	}
+
+	@Override
+	public FileVO selectFileByIndex(int num) throws Exception {
+		// TODO Auto-generated method stub
+		return fileDAO.selectFileByIndex(num);
 	}
 
 }

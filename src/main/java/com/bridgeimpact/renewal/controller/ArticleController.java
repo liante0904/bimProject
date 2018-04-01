@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bridgeimpact.renewal.common.PageUtil;
 import com.bridgeimpact.renewal.dto.ArticleVO;
 import com.bridgeimpact.renewal.dto.CommentVO;
+import com.bridgeimpact.renewal.dto.FileVO;
 import com.bridgeimpact.renewal.dto.MemberVO;
 import com.bridgeimpact.renewal.service.ArticleService;
 import com.bridgeimpact.renewal.service.BoardService;
@@ -84,6 +85,8 @@ public class ArticleController {
 	public ModelAndView boardView(String id,int num,Model model,HttpSession session){
 		
 		List<CommentVO> commentList = null;
+		List<FileVO> fileList = null;
+
 		ArticleVO article = null;
 		/***
 		 * 글번호(idx)의 글 조회하여
@@ -127,8 +130,22 @@ public class ArticleController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
+		/***
+		 * 게시글의 첨부 파일 가져오기 
+		 */
+		
+			try {
+				fileList = fileService.selectAllFileByIndex(num);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("컨트롤러:"+fileList);
 		model.addAttribute("article" , article);
 		model.addAttribute("commentList" , commentList);
+		model.addAttribute("fileList" , fileList);
 		session.setAttribute("articleInfo", article);
 
 		return new ModelAndView("/board/viewForm");

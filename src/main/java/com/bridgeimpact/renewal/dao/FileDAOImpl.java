@@ -1,5 +1,7 @@
 package com.bridgeimpact.renewal.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -32,6 +34,18 @@ public class FileDAOImpl implements FileDAO{
 	public void deleteFile(FileVO file) throws Exception {
 		// TODO Auto-generated method stub
 		sqlSession.delete(Namespace+".deleteFile", file);
+	}
+
+	@Override
+	public List<FileVO> selectAllFileByIndex(int num) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(Namespace+".selectAllFileByIndex", num);
+	}
+
+	@Override
+	public FileVO selectFileByIndex(int num) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(Namespace+".selectFileByIndex", num);
 	}
 
 }

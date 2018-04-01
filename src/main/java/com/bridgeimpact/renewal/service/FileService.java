@@ -1,5 +1,7 @@
 package com.bridgeimpact.renewal.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.bridgeimpact.renewal.dto.ArticleVO;
@@ -12,5 +14,9 @@ public interface FileService {
 	public void editFile(FileVO file) throws Exception;
 
 	public void deleteFile(FileVO file) throws Exception;
+
+	public List<FileVO> selectAllFileByIndex(int num) throws Exception;
+
+	public FileVO selectFileByIndex(int num) throws Exception;
 
 }

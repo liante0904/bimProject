@@ -54,7 +54,7 @@
     ]]>
 	</insert>
 	
-     
+     <!-- 
      
     <select id="selectAllBoard" parameterType="String" resultType="boardVO">
 	<![CDATA[
@@ -117,27 +117,41 @@
 		]]>
 	</update>
 	
-<!-- 
 
-    
-        <select id="selectArticleByIndex" parameterType="int" resultType="articleVO">
+
+     -->
+     
+        <select id="selectAllFileByIndex" parameterType="int" resultType="fileVO">
 	<![CDATA[
 	
-	
-		SELECT   
-		IDX  ,   
-		PARENT_IDX  ,   
-		TITLE  ,   
-		CONTENTS  ,   
-		HIT_CNT  ,   
-		DEL_GB  ,   
-		DATE_FORMAT(WRITE_DT, "%Y-%m-%d %H:%i:%s") AS 'WRITE_DT'   ,   
-		WRITE_ID   
-		FROM   BIM_ARTICLE_TB   
-		WHERE IDX = #{index}		
+		SELECT
+		IDX   ,
+		ARTICLE_IDX  ,   
+		ORIGINAL_FILE_NAME  ,   
+		STORED_FILE_NAME  ,   
+		FILE_SIZE  ,   
+		DEL_GB 
+		FROM   BIM_FILE_TB   
+		WHERE ARTICLE_IDX = #{value}		
     ]]>
     </select>
+    
+        <select id="selectFileByIndex" parameterType="int" resultType="fileVO">
+	<![CDATA[
 	
+		SELECT
+		IDX   ,
+		ARTICLE_IDX  ,   
+		ORIGINAL_FILE_NAME  ,   
+		STORED_FILE_NAME  ,   
+		FILE_SIZE  ,   
+		DEL_GB  
+		FROM   BIM_FILE_TB   
+		WHERE IDX = #{value}	 
+    ]]>
+		
+    </select>
+	<!-- 
 	  	<update id="updateArticle" parameterType="articleVO">
    		<![CDATA[
    		
