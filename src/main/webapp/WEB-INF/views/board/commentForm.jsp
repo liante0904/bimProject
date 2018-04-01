@@ -4,8 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@ include file="/WEB-INF/include/common.jsp" %>
-<title>Insert title here</title>
+<%@ include file="/WEB-INF/include/include.jsp" %>
 <script type="text/javascript">
 $(document).ready(function() {
 
@@ -161,11 +160,11 @@ $(document).ready(function() {
 	</c:forEach>
 
 		<c:if test="${!empty sessionScope.loginInfo}">
-			<table border="2">
+			<table class="table">
 				<tbody>
 					<tr>
 						<th>댓글 내용</th>
-						<td colspan="5" width="250" height="50"><input type="text" size="40" id="writeCommentContents" placeholder="댓글을 입력하세요" class="form-control"></td>
+						<td colspan="5" width="250" height="50"><input type="text" class="form-control" id="writeCommentContents" placeholder="댓글을 입력하세요" class="form-control"></td>
 						<td><input type="button" id="writeComment" value="댓글작성" class="btn btn-primary"></td>
 					</tr>
 				</tbody>

@@ -24,7 +24,44 @@ var localhost = '${pageContext.request.contextPath }';
 	    }
 	};
 	// 파라미터 호출 예시 (id) console.log(getParameters('id'));
-	
+	$(document).ready(function(){
+		var idParam = "?" + "id=" + getParameters('id');
+		$("#list").click(function() {
+			location.href="../board/viewList.bim"+idParam;
+		});
+
+		
+		$("#cancel").click(function() {
+			if (confirm("정말로 취소 하시겠습니까?")) {
+				location.href="../board/viewList.bim"+idParam;
+					
+				}
+		});
+
+		
+		
+		$("#writelist").click(function() {
+			if (confirm("정말로 글쓰기를 취소 하시겠습니까?")) {
+				location.href="../board/viewList.bim"+idParam;
+					
+				}
+		});
+
+/* 		
+		$("#cancel", "#list", "#writelist").on("click", function(e) {
+			var flag = $(this).attr('id');
+			alert(flag);
+			if (flag == cancel || flag == writelist) {
+				if (confirm("정말로 글쓰기를 취소 하시겠습니까?")) {
+					location.href="../board/viewList.bim"+idParam;
+						
+					}
+				
+			}
+			location.href="../board/boardList.bim";
+		});
+		 */
+}); 
 
 	
 
