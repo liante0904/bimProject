@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <%@ include file="/WEB-INF/include/mainHeader.jsp" %>
 <%@ include file="/WEB-INF/include/adminHeader.jsp" %>
-<%@ include file="/WEB-INF/include/common.jsp" %>
+
 <script type="text/javascript">
 $(document).ready(function(){
 
@@ -183,8 +183,8 @@ function deleteBoard(boardId) {
             <c:forEach items="${articleList}" var="article">
                 <tr>
                     <td>${article.idx}</td>
-                    <td>${article.boardName}</td>
-                    <td><a href="${pageContext.request.contextPath }/board/viewArticle.bim?id=${article.boardName}&num=${article.idx}">${article.title}</a></td>
+                    <td>${article.boardId}</td>
+                    <td><a href="${pageContext.request.contextPath }/board/viewArticle.bim?id=${article.boardId}&num=${article.idx}">${article.title}</a></td>
                     <td>${article.writeId}</td>
                     <td>${article.hitCnt}</td>
                     <td>${article.writeDt}</td>

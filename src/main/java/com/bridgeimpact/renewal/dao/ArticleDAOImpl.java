@@ -32,9 +32,9 @@ public class ArticleDAOImpl implements ArticleDAO {
 	}
 
 	@Override
-	public List<ArticleVO> selectArticleByBoardName(String id) throws Exception {
+	public List<ArticleVO> selectArticleByboardId(String id) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(Namespace+".selectArticleByBoardName", id);
+		return sqlSession.selectList(Namespace+".selectArticleByboardId", id);
 	}
 
 	@Override

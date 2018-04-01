@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="/WEB-INF/include/mainHeader.jsp" %>
-<%@ include file="/WEB-INF/include/common.jsp" %>
+
 <title>Home</title>
 <script type="text/javascript">
 
@@ -18,12 +18,6 @@ $(function(){
 	var	 paramTitleValue = $("#title").val();
 	var	 paramContentsValue = $("#contents").val();
 	
-	$("#list").click(function() {
-		if (confirm("정말로 글쓰기를 취소 하시겠습니까?")) {
-		location.href="${pageContext.request.contextPath }/board/boardList.bim";
-			
-		}
-	});
 
 	$("#edit").click(function() {
 		var	 paramIdValue = getParameters('id');
@@ -33,7 +27,7 @@ $(function(){
 		        url : "${pageContext.request.contextPath }/board/editArticleAjax.bim",
 		        type: "post",
 		        data : { 
-		        	"boardName" : paramIdValue,
+		        	"boardId" : paramIdValue,
 		        	"title" : paramTitleValue,
 		        	"contents" : paramContentsValue
 		        },
@@ -70,7 +64,7 @@ $(function(){
             </tbody>
         </table>
  <input type="button" id="edit" value="수정" class="btn btn-primary"/>
- <input type="button" value="목록" class="btn btn-primary"/>
+ <input type="button" id="cancel" value="목록" class="btn btn-primary"/>
  
     </form>
 

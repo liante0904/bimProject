@@ -11,7 +11,7 @@ public interface ArticleDAO {
 	
 	public ArticleVO selectArticleByIndex(int index) throws Exception;
 	
-	public List<ArticleVO> selectArticleByBoardName(String id) throws Exception;
+	public List<ArticleVO> selectArticleByboardId(String id) throws Exception;
 	
 	public int insertArticle(ArticleVO board) throws Exception;
 

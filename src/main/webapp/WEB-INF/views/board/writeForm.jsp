@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="/WEB-INF/include/mainHeader.jsp" %>
-<%@ include file="/WEB-INF/include/common.jsp" %>
 <title>Home</title>
 <script type="text/javascript">
 
@@ -27,7 +26,7 @@ $(function(){
 		        url : "${pageContext.request.contextPath }/board/writeArticle.bim",
 		        type: "post",
 		        data : { 
-		        	"boardName" : paramIdValue,
+		        	"boardId" : paramIdValue,
 		        	"title" : paramTitleValue,
 		        	"contents" : paramContentsValue
 		        },
@@ -42,12 +41,7 @@ $(function(){
 		
 	});
 
-	
-	$("#writelist").click(function() {
-		if (confirm("정말로 글쓰기를 취소 하시겠습니까?")) {
-     		location.href=  "${pageContext.request.contextPath }/board/viewList.bim?id="+paramIdValue;
-		}
-	});
+
 
 });
 
@@ -84,8 +78,8 @@ $(function(){
             </tbody>
         </table>
  <input type="button" id="write" value="글쓰기"  class="btn btn-lg btn-primary btn-block"/>
- <input type="button" id="writelist" value="목록"  class="btn btn-lg btn-primary btn-block"/>
- <input type="hidden" id="boardName" name="boardName" value="${param.id }"/>
+ <input type="button" id="cancel" value="목록"  class="btn btn-lg btn-primary btn-block"/>
+ <input type="hidden" id="boardId" name="boardId" value="${param.id }"/>
  
     </form>
 </div>

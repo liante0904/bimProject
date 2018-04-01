@@ -18,6 +18,7 @@
   
 	    	<resultMap type="articleVO"  id="ArticleResultMap">
 		    	<result property="idx" column="IDX" />
+		    	<result property="boardId" column="BOARD_ID" />
 		    	<result property="boardName" column="BOARD_NAME" />
 			<result property="title" column="TITLE" />
 			<result property="contents" column="CONTENTS" />
@@ -27,13 +28,12 @@
 			<result property="writeId" column="WRITE_ID" />
 			<result property="boardDelGb" column="BOARD_DEL_GB" />
 		</resultMap>
-    
+		
         <resultMap type="pageUtil"  id="PageUtilResultMap">
 	   	 	<result property="currentPage" column="CURRENTPAGE" />
 	    		<result property="displayArticleCnt" column="DISPLAYARTICLECNT" />
 			<result property="totalPageCnt" column="TOTALPAGECNT" />
 		</resultMap>
-    
      
     <select id="selectAllArticle" resultType="articleVO">
 		<![CDATA[
@@ -41,7 +41,7 @@
 	
 		SELECT   
 		IDX  ,   
-		BOARD_NAME  ,   
+		BOARD_ID  ,   
 		TITLE  ,   
 		CONTENTS  ,   
 		HIT_CNT  ,   
@@ -61,7 +61,7 @@
 		SELECT   
 		count(*)    
 		FROM   BIM_ARTICLE_TB   
-		WHERE BOARD_NAME = #{boardName}
+		WHERE BOARD_ID = #{boardId}
 		AND	DEL_GB = 'N'
 		<if test="searchKeyword != null">
 		AND	${searchType}  LIKE CONCAT(#{searchKeyword} ,'%')
@@ -80,7 +80,7 @@
 		FROM   BIM_ARTICLE_TB   
 		WHERE 
 		DEL_GB = 'N'		
-		AND		BOARD_NAME = #{boardName}
+		AND		BOARD_ID = #{boardId}
 		<if test="searchType != null">
 		AND 		#{searchType} LIKE CONCAT('%', #{searchKeyword} ,'%');
 		</if>
@@ -88,54 +88,55 @@
    		 ]]>
     </select>
 
-    
-        <select id="selectArticleByKeyword" parameterType="Map" resultType="articleVO">
+	    
+	<select id="selectArticleByKeyword" parameterType="Map" resultType="articleVO">
 	
-		SELECT   
-		IDX  ,   
-		BOARD_NAME  ,   
-		TITLE  ,   
-		CONTENTS  ,   
-		HIT_CNT  ,   
-		DEL_GB  ,   
-		DATE_FORMAT(WRITE_DT, "%Y-%m-%d ") AS 'WRITE_DT'  ,   
-		WRITE_ID   
-		FROM   BIM_ARTICLE_TB   
-		WHERE BOARD_NAME = #{boardName}
-		AND	DEL_GB = 'N'
-		AND	${searchType}  LIKE CONCAT(#{searchKeyword} ,'%')
-		ORDER BY IDX DESC
-		
-    </select>
-    
-      <select id="selectArticleByIndex" parameterType="int" resultType="articleVO">
-		<![CDATA[
+	SELECT   
+	IDX  ,   
+	BOARD_ID  ,   
+	TITLE  ,   
+	CONTENTS  ,   
+	HIT_CNT  ,   
+	DEL_GB  ,   
+	DATE_FORMAT(WRITE_DT, "%Y-%m-%d ") AS 'WRITE_DT'  ,   
+	WRITE_ID   
+	FROM   BIM_ARTICLE_TB   
+	WHERE BOARD_ID = #{boardId}
+	AND	DEL_GB = 'N'
+	AND	${searchType}  LIKE CONCAT(#{searchKeyword} ,'%')
+	ORDER BY IDX DESC
 	
-		SELECT   
-		article.IDX  ,   
-		article.BOARD_NAME  ,   
-		board.DEL_GB AS 'BOARD_DEL_GB' ,
-		article.TITLE  ,   
-		article.CONTENTS  ,   
-		article.HIT_CNT  ,   
-		article.DEL_GB  ,   
-		article.WRITE_DT,
-		article.WRITE_ID   
-		FROM
-		BIM_BOARD_TB  board,  BIM_ARTICLE_TB article  WHERE  board.id =  article.board_name AND article.idx = #{index};
+	  </select>
+ 
+    <select id="selectArticleByIndex" parameterType="int" resultType="articleVO">
+<![CDATA[
 
-			
-    		]]>
-    </select>
-    
-    
+SELECT   
+article.IDX  ,   
+article.BOARD_ID  ,   
+board.NAME AS 'BOARD_NAME' ,   
+board.DEL_GB AS 'BOARD_DEL_GB' ,
+article.TITLE  ,   
+article.CONTENTS  ,   
+article.HIT_CNT  ,   
+article.DEL_GB  ,   
+article.WRITE_DT,
+article.WRITE_ID   
+FROM
+BIM_BOARD_TB  board,  BIM_ARTICLE_TB article  WHERE  board.id =  article.BOARD_ID AND article.idx = #{index};
+
+	
+  		]]>
+  </select>
+  
+  
         
-       <select id="selectArticleByBoardName" parameterType="String" resultType="articleVO">
+       <select id="selectArticleByboardId" parameterType="String" resultType="articleVO">
 		<![CDATA[
 	
 		SELECT   
 		IDX  ,   
-		BOARD_NAME  ,   
+		BOARD_ID  ,   
 		TITLE  ,   
 		CONTENTS  ,   
 		HIT_CNT  ,   
@@ -143,7 +144,7 @@
 		DATE_FORMAT(WRITE_DT, "%Y-%m-%d %H:%i:%s") AS 'WRITE_DT'   ,   
 		WRITE_ID   
 		FROM   BIM_ARTICLE_TB   
-		WHERE BOARD_NAME = #{id} AND DEL_GB = 'N'
+		WHERE BOARD_ID = #{id} AND DEL_GB = 'N'
 		ORDER BY IDX DESC		
    		 ]]>
     </select>
@@ -153,7 +154,7 @@
 	
 		SELECT   
 		IDX  ,   
-		BOARD_NAME  ,   
+		BOARD_ID  ,   
 		TITLE  ,   
 		CONTENTS  ,   
 		HIT_CNT  ,   
@@ -161,7 +162,7 @@
 		DATE_FORMAT(WRITE_DT, "%Y-%m-%d ") AS 'WRITE_DT'  ,   
 		WRITE_ID   
 		FROM   BIM_ARTICLE_TB   
-		WHERE BOARD_NAME = #{boardName} AND DEL_GB = 'N'
+		WHERE BOARD_ID = #{boardId} AND DEL_GB = 'N'
 		<if test="searchKeyword != null">
 		AND	${searchType}  LIKE CONCAT('%',#{searchKeyword} ,'%')
 		</if>
@@ -178,7 +179,7 @@
 		INSERT INTO BIM_ARTICLE_TB 
 		(
 		IDX  ,   
-		BOARD_NAME  ,   
+		BOARD_ID  ,   
 		TITLE  ,   
 		CONTENTS  ,   
 		HIT_CNT  ,   
@@ -189,7 +190,7 @@
 		VALUES
 		(
 		NULL,
-		#{boardName},
+		#{boardId},
 		#{title},
 		#{contents},
 		0,

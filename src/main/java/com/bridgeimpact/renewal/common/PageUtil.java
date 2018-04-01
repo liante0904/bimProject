@@ -18,7 +18,7 @@ public class PageUtil {
 	private int totalPageCnt;
 	private int startArticleCnt;
 	private int pageRangeCnt;
-	private String boardName;
+	private String boardId;
 	private HashMap<String, Object> paramMap = new HashMap<String, Object>();
 	
 
@@ -60,11 +60,11 @@ public class PageUtil {
 		 * 사용자가 요청한 조건의 게시글을 Map으로 구현
 		 */
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("boardName", request.getParameter("id"));
+		paramMap.put("boardId", request.getParameter("id"));
 		paramMap.put("searchType", request.getParameter("searchType"));
 		paramMap.put("searchKeyword", request.getParameter("searchKeyword"));
 
-		this.setboardName(String.valueOf(paramMap.get("boardName")));
+		this.setboardId(String.valueOf(paramMap.get("boardId")));
 		this.setTotalArticleCnt(articleService,request,paramMap);
 		this.setTotalPageCnt();
 		this.setPageRangeCnt();
@@ -75,7 +75,7 @@ public class PageUtil {
 		System.out.println("현재 페이지(실제 페이지보다 -1) : " + this.getCurrentPage());
 		
 
-		System.out.println(boardName +"게시판 글 수 : " + this.getTotalArticleCnt());
+		System.out.println(boardId +"게시판 글 수 : " + this.getTotalArticleCnt());
 		System.out.println("게시판의 총  페이지 갯 수 : "+ this.getTotalPageCnt());
 
 
@@ -100,13 +100,13 @@ public class PageUtil {
 	}
 
 
-	public String getboardName() {
-		return boardName;
+	public String getboardId() {
+		return boardId;
 	}
 
 
-	public void setboardName(String boardName) {
-		this.boardName = boardName;
+	public void setboardId(String boardId) {
+		this.boardId = boardId;
 	}
 
 

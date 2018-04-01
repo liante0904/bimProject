@@ -163,7 +163,7 @@ public class ArticleController {
 	
 	@RequestMapping(value="/writeArticle.bim")
 	public ModelAndView boardWrite(Model model,ArticleVO article, HttpServletRequest request,HttpSession session,MultipartHttpServletRequest multipartHttpServletRequest){
-		String boardName = article.getBoardName();
+		String boardId = article.getBoardId();
 		Map<String, String> resultMap = new HashMap<String, String>();
 		logger.info("글 제목 : "+ article.getTitle() + "\t 글내용 : " + article.getContents() );
 		String result = "";
@@ -300,7 +300,7 @@ public class ArticleController {
 		}
 
 		*/
-		ModelAndView mav = new ModelAndView("redirect:/board/viewList.bim?id="+boardName);
+		ModelAndView mav = new ModelAndView("redirect:/board/viewList.bim?id="+boardId);
 		return mav;
 	}
 	
@@ -421,13 +421,13 @@ public class ArticleController {
 	    /***
 	     * 사용자의 게시판 검색 파라미터를 설정 합니다.
 	     * 
-	     * @param boardName : 검색 요청 게시판
+	     * @param boardId : 검색 요청 게시판
 	     * @param searchType :검색 요청 타입
 	     * @param searchKeyword : 검색어 
 	     * @return paramMap : HashMap
 	     */
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("boardName", id);
+		paramMap.put("boardId", id);
 		paramMap.put("searchType", searchType);
 		paramMap.put("searchKeyword", searchKeyword);
 		

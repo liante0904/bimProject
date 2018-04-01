@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="/WEB-INF/include/mainHeader.jsp" %>
-<%@ include file="/WEB-INF/include/common.jsp" %>
+
 <title>Home</title>
 <script type="text/javascript">
 
@@ -29,7 +29,7 @@ $(function(){
 <body>
  
  <div class="container">
-   <h1>boardList.jsp</h1>
+   <h1>${article.boardName }</h1>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -47,8 +47,8 @@ $(function(){
             <c:forEach items="${articleList}" var="article" begin="0" end="${pageUtil.displayArticleCnt - 1}">
                 <tr>
                     <td>${article.idx}</td>
-                    <td>${article.boardName}</td>
-                    <td><a href="${pageContext.request.contextPath }/board/viewArticle.bim?id=${article.boardName}&num=${article.idx}">${article.title}</a></td>
+                    <td>${article.boardId}</td>
+                    <td><a href="${pageContext.request.contextPath }/board/viewArticle.bim?id=${article.boardId}&num=${article.idx}">${article.title}</a></td>
                     <td>${article.writeId}</td>
                     <td>${article.hitCnt}</td>
                     <td>${article.writeDt}</td>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%@ include file="/WEB-INF/include/common.jsp" %>
+
 <title>Home</title>
 <script type="text/javascript">
 

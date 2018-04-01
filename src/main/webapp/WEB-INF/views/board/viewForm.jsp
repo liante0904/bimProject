@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="/WEB-INF/include/mainHeader.jsp" %>
-<%@ include file="/WEB-INF/include/common.jsp" %>
 <title>Home</title>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -48,11 +47,7 @@ $(function(){
 		location.href="${pageContext.request.contextPath }/board/deleteArticle.bim"+param;
 	});
 	
-	$("#list").on('click',function() {
-		if (confirm("정말로 글쓰기를 취소 하시겠습니까?")) {
-		location.href="${pageContext.request.contextPath }/board/viewList.bim"+idParam;
-		}
-	});
+
 	
 });
 
@@ -60,25 +55,23 @@ $(function(){
 </script>
 </head>
 <body>
-	<h1>viewForm.jsp</h1>
+<h4>${article.boardName}</h4>
+<h3 id="article_title">${article.title}</h3>
 	<form action="${pageContext.request.contextPath }/board/boardWrite.bim"
 		method="post">
-		<div class="table-responsive">
-			<table class="table" border="2">
-
+		<div class="container">
+			<table class="table">
 				<tbody>
 					<tr>
-						<th width="50" height="50">작성자</th>
-						<th width="50" height="50">${article.writeId}</th>
-						<th width="50" height="50">조회수</th>
-						<th width="50" height="50">${article.hitCnt}</th>
-						<th width="50" height="50">작성일</th>
-						<th height="50">${article.writeDt}</th>
+						<th width="70" height="30">작성자</th>
+						<td colspan="2">${article.writeId}</td>
+						<th width="60" height="30">조회수</th>
+						<th width="50" height="30">${article.hitCnt}</th>
 					</tr>
 
 					<tr>
-						<th>제목</th>
-						<td colspan="5" width="150" height="150">${article.title}</td>
+						<th height="50">작성일</th>
+						<td colspan="5">${article.writeDt}</td>
 					</tr>
 
 					<tr>
@@ -102,8 +95,6 @@ $(function(){
 		</div>
 			</form>
 
-	세션 아이디 : "${sessionScope.loginInfo.id}"
-	작성자 아이디 : "${article.writeId}"
 <div id="commentContent"></div>
 
 </body>

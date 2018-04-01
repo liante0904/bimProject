@@ -34,9 +34,9 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public List<ArticleVO> selectArticleByBoardName(String id) throws Exception {
+	public List<ArticleVO> selectArticleByboardId(String id) throws Exception {
 		// TODO Auto-generated method stub
-		return articleDAO.selectArticleByBoardName(id);
+		return articleDAO.selectArticleByboardId(id);
 	}
 	
 	@Override
@@ -84,7 +84,7 @@ public class ArticleServiceImpl implements ArticleService {
 	public Boolean checkValidateArticleByIdx(int num) throws Exception {
 		// TODO Auto-generated method stub
 		ArticleVO article = articleDAO.selectArticleByIndex(num);
-		String boardDelgb = boardDAO.selectBoardDelgbById(article.getBoardName());
+		String boardDelgb = boardDAO.selectBoardDelgbById(article.getBoardId());
 		if ("Y".equals(article.getDelGb()) || "Y".equals(boardDelgb)) {
 			return false;
 		}

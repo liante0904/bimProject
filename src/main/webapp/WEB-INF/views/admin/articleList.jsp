@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%@ include file="/WEB-INF/include/common.jsp" %>
+
 <%@ include file="/WEB-INF/include/mainHeader.jsp" %>
 <title>Home</title>
 <script type="text/javascript">
@@ -42,7 +42,7 @@ $(document).ready(function(){
             <c:forEach items="${articleList}" var="article">
                 <tr>
                     <td>${article.idx}</td>
-                    <td>${article.boardName}</td>
+                    <td>${article.boardId}</td>
                     <td><a href="${pageContext.request.contextPath }/board/boardView.bim?num=${article.idx}">${article.title}</a></td>
                     <td>${article.writeId}</td>
                     <td>${article.hitCnt}</td>
