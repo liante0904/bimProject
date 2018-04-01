@@ -12,7 +12,7 @@
 $(document).ready(function(){ 
 
 	$("#write").click(function() {
-		location.href="${pageContext.request.contextPath }/board/writeForm.bim";
+		location.href="../board/writeForm.bim";
 	})
 
 	
@@ -43,7 +43,7 @@ $(document).ready(function(){
                 <tr>
                     <td>${article.idx}</td>
                     <td>${article.boardId}</td>
-                    <td><a href="${pageContext.request.contextPath }/board/boardView.bim?num=${article.idx}">${article.title}</a></td>
+                    <td><a href="../board/boardView.bim?num=${article.idx}">${article.title}</a></td>
                     <td>${article.writeId}</td>
                     <td>${article.hitCnt}</td>
                     <td>${article.writeDt}</td>

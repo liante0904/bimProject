@@ -10,8 +10,8 @@
 <body>
 
 <h1> mainForm</h1>
-<a href="${pageContext.request.contextPath }/member/editForm.bim">회원정보 수정,탈퇴</a>
-<a href="${pageContext.request.contextPath }/board/boardList.bim">게시판</a>
+<a href="../member/editForm.bim">회원정보 수정,탈퇴</a>
+<a href="../board/boardList.bim">게시판</a>
 <h2> 로그인 상태 : ${msg}</h2>
 
 

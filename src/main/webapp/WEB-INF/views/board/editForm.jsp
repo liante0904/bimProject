@@ -24,7 +24,7 @@ $(function(){
 		var	 paramTitleValue = $("#title").val();
 		var	 paramContentsValue = $("#contents").val();
 		 $.ajax({
-		        url : "${pageContext.request.contextPath }/board/editArticleAjax.bim",
+		        url : "../board/editArticleAjax.bim",
 		        type: "post",
 		        data : { 
 		        	"boardId" : paramIdValue,
@@ -49,7 +49,7 @@ $(function(){
 </head>
 <body>
     <h1>editForm.jsp</h1>
-     <form action="${pageContext.request.contextPath }/board/editArticle.bim" method="post">
+     <form action="../board/editArticle.bim" method="post">
         <table>
             <tbody>
                 <tr>

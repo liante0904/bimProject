@@ -18,12 +18,12 @@ $(document).ready(function(){
 
 
 	$("#edit").click(function() {
-		location.href="${pageContext.request.contextPath }/member/editSubmit.bim";
+		location.href="../member/editSubmit.bim";
 	})
 	
 	 
 	$("#delete").click(function() {
-		location.href="${pageContext.request.contextPath }/member/deleteSubmit.bim";
+		location.href="../member/deleteSubmit.bim";
 	})
 
 	
@@ -41,7 +41,7 @@ $(document).ready(function(){
 
 
 
- <form action="${pageContext.request.contextPath }/member/editSubmit.bim"  method="POST" >
+ <form action="../member/editSubmit.bim"  method="POST" >
 
   <div>
     <pre>

@@ -23,7 +23,7 @@ $(function(){
 		var paramContentsValue = $("#contents").val();
 		
 		 $.ajax({
-		        url : "${pageContext.request.contextPath }/board/writeArticle.bim",
+		        url : "../board/writeArticle.bim",
 		        type: "post",
 		        data : { 
 		        	"boardId" : paramIdValue,
@@ -32,7 +32,7 @@ $(function(){
 		        },
 		        success : function(data){
 		         if ( data.result == "success") {
-		     		location.href=  "${pageContext.request.contextPath }/board/viewList.bim?id="+paramIdValue;
+		     		location.href=  "../board/viewList.bim?id="+paramIdValue;
 				}
 		        }
 		    });
@@ -50,7 +50,7 @@ $(function(){
 <body>
 <div class="container">
     <h1>writeForm.jsp</h1>
-     <form id="writeForm" action="${pageContext.request.contextPath }/board/writeArticle.bim" method="post" enctype="multipart/form-data">
+     <form id="writeForm" action="../board/writeArticle.bim" method="post" enctype="multipart/form-data">
         <table>
             <tbody>
                 <tr>

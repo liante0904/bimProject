@@ -56,7 +56,7 @@ $(function(){
 	$('#idChk').on('click',function(){
 		
 		 $.ajax({
-		        url : "${pageContext.request.contextPath }/member/memberIdCheck.bim",
+		        url : "../member/memberIdCheck.bim",
 		        type: "get",
 		        data : { "id" : $("#id").val() },
 		        success : function(data){
@@ -85,7 +85,7 @@ $(function(){
 
 
 
- <form action="${pageContext.request.contextPath }/member/joinSubmit.bim"  method="POST">
+ <form action="../member/joinSubmit.bim"  method="POST">
 
   <div>
     <pre>

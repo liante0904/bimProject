@@ -15,7 +15,7 @@ $(document).ready(function(){
 $(function(){
 	
     $("#addBoard").click(function(){
-    	location.href="${pageContext.request.contextPath }/admin/board/addBoard.bim";
+    	location.href="../admin/board/addBoard.bim";
    });
 	
     
@@ -142,7 +142,7 @@ function deleteBoard(boardId) {
                     <td>${board.id}</td>
                     <td><input type="text" value="${board.name}" readonly="readonly" data-name="${board.id}"></td>
                     <td>${board.delGb}</td>
-					<td><a href="${pageContext.request.contextPath }/board/viewList.bim?id=${board.id}">${board.id} </a></td>
+					<td><a href="../board/viewList.bim?id=${board.id}">${board.id} </a></td>
                     <td><input type="button" id="edit" value="편집" onclick="editBoard('${board.id}')"> 
                     <c:set var="delGb" value="${board.delGb}"></c:set>
                     <c:choose>
@@ -184,7 +184,7 @@ function deleteBoard(boardId) {
                 <tr>
                     <td>${article.idx}</td>
                     <td>${article.boardId}</td>
-                    <td><a href="${pageContext.request.contextPath }/board/viewArticle.bim?id=${article.boardId}&num=${article.idx}">${article.title}</a></td>
+                    <td><a href="../board/viewArticle.bim?id=${article.boardId}&num=${article.idx}">${article.title}</a></td>
                     <td>${article.writeId}</td>
                     <td>${article.hitCnt}</td>
                     <td>${article.writeDt}</td>

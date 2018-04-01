@@ -47,7 +47,7 @@ $(function(){
 		var jsonData = JSON.stringify(obj);
 		
 		 $.ajax({
-		        url : "${pageContext.request.contextPath }/board/insertBoardAjax.bim",
+		        url : "../board/insertBoardAjax.bim",
 		        type: "post",
 		        data : { 
 		        	"id" : $("#id").val(),
@@ -80,7 +80,7 @@ $(function(){
 
 
 
- <form action="${pageContext.request.contextPath }/board/insertBoard.bim"  method="POST">
+ <form action="../board/insertBoard.bim"  method="POST">
 
   <div>
     <pre>

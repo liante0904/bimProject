@@ -17,7 +17,7 @@ $(document).ready(function(){
 $(function(){
 	var	 paramIdValue = getParameters('id');
 	$("#write").click(function() {
-		location.href="${pageContext.request.contextPath }/board/writeForm.bim?id="+ paramIdValue;
+		location.href="../board/writeForm.bim?id="+ paramIdValue;
 	});
 	
 });

@@ -15,7 +15,7 @@ function getCommentList(){
 	var data = { num : num };
 		$.ajax({
 	        type : "POST",
-	        url : "${pageContext.request.contextPath }/comment/getCommentList.bim",
+	        url : "../comment/getCommentList.bim",
 	        data : data,
 	        dataType : "html",
 	        success : function(data){
@@ -36,15 +36,15 @@ $(function(){
 		var sessionId = "${sessionScope.loginInfo.id}";
 		var writerId =  "${article.writeId}";
 	    if (sessionId == writerId) {
-	    	location.href="${pageContext.request.contextPath }/board/editForm.bim"+param;
+	    	location.href="../board/editForm.bim"+param;
 	    }else{
 	    	alert("잘못된 접근 입니다.");
-	    	location.href="${pageContext.request.contextPath }/board/viewArticle.bim"+param;
+	    	location.href="../board/viewArticle.bim"+param;
 	    }
 	});
 	$("#delete").on('click',function() {
 		if (confirm("정말로 게시물을 삭제 하시겠습니까?")) 
-		location.href="${pageContext.request.contextPath }/board/deleteArticle.bim"+param;
+		location.href="../board/deleteArticle.bim"+param;
 	});
 	
 
@@ -57,7 +57,7 @@ $(function(){
 <body>
 <h4>${article.boardName}</h4>
 <h3 id="article_title">${article.title}</h3>
-	<form action="${pageContext.request.contextPath }/board/boardWrite.bim"
+	<form action="../board/boardWrite.bim"
 		method="post">
 		<div class="container">
 			<table class="table">

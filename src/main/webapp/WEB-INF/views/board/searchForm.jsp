@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/include/include.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +15,7 @@ $(document).ready(function(){
 </head>
 <body>
 ${param.searchType }
-<form action="/board/search.bim" method="get">
+<form action="../board/search.bim" method="get">
 <input type="hidden" id="id" name="id"> 
 검색 : 
 <select name="searchType" id="searchType">

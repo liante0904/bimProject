@@ -15,7 +15,7 @@ $(document).ready(function() {
 	
 	$("#writeComment").on('click',function() {
 		 $.ajax({
-		        url : "${pageContext.request.contextPath }/comment/writeCommentAjax.bim",
+		        url : "../comment/writeCommentAjax.bim",
 		        type: "POST",
 		        data: 
 		        		{ 
@@ -44,7 +44,7 @@ $(document).ready(function() {
 		var data = { num : num };
 			$.ajax({
 		        type : "POST",
-		        url : "${pageContext.request.contextPath }/comment/getCommentList.bim",
+		        url : "../comment/getCommentList.bim",
 		        data : data,
 		        dataType : "html",
 		        success : function(data){
@@ -72,7 +72,7 @@ $(document).ready(function() {
 	function editComment(idx){
 		
 		 $.ajax({
-		        url : "${pageContext.request.contextPath }/comment/editCommentAjax.bim",
+		        url : "../comment/editCommentAjax.bim",
 		        type: "post",
 		        data: { 
 		        		"idx" : idx, 
@@ -108,7 +108,7 @@ $(document).ready(function() {
 	};
 	function deleteComment(idx){
 		 $.ajax({
-		        url : "${pageContext.request.contextPath }/comment/deleteCommentAjax.bim",
+		        url : "../comment/deleteCommentAjax.bim",
 		        type: "post",
 		        data: { 
 		        		"idx" : idx,

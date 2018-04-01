@@ -18,7 +18,7 @@ $(document).ready(function(){
 $(function(){
 	var	 paramIdValue = getParameters('id');
 	$("#write").click(function() {
-		location.href="${pageContext.request.contextPath }/board/writeForm.bim?id="+ paramIdValue;
+		location.href="../board/writeForm.bim?id="+ paramIdValue;
 	});
 	
 });
@@ -48,7 +48,7 @@ $(function(){
                 <tr>
                     <td>${article.idx}</td>
                     <td>${article.boardId}</td>
-                    <td><a href="${pageContext.request.contextPath }/board/viewArticle.bim?id=${article.boardId}&num=${article.idx}">${article.title}</a></td>
+                    <td><a href="../board/viewArticle.bim?id=${article.boardId}&num=${article.idx}">${article.title}</a></td>
                     <td>${article.writeId}</td>
                     <td>${article.hitCnt}</td>
                     <td>${article.writeDt}</td>
