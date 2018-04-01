@@ -34,6 +34,9 @@ public class PageUtil {
 			this.setCurrentPage(0);
 		}else {
 			int page = Integer.parseInt(request.getParameter("page").toString()) - 1;
+			if (page < 0 ) {
+				page = 0;
+			}
 			this.setCurrentPage(page);
 		}
 		
