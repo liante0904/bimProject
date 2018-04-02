@@ -10,6 +10,8 @@
 <link rel="icon" href="${pageContext.request.contextPath}/resources/favicon.ico">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.css">    <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bootstrap/css/carousel.css">    <!-- Custom styles for this template -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bootstrap/css/common.css">    <!-- common CSS -->
+
 <script src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.js"></script>	<!-- Bootstrap core js(TODO locate footer) -->
 <script type="text/javascript">
 var localhost = '${pageContext.request.contextPath }';
