@@ -29,7 +29,7 @@ $(function(){
 <body>
  
  <div class="container">
-   <h1>${article.boardName }</h1>
+   <h1>${boardName}</h1>
     <table class="table table-hover">
         <thead>
             <tr>

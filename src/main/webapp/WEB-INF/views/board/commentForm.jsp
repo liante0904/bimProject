@@ -138,12 +138,57 @@ $(document).ready(function() {
 
 
 <h4>댓글</h4>
+	<table class="table">
+		<tbody>
+			<tr>
+				<th width="15%">
+				댓글(갯수)
+				</th>
+				<th width="60%">
+				댓글 내용
+				</th>
+				<th width="25%">
+				댓글로 소통하세요!
+				</th>
+			</tr>
+<c:forEach items="${commentList}" var="comment">
+			<tr>
+				<td>${comment.writeId} 님</td>
+				<td>${comment.contents}</td>
+				<td>
+				<c:set var="writeCommentId" value="${comment.writeId}" />
+				<c:set var="sessionId" value="${sessionScope.loginInfo.id}" />
+				<c:if test="${writeCommentId == sessionId}">
+				   <input type="button" id="editCommentInit" value="댓글수정" onclick="editCommentInit(${comment.idx})" data-idx="${comment.idx}" class="btn btn-primary btn-xs">
+				   <input type="button" id="deleteComment" value="댓글삭제" onclick="deleteComment(${comment.idx})" class="btn btn-primary btn-xs">
+				</c:if>
+				</td>				
+				<td>
+
+				</td>
+			</tr>
+</c:forEach>
+		</tbody>
+	</table>
+
+
+ 		<c:if test="${!empty sessionScope.loginInfo}">
+			<table class="table">
+				<tbody>
+					<tr>
+						<th>댓글 작성</th>
+						<td colspan="5" width="250" height="50"><input type="text" class="form-control" id="writeCommentContents" placeholder="댓글을 입력하세요" class="form-control"></td>
+						<td><input type="button" id="writeComment" value="댓글작성" class="btn btn-primary"></td>
+					</tr>
+				</tbody>
+			</table>
+		</c:if>
+		
+<%-- 
 	<c:forEach items="${commentList}" var="comment">
 		<p data-idx=${comment.idx }>
 			작성자 : ${comment.writeId} 댓글번호 : ${comment.idx}  
 			내용 :${comment.contents}
-			<c:set var="writeCommentId" value="${comment.writeId}" />
-			<c:set var="sessionId" value="${sessionScope.loginInfo.id}" />
 			
 			<c:if test="${writeCommentId == sessionId}">
 			   <input type="button" id="editCommentInit" value="댓글수정" onclick="editCommentInit(${comment.idx})" data-idx="${comment.idx}" class="btn btn-primary">
@@ -159,17 +204,7 @@ $(document).ready(function() {
 			</div> 
 	</c:forEach>
 
-		<c:if test="${!empty sessionScope.loginInfo}">
-			<table class="table">
-				<tbody>
-					<tr>
-						<th>댓글 내용</th>
-						<td colspan="5" width="250" height="50"><input type="text" class="form-control" id="writeCommentContents" placeholder="댓글을 입력하세요" class="form-control"></td>
-						<td><input type="button" id="writeComment" value="댓글작성" class="btn btn-primary"></td>
-					</tr>
-				</tbody>
-			</table>
-		</c:if>
+ --%>
 
 
 </body>

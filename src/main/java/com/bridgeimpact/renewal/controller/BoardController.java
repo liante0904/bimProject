@@ -101,7 +101,8 @@ public class BoardController {
 		} 
 		
 		System.out.println("출력될 게시글 수 : " + pageUtil.getDisplayArticleCnt());
-		
+		System.out.println("articleList:" + articleList);
+		model.addAttribute("boardName", articleList.get(0).getBoardName());
 		model.addAttribute("articleList", articleList);
 		model.addAttribute("pageUtil", pageUtil);
 

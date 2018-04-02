@@ -59,7 +59,7 @@ $(function(){
 <h3 id="article_title">${article.title}</h3>
 	<form action="../board/boardWrite.bim"
 		method="post">
-		<div class="container">
+		<div class="container viewArticle">
 			<table class="table">
 				<tbody>
 					<tr>
