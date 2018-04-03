@@ -12,9 +12,73 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <script type="text/javascript">
 $(document).ready(function(){
-	var idCheck = 0;
-	var passwordCheck = 0;
-	var password2Check = 0;
+	$('form').validate({
+		rules : {
+			
+			id: {
+				required : true,
+				minlength: 5
+			},
+			password: {
+				required : true,
+				minlength: 7
+			},
+			repassword: {
+				required : true,
+				equalTo : password
+			},
+			name: {
+				required : true,
+			},
+			email: {
+				required : true,				
+			},
+			phone: {
+				required : true,
+			},
+			address: {
+				required : true,
+			},
+			church: {
+				required : true,
+			}
+		},
+		messages : {
+			id:{
+				required : "",	
+				minlength : ""
+			},
+			password: {
+				required : "",
+				minlength : ""
+			},
+			repassword: {
+				required : "",
+				equalTo : ""
+			},
+			name: {
+				required : "필수 정보입니다.",
+			},
+			email: {
+				required : "필수 정보입니다.",				
+			},
+			phone: {
+				required : "필수 정보입니다.",
+			},
+			address: {
+				required : "필수 정보입니다.",
+			},
+			church: {
+				required : "필수 정보입니다.",
+			}
+		},
+/* 		
+		submitHandler : function() {
+
+		}
+		 */
+	});
+	
 	
 	
 	$("#id").focusout(function(){
@@ -24,6 +88,8 @@ $(document).ready(function(){
 		
 		if($(this).val().length === 0){
 			idResult.html("아이디를 입력해주세요.");
+		}else if ($(this).val().length < 7) {
+			idResult.html("아이디가 너무 짧습니다.");
 		}else{
 			
 			 $.ajax({
@@ -32,10 +98,8 @@ $(document).ready(function(){
 			        data : { "id" : id },
 			        success : function(data){
 			         if ( data.result == "success") {
-						idCheck = 1;
 						idResult.css("color","green");
 					}else {
-						idCheck = 0;
 						idResult.css("color","red");
 					}
 
@@ -49,49 +113,55 @@ $(document).ready(function(){
 	});
 
 $('#password').focusout(function() {
-	//TODO 패스워드 조건추가
 
 	passwordCheck = $(this).val();
-	$('#passwordResult').html("패스워드가 너무짧습니다.");
+	if (passwordCheck.length < 8) {
+		$('#passwordResult').html("패스워드가 너무짧습니다.");
+	}
 });
-	 $('#password2').focusout(function() {
-		password2Check = $(this).val();
-		
-		if (passwordCheck === password2Check) {
-			$('#passwordResult').html("패스워드가 일치합니다.");
+
+	 $('#repassword').focusout(function() {
+		 passwordCheck = $('#password').val();
+		repasswordCheck = $(this).val();
+		var passwordResult = $('#passwordResult');
+		if (passwordCheck === repasswordCheck && passwordCheck != "") {
+			if (repasswordCheck.length < 8) {
+				passwordResult.css("color", "orange");
+				passwordResult.html("패스워드가 일치하지만, 너무 짧습니다.");
+				
+			}else{
+			passwordResult.css("color", "green");
+			passwordResult.html("패스워드가 일치합니다.");
+			}
 		}else{
-			$('#passwordResult').html("패스워드가 일치하지 않습니다.");
+			passwordResult.html("패스워드가 일치하지 않습니다.");
 				
 		}
 		
 	})
-	 
-	$('#join').on('click', function(){
-		if (idCheck) {
-//			alert('true');
-		}else{
-//		alert('false');
-		return false;
+	/* 
+	$('#join').on('click', function(e){
+		$('form').validate();
+        var MemberVO = $("form").serializeObject();
+		for(key in MemberVO) {
+		    console.log('key:' + key + ' / ' + 'value:' + MemberVO[key]);
+			if (MemberVO[key] === "") {
+				console.log(key + "항목이 비어있습니다." );
+				$('#'+key).focus();
+				e.preventDefault();
+			    e.stopPropagation();
+				return false;
+			}
 		}
-		alert("hello");
 		$('form').submit();
-		
+
+
 	});
-	
-	
+ */		
 });
 
-$(function(){
-
-
-	$('form').submit(
-	function() {
-		alert("area");
-	}		
-	);
-	
-});
-
+					
+				
 </script>
 
 </head>
@@ -101,23 +171,23 @@ $(function(){
 
 
 <div class="container joinForm">
- <form action="../member/joinSubmit.bim"  method="POST">
+ <form action="../member/joinSubmit.bim"  name="joinForm" id="joinForm" method="POST">
 	<div class="form-group">
-		<input type="text" id="id" name="id" class="form-control" placeholder="아이디" /> <span id="idResult">아이디를 입력해주세요.</span>  <!--  <input type="button" id="idChk" value="중복체크" >  -->
+		<input type="text" id="id" name="id" class="form-control" placeholder="아이디"  /> <span id="idResult">아이디를 입력해주세요.</span> 
 	</div>
 	<div class="form-group">
 		<input type="password" name="password" id="password" class="form-control" placeholder="패스워드" />
-		<input type="password" name="password" id="password2" class="form-control" placeholder="패스워드 확인" /> <span id="passwordResult"></span>  
+		<input type="password" name="repassword" id="repassword" class="form-control" placeholder="패스워드 확인" /> <span id="passwordResult">패스워드를 입력해주세요.</span>  
 	</div>
 	<div class="form-group">	
-		<input type="text" name="name"  class="form-control" placeholder="이름" />
-		<input type="text" name="email" class="form-control" placeholder="E-MAIL" />
-		<input type="text" name="phone"  class="form-control" placeholder="휴대전화" />
-		<input type="text" name="address"  class="form-control"  placeholder="주소" />
-		<input type="text" name="church"  class="form-control"  placeholder="출석교회" />
+		<input type="text" name="name"  id="name" class="form-control" placeholder="이름" />
+		<input type="text" name="email" id="email" class="form-control" placeholder="E-MAIL" />
+		<input type="text" name="phone" id="phone" class="form-control" placeholder="휴대전화" />
+		<input type="text" name="address" id="address" class="form-control"  placeholder="주소" />
+		<input type="text" name="church" id="church" class="form-control"  placeholder="출석교회" />
 	</div>
    <div>
-   <input type="submit" value="가입" id="join"  class="btn btn-lg btn-primary btn-block" disabled="disabled" />
+   <input type="submit" value="가입" id="join"  class="btn btn-lg btn-primary btn-block"   />
    <input type="button" value="취소" id="joinFormCancel" style="align:center" class="btn btn-lg btn-primary btn-block" >
 
   </div>
