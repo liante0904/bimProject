@@ -16,7 +16,7 @@
 			<ul class="pagination">
 				<!-- (처음) 버튼 판별  (첫페이지가 아니거나 10페이지 이상일때)-->
 				<c:if
-					test="${pageUtil.currentPage +1 ne 1 and pageUtil.totalPageCnt > 10}">
+					test="${pageUtil.currentPage +1 ne 1 and pageUtil.totalPageCnt > pageUtil.displayPageCnt}">
 					<li><a
 						href="..${requestURI}?id=${param.id }&page=${status.current }<c:if test="${!empty param.searchKeyword  || param.searchKeyword ne null }">&searchType=${param.searchType }&searchKeyword=${param.searchKeyword }</c:if>">처음</a></li>
 				</c:if>
@@ -33,7 +33,7 @@
 				<!-- 페이지 출력 부분 -->
 				<c:forEach var="PageCntByBoard"
 					begin="${pageUtil.pageRangeCnt + 1  }"
-					end="${pageUtil.pageRangeCnt  + 10 }" varStatus="status">
+					end="${pageUtil.pageRangeCnt  + pageUtil.displayPageCnt }" varStatus="status">
 					<c:choose>
 						<c:when test="${status.current eq pageUtil.currentPage +1 }">
 							<!-- 현재 페이지를 음영처리 -->
@@ -52,20 +52,20 @@
 
 				<!-- 다음 버튼 -->
 				<c:if
-					test="${pageUtil.totalPageCnt > 10 and pageUtil.totalPageCnt ne pageUtil.currentPage +1}">
-					<fmt:parseNumber var="var1" value="${pageUtil.currentPage +1 / 10}"
+					test="${pageUtil.totalPageCnt > pageUtil.displayPageCnt and pageUtil.totalPageCnt ne pageUtil.currentPage +1}">
+					<fmt:parseNumber var="var1" value="${pageUtil.currentPage +1 / pageUtil.displayPageCnt}"
 						integerOnly="true" />
-					<fmt:parseNumber var="var2" value="${pageUtil.totalPageCnt  / 10}"
+					<fmt:parseNumber var="var2" value="${pageUtil.totalPageCnt  / pageUtil.displayPageCnt}"
 						integerOnly="true" />
 					<c:if test="${var1 ne var2}">
 						<li><a
-							href="..${requestURI}?id=${param.id }&page=${pageUtil.pageRangeCnt + 1 + 10 }<c:if test="${!empty param.searchKeyword  || param.searchKeyword ne null }">&searchType=${param.searchType }&searchKeyword=${param.searchKeyword }</c:if>"
+							href="..${requestURI}?id=${param.id }&page=${pageUtil.pageRangeCnt + 1 + pageUtil.displayPageCnt }<c:if test="${!empty param.searchKeyword  || param.searchKeyword ne null }">&searchType=${param.searchType }&searchKeyword=${param.searchKeyword }</c:if>"
 							aria-label="Next"><span aria-hidden="true">다음</span></a></li>
 					</c:if>
 				</c:if>
 				<!-- 끝 버튼  판별-->
 				<c:if
-					test="${pageUtil.totalPageCnt > 10 and pageUtil.totalPageCnt  ne pageUtil.currentPage +1}">
+					test="${pageUtil.totalPageCnt > pageUtil.displayPageCnt and pageUtil.totalPageCnt  ne pageUtil.currentPage +1}">
 					<li><a
 						href="..${requestURI}?id=${param.id }&page=${pageUtil.totalPageCnt }<c:if test="${!empty param.searchKeyword  || param.searchKeyword ne null }">&searchType=${param.searchType }&searchKeyword=${param.searchKeyword }</c:if>">끝</a></li>
 				</c:if>
@@ -76,7 +76,7 @@
 	<br>
 ${requestURI}
 	<div>begin : ${pageUtil.pageRangeCnt + 1  }
-		end="${pageUtil.pageRangeCnt  + 10 }"</div>
+		end="${pageUtil.pageRangeCnt  + pageUtil.displayPageCnt }"</div>
 
 	<div>jspt(endPageCnt) : ${endPageCnt }</div>
 	<div>pageRangeCnt: ${pageUtil.pageRangeCnt }</div>
@@ -88,8 +88,8 @@ ${requestURI}
 	<div>보여질 게시글 갯수 : ${pageUtil.displayArticleCnt}</div>
 
 
-	<div>현재 범위 : ${ var1 + 10 }</div>
-	<div>마지막페이지 범위 : ${var2 + 10 }</div>
+	<div>현재 범위 : ${ var1 + pageUtil.displayPageCnt }</div>
+	<div>마지막페이지 범위 : ${var2 + pageUtil.displayPageCnt }</div>
 
 </body>
 </html>

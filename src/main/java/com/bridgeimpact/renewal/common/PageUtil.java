@@ -12,8 +12,11 @@ import com.bridgeimpact.renewal.service.ArticleService;
 
 public class PageUtil {
 
+	private final int displayArticleCnt = 5;
+	// 보여질 게시글 갯수
+	private final int displayPageCnt = 5;
+	// 보여질 페이지 갯수 
 	private int totalArticleCnt;
-	private final int displayArticleCnt = 2;
 	private int currentPage;
 	private int totalPageCnt;
 	private int startArticleCnt;
@@ -26,25 +29,6 @@ public class PageUtil {
 	private static final Logger logger = LoggerFactory.getLogger(PageUtil.class);
 
 
-	private void init(HttpServletRequest request, ArticleService articleService) {
-		
-		// 페이지 요청 처리
-		if (request.getParameter("page") == null || "".equals(request.getParameter("page"))) {
-			// 페이지 파리미터가 없을때
-			this.setCurrentPage(0);
-		}else {
-			int page = Integer.parseInt(request.getParameter("page").toString()) - 1;
-			if (page < 0 ) {
-				page = 0;
-			}
-			this.setCurrentPage(page);
-		}
-		
-
-		
-		
-	}
-
 	/***
 	 * pageUtil 생성자 게시판 요청시 페이지 처리를 합니다.
 	 * 사용자의 request를 이용해 검색, 글 조회를 우선 판단한 뒤
@@ -53,10 +37,11 @@ public class PageUtil {
 	 * @param articleService
 	 */
 	public PageUtil(HttpServletRequest request, ArticleService articleService) {
+		
 		/***
 		 * 사용자의 요청 페이지수 계산 구간
 		 */
-		this.init(request, articleService);
+		this.setCurrentPage(request, articleService);
 
 		
 		/***
@@ -103,6 +88,7 @@ public class PageUtil {
 	}
 
 
+	
 	public String getboardId() {
 		return boardId;
 	}
@@ -121,14 +107,14 @@ public class PageUtil {
 	public void setPageRangeCnt() {
 		// 현재 페이지의 표시될 페이지의 범위를 계산
 		System.out.println("pageRangeCnt: 구간에서 " +currentPage);
-			 if (currentPage + 1 < 11) { //현재 페이지가 첫페이지 일 경우(1~10페이지)
+			 if (currentPage + 1 <  displayPageCnt + 1) { //현재 페이지가 첫페이지 일 경우(1~displayPageCnt페이지)
 				pageRangeCnt = 0;
 			}else { //11페이지 이상일 경우
-				pageRangeCnt = (currentPage / 10) * 10;
+				pageRangeCnt = (currentPage / displayPageCnt) * displayPageCnt;
 				if (currentPage + 1 == pageRangeCnt) {
 					
-					pageRangeCnt = pageRangeCnt - 10;
-					System.out.println("current랑 rangeCnt랑 같으면 -10" + pageRangeCnt);
+					pageRangeCnt = pageRangeCnt - displayPageCnt;
+					System.out.println("current랑 rangeCnt랑 같으면 - displayPageCnt" + pageRangeCnt);
 				}
 			}
 			 
@@ -178,15 +164,32 @@ public class PageUtil {
 		return displayArticleCnt;
 	}
 
+	
+
+	public int getDisplayPageCnt() {
+		return displayPageCnt;
+	}
+
+
+
 
 	public int getCurrentPage() {
 		return currentPage;
 	}
 
 
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
-		this.setStartArticleCnt();
+	public void setCurrentPage(HttpServletRequest request, ArticleService articleService) {
+		// 페이지 요청 처리
+		if (request.getParameter("page") == null || "".equals(request.getParameter("page"))) {
+			// 페이지 파리미터가 없을때
+			currentPage = 0;
+		}else {
+			int page = Integer.parseInt(request.getParameter("page").toString()) - 1;
+			if (page < 0 ) { // 페이지 파라미터를 0으로 받았을때 예외처리
+				currentPage = 0;
+			}
+			currentPage = page;
+		}
 	}
 
 
