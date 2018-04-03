@@ -117,8 +117,8 @@ $(function(){
 		<input type="text" name="church"  class="form-control"  placeholder="출석교회" />
 	</div>
    <div>
-   <input type="button" value="취소" id="joinFormCancel" style="align:center" class="btn btn-lg btn-primary btn-block" >
    <input type="submit" value="가입" id="join"  class="btn btn-lg btn-primary btn-block" disabled="disabled" />
+   <input type="button" value="취소" id="joinFormCancel" style="align:center" class="btn btn-lg btn-primary btn-block" >
 
   </div>
  </form>

@@ -95,7 +95,7 @@ $(function(){
 		</div>
 			</form>
 
-<div id="commentContent"></div>
+<div id="commentContent" class="container"></div>
 
 </body>
 </html>
