@@ -46,6 +46,13 @@ var localhost = '${pageContext.request.contextPath }';
 					
 				}
 		});
+		
+		$("#joinFormCancel").click(function() {
+			if (confirm("정말로 회원가입을 취소 하시겠습니까?")) {
+				location.href="../";
+					
+				}
+		});
 
 /* 		
 		$("#cancel", "#list", "#writelist").on("click", function(e) {

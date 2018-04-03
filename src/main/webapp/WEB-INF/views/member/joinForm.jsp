@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원가입 페이지</title>
 <%@ include file="/WEB-INF/include/mainHeader.jsp" %>
 <%@ include file="/WEB-INF/include/include.jsp" %>
 <!-- header 영역 작성중 -->
@@ -12,100 +12,116 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <script type="text/javascript">
 $(document).ready(function(){
-	var idCheck
+	var idCheck = 0;
+	var passwordCheck = 0;
+	var password2Check = 0;
 	
-	$("#id").keyup(function(){
-		if($(this).val().length > 2){
-			var id = $(this).val();
-			console.log(id);
+	
+	$("#id").focusout(function(){
+
+		var id = $(this).val();
+		var idResult = $("#idResult");
+		
+		if($(this).val().length === 0){
+			idResult.html("아이디를 입력해주세요.");
+		}else{
+			
 			 $.ajax({
 			        url : "${pageContext.request.contextPath}/member/checkMemberIdAjax.bim",
 			        type: "get",
 			        data : { "id" : id },
 			        success : function(data){
 			         if ( data.result == "success") {
-						console.log("사용 가능한 아이디");
 						idCheck = 1;
-						$("#result").html("사용 가능한 아이디");
+						idResult.css("color","green");
 					}else {
-						console.log("중복 아이디");
 						idCheck = 0;
-						$("#result").html("중복된 아이디");
+						idResult.css("color","red");
 					}
+
+						console.log(id);
+						console.log(data.resultMsg);
+						idResult.html(data.resultMsg);
+			         
 			        }
 			    });
-			
 		}
 	});
-	
+
+$('#password').focusout(function() {
+	//TODO 패스워드 조건추가
+
+	passwordCheck = $(this).val();
+	$('#passwordResult').html("패스워드가 너무짧습니다.");
+});
+	 $('#password2').focusout(function() {
+		password2Check = $(this).val();
+		
+		if (passwordCheck === password2Check) {
+			$('#passwordResult').html("패스워드가 일치합니다.");
+		}else{
+			$('#passwordResult').html("패스워드가 일치하지 않습니다.");
+				
+		}
+		
+	})
+	 
 	$('#join').on('click', function(){
 		if (idCheck) {
-			alert('true');
+//			alert('true');
 		}else{
-		alert('false');
+//		alert('false');
 		return false;
 		}
 		alert("hello");
 		$('form').submit();
+		
 	});
 	
 	
 });
+
 $(function(){
 
-	$('#idChk').on('click',function(){
-		
-		 $.ajax({
-		        url : "../member/memberIdCheck.bim",
-		        type: "get",
-		        data : { "id" : $("#id").val() },
-		        success : function(data){
-		         if ( data.result == "success") {
-					alert("사용 가능한 아이디");
-				}else {
-					alert("중복된 아이디");
-				}
-		        }
-		    });
-		
-		});
 
-	
+	$('form').submit(
+	function() {
+		alert("area");
+	}		
+	);
 	
 });
-
-
 
 </script>
 
 </head>
 <body>
 
-<h1>joinForm</h1>
+<h2>회원가입 페이지</h2>
 
 
-
+<div class="container joinForm">
  <form action="../member/joinSubmit.bim"  method="POST">
-
-  <div>
-    <pre>
-아이디 :  <span id="result">아이디를 입력해주세요.</span> <input type="text" id="id" name="id" class="form-control"> 중복 체크 결과: <span id="result">아이디를 입력해주세요.</span> <!--  <input type="button" id="idChk" value="중복체크" >  -->
-패스워드 <input type="password" name="password"  class="form-control">
-이름 <input type="text" name="name"  class="form-control">
-E - MAIL<input type="text" name="email" class="form-control">
-휴대전화 <input type="text" name="phone"  class="form-control"/>
-주소 <input type="text" name="address"  class="form-control"/>
-출석교회 <input type="text" name="church"  class="form-control"/>
-
-    </pre>
-  </div>
-
+	<div class="form-group">
+		<input type="text" id="id" name="id" class="form-control" placeholder="아이디" /> <span id="idResult">아이디를 입력해주세요.</span>  <!--  <input type="button" id="idChk" value="중복체크" >  -->
+	</div>
+	<div class="form-group">
+		<input type="password" name="password" id="password" class="form-control" placeholder="패스워드" />
+		<input type="password" name="password" id="password2" class="form-control" placeholder="패스워드 확인" /> <span id="passwordResult"></span>  
+	</div>
+	<div class="form-group">	
+		<input type="text" name="name"  class="form-control" placeholder="이름" />
+		<input type="text" name="email" class="form-control" placeholder="E-MAIL" />
+		<input type="text" name="phone"  class="form-control" placeholder="휴대전화" />
+		<input type="text" name="address"  class="form-control"  placeholder="주소" />
+		<input type="text" name="church"  class="form-control"  placeholder="출석교회" />
+	</div>
    <div>
-   <input type="button" value="취소" onclick="javascript:window.close()" style="align:center"  class="btn btn-lg btn-primary btn-block"/>
-   <input type="button" value="가입" id="join"  class="btn btn-lg btn-primary btn-block"/>
+   <input type="button" value="취소" id="joinFormCancel" style="align:center" class="btn btn-lg btn-primary btn-block" >
+   <input type="submit" value="가입" id="join"  class="btn btn-lg btn-primary btn-block" disabled="disabled" />
 
   </div>
  </form>
- 
+</div>
 </body>
 </html>

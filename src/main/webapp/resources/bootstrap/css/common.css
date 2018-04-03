@@ -2,3 +2,17 @@
 .container.viewArticle {
 	margin-bottom: 30px;
 }
+.container.joinForm {
+	display: block;
+  padding: 9.5px;
+  margin: 0 0 (@line-height-computed / 2);
+  font-size: (@font-size-base - 1); // 14px to 13px
+  line-height: @line-height-base;
+  word-break: break-all;
+  word-wrap: break-word;
+  color: @pre-color;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+	
+}
