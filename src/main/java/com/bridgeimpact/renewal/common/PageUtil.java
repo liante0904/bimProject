@@ -185,8 +185,8 @@ public class PageUtil {
 			currentPage = 0;
 		}else {
 			int page = Integer.parseInt(request.getParameter("page").toString()) - 1;
-			if (page < 0 ) { // 페이지 파라미터를 0으로 받았을때 예외처리
-				currentPage = 0;
+			if (page <= 0 ) { // 페이지 파라미터를 0으로 받았을때 예외처리
+				page = 0;
 			}
 			currentPage = page;
 		}

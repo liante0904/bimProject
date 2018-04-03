@@ -53,15 +53,11 @@
 				<!-- 다음 버튼 -->
 				<c:if
 					test="${pageUtil.totalPageCnt > pageUtil.displayPageCnt and pageUtil.totalPageCnt ne pageUtil.currentPage +1}">
-					<fmt:parseNumber var="var1" value="${pageUtil.currentPage +1 / pageUtil.displayPageCnt}"
-						integerOnly="true" />
-					<fmt:parseNumber var="var2" value="${pageUtil.totalPageCnt  / pageUtil.displayPageCnt}"
-						integerOnly="true" />
-					<c:if test="${var1 ne var2}">
+
+
 						<li><a
 							href="..${requestURI}?id=${param.id }&page=${pageUtil.pageRangeCnt + 1 + pageUtil.displayPageCnt }<c:if test="${!empty param.searchKeyword  || param.searchKeyword ne null }">&searchType=${param.searchType }&searchKeyword=${param.searchKeyword }</c:if>"
 							aria-label="Next"><span aria-hidden="true">다음</span></a></li>
-					</c:if>
 				</c:if>
 				<!-- 끝 버튼  판별-->
 				<c:if
@@ -80,7 +76,7 @@ ${requestURI}
 
 	<div>jspt(endPageCnt) : ${endPageCnt }</div>
 	<div>pageRangeCnt: ${pageUtil.pageRangeCnt }</div>
-	<div>displayPageCnt : ${displayPageCnt }</div>
+	<div>displayPageCnt : ${pageUtil.displayPageCnt }</div>
 	<div>
 		현재 게시판의 총 페이지 갯수 : ${pageUtil.totalPageCnt } <br>
 	</div>
