@@ -138,7 +138,7 @@ $(document).ready(function() {
 
 
 <h4>댓글</h4>
-	<table class="table">
+	<table class="table table-hover">
 		<tbody>
 			<tr>
 				<th width="15%">

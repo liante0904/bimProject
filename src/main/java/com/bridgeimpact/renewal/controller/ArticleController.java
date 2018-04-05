@@ -86,22 +86,25 @@ public class ArticleController {
 		
 		List<CommentVO> commentList = null;
 		List<FileVO> fileList = null;
-
 		ArticleVO article = null;
+		Boolean articleResult = null;
+		
 		/***
 		 * 글번호(idx)의 글 조회하여
 		 * 해당 게시판과 글의 유효성 판별
 		 */
 		try {
-			Boolean articleResult = articleService.checkValidateArticleByIdx(num);
-			if (!articleResult) {
-				logger.info("★★★★★>>> 게시판 비공개 혹은 게시글 삭제시 ");
-				return new ModelAndView("main/mainForm");
-			}
+			articleResult = articleService.checkValidateArticleByIdx(num);
+
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}finally {
+			if (!articleResult) {
+				logger.info("★★★★★>>> 게시판 비공개 혹은 게시글 삭제시 ");
+				return new ModelAndView("main/mainForm");
+			}
+			
 			try {
 				article = articleService.selectArticleByIndex(num);
 			} catch (Exception e) {
