@@ -6,24 +6,24 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="/WEB-INF/include/mainHeader.jsp" %>
-<%@ include file="/WEB-INF/include/leftSide.jsp" %>
 <title>Insert title here</title>
 </head>
-<h1>this is index.jsp </h1>
 <body>
 
-<div id="context"></div>
+<div class="container">
+<div class="jumbotron">
+        <h2> 브리즈 임팩트에 오신 것을 환영합니다!</h2>
+        <p> 청소년들이 하나님의 은혜를 체험하고 그 은혜 안에서 자라갈수 있기를 원합니다. </p>
+        <p>
+          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs »</a>
+        </p>
+      </div>
+</div>
 
-
-            <c:forEach items="${boardList}" var="board" >
-                <tr>
-                    <td>${board.idx}</td>
-                    <td>${board.id}</td>
-                    <td>${board.name}</td>
-                    <td>${board.delGb}</td>
-                </tr>
-                
-            </c:forEach>
-
+<footer class="footer">
+      <div class="container">
+        <p class="text-muted">Place sticky footer content here.</p>
+      </div>
+    </footer>
 </body>
 </html>

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/WEB-INF/include/common.jsp" %>
 <%@ include file="/WEB-INF/include/include.jsp" %>
+<%@ include file="/WEB-INF/include/leftSide.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
