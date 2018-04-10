@@ -73,19 +73,23 @@ public class MemberController {
 
 
 	/***
-	 * 회원가입 페이지에서 작성된 데이터 반영 요청
+	 * 회원가입 페이지에서 작성된 데이터 DB반영 요청
 	 * @param member
 	 * @return 로그인 페이지 반환
 	 */
 	@RequestMapping(value="member/joinSubmit.bim")
 	public String joinSubmit(MemberVO inputMember){
-
+		int result = 0;
 		try {
-			memberService.insertMember(inputMember);
+			result = memberService.insertMember(inputMember);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return "error";
+		}finally {
+			if (result == 0) {
+				return "error";
+			}
 		}
 		
 		return "redirect:/main/loginForm.bim";

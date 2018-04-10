@@ -11,7 +11,7 @@ public interface MemberService {
     
     public List<MemberVO> selectAllMember() throws Exception;
 
-	public void insertMember(MemberVO member) throws Exception;
+	public int insertMember(MemberVO member) throws Exception;
 
 	public void editMember(HttpSession session,MemberVO inputMember) throws Exception;
 

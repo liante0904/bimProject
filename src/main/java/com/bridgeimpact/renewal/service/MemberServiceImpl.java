@@ -35,7 +35,21 @@ public class MemberServiceImpl implements MemberService {
     }
 
 	@Override
-	public void insertMember(MemberVO inputMember) throws Exception {
+	public int insertMember(MemberVO inputMember) throws Exception {
+		/***
+		 * DB반영전 작업 (입력받은 아이디 중복체크, 암호화 로직 처리 후 DB반영  
+		 */
+		
+		/***
+		 * 아이디 중복체크
+		 */
+		int resultCnt = memberDAO.selectMemberById(inputMember);
+
+		  if ( resultCnt == 1 ){
+			  return 0;
+			  } 
+
+		
 		
 		/***
 		 * DB반영전 패스워드 암호화 로직
@@ -47,6 +61,7 @@ public class MemberServiceImpl implements MemberService {
 		System.out.println(inputMember.getId());
 		inputMember.setPassword(encryptPassword);
 		memberDAO.insertMember(inputMember);
+		return 1;
 	}
 
 	@Override
