@@ -42,7 +42,6 @@ public class PageUtil {
 		 * 사용자의 요청 페이지수 계산 구간
 		 */
 		this.setCurrentPage(request, articleService);
-
 		
 		/***
 		 * 사용자가 요청한 조건의 게시글을 Map으로 구현
@@ -52,10 +51,19 @@ public class PageUtil {
 		paramMap.put("searchType", request.getParameter("searchType"));
 		paramMap.put("searchKeyword", request.getParameter("searchKeyword"));
 
+		/***
+		 * 페이징을 위한 초기화 세팅 
+		 * 1. 요청 게시판 ID
+		 * 2. 해당 게시판의 게시글 갯수
+		 * 3. 해당 게시판의 총 페이지 수
+		 * 4. 출력될 게시판 범위
+		 * 5. 페이징 게시글 범위 세팅
+		 */
 		this.setboardId(String.valueOf(paramMap.get("boardId")));
 		this.setTotalArticleCnt(articleService,request,paramMap);
 		this.setTotalPageCnt();
 		this.setPageRangeCnt();
+		this.setStartArticleCnt();
 		
 		paramMap.put("startArticleCnt", this.getStartArticleCnt());
 		paramMap.put("displayArticleCnt", this.getDisplayArticleCnt());
