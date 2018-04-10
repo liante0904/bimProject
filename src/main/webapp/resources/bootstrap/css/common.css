@@ -1,6 +1,32 @@
 
-.container.viewArticle {
+
+.jumbotron {
+	margin-top: 25px;
+}
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+
+}
+
+.container.viewArticle, .container.articleList  {
 	margin-bottom: 30px;
+	margin-top: 40px;
+	
+}
+
+.container.viewArticle h4, .container.articleList h4 {
+	margin-bottom: 30px;
+	
+}
+
+.container.viewArticle .table td.title {
+	background-color: #fafafa;
+	
+}
+.container.viewArticle .table td.writer {
+	background-color: #f1f1f1;
+	
 }
 .container.joinForm {
 	display: block;
@@ -21,4 +47,39 @@ form#joinForm label.error {
 	color: red;
 	font-weight: normal;
 	display: inline;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }

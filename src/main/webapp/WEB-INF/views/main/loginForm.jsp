@@ -15,6 +15,7 @@ $(document).ready(function(){
 <title>Insert title here</title>
 </head>
 <body>
+<div class="container">
 	<h1>로그인</h1>
 	<h2> 로그인 상태 : ${msg} ${sessionScope.msg}</h2>
 	<form action="${pageContext.request.contextPath}/main/login.bim" method="POST">
@@ -25,5 +26,6 @@ PASSWORD: <input type="password" id="password" name="password" class="form-contr
 		</pre>	
 
 	</form>
+</div>
 </body>
 </html>

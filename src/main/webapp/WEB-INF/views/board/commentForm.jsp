@@ -141,38 +141,39 @@ $(document).ready(function() {
 	<table class="table table-hover">
 		<tbody>
 			<tr>
-				<th width="15%">
-				댓글(갯수)
-				</th>
-				<th width="60%">
-				댓글 내용
-				</th>
-				<th width="25%">
-				댓글로 소통하세요!
-				</th>
+				<th width="15%">댓글(갯수)</th>
+				<th width="60%">댓글 내용</th>
+				<th width="25%">댓글로 소통하세요!</th>
 			</tr>
-<c:forEach items="${commentList}" var="comment">
-			<tr>
-				<td>${comment.writeId} 님</td>
-				<td>${comment.contents}</td>
-				<td>
-				<c:set var="writeCommentId" value="${comment.writeId}" />
-				<c:set var="sessionId" value="${sessionScope.loginInfo.id}" />
-				<c:if test="${writeCommentId == sessionId}">
-				   <input type="button" id="editCommentInit" value="댓글수정" onclick="editCommentInit(${comment.idx})" data-idx="${comment.idx}" class="btn btn-primary btn-xs">
-				   <input type="button" id="deleteComment" value="댓글삭제" onclick="deleteComment(${comment.idx})" class="btn btn-primary btn-xs">
-				</c:if>
-				</td>				
-				<td>
-
-				</td>
-			</tr>
-</c:forEach>
+			<c:forEach items="${commentList}" var="comment">
+				<tr>
+					<td>${comment.writeId}님</td>
+					<td>${comment.contents}</td>
+					<td><c:set var="writeCommentId" value="${comment.writeId}" />
+						<c:set var="sessionId" value="${sessionScope.loginInfo.id}" /> <c:if test="${writeCommentId == sessionId}">
+							<input type="button" id="editCommentInit" value="댓글수정"	onclick="editCommentInit(${comment.idx})" data-idx="${comment.idx}" class="btn btn-primary btn-xs">
+							<input type="button" id="deleteComment" value="댓글삭제" onclick="deleteComment(${comment.idx})" class="btn btn-primary btn-xs">
+						</c:if></td>
+					<td></td>
+				</tr>
+				
+			</c:forEach>
 		</tbody>
 	</table>
-
-
- 		<c:if test="${!empty sessionScope.loginInfo}">
+	
+	<!-- 댓글 수정 영역 -->
+	<c:forEach items="${commentList}" var="comment">
+		<div id="editDiv"  data-idx="${comment.idx}" style="display:none; margin: 50px 1px 50px 1px">
+			<p>
+		<input type="text" size="40" id="editCommentContents" value="${comment.contents}" data-idx="${comment.idx}" placeholder="댓글을 수정하세요" class="form-control"> 
+		<input type="button" onclick="editComment(${comment.idx})" value="댓글수정" class="btn btn-primary">
+			</p>
+		</div> 
+	</c:forEach>
+	<!-- /댓글 수정 영역/ -->
+	
+	<!-- 댓글 작성 영역 -->
+	<c:if test="${!empty sessionScope.loginInfo}">
 			<table class="table">
 				<tbody>
 					<tr>
@@ -183,8 +184,11 @@ $(document).ready(function() {
 				</tbody>
 			</table>
 		</c:if>
+	<!-- /댓글 작성 영역/ -->
+		
 		
 <%-- 
+
 	<c:forEach items="${commentList}" var="comment">
 		<p data-idx=${comment.idx }>
 			작성자 : ${comment.writeId} 댓글번호 : ${comment.idx}  
@@ -196,12 +200,6 @@ $(document).ready(function() {
 			    
 			</c:if>
 		</p>
-			<div id="editDiv"  data-idx="${comment.idx}" style="display:none; margin: 50px 1px 50px 1px">
-				<p>
-			<input type="text" size="40" id="editCommentContents" value="${comment.contents}" data-idx="${comment.idx}" placeholder="댓글을 수정하세요" class="form-control"> 
-			<input type="button" onclick="editComment(${comment.idx})" value="댓글수정" class="btn btn-primary">
-				</p>
-			</div> 
 	</c:forEach>
 
  --%>

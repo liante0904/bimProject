@@ -51,7 +51,7 @@ $(function(){
 <div class="container">
     <h1>writeForm.jsp</h1>
      <form id="writeForm" action="../board/writeArticle.bim" method="post" enctype="multipart/form-data">
-        <table>
+        <table class="table">
             <tbody>
                 <tr>
                     <th>제목</th>

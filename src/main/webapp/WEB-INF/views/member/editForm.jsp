@@ -40,7 +40,7 @@ $(document).ready(function(){
 <h1>editForm</h1>
 
 
-
+<div class="container">
  <form action="../member/editSubmit.bim"  method="POST" >
 
   <div>
@@ -62,6 +62,7 @@ E - MAIL<input type="text" name="email" value="${sessionScope.loginInfo.email}" 
 	   <input type="button" value="탈퇴" id="delete" class="btn btn-lg btn-primary btn-block"/>
   </div>
  </form>
+ </div>
  
 </body>
 </html>

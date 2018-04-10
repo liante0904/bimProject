@@ -55,32 +55,35 @@ $(function(){
 </script>
 </head>
 <body>
-<h4>${article.boardName}</h4>
-<h3 id="article_title">${article.title}</h3>
 	<form action="../board/boardWrite.bim"
 		method="post">
 		<div class="container viewArticle">
-			<table class="table">
-				<tbody>
-					<tr>
-						<th width="70" height="30">작성자</th>
-						<td colspan="2">${article.writeId}</td>
-						<th width="60" height="30">조회수</th>
-						<th width="50" height="30">${article.hitCnt}</th>
-					</tr>
+			<h4>									<c:forEach items="${boardList}" var="board"><c:if test="${param.id eq board.id}"><a href="../board/viewList.bim?id=${board.id }">${board.name}</a></c:if></c:forEach></h4>
 
-					<tr>
-						<th height="50">작성일</th>
-						<td colspan="5">${article.writeDt}</td>
-					</tr>
-
-					<tr>
-						<th>내용</th>
-						<td colspan="5" width="150" height="150">${article.contents}</td>
-					</tr>
-				</tbody>
-
-			</table>
+				<table class="table">
+					<tbody>
+						<tr>
+							<td class="title" colspan="5"><h3 id="article_title">${article.title}</h3></td>
+						</tr>
+						<tr >
+							<td class="writer" width="70" height="30">작성자</td>
+							<td class="writer" colspan="2">${article.writeId}</td>
+							<td class="writer" width="60" height="30">조회수</td>
+							<td class="writer" width="50" height="30">${article.hitCnt}</td>
+						</tr>
+	
+						<tr>
+							<th height="50">작성일</th>
+							<td colspan="5">${article.writeDt}</td>
+						</tr>
+	
+						<tr>
+							<th>내용</th>
+							<td colspan="5" width="150" height="150">${article.contents}</td>
+						</tr>
+					</tbody>
+	
+				</table>
 			
 				<c:forEach items="${fileList}" var="file">
 				<div id="fileList"><span>첨부파일 : </span>
@@ -94,7 +97,6 @@ $(function(){
 		<input type="button" id="list" value="목록" class="btn btn-primary"/>
 		</div>
 			</form>
-
 <div id="commentContent" class="container"></div>
 
 </body>

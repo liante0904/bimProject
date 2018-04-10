@@ -48,18 +48,19 @@ $(function(){
 </script>
 </head>
 <body>
+<div class="container">
     <h1>editForm.jsp</h1>
      <form action="../board/editArticle.bim" method="post">
-        <table>
+        <table class="table">
             <tbody>
                 <tr>
                     <th>제목</th>
-                    <td><input type="text" id="title" name="title" class="wdp_90" size="98"/></td>
+                    <td><input type="text" id="title" name="title" class="form-control" size="98" /></td>
                 </tr>
                 
                 <tr>
 					<th>내용</th>                   
-                       <td> <textarea rows="20" cols="100"  id="contents" name="contents"></textarea></td>
+                       <td> <textarea rows="20" cols="100" id="contents" name="contents" class="form-control"></textarea></td>
                 </tr>
             </tbody>
         </table>
@@ -67,7 +68,7 @@ $(function(){
  <input type="button" id="cancel" value="목록" class="btn btn-primary"/>
  
     </form>
-
+</div>
 
  
 </body>

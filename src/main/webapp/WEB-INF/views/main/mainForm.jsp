@@ -9,6 +9,7 @@
 </head>
 <body>
 
+<div class="container">
 <h1> mainForm</h1>
 <a href="../member/editForm.bim">회원정보 수정,탈퇴</a>
 <a href="../board/boardList.bim">게시판</a>
@@ -18,5 +19,6 @@
 <h3>로그인 검증</h3>
 <h4>아이디 : ${sessionScope.loginInfo.id}</h4>
 <h4>이름 : ${sessionScope.loginInfo.name}</h4>
+</div>
 </body>
 </html>

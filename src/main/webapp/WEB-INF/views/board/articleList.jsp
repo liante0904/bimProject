@@ -28,8 +28,9 @@ $(function(){
 </head>
 <body>
  
- <div class="container">
-   <h1>${boardName}</h1>
+ <div class="container articleList">
+   <h4>									<c:forEach items="${boardList}" var="board"><c:if test="${param.id eq board.id}"><a href="../board/viewList.bim?id=${board.id }">${board.name}</a></c:if></c:forEach></h4>
+
     <table class="table table-hover">
         <thead>
             <tr>
@@ -59,8 +60,8 @@ $(function(){
 
         </tbody>
     </table>		
-</div>
  <input type="button" id="write" class="btn btn-primary pull-right" value="글쓰기"/>
+</div>
  
 <%@ include file="/WEB-INF/views/common/pageUtil.jsp" %>
 <%@ include file="/WEB-INF/views/board/searchForm.jsp" %>
