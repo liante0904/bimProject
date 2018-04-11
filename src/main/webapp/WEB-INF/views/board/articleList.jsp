@@ -34,13 +34,11 @@ $(function(){
     <table class="table table-hover">
         <thead>
             <tr>
-                <th>글번호</th>
-                <th>게시판 구분</th>
-                <th>제목</th>
-				<th>작성자</th>
-                <th>조회수</th>
-                <th>날짜</th>
-                <th>삭제여부</th>
+                <th width="8%"></th>
+                <th width="50%"></th>
+				<th width="10%"></th>
+                <th width="12%"></th>
+                <th width="15%"></th>
             </tr>
         </thead>
         <tbody>
@@ -48,12 +46,29 @@ $(function(){
             <c:forEach items="${articleList}" var="article" begin="0" end="${pageUtil.displayArticleCnt - 1}">
                 <tr>
                     <td>${article.idx}</td>
-                    <td>${article.boardId}</td>
                     <td><a href="../board/viewArticle.bim?id=${article.boardId}&num=${article.idx}">${article.title}</a></td>
                     <td>${article.writeId}</td>
                     <td>${article.hitCnt}</td>
-                    <td>${article.writeDt}</td>
-                    <td>${article.delGb}</td>
+                    <td>
+                    <jsp:useBean id="now" class="java.util.Date" />
+					 <fmt:formatDate pattern = "yyyy-MM-dd"     value = "${now}" var="today"/>
+						
+
+<c:choose>
+
+    <c:when test="${today eq article.writeDt}">
+    ${fn:substring(article.writeTime,0,5) }
+    </c:when>
+
+
+    <c:otherwise>
+    ${fn:substring(article.writeDt,5,10) }
+    </c:otherwise>
+
+</c:choose>
+
+                    
+                    </td>
                 </tr>
                 
             </c:forEach>

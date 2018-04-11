@@ -46,7 +46,8 @@
 		CONTENTS  ,   
 		HIT_CNT  ,   
 		DEL_GB  ,   
-		DATE_FORMAT(WRITE_DT, "%Y-%m-%d ") AS 'WRITE_DT'  ,   
+		DATE_FORMAT(WRITE_DT, "%Y-%m-%d") AS 'WRITE_DT'  , 
+		DATE_FORMAT(WRITE_DT, "%T") AS 'WRITE_TIME'  ,   
 		WRITE_ID   
 		FROM   BIM_ARTICLE_TB   
 		ORDER BY IDX DESC
@@ -98,7 +99,8 @@
 	CONTENTS  ,   
 	HIT_CNT  ,   
 	DEL_GB  ,   
-	DATE_FORMAT(WRITE_DT, "%Y-%m-%d ") AS 'WRITE_DT'  ,   
+	DATE_FORMAT(WRITE_DT, "%Y-%m-%d") AS 'WRITE_DT'  , 
+	DATE_FORMAT(WRITE_DT, "%T") AS 'WRITE_TIME'  ,   
 	WRITE_ID   
 	FROM   BIM_ARTICLE_TB   
 	WHERE BOARD_ID = #{boardId}
@@ -120,10 +122,10 @@
 	article.CONTENTS  ,   
 	article.HIT_CNT  ,   
 	article.DEL_GB  ,   
-	article.WRITE_DT,
+	DATE_FORMAT(WRITE_DT, "%Y-%m-%d %T") AS 'WRITE_DT',
 	article.WRITE_ID   
 	FROM
-	BIM_BOARD_TB  board,  BIM_ARTICLE_TB article  WHERE  board.id =  article.BOARD_ID AND article.idx = #{index};
+	BIM_BOARD_TB  board,  BIM_ARTICLE_TB article  WHERE  board.id =  article.BOARD_ID AND article.idx = 183;
 	
 		
 	  		]]>
@@ -141,7 +143,7 @@
 		CONTENTS  ,   
 		HIT_CNT  ,   
 		DEL_GB  ,   
-		DATE_FORMAT(WRITE_DT, "%Y-%m-%d %H:%i:%s") AS 'WRITE_DT'   ,   
+		DATE_FORMAT(WRITE_DT, "%Y-%m-%d %T %H:%i:%s") AS 'WRITE_DT'   ,   
 		WRITE_ID   
 		FROM   BIM_ARTICLE_TB   
 		WHERE BOARD_ID = #{id} AND DEL_GB = 'N'
@@ -160,7 +162,8 @@
 		article.CONTENTS  ,   
 		article.HIT_CNT  ,   
 		article.DEL_GB  ,  
-		DATE_FORMAT(WRITE_DT, "%Y-%m-%d ") AS 'WRITE_DT'  ,    
+		DATE_FORMAT(WRITE_DT, "%Y-%m-%d") AS 'WRITE_DT'  , 
+		DATE_FORMAT(WRITE_DT, "%T") AS 'WRITE_TIME'  ,    
 		article.WRITE_ID   
 		FROM   BIM_BOARD_TB  board,  BIM_ARTICLE_TB article WHERE  board.id =  article.BOARD_ID
 		AND article.BOARD_ID = #{boardId} 
