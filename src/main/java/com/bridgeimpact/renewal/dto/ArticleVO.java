@@ -13,6 +13,7 @@ public class ArticleVO {
 	private int hitCnt;  
 	private String delGb;  
 	private String writeDt;  
+	private String writeTime;  
 	private String writeId;
 	private MultipartFile files;
 	
@@ -109,6 +110,34 @@ public class ArticleVO {
 	public String getTitle() {
 		return title;
 	}
+
+
+
+
+
+
+	public String getWriteTime() {
+		return writeTime;
+	}
+
+
+
+
+
+
+
+
+
+
+
+	public void setWriteTime(String writeTime) {
+		this.writeTime = writeTime;
+	}
+
+
+
+
+
 
 
 

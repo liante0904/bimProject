@@ -14,8 +14,8 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-${param.searchType }
-<form action="../board/search.bim" method="get">
+<form action="../board/search.bim" method="get" class="navbar-form">
+<div class="form-group">
 <input type="hidden" id="id" name="id"> 
 검색 : 
 <select name="searchType" id="searchType">
@@ -24,7 +24,11 @@ ${param.searchType }
 	<option value="title+content" <c:if test="${param.searchType == 'title+content' }">selected="selected"</c:if>>제목+본문</option>
 	<option value="writer"  <c:if test="${param.searchType == 'writer' }">selected="selected"</c:if>>글쓴이</option>
 </select>
-<input type="text" name="searchKeyword" id="searchKeyword" value="${param.searchKeyword }"> <input type="submit" value="검색">
+</div>
+<div class="input-group input-group-sm">
+<input type="text" name="searchKeyword" id="searchKeyword" value="${param.searchKeyword }" class="form-control" >  <input type="submit" value="검색" class="btn btn-default">
+</div>
+
 </form>
 </body>
 </html>
