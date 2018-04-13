@@ -2,6 +2,7 @@ package com.bridgeimpact.renewal.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.bridgeimpact.renewal.common.PageUtil;
 import com.bridgeimpact.renewal.dto.ArticleVO;
 import com.bridgeimpact.renewal.dto.BoardVO;
@@ -86,10 +88,10 @@ public class BoardController {
 		String url = "redirect:/board/viewList.bim?id=" + id + "&page=" + pageUtil.getTotalPageCnt();
 			return 	url;
 		}
+		
 		/***
 		 * 요청 게시판의 게시글 세팅
 		 */
-		
 		List<ArticleVO> articleList = null;
 		
 		// 계산된 게시글 가져오기		
@@ -100,9 +102,20 @@ public class BoardController {
 			e.printStackTrace();
 		} 
 		
+		/***
+		 * 게시판 정보 세팅
+		 */
+		BoardVO board = null;
+		try {
+			board = boardService.getBoardByid(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		System.out.println("출력될 게시글 수 : " + pageUtil.getDisplayArticleCnt());
 		System.out.println("articleList:" + articleList);
-		model.addAttribute("boardName", articleList.get(0).getBoardName());
+		model.addAttribute("board", board);
 		model.addAttribute("articleList", articleList);
 		model.addAttribute("pageUtil", pageUtil);
 

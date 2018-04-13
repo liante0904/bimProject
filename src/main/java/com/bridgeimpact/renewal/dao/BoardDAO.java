@@ -10,7 +10,7 @@ public interface BoardDAO {
 
 	public void insertBoard(BoardVO board) throws Exception;
 
-	public int selectBoardById(String Id) throws Exception;
+	public int selectBoardCntById(String Id) throws Exception;
 
 	public int deleteBoardById(String id) throws Exception;
 
@@ -19,6 +19,9 @@ public interface BoardDAO {
 	public List<BoardVO> selectAllBoard() throws Exception;
 
 	public String selectBoardDelgbById(String id) throws Exception;
+
+	public BoardVO selectBoardById(String id) throws Exception;
+
 
 
 }

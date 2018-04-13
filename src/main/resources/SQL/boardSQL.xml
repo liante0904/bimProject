@@ -60,7 +60,7 @@
 	</insert>
 	
 	
-	 <select id="selectBoardById" parameterType="String" resultType="int">
+	 <select id="selectBoardCntById" parameterType="String" resultType="int">
 	<![CDATA[
 	
 	
@@ -113,6 +113,23 @@
 		]]>
 	</update>
 	
+	
+	
+		
+	 <select id="selectBoardById" parameterType="String" resultType="boardVO">
+	<![CDATA[
+	
+	
+		SELECT   
+		IDX  ,   
+		ID  ,   
+		NAME  ,   
+		DEL_GB    
+		FROM   BIM_BOARD_TB  
+		WHERE 
+		ID = #{value}		
+    ]]>
+    </select>
 <!-- 
 
     

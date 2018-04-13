@@ -20,5 +20,7 @@ public interface BoardService {
 
 	public int checkBoardStatusById(String id) throws Exception;
 
+	public BoardVO getBoardByid(String id) throws Exception;
+
 
 }

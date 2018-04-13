@@ -29,7 +29,7 @@ $(function(){
 <body>
  
  <div class="container articleList">
-   <h4>									<c:forEach items="${boardList}" var="board"><c:if test="${param.id eq board.id}"><a href="../board/viewList.bim?id=${board.id }">${board.name}</a></c:if></c:forEach></h4>
+   <h4>	<a href="../board/viewList.bim?id=${board.id }">${board.name}</a></h4>
 
     <table class="table table-hover">
         <thead>

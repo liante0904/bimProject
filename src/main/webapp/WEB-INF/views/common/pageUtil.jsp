@@ -68,7 +68,8 @@
 			</ul>
 		</div>
 	</nav>
-	
+<%-- 
+<div>
 	<br>
 ${requestURI}
 	<div>begin : ${pageUtil.pageRangeCnt + 1  }
@@ -87,5 +88,7 @@ ${requestURI}
 	<div>현재 범위 : ${ var1 + pageUtil.displayPageCnt }</div>
 	<div>마지막페이지 범위 : ${var2 + pageUtil.displayPageCnt }</div>
 
+</div>
+ --%>
 </body>
 </html>

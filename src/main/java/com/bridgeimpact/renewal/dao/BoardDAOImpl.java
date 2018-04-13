@@ -40,9 +40,9 @@ public class BoardDAOImpl implements BoardDAO {
 
 
 	@Override
-	public int selectBoardById(String id) throws Exception {
+	public int selectBoardCntById(String id) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(Namespace+".selectBoardById", id);
+		return sqlSession.selectOne(Namespace+".selectBoardCntById", id);
 	}
 
 
@@ -65,6 +65,13 @@ public class BoardDAOImpl implements BoardDAO {
 	public String selectBoardDelgbById(String id) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(Namespace+".selectBoardDelgbById", id);
+	}
+
+
+	@Override
+	public BoardVO selectBoardById(String id) throws Exception {
+		return (BoardVO)sqlSession.selectOne(Namespace+".selectBoardById", id);
+		
 	}
 
 

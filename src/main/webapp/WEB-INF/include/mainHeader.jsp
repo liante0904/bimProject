@@ -106,11 +106,11 @@ $(function(){
 										<li><a href="#" id="logout">로그아웃</a></li>
 									</c:if>
 			
-			
-									<li><a
-										href="${pageContext.request.contextPath }/admin/admin.bim">관리자
+								<c:if test="${sessionScope.loginInfo.id eq 'admin' }">
+									<li><a href="${pageContext.request.contextPath }/admin/admin.bim">관리자
 											페이지(예시)</a></li>
 									<li><a href="http://www.bridgeimpact.com/">이전 BIM 페이지</a></li>
+
 					                <li class="dropdown">
 					                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
 					                  <ul class="dropdown-menu" role="menu">
@@ -123,6 +123,7 @@ $(function(){
 					                    <li><a href="#">One more separated link</a></li>
 					                  </ul>
 					                </li>
+					           </c:if>
 							</ul>
 						</div>
 					</div>

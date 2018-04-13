@@ -6,7 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="/WEB-INF/include/mainHeader.jsp" %>
-<title>Insert title here</title>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+});
+</script>
+<title>index.jsp</title>
 </head>
 <body>
 
@@ -17,7 +22,14 @@
         <p>
           <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs »</a>
         </p>
+
       </div>
+      
+    	<div class="row">
+		  <div class="col-md-6">.col-md-6</div>
+		  <div class="col-md-6">.col-md-6</div>
+		</div>
+      
 </div>
 
 <footer class="footer">
