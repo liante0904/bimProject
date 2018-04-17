@@ -42,7 +42,9 @@ $(function(){
             </tr>
         </thead>
         <tbody>
-         
+
+<c:choose>
+    <c:when test="${fn:length(articleList) > 0 }">
             <c:forEach items="${articleList}" var="article" begin="0" end="${pageUtil.displayArticleCnt - 1}">
                 <tr>
                     <td>${article.idx}</td>
@@ -53,28 +55,31 @@ $(function(){
                     <jsp:useBean id="now" class="java.util.Date" />
 					 <fmt:formatDate pattern = "yyyy-MM-dd"     value = "${now}" var="today"/>
 						
+			<c:choose>
+			    <c:when test="${today eq article.writeDt}">
+			    ${fn:substring(article.writeTime,0,5) }
+			    </c:when>
+			
+			    <c:otherwise>
+			    ${fn:substring(article.writeDt,5,10) }
+			    </c:otherwise>
+			</c:choose>
 
-<c:choose>
+                    </td>
+                </tr>
 
-    <c:when test="${today eq article.writeDt}">
-    ${fn:substring(article.writeTime,0,5) }
+            </c:forEach>
     </c:when>
 
 
     <c:otherwise>
-    ${fn:substring(article.writeDt,5,10) }
+        게시글이 존재하지 않습니다. 
     </c:otherwise>
 
 </c:choose>
 
-                    
-                    </td>
-                </tr>
-                
-            </c:forEach>
-
         </tbody>
-    </table>		
+    </table>
  <input type="button" id="write" class="btn btn-primary pull-right" value="글쓰기"/>
 </div>
  
