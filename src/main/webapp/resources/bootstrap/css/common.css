@@ -9,6 +9,10 @@ body {
 
 }
 
+form[action="../board/search.bim"] {
+	text-align: center;
+}
+
 .container.viewArticle, .container.articleList  {
 	margin-bottom: 30px;
 	margin-top: 40px;
