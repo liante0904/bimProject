@@ -80,4 +80,14 @@ public class ArticleDAOImpl implements ArticleDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(Namespace+".selectArticleByKeyword", paramMap);
 	}
+
+	@Override
+	public List<ArticleVO> selectArticleByRecent(int articleCnt, String boardId) throws Exception {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> paramMap = new HashMap<>();
+		paramMap.put("articleCnt", 5);
+		paramMap.put("boardId", boardId);
+		return sqlSession.selectList(Namespace+".selectArticleByRecent", paramMap);
+		
+	}
 }

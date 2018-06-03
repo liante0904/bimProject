@@ -1,5 +1,6 @@
 package com.bridgeimpact.renewal.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.bridgeimpact.renewal.dao.ArticleDAO;
 import com.bridgeimpact.renewal.dao.BoardDAO;
 import com.bridgeimpact.renewal.dto.ArticleVO;
+import com.bridgeimpact.renewal.dto.BoardVO;
 
 
 @Service
@@ -89,6 +91,19 @@ public class ArticleServiceImpl implements ArticleService {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public List<ArticleVO> selectMainArticleList(List<BoardVO> boardList) throws Exception {
+		//TODO articleCnt should be static parameter
+		int articleCnt = 5;
+    	List<ArticleVO> resultList = new ArrayList<ArticleVO>();
+    	resultList.addAll(articleDAO.selectArticleByRecent(articleCnt,boardList.get(0).getId()));
+    	resultList.addAll(articleDAO.selectArticleByRecent(articleCnt,boardList.get(1).getId()));
+    	resultList.addAll(articleDAO.selectArticleByRecent(articleCnt,boardList.get(2).getId()));
+    	resultList.addAll(articleDAO.selectArticleByRecent(articleCnt,boardList.get(3).getId()));
+		System.out.println("map 테스트 : " + resultList);
+    	return resultList;
 	}
 
 

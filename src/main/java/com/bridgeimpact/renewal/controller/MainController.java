@@ -1,5 +1,6 @@
 package com.bridgeimpact.renewal.controller;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bridgeimpact.renewal.dto.ArticleVO;
 import com.bridgeimpact.renewal.dto.BoardVO;
 import com.bridgeimpact.renewal.dto.FileVO;
 import com.bridgeimpact.renewal.dto.MemberVO;
+import com.bridgeimpact.renewal.service.ArticleService;
 import com.bridgeimpact.renewal.service.BoardService;
 import com.bridgeimpact.renewal.service.FileService;
 import com.bridgeimpact.renewal.service.MemberService;
@@ -39,6 +42,9 @@ public class MainController {
     
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private ArticleService articleService;
 
 	@Autowired
 	private FileService fileService;
@@ -55,8 +61,24 @@ public class MainController {
 	 * @throws Exception
 	 */
     @RequestMapping(value = {"/" ,"/index.bim"} , method = RequestMethod.GET)
-    public String indexForm() {
-        return "index";
+    public ModelAndView indexForm(Model model,HttpSession session) {
+    	/***
+    	 * 최근 게시글 세팅 로직
+    	 */
+    	List<BoardVO> boardList =  (List<BoardVO>) session.getAttribute("boardList");
+    	System.out.println("boardList 확인 : " + boardList);
+    	List<ArticleVO> mainArticleList = new ArrayList<ArticleVO>();
+    	try {
+    		mainArticleList = articleService.selectMainArticleList(boardList);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+    	System.out.println("출력 테스트 : " + mainArticleList);
+    	model.addAttribute("mainArticleList", mainArticleList);
+        return new ModelAndView("index");
     }
 	@RequestMapping(value="main/loginForm.bim")
 	public String loginForm() {

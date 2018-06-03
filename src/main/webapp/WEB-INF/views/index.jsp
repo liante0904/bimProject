@@ -23,11 +23,33 @@ $(document).ready(function(){
           <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs »</a>
         </p>
 
+
       </div>
       
     	<div class="row">
-		  <div class="col-md-6">.col-md-6</div>
-		  <div class="col-md-6">.col-md-6</div>
+  			<c:forEach items="${boardList }" var="boardList">
+				<div class="col-md-6" id="${boardList.id }">
+					<h2>${boardList.name }</h2>
+					  	<c:forEach items="${mainArticleList }" var="articleList">
+							<div>
+								<c:if test="${articleList.boardId eq boardList.id }">
+									<a href="${pageContext.request.contextPath}/board/viewArticle.bim?id=${articleList.boardId}&num=${articleList.idx}">${articleList.title}</a> 
+								</c:if>
+							</div>		  			
+				  		</c:forEach>
+				</div>
+  			</c:forEach>
+<%-- 			
+			<div class="col-md-6" id="freeboard">
+			  	<c:forEach items="${articleList }" var="articleList">
+			  		<c:if test="${articleList.boardId eq 'freeboard' }">
+						<div>
+							<a href="${pageContext.request.contextPath}//board/viewArticle.bim?id=${articleList.boardId }&num=${articleList.idx } ">${articleList.title }</a> 
+						</div>		  			
+			  		</c:if>
+			  	</c:forEach>
+			</div>
+			 --%>
 		</div>
       
 </div>

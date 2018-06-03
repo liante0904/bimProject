@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.bridgeimpact.renewal.dto.ArticleVO;
+import com.bridgeimpact.renewal.dto.BoardVO;
 
 public interface ArticleService {
 
@@ -28,6 +29,8 @@ public interface ArticleService {
 	public List<ArticleVO> selectArticleByKeyword(HashMap<String, Object> paramMap) throws Exception;
 
 	public Boolean checkValidateArticleByIdx(int num) throws Exception;
+
+	public List<ArticleVO> selectMainArticleList(List<BoardVO> boardList) throws Exception;
 
 
 
