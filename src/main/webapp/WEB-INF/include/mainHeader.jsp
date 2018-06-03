@@ -13,10 +13,11 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bootstrap/css/carousel.css">    <!-- Custom styles for this template -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bootstrap/css/common.css">    <!-- common CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bootstrap/css/sticky-footer.css">    <!-- bootstrap sticky-footer.css CSS -->
-
 <script src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>	<!-- Bootstrap core js(TODO locate footer) -->
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="${pageContext.request.contextPath}/resources/bootstrap/js/ie10-viewport-bug-workaround.js"></script>
+<script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>	<!-- ckeditor -->
+
 <script type="text/javascript">
 var localhost = '${pageContext.request.contextPath }';
 

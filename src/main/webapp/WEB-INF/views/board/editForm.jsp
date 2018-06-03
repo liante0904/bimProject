@@ -60,7 +60,13 @@ $(function(){
                 
                 <tr>
 					<th>내용</th>                   
-                       <td> <textarea rows="20" cols="100" id="contents" name="contents" class="form-control"></textarea></td>
+  						<td> <textarea id="contents" name="contents" class="form-control"></textarea>
+								<script>
+					                // Replace the <textarea id="editor1"> with a CKEditor
+					                // instance, using default configuration.
+					                CKEDITOR.replace( 'contents' );
+					            </script>
+			            </td>
                 </tr>
             </tbody>
         </table>
