@@ -12,7 +12,7 @@ import com.bridgeimpact.renewal.service.ArticleService;
 
 public class PageUtil {
 
-	private final int displayArticleCnt = 5;
+	private final int displayArticleCnt = 10;
 	// 보여질 게시글 갯수
 	private final int displayPageCnt = 5;
 	// 보여질 페이지 갯수 

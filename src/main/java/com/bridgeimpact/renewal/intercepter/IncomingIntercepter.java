@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.bridgeimpact.renewal.dao.BoardDAO;
-import com.bridgeimpact.renewal.dto.ArticleVO;
 import com.bridgeimpact.renewal.dto.BoardVO;
 
 
@@ -35,7 +34,7 @@ public class IncomingIntercepter extends HandlerInterceptorAdapter {
         */
 	   
 	   List<BoardVO> boardList =  (List<BoardVO>) request.getSession().getAttribute("boardList");
-	   List<ArticleVO> articleList =  (List<ArticleVO>) request.getSession().getAttribute("articleList");
+	   //List<ArticleVO> articleList =  (List<ArticleVO>) request.getSession().getAttribute("articleList");
 
    		try {
    			String delGb = "N";

@@ -18,7 +18,7 @@ $(document).ready(function(){
 	<form action="../board/search.bim" method="get" class="navbar-form" id="searchForm">
 		<div class="form-group">
 			<input type="hidden" id="id" name="id"> 
-			검색 : 
+
 			<select name="searchType" id="searchType" class="form-control">
 				<option value="title" <c:if test="${param.searchType == 'title' }">selected="selected"</c:if>>제목	검색</option>
 				<option value="content" <c:if test="${param.searchType == 'content' }">selected="selected"</c:if>>본문	검색</option>
