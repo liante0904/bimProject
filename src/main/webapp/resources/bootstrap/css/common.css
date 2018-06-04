@@ -87,3 +87,14 @@ form#joinForm label.error {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+.articleList {
+	list-style: none;
+  
+    
+    
+    padding: 5px 0px 5px 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #efefef;
+    font-size: 12px;
+}

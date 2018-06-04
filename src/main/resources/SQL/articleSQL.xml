@@ -149,8 +149,9 @@
 		article.DEL_GB  ,  
 		DATE_FORMAT(WRITE_DT, "%Y-%m-%d") AS 'WRITE_DT'  , 
 		DATE_FORMAT(WRITE_DT, "%T") AS 'WRITE_TIME'  ,    
-		article.WRITE_ID   
-		FROM   BIM_BOARD_TB  board,  BIM_ARTICLE_TB article WHERE  board.id =  article.BOARD_ID
+		article.WRITE_ID  , 
+		(SELECT COUNT(*) FROM BIM_ARTICLE_COMMENT_TB comment WHERE comment.PARENT_IDX = article.IDX) as COMMENT_CNT 
+		FROM   BIM_BOARD_TB  board,  BIM_ARTICLE_TB article  WHERE  board.id =  article.BOARD_ID
 		AND article.BOARD_ID = #{boardId} 
 		AND article.DEL_GB = 'N'
 		<if test="searchKeyword != null">

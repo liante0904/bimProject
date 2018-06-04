@@ -16,6 +16,7 @@ public class ArticleVO {
 	private String writeTime;  
 	private String writeId;
 	private MultipartFile files;
+	private int commentCnt;
 	
 	public ArticleVO() {
 		super();
@@ -36,10 +37,12 @@ public class ArticleVO {
 	public String toString() {
 		return "ArticleVO [idx=" + idx + ", boardId=" + boardId + ", boardName=" + boardName + ", title=" + title
 				+ ", contents=" + contents + ", hitCnt=" + hitCnt + ", delGb=" + delGb + ", writeDt=" + writeDt
-				+ ", writeId=" + writeId + ", files=" + files + ", getIdx()=" + getIdx() + ", getBoardId()="
-				+ getBoardId() + ", getBoardName()=" + getBoardName() + ", getTitle()=" + getTitle()
+				+ ", writeTime=" + writeTime + ", writeId=" + writeId + ", files=" + files + ", commentCnt="
+				+ commentCnt + ", getIdx()=" + getIdx() + ", getBoardId()=" + getBoardId() + ", getBoardName()="
+				+ getBoardName() + ", getTitle()=" + getTitle() + ", getWriteTime()=" + getWriteTime()
 				+ ", getContents()=" + getContents() + ", getHitCnt()=" + getHitCnt() + ", getDelGb()=" + getDelGb()
 				+ ", getWriteDt()=" + getWriteDt() + ", getWriteId()=" + getWriteId() + ", getFiles()=" + getFiles()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
 				+ "]";
 	}
 
@@ -254,6 +257,34 @@ public class ArticleVO {
 
 	public void setFiles(MultipartFile files) {
 		this.files = files;
+	}
+
+
+
+
+
+
+
+
+
+
+
+	public int getCommentCnt() {
+		return commentCnt;
+	}
+
+
+
+
+
+
+
+
+
+
+
+	public void setCommentCnt(int commentCnt) {
+		this.commentCnt = commentCnt;
 	}
 
 

@@ -90,10 +90,11 @@ $(function(){
 		    <c:when test="${fn:length(articleList) > 0 }">
 		    	<c:forEach items="${articleList}" var="article" begin="0" end="${pageUtil.displayArticleCnt - 1}">
 		    		<ul>
-		    			<li>
+		    			<li class="articleList">
 		    				<a href="../board/viewArticle.bim?id=${article.boardId}&num=${article.idx}">
 		    					<span>${article.title}</span>
 		    					<span>
+		    						<span>[${article.commentCnt}]</span>
 		    						<span>${article.writeId}</span>
 		    						<span>${article.hitCnt}</span>
 		    						<span> 
