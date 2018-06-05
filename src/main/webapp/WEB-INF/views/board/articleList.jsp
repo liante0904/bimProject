@@ -85,19 +85,20 @@ $(function(){
 	     --%>
 
 	
-	<div class="containter">
+	<div>
 		<c:choose>
 		    <c:when test="${fn:length(articleList) > 0 }">
 		    	<c:forEach items="${articleList}" var="article" begin="0" end="${pageUtil.displayArticleCnt - 1}">
 		    		<ul>
 		    			<li class="articleList">
 		    				<a href="../board/viewArticle.bim?id=${article.boardId}&num=${article.idx}">
-		    					<span>${article.title}</span>
-		    					<span>
-		    						<span>[${article.commentCnt}]</span>
-		    						<span>${article.writeId}</span>
-		    						<span>${article.hitCnt}</span>
-		    						<span> 
+		    					<span class="title">${article.title} 
+		    						<span> <c:if test="${article.commentCnt > 0}">[${article.commentCnt}]</c:if></span>
+		    					</span>
+		    					<span class="articleInfo">
+		    						<span class="writeId">${article.writeId}</span>
+		    						<span class="hitCnt">${article.hitCnt}</span>
+		    						<span class="writeDt"> 
 			    						<jsp:useBean id="now" class="java.util.Date" /> <fmt:formatDate pattern="yyyy-MM-dd" value="${now}" var="today" /> 
 				    						<c:choose>
 												<c:when test="${today eq article.writeDt}">
