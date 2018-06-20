@@ -25,6 +25,7 @@ http://liante0904.asuscomm.com:9090/bimProject/
 ## About
 
 ### ChangeLog
+- 게시글 검색 기능(본문, 제목+본문, 글쓰기 검색) 
 - 위지윅 적용(WYSIWYG) 
 - 글목록 댓글 갯수 표시 
 - 메인 페이지 레이아웃 추가 (게시판 최근 글)
@@ -44,9 +45,8 @@ http://liante0904.asuscomm.com:9090/bimProject/
 
 ## TODOList
 - SSL적용
-- 게시글 검색 기능(본문, 제목+본문, 글쓰기 검색) 
+- 메인 페이지 레이아웃 수정
 - 회원가입, 로그인 로직 개선 (이메일 인증 Transaction, 소셜 회원가입)
-- table 태그 비율 or 레이아웃 변경
 - Side bar Toogle 구현
 - 온라인 신청페이지
 - 에러알림처리 (사용자에게 에러문구 처리)

@@ -154,12 +154,44 @@
 		FROM   BIM_BOARD_TB  board,  BIM_ARTICLE_TB article  WHERE  board.id =  article.BOARD_ID
 		AND article.BOARD_ID = #{boardId} 
 		AND article.DEL_GB = 'N'
+<!--  
 		<if test="searchKeyword != null">
 		AND	${searchType}  LIKE CONCAT('%',#{searchKeyword} ,'%')
 		</if>
+		 -->
+
+ 		<choose>
+ 			<when test="searchKeyword == null">
+ 			</when>
+ 		
+			<when test="searchKeyword != null and searchType.equals('title')">
+			AND	article.TITLE  LIKE CONCAT('%',#{searchKeyword} ,'%')
+			</when>
+
+			<when test="searchKeyword != null and searchType.equals('contents')">
+			AND	article.CONTENTS  LIKE CONCAT('%',#{searchKeyword} ,'%')
+			</when>
+
+			<when test="searchKeyword != null and searchType.equals('title+contents')">
+			AND	article.TITLE LIKE CONCAT('%', #{searchKeyword}  ,'%')
+			OR	article.CONTENTS  LIKE CONCAT('%', #{searchKeyword}  ,'%')
+			</when>
+
+
+			<when test="searchKeyword != null and searchType.equals('write_id')">
+			AND	article.WRITE_ID  LIKE CONCAT('%',#{searchKeyword} ,'%')
+			</when>
+
+			<otherwise>
+			</otherwise>
+			
+		</choose>
+
+		
 		ORDER BY article.IDX DESC
 		LIMIT  
 		#{startArticleCnt} , #{displayArticleCnt}
+		
     </select>
     
     <select id="selectArticleByRecent" parameterType="map" resultType="articleVO">

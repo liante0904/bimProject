@@ -429,10 +429,14 @@ public class ArticleController {
 	     * @param searchKeyword : 검색어 
 	     * @return paramMap : HashMap
 	     */
-		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("boardId", id);
-		paramMap.put("searchType", searchType);
-		paramMap.put("searchKeyword", searchKeyword);
+		
+//		
+//		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+//		paramMap.put("boardId", id);
+//		paramMap.put("searchType", searchType);
+//		paramMap.put("searchKeyword", searchKeyword);
+//		
+//		
 		
 		List<ArticleVO> articleList = null;
 		

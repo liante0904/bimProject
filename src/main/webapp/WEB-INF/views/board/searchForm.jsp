@@ -21,9 +21,9 @@ $(document).ready(function(){
 
 			<select name="searchType" id="searchType" class="form-control">
 				<option value="title" <c:if test="${param.searchType == 'title' }">selected="selected"</c:if>>제목	검색</option>
-				<option value="content" <c:if test="${param.searchType == 'content' }">selected="selected"</c:if>>본문	검색</option>
-				<option value="title+content" <c:if test="${param.searchType == 'title+content' }">selected="selected"</c:if>>제목+본문	검색</option>
-				<option value="writer"  <c:if test="${param.searchType == 'writer' }">selected="selected"</c:if>>글쓴이	검색</option>
+				<option value="contents" <c:if test="${param.searchType == 'contents' }">selected="selected"</c:if>>본문	검색</option>
+				<option value="title+contents" <c:if test="${param.searchType == 'title+contents' }">selected="selected"</c:if>>제목+본문	검색</option>
+				<option value="write_id"  <c:if test="${param.searchType == 'write_id' }">selected="selected"</c:if>>글쓴이	검색</option>
 			</select>
 		</div>
 		<div class="form-group">
