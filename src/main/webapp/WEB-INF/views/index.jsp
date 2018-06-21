@@ -29,11 +29,14 @@ $(document).ready(function(){
     	<div class="row">
   			<c:forEach items="${boardList }" var="boardList">
 				<div class="col-md-6" id="${boardList.id }">
-					<h2>${boardList.name }</h2>
+					<h2 class="mainTitle">${boardList.name }</h2>
 					  	<c:forEach items="${mainArticleList }" var="articleList">
-							<div>
+							<div class="mainArticle">
 								<c:if test="${articleList.boardId eq boardList.id }">
-									<a href="${pageContext.request.contextPath}/board/viewArticle.bim?id=${articleList.boardId}&num=${articleList.idx}">${articleList.title}</a> 
+									<a href="${pageContext.request.contextPath}/board/viewArticle.bim?id=${articleList.boardId}&num=${articleList.idx}">
+										<span class="boardName">${articleList.boardName}</span>
+										<span class="articleTitle">${articleList.title}</span>
+									</a> 
 								</c:if>
 							</div>		  			
 				  		</c:forEach>

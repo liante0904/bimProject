@@ -196,16 +196,18 @@
     
     <select id="selectArticleByRecent" parameterType="map" resultType="articleVO">
 		SELECT   
-		IDX  ,   
-		BOARD_ID  ,   
-		TITLE  ,   
-		CONTENTS  ,   
-		HIT_CNT  ,   
-		DEL_GB  ,   
+		article.IDX  ,   
+		article.BOARD_ID  ,  
+		board.NAME AS 'BOARD_NAME',
+		article.TITLE  ,   
+		article.CONTENTS  ,   
+		article.HIT_CNT  ,   
+		article.DEL_GB  ,   
 		DATE_FORMAT(WRITE_DT, "%Y-%m-%d %T") AS 'WRITE_DT'   ,   
-		WRITE_ID   
-		FROM   BIM_ARTICLE_TB  WHERE BOARD_ID = #{boardId}
-		AND DEL_GB = 'N'
+		article.WRITE_ID   
+		FROM   BIM_BOARD_TB  board,  BIM_ARTICLE_TB article  WHERE  board.id =  article.BOARD_ID 		
+		AND article.DEL_GB = 'N' 
+		AND article.BOARD_ID = #{boardId}
 		ORDER BY IDX DESC
 		LIMIT  	 0 , #{articleCnt}
 	</select>

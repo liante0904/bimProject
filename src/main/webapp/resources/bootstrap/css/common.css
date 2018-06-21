@@ -105,3 +105,43 @@ form#joinForm label.error {
 	border-left: 1px solid #efefef;
     
 }
+
+.articleInfo .writeId {
+	display: inline-block;
+	padding-right: 5px;
+}
+.articleInfo .hitCnt {
+	display: inline-block;
+	width: 40px;
+	text-align: center;
+}
+
+div.mainArticle .boardName{
+	display: inline-block;
+	overflow: hidden;
+	background-color: #666;
+	color: #fff;
+}
+div.mainArticle .articleTitle{
+	display: inline-block;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	width: 350px;
+}
+
+li.articleList .title, li.articleList .comment{
+	display: inline-block;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	max-width: 350px;
+	font-size: 14px;
+	padding: 0px 5px 0px 5px;
+}
+
+.mainTitle {
+    padding: 5px 10px 8px 5px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #bebebe;
+}
