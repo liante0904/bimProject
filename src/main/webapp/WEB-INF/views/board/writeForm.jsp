@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="/WEB-INF/include/mainHeader.jsp" %>
+<%@ include file="/WEB-INF/include/include.jsp" %>
 <title>Home</title>
 <script type="text/javascript">
 
@@ -13,6 +14,30 @@ $(document).ready(function(){
 }); 
 
 $(function(){
+	$('form').validate({
+		rules : {
+			
+			title: {
+				required : true,
+				minlength: 1
+			},
+			contents: {
+				required : true,
+				minlength: 3
+			}
+		},
+		messages : {
+			title:{
+				required : "글 제목을 입력하세요",	
+				minlength : "글 제목을 입력하세요"
+			},
+			contents: {
+				required : "본문을 입력하세요",
+				minlength : "본문을 입력하세요"
+			}
+		},
+	});
+	
 	$("#write").on("click", function(e) {
 		e.preventDefault();
 		$("form").submit();
