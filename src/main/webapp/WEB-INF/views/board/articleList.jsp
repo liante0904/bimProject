@@ -29,7 +29,7 @@ $(function(){
 <body>
  
  <div class="container articleList">
-   <h4>	<a href="../board/viewList.bim?id=${board.id }">${board.name}</a></h4>
+   <h4 class="mb-1">	<a href="../board/viewList.bim?id=${board.id }">${board.name}</a></h4>
 <%-- 
 	<div class="table-responsive">
 	    <table class="table table-hover">

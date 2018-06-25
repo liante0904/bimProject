@@ -49,9 +49,9 @@ $(function(){
 </head>
 <body>
 <div class="container">
-    <h1>editForm.jsp</h1>
+    <h1 class="mb-1">글수정</h1>
      <form action="../board/editArticle.bim" method="post">
-        <table class="table">
+<!--         <table class="table">
             <tbody>
                 <tr>
                     <th>제목</th>
@@ -69,9 +69,25 @@ $(function(){
 			            </td>
                 </tr>
             </tbody>
-        </table>
- <input type="button" id="edit" value="수정" class="btn btn-primary"/>
- <input type="button" id="cancel" value="목록" class="btn btn-primary"/>
+        </table> -->
+        <div class="container">
+        		<div class="mt-2">
+        			<input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력하세요." />
+        		</div>
+        		<div class="mt-2">
+        			<textarea id="contents" name="contents" class="form-control"></textarea>
+					<script>
+		                // Replace the <textarea id="editor1"> with a CKEditor
+		                // instance, using default configuration.
+		                CKEDITOR.replace( 'contents' );
+		            </script>
+        		</div>
+        		<div class="mt-2">
+			 <input type="button" id="cancel" value="목록" class="btn btn-default"/>
+			 <input type="button" id="edit" value="수정" class="btn btn-primary pull-right"/>
+        			
+        		</div>
+        </div>
  
     </form>
 </div>
