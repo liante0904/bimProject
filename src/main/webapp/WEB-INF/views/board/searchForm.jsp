@@ -23,7 +23,7 @@ $(document).ready(function(){
 				<option value="title" <c:if test="${param.searchType == 'title' }">selected="selected"</c:if>>제목	검색</option>
 				<option value="contents" <c:if test="${param.searchType == 'contents' }">selected="selected"</c:if>>본문	검색</option>
 				<option value="title+contents" <c:if test="${param.searchType == 'title+contents' }">selected="selected"</c:if>>제목+본문	검색</option>
-				<option value="write_id"  <c:if test="${param.searchType == 'write_id' }">selected="selected"</c:if>>글쓴이	검색</option>
+				<option value="write_id"  <c:if test="${param.searchType == 'write_id' }">selected="selected"</c:if>>아이디 	검색</option>
 			</select>
 		</div>
 		<div class="form-group">
