@@ -19,7 +19,7 @@ form[action="../board/search.bim"] {
 	/* padding-right: 10px; */
 }
 
-.container.viewArticle h4, .container.articleList h4 {
+.container.viewArticle h4 {
 	margin-bottom: 30px;
 	
 }
@@ -141,9 +141,17 @@ li.articleList .title, li.articleList .comment{
 	font-size: 14px;
 	padding: 0px 5px 0px 5px;
 }
-
+/* 
 .mainTitle {
     padding: 5px 10px 8px 5px;
     margin-bottom: 12px;
     border-bottom: 1px solid #bebebe;
+}
+*/
+.mb-1 {
+	margin-bottom: 1em;
+}
+
+.mt-2 {
+	margin-top: 0.5em;
 }
