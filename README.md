@@ -45,6 +45,7 @@ http://liante0904.asuscomm.com:9090/bimProject/
 
 ## TODOList
 - SSL적용
+- 게시글 작성, 수정시 파일 업로드 로직개선
 - 메인 페이지 레이아웃 수정
 - 회원가입, 로그인 로직 개선 (이메일 인증 Transaction, 소셜 회원가입)
 - Side bar Toogle 구현

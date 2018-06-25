@@ -74,9 +74,9 @@ $(function(){
 </head>
 <body>
 <div class="container">
-    <h1>writeForm.jsp</h1>
+    <h1 class="mb-1">글쓰기</h1>
      <form id="writeForm" action="../board/writeArticle.bim" method="post" enctype="multipart/form-data">
-        <table class="table">
+<!--         <table class="table">
             <tbody>
                 <tr>
                     <th>제목</th>
@@ -107,11 +107,34 @@ $(function(){
                 		<td><input type="file" name="files4" class="form-control"></td>
                 </tr>
             </tbody>
-        </table>
- <input type="button" id="write" value="글쓰기"  class="btn btn-lg btn-primary btn-block"/>
- <input type="button" id="cancel" value="목록"  class="btn btn-lg btn-primary btn-block"/>
- <input type="hidden" id="boardId" name="boardId" value="${param.id }"/>
- 
+        </table> -->
+        <div class="container">
+     		<div class="mt-2">
+    		    		<input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력해주세요."/>
+     		</div>
+        		
+        		<div class="mt-2">
+        			<textarea id="contents" name="contents" class="form-control"></textarea>
+					<script>
+		                // Replace the <textarea id="editor1"> with a CKEditor
+		                // instance, using default configuration.
+		                CKEDITOR.replace( 'contents' );
+		            </script>
+        		</div>
+        		
+        		<div class="mt-2">
+        			<input type="file" name="files1" class="form-control">
+        			<input type="file" name="files2" class="form-control">
+        			<input type="file" name="files3" class="form-control">
+        			<input type="file" name="files4" class="form-control">
+        			
+        		</div>
+			<div class="mt-2">
+				 <input type="button" id="cancel" value="목록"  class="btn  btn-default"/>
+				 <input type="button" id="write" value="글쓰기"  class="btn  btn-primary  pull-right"/>
+				 <input type="hidden" id="boardId" name="boardId" value="${param.id }"/> 
+			</div>
+        </div>
     </form>
 </div>
 
