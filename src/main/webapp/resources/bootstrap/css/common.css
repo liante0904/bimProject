@@ -1,3 +1,4 @@
+/* mainPage */
 html, body {
 	background-color: #eee;
 }
@@ -7,6 +8,13 @@ html, body {
 }
 .jumbotron {
 	margin-top: 25px;
+}
+.main_page .recent_article {
+	background-color: #FFF;
+}
+.recent_article {
+	margin: 5px -8px 5px -8px;
+	padding: 5px 5px 5px 5px;
 }
 body {
   padding-top: 40px;
@@ -213,7 +221,10 @@ li.articleList .title, li.articleList .comment{
 	height: 35px;
 }
 .comment_contents {
-	padding: 10px 15px 10px 15px;
+	padding: 10px 15px 10px 10px;
+}
+.comment_editForm_div {
+	display: none; 
 }
 .comment_depth_picker {
 	position: relative;
@@ -226,6 +237,7 @@ li.articleList .title, li.articleList .comment{
 }
 .comment_editForm {
 	margin: -20px 0 5px 25px;
-	padding: 5px 15px 10px 15px;	
+	padding: 5px 15px 20px 15px;	
 	background: #f1f1f1;
+	border-left: 2px solid #ccc;
 }

@@ -24,20 +24,22 @@ $(document).ready(function(){
         </p>
 	</div>
       
-    	<div class="row">
+    	<div class="main_page row">
   			<c:forEach items="${boardList }" var="boardList">
-				<div class="col-md-6" id="${boardList.id }">
-					<h2 class="mainTitle"><a href="${pageContext.request.contextPath}/board/viewList.bim?id=${boardList.id }">${boardList.name }</a></h2>
-					  	<c:forEach items="${mainArticleList }" var="articleList">
-							<div class="mainArticle">
-								<c:if test="${articleList.boardId eq boardList.id }">
-									<a href="${pageContext.request.contextPath}/board/viewArticle.bim?id=${articleList.boardId}&num=${articleList.idx}">
-										<span class="boardName">${articleList.boardName}</span>
-										<span class="articleTitle">${articleList.title}</span>
-									</a> 
-								</c:if>
-							</div>		  			
-				  		</c:forEach>
+				<div class="col-md-6" >
+					<div class="recent_article" id="${boardList.id }">
+						<h2 class="mainTitle"><a href="${pageContext.request.contextPath}/board/viewList.bim?id=${boardList.id }">${boardList.name }</a></h2>
+						  	<c:forEach items="${mainArticleList }" var="articleList">
+								<div class="mainArticle">
+									<c:if test="${articleList.boardId eq boardList.id }">
+										<a href="${pageContext.request.contextPath}/board/viewArticle.bim?id=${articleList.boardId}&num=${articleList.idx}">
+											<span class="boardName">${articleList.boardName}</span>
+											<span class="articleTitle">${articleList.title}</span>
+										</a> 
+									</c:if>
+								</div>		  			
+					  		</c:forEach>
+					</div>
 				</div>
   			</c:forEach>
 <%-- 			
