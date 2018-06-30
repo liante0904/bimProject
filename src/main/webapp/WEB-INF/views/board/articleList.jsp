@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <%@ include file="/WEB-INF/include/mainHeader.jsp" %>
 
-<title>Home</title>
+<title>${board.name}</title>
 <script type="text/javascript">
 
 $(document).ready(function(){ 

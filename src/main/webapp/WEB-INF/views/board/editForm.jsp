@@ -5,21 +5,54 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="/WEB-INF/include/mainHeader.jsp" %>
+<%@ include file="/WEB-INF/include/include.jsp" %>
 
 <title>Home</title>
 <script type="text/javascript">
 
 $(document).ready(function(){
-	
+
 }); 
 
 $(function(){
+	$('form').validate({
+		rules : {
+			
+			title: {
+				required : true,
+				minlength: 1,
+				maxlength: 40
+			},
+			contents: {
+				required : true,
+				minlength: 3
+			}
+		},
+		messages : {
+			title:{
+				required : "글 제목을 입력하세요",	
+				minlength : "글 제목을 입력하세요",
+				maxlength : "글 제목이 너무 길어요"
+			},
+			contents: {
+				required : "본문을 입력하세요",
+				minlength : "본문을 입력하세요"
+			}
+		},
+	});
+	
+	
 	var	 paramIdValue = getParameters('id');
 	var	 paramTitleValue = $("#title").val();
 	var	 paramContentsValue = $("#contents").val();
 	
 
-	$("#edit").click(function() {
+	$("#edit").on("click", function(e) {
+
+/* 
+		e.preventDefault();
+		$("form").submit();
+ */
 		var	 paramIdValue = getParameters('id');
 		var	 paramTitleValue = $("#title").val();
 		var	 paramContentsValue = $("#contents").val();
@@ -33,13 +66,13 @@ $(function(){
 		        },
 		        success : function(data){
 		         if ( data.result == "success") {
-					alert("글 작성 성공");
 					location.href =  document.referrer; 
 				}
 		        }
 		    });
-
 	});
+	
+	
 	
 });
 

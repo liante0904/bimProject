@@ -12,7 +12,7 @@ http://liante0904.asuscomm.com:9090/bimProject/
 - JSP
 - jQuery 1.11.2
 - CSS
-- Bootstrap 3 (Applying)
+- Bootstrap 3
 
 ### Server
 - Java 8 & Spring Framework 3
@@ -25,6 +25,7 @@ http://liante0904.asuscomm.com:9090/bimProject/
 ## About
 
 ### ChangeLog
+
 - 게시글 검색 기능(본문, 제목+본문, 글쓰기 검색) 
 - 위지윅 적용(WYSIWYG) 
 - 글목록 댓글 갯수 표시 
@@ -38,17 +39,16 @@ http://liante0904.asuscomm.com:9090/bimProject/
 - Bootstrap 적용(메인 헤더, 게시글 조회 한정)
 
 ### Testing
-- Front-end 데이터 제한처리(회원가입 페이지 처리 완료, 게시판 영역 적용중)
+- Front-end 데이터 제한처리(회원가입시 처리 완료, 수정시 처리필요)
+- Side bar Toogle 구현
 - 관리자 인터셉터 구현(구체화), 게시판 공개여부 토글처리(메소드 통합)
 - 컨트롤러, 서비스(비즈니스)로직 분리 & 정리
  
 
 ## TODOList
 - SSL적용
-- 게시글 작성, 수정시 파일 업로드 로직개선
-- 메인 페이지 레이아웃 수정
-- 회원가입, 로그인 로직 개선 (이메일 인증 Transaction, 소셜 회원가입)
-- Side bar Toogle 구현
+- 글 작성 및 수정요청 로직 변경(ajax to submit, 파일 업로드)
+- 회원 정보 수정 페이지 재 작성
+- 스프링 트랜잭션 적용하기(for 이메일 인증, 소셜회원가입) + 회원가입 로직 개선 및 기능 추가
 - 온라인 신청페이지
 - 에러알림처리 (사용자에게 에러문구 처리)
-- Back-end SQL Injection AOP처리

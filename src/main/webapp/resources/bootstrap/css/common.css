@@ -32,7 +32,8 @@ form[action="../board/search.bim"] {
 	background-color: #f1f1f1;
 	
 }
-.container.joinForm {
+.container member joinForm, 
+.container member editForm {
 	display: block;
 	padding: 9.5px;
 	word-break: break-all;

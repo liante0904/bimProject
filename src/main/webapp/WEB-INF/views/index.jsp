@@ -11,7 +11,7 @@ $(document).ready(function(){
 	
 });
 </script>
-<title>index.jsp</title>
+<title>브리지 임팩트 사역원입니다.</title>
 </head>
 <body>
 

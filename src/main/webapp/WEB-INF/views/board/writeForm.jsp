@@ -19,7 +19,8 @@ $(function(){
 			
 			title: {
 				required : true,
-				minlength: 1
+				minlength: 1,
+				maxlength: 40
 			},
 			contents: {
 				required : true,
@@ -29,7 +30,8 @@ $(function(){
 		messages : {
 			title:{
 				required : "글 제목을 입력하세요",	
-				minlength : "글 제목을 입력하세요"
+				minlength : "글 제목을 입력하세요",
+				maxlength : "글 제목이 너무 길어요"
 			},
 			contents: {
 				required : "본문을 입력하세요",
