@@ -1,7 +1,20 @@
-
-
+/* mainPage */
+html, body {
+	background-color: #eee;
+}
+.main_view {
+	background-color: #FFF;
+	padding: 15px 15px 15px 15px;
+}
 .jumbotron {
 	margin-top: 25px;
+}
+.main_page .recent_article {
+	background-color: #FFF;
+}
+.recent_article {
+	margin: 5px -8px 5px -8px;
+	padding: 5px 5px 5px 5px;
 }
 body {
   padding-top: 40px;
@@ -13,12 +26,17 @@ form[action="../board/search.bim"] {
 	text-align: center;
 }
 
-.container.viewArticle, .container.articleList  {
+.container.viewArticle, 
+.container.articleList,
+.container.writeForm,
+.container.editForm  {
 	margin-bottom: 30px;
-	margin-top: 40px;
+	margin-top: 20px;
 	/* padding-right: 10px; */
 }
-
+.articleList a {
+	text-decoration: none;
+}
 .container.viewArticle h4 {
 	margin-bottom: 30px;
 	
@@ -149,10 +167,78 @@ li.articleList .title, li.articleList .comment{
     border-bottom: 1px solid #bebebe;
 }
 */
+.mainTitle a {
+	text-decoration: none;
+}
 .mb-1 {
 	margin-bottom: 1em;
 }
 
 .mt-2 {
 	margin-top: 0.5em;
+}
+/* articleView */
+.article_title {
+	border-top: 1px solid #ddd;
+}
+.article_info1 {
+	text-align: center;
+	padding: 5px 10px 5px 10px;
+	background-color: #f1f1f1;
+	height: 35px;
+	border-top:2px solid #516B82; 
+}
+.article_info2 {
+	padding: 5px 10px 5px 10px;
+	height: 20px;
+	margin-bottom: 10px;
+}
+
+.article_writer {
+	float: left;
+}
+.article_stat {
+	float: right;
+}
+.article_contents {
+	margin-top: 20px;
+	padding: 10px 15px 10px 15px;
+}
+.article_edit {
+	padding: 5px 10px 5px 10px;
+}
+
+/*  comment  */
+.comment_writer {
+	float: left;
+}
+.comment_date {
+	float: right;
+}
+.comment_info {
+	text-align: center;
+	padding: 5px 10px 5px 10px;
+	background-color: #f1f1f1;
+	height: 35px;
+}
+.comment_contents {
+	padding: 10px 15px 10px 10px;
+}
+.comment_editForm_div {
+	display: none; 
+}
+.comment_depth_picker {
+	position: relative;
+	width: 17px;
+	height: 26px;
+	right: -7px;
+	top: 7px;
+	border: 1px solid #ccc;
+	border-width: 0 0 1.5px 1.5px;
+}
+.comment_editForm {
+	margin: -20px 0 5px 25px;
+	padding: 5px 15px 20px 15px;	
+	background: #f1f1f1;
+	border-left: 2px solid #ccc;
 }

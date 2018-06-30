@@ -75,7 +75,7 @@ $(function(){
 </script>
 </head>
 <body>
-<div class="container">
+<div class="container writeForm">
     <h1 class="mb-1">글쓰기</h1>
      <form id="writeForm" action="../board/writeArticle.bim" method="post" enctype="multipart/form-data">
 <!--         <table class="table">
@@ -139,7 +139,7 @@ $(function(){
         </div>
     </form>
 </div>
-
+<%@ include file="/WEB-INF/views/main/footer.jsp" %>
  
 </body>
 </html>

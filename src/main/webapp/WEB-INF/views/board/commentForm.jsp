@@ -8,11 +8,9 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-
-
 });
 
-	
+$(function(){
 	$("#writeComment").on('click',function() {
 		 $.ajax({
 		        url : "../comment/writeCommentAjax.bim",
@@ -36,77 +34,11 @@ $(document).ready(function() {
 		        }
 		    });
 	});
-	
-	
-	function getCommentList(){
-		
-		var num = getParameters('num');
-		var data = { num : num };
-			$.ajax({
-		        type : "POST",
-		        url : "../comment/getCommentList.bim",
-		        data : data,
-		        dataType : "html",
-		        success : function(data){
-		           	$("#commentContent").html(data);
-		        },
-		        error : function(data){
-		            alert(' 실패!!');
-		        }
-			});
-		}
-
-	function editCommentInit(idx) {
-		var editDiv = $('div[id=editDiv][data-idx='+idx+']');
-		editDiv.show();
-		
-		var selectComment= $('p[data-idx='+idx+']');
-		var selectCommentValue = selectComment.text();
-		
-		var beforeComment = $('#editCommentContents[data-idx='+idx+']');
-		var beforeCommentValue = beforeComment.val();
-		beforeComment.focus();
-		console.log(selectCommentValue);
-		console.log(beforeCommentValue);
-	}
-	function editComment(idx){
-		
-		 $.ajax({
-		        url : "../comment/editCommentAjax.bim",
-		        type: "post",
-		        data: { 
-		        		"idx" : idx, 
-		        		"contents" : $("#editCommentContents").val(),
-						"writeId" : "${sessionScope.loginInfo.id}"
-						},
-		        success : function(data){
-		         if ( data.result == "success") {
-					editCommentAction(idx);
-				}else {
-					alert("댓글 수정 실패");
-				}
-		         
-		        },
-		        error : function(error){
-		        	alert("댓글 수정 실패");
-		        },
-		        complete : function(){
-					getCommentList();
-		        }
-		    });
-		 
-	}
-	function editCommentAction(idx){
-		var selectComment= $('p[data-idx='+idx+']');
-		var selectCommentValue = selectComment.text();
-		
-		var beforeComment = $('#editCommentContents[data-idx='+idx+']');
-		var beforeCommentValue = beforeComment.val();
-		
-		console.log(selectCommentValue);
-		console.log(beforeCommentValue);
-	};
-	function deleteComment(idx){
+	$(".deleteComment_submit").on('click', function() {
+		if (!confirm("댓글을 삭제 하시겠습니까?")) {
+			return false;
+		}else {
+		var idx = $(this).attr('data-idx');
 		 $.ajax({
 		        url : "../comment/deleteCommentAjax.bim",
 		        type: "post",
@@ -129,14 +61,220 @@ $(document).ready(function() {
 					getCommentList();
 		        }
 		    });
-		 
+		}
+	});
+	
+	$(".editComment").on('click', function() {
+		var idx = $(this).attr('data-idx');
+		var editComment_div = $('div[class=comment_editForm_div][id='+idx+']');
+		editComment_div.show();
+	});
+	$(".editComment_submit").on('click', function() {
+		var idx = $(this).attr('data-idx');
+		 $.ajax({
+		        url : "../comment/editCommentAjax.bim",
+		        type: "post",
+		        data: { 
+		        		"idx" : idx, 
+		        		"contents" : $("#editCommentContents").val(),
+						"writeId" : "${sessionScope.loginInfo.id}"
+						},
+		        success : function(data){
+		         if ( data.result == "success") {
+					console.log('댓글 수정 성공');
+				}else {
+					alert("댓글 수정 실패");
+				}
+		         
+		        },
+		        error : function(error){
+		        	alert("댓글 수정 실패");
+		        },
+		        complete : function(){
+					getCommentList();
+		        }
+		    });
+	});
+});
+
+
+function getCommentList(){
+	
+	var num = getParameters('num');
+	var data = { num : num };
+		$.ajax({
+	        type : "POST",
+	        url : "../comment/getCommentList.bim",
+	        data : data,
+	        dataType : "html",
+	        success : function(data){
+	           	$("#main_view").html(data);
+	        },
+	        error : function(data){
+	            alert(' 실패!!');
+	        }
+		});
 	}
- 
+
+
+/* 
+	
+function editCommentAction(idx){
+	var selectComment= $('p[data-idx='+idx+']');
+	var selectCommentValue = selectComment.text();
+	
+	var beforeComment = $('#editCommentContents[data-idx='+idx+']');
+	var beforeCommentValue = beforeComment.val();
+	
+	console.log(selectCommentValue);
+	console.log(beforeCommentValue);
+};
+
+	$("#editCommentInit").on('click',function(){
+		var idx = $(this).attr('data-idx');
+		var listIdx = $(this).attr('data-list-idx');
+		
+		alert(idx);
+		alert(listIdx);
+		
+		var editDiv = $('span[class=comment_contents][data-idx='+idx+']');
+		editDiv.show();
+ 		
+		var selectComment= $('span[class=comment_contents][data-idx='+idx+']');
+		var selectCommentValue = selectComment.text();
+		console.log("선택 댓글: "+selectCommentValue) 
+		
+		var beforeComment = $('#editCommentContents[data-idx='+idx+']');
+		var beforeCommentValue = beforeComment.val();
+		beforeComment.focus();
+		console.log(selectCommentValue);
+		console.log(beforeCommentValue);
+	});
+	
+function editCommentInit(idx) {
+	var editDiv = $('div[id=editDiv][data-idx='+idx+']');
+	editDiv.show();
+	
+	var selectComment= $('p[data-idx='+idx+']');
+	var selectCommentValue = selectComment.text();
+	
+	var beforeComment = $('#editCommentContents[data-idx='+idx+']');
+	var beforeCommentValue = beforeComment.val();
+	beforeComment.focus();
+	console.log(selectCommentValue);
+	console.log(beforeCommentValue);
+}
+
+function editComment(idx){
+	
+	 $.ajax({
+	        url : "../comment/editCommentAjax.bim",
+	        type: "post",
+	        data: { 
+	        		"idx" : idx, 
+	        		"contents" : $("#editCommentContents").val(),
+					"writeId" : "${sessionScope.loginInfo.id}"
+					},
+	        success : function(data){
+	         if ( data.result == "success") {
+				editCommentAction(idx);
+			}else {
+				alert("댓글 수정 실패");
+			}
+	         
+	        },
+	        error : function(error){
+	        	alert("댓글 수정 실패");
+	        },
+	        complete : function(){
+				getCommentList();
+	        }
+	    });
+	 
+}
+
+function deleteComment(idx){
+	 $.ajax({
+	        url : "../comment/deleteCommentAjax.bim",
+	        type: "post",
+	        data: { 
+	        		"idx" : idx,
+					"writeId" : "${sessionScope.loginInfo.id}"
+					},
+	        success : function(data){
+	         if ( data.result == "success") {
+				console.log("댓글 삭제 완료");
+			}else {
+				alert("댓글 삭제 실패");
+			}
+	         
+	        },
+	        error : function(error){
+	        	alert("댓글 삭제 실패");
+	        },
+	        complete : function(){
+				getCommentList();
+	        }
+	    });
+	 
+}
+  */
 </script>
 </head>
 <body>
 
-
+	<div class="comment_title">
+		<h4>댓글</h4>
+	</div>
+	<div class="comment_list">
+		<c:forEach items="${commentList}" var="comment" varStatus="status">
+		<div class="comment_info">
+			<div class="comment_writer">
+				<span>${comment.writeId}님</span>
+				<c:set var="writeCommentId" value="${comment.writeId}" />
+				<c:set var="sessionId" value="${sessionScope.loginInfo.id}" /> 
+					<c:if test="${writeCommentId == sessionId}">
+						<span>
+							<a class="editComment" data-idx="${comment.idx}"><span>수정</span></a>
+							<a class="deleteComment_submit" data-idx="${comment.idx}"><span>삭제</span></a>
+						</span>
+					</c:if>
+			</div>
+			<div class="comment_date">
+				<span>${comment.writeDt}</span>
+			</div>
+		</div>
+		<div class="comment_contents">
+			<span class="comment_contents">${comment.contents}</span>
+		</div>
+		<!-- 댓글 수정 영역 -->
+		<c:set var="writeCommentId" value="${comment.writeId}" />
+		<c:set var="sessionId" value="${sessionScope.loginInfo.id}" /> 
+		<c:if test="${writeCommentId == sessionId}">
+			<div class="comment_editForm_div" id="${comment.idx}">
+				<div class="comment_depth_picker"></div>
+				<div class="comment_editForm">
+					<c:if test="${!empty sessionScope.loginInfo}">
+						댓글 수정
+			<!-- 			<input type="text" class="form-control" id="writeCommentContents" placeholder="댓글을 입력하세요" > -->
+						<textarea rows="" cols="5px" class="form-control" id="editCommentContents" placeholder="댓글을 수정하세요" >${comment.contents}</textarea>
+						<input type="button" id="editComment_submit" value="댓글수정" class="editComment_submit btn btn-primary" data-idx="${comment.idx}">
+					</c:if>
+				</div>
+			</div>
+		</c:if>
+		<!-- /댓글 수정 영역/ -->
+		</c:forEach>
+	</div>
+	<div class="comment_writeForm">
+		<c:if test="${!empty sessionScope.loginInfo}">
+			댓글 작성
+<!-- 			<input type="text" class="form-control" id="writeCommentContents" placeholder="댓글을 입력하세요" > -->
+			<textarea rows="" cols="5px" class="form-control" id="writeCommentContents" placeholder="댓글을 입력하세요" ></textarea>
+			<input type="button" id="writeComment" value="댓글작성" class="btn btn-primary">
+		</c:if>
+	</div>
+<%-- 
 <h4>댓글</h4>
 	<table class="table table-hover">
 		<tbody>
@@ -160,7 +298,7 @@ $(document).ready(function() {
 			</c:forEach>
 		</tbody>
 	</table>
-	
+
 	<!-- 댓글 수정 영역 -->
 	<c:forEach items="${commentList}" var="comment">
 		<div id="editDiv"  data-idx="${comment.idx}" style="display:none; margin: 50px 1px 50px 1px">
@@ -172,20 +310,7 @@ $(document).ready(function() {
 	</c:forEach>
 	<!-- /댓글 수정 영역/ -->
 	
-	<!-- 댓글 작성 영역 -->
-	<c:if test="${!empty sessionScope.loginInfo}">
-			<table class="table">
-				<tbody>
-					<tr>
-						<th>댓글 작성</th>
-						<td colspan="5" width="250" height="50"><input type="text" class="form-control" id="writeCommentContents" placeholder="댓글을 입력하세요" class="form-control"></td>
-						<td><input type="button" id="writeComment" value="댓글작성" class="btn btn-primary"></td>
-					</tr>
-				</tbody>
-			</table>
-		</c:if>
-	<!-- /댓글 작성 영역/ -->
-		
+	 --%>
 		
 <%-- 
 
@@ -203,7 +328,6 @@ $(document).ready(function() {
 	</c:forEach>
 
  --%>
-
 
 </body>
 </html>
