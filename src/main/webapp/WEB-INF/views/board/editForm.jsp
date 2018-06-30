@@ -48,7 +48,7 @@ $(function(){
 </script>
 </head>
 <body>
-<div class="container">
+<div class="container editForm">
     <h1 class="mb-1">글수정</h1>
      <form action="../board/editArticle.bim" method="post">
 <!--         <table class="table">
