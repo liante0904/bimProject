@@ -5,14 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title></title>
 </head>
 <body>
 	<nav>
-		<div class="text-center">
-			<c:set var="requestURI"
-				value="${requestScope['javax.servlet.forward.servlet_path']}" />
-
+		<div class="board_paging text-center">
+			<c:set var="requestURI" value="${requestScope['javax.servlet.forward.servlet_path']}" />
 			<ul class="pagination">
 				<!-- (처음) 버튼 판별  (첫페이지가 아니거나 10페이지 이상일때)-->
 				<c:if
@@ -21,14 +19,12 @@
 						href="..${requestURI}?id=${param.id }&page=${status.current }<c:if test="${!empty param.searchKeyword  || param.searchKeyword ne null }">&searchType=${param.searchType }&searchKeyword=${param.searchKeyword }</c:if>">처음</a></li>
 				</c:if>
 
-
 				<!-- 이전 버튼  (첫페이지가 아닐때)-->
 				<c:if test="${ pageUtil.currentPage +1 ne 1}">
 					<li><a
 						href="..${requestURI}?id=${param.id }&page=${pageUtil.pageRangeCnt  }<c:if test="${!empty param.searchKeyword  || param.searchKeyword ne null }">&searchType=${param.searchType }&searchKeyword=${param.searchKeyword }</c:if>"
 						aria-label="Previous"><span aria-hidden="true">이전</span></a></li>
 				</c:if>
-
 
 				<!-- 페이지 출력 부분 -->
 				<c:forEach var="PageCntByBoard"
@@ -40,21 +36,15 @@
 							<%-- 					<li><font color="red">${status.current }</font></li> --%>
 							<li class="active"><a href="#">${status.current }</a></li>
 						</c:when>
-
-						<c:when
-							test="${status.current ne pageUtil.currentPage +1  and status.current <= pageUtil.totalPageCnt }">
+						<c:when test="${status.current ne pageUtil.currentPage +1  and status.current <= pageUtil.totalPageCnt }">
 							<li><a
 								href="..${requestURI}?id=${param.id }&page=${status.current }<c:if test="${!empty param.searchKeyword  || param.searchKeyword ne null }">&searchType=${param.searchType }&searchKeyword=${param.searchKeyword }</c:if>">${status.current }</a></li>
 						</c:when>
-
 					</c:choose>
 				</c:forEach>
 
 				<!-- 다음 버튼 -->
-				<c:if
-					test="${pageUtil.totalPageCnt > pageUtil.displayPageCnt and pageUtil.totalPageCnt ne pageUtil.currentPage +1}">
-
-
+				<c:if test="${pageUtil.totalPageCnt > pageUtil.displayPageCnt and pageUtil.totalPageCnt ne pageUtil.currentPage +1}">
 						<li><a
 							href="..${requestURI}?id=${param.id }&page=${pageUtil.pageRangeCnt + 1 + pageUtil.displayPageCnt }<c:if test="${!empty param.searchKeyword  || param.searchKeyword ne null }">&searchType=${param.searchType }&searchKeyword=${param.searchKeyword }</c:if>"
 							aria-label="Next"><span aria-hidden="true">다음</span></a></li>

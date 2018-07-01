@@ -85,11 +85,11 @@ $(function(){
 		</div>
 		     --%>
 	
-		<div>
+		<div class="articleList">
 			<c:choose>
 			    <c:when test="${fn:length(articleList) > 0 }">
 			    	<c:forEach items="${articleList}" var="article" begin="0" end="${pageUtil.displayArticleCnt - 1}">
-			    		<ul>
+			    		<ul class="articleList">
 			    			<li class="articleList">
 			    				<a href="../board/viewArticle.bim?id=${article.boardId}&num=${article.idx}">
 			    					<span class="title">${article.title}</span>

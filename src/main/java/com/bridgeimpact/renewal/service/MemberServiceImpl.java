@@ -123,7 +123,7 @@ public class MemberServiceImpl implements MemberService {
 
 		  if ( resultCnt == 0 ){
 			   result = "success";
-			   resultMsg = "사용가능한 아이디입니다.";
+			   resultMsg = "사용 가능한 아이디입니다.";
 			  } else {
 			   result = "failure";
 			   resultMsg = "이미 사용중인 아이디입니다.";

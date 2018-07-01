@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입 페이지</title>
+<title>회원가입</title>
 <%@ include file="/WEB-INF/include/mainHeader.jsp" %>
 <%@ include file="/WEB-INF/include/include.jsp" %>
 <!-- header 영역 작성중 -->

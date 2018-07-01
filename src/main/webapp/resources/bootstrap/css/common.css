@@ -4,10 +4,11 @@ html, body {
 }
 .main_view {
 	background-color: #FFF;
-	padding: 15px 15px 15px 15px;
+	padding: 15px 15px 45px 15px;
 }
 .jumbotron {
 	margin-top: 25px;
+	background-color: #FFF;
 }
 .main_page .recent_article {
 	background-color: #FFF;
@@ -33,6 +34,16 @@ form[action="../board/search.bim"] {
 	margin-bottom: 30px;
 	margin-top: 20px;
 	/* padding-right: 10px; */
+}
+/* articleList */
+ .main_view div.articleList {
+ 	padding: 5px 0 0 0;
+	border-top:	2px solid #516B82;
+	border-left: 1px solid #E2E2E2;
+	border-right: 1px solid #E2E2E2;
+}
+ul.articleList:hover {
+	background-color: #FAFAFA;
 }
 .articleList a {
 	text-decoration: none;
@@ -177,6 +188,10 @@ li.articleList .title, li.articleList .comment{
 .mt-2 {
 	margin-top: 0.5em;
 }
+/* articleList */
+ul.articleList {
+	padding: 0;
+}
 /* articleView */
 .article_title {
 	border-top: 1px solid #ddd;
@@ -242,3 +257,20 @@ li.articleList .title, li.articleList .comment{
 	background: #f1f1f1;
 	border-left: 2px solid #ccc;
 }
+
+/* board_paging */
+.board_paging {
+	margin-top: -40px;
+}
+
+/* 
+@media all and (max-width: 800px) {
+	ul.articleList li.articleList a .title {
+		max-width: 100%;
+		display: block;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+}
+ */

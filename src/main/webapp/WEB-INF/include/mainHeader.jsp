@@ -103,7 +103,7 @@ $(function(){
 			
 									<c:if test="${not empty sessionScope.loginInfo.id }">
 										<!-- sessionScopre.id가 있으면(로그인 성공시) -->
-										<li class="active"><a href="../member/editForm.bim"> ${sessionScope.loginInfo.name } 님</a></li>
+										<li class="active"><a href="${pageContext.request.contextPath }/member/editForm.bim"> ${sessionScope.loginInfo.name } 님</a></li>
 										<li><a href="#" id="logout">로그아웃</a></li>
 									</c:if>
 			
