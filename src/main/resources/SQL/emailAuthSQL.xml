@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.bridgeimpact.renewal.fileSQL">
+
+   	<insert id="insertFile" parameterType="fileVO">
+		INSERT INTO BIM_EMAIL_AUTH
+		(
+		IDX,
+		USER_IDX,
+		USER_ID,
+		EMAIL_AUTH_KEY,
+		AUTH_FL
+		)
+		VALUES
+		(
+		NULL,
+		#{USER_IDX },
+		#{USER_ID },
+		#{EMAIL_AUTH_KEY },
+		#{AUTH_FL }
+		)
+	</insert>
+
+	<update id="updateEmail">
+		UPDATE BIM_EMAIL_AUTH
+		SET
+		AUTH_FL = 'Y'
+		WHERE
+		USER_ID = #{userId }
+		AND 
+		EMAIL_AUTH_KEY = #{emailAuthKey }
+	</update>
+</mapper>
