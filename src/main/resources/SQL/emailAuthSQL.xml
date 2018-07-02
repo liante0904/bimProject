@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.bridgeimpact.renewal.emailAuthSQL">
+
+   	<resultMap type="emailAuthVO"  id="EmailAuthResultMap">
+    	<result property="idx" column="IDX" />
+		<result property="userId" column="USER_ID" />
+		<result property="emailAuthKey" column="EMAIL_AUTH_KEY" />
+		<result property="authFl" column="AUTH_FL" />
+	</resultMap>
+	
+	
+</mapper>
