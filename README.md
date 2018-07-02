@@ -25,7 +25,7 @@ http://liante0904.asuscomm.com:9090/bimProject/
 ## About
 
 ### ChangeLog
-
+- 글 작성 및 수정요청 로직 변경(ajax to submit)
 - 게시글 검색 기능(본문, 제목+본문, 글쓰기 검색)
 - 위지윅 적용(WYSIWYG)
 - 글목록 댓글 갯수 표시
@@ -47,8 +47,11 @@ http://liante0904.asuscomm.com:9090/bimProject/
 
 ## TODOList
 - SSL적용
-- 글 작성 및 수정요청 로직 변경(ajax to submit, 파일 업로드)
+- 글 작성, 수정시 첨부파일 로직변경
 - 회원 정보 수정 페이지 재 작성
 - 스프링 트랜잭션 적용하기(for 이메일 인증, 소셜회원가입) + 회원가입 로직 개선 및 기능 추가
 - 온라인 신청페이지
 - 에러알림처리 (사용자에게 에러문구 처리)
+
+## TODO Bugfix
+- 글 수정페이지 접근 후, 세션 만료시 NullPoint처리 

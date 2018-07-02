@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bridgeimpact.renewal.common.PageUtil;
 import com.bridgeimpact.renewal.dto.ArticleVO;
+import com.bridgeimpact.renewal.dto.BoardVO;
 import com.bridgeimpact.renewal.dto.CommentVO;
 import com.bridgeimpact.renewal.dto.FileVO;
 import com.bridgeimpact.renewal.dto.MemberVO;
@@ -66,8 +67,20 @@ public class ArticleController {
 		return "/board/writeForm";
 	}
 	@RequestMapping(value="/editForm.bim")
-	public String editForm(Model model, HttpServletRequest request,HttpSession session){
+	public String editForm(String id,Model model, HttpServletRequest request,HttpSession session){
 		// session.setAttribute(name, value);
+		if (id == null) {
+		String userBeforeUrl = 	request.getHeader("referer");
+		return userBeforeUrl;
+		}
+		BoardVO boardVO = new BoardVO();
+		try {
+			boardVO = boardService.getBoardByid(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		model.addAttribute("board", boardVO);
 		return "/board/editForm";
 	}
 	 
@@ -308,7 +321,7 @@ public class ArticleController {
 	}
 	
 	/***
-	 * 사용자의 글수정 요청을 받아 DB에 처리
+	 * 사용자의 글수정 요청을 받아 DB에 반영(ajax)
 	 * @param model
 	 * @param article
 	 * @param request
@@ -335,6 +348,33 @@ public class ArticleController {
 		return resultMap;
 	}
 	
+	
+	/***
+	 * 사용자의 글수정 요청을 받아 DB에 반영(submit)
+	 * @param model
+	 * @param article
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value="/editArticle.bim")
+	public ModelAndView editArticle(Model model,ArticleVO article, HttpServletRequest request,HttpSession session){
+		logger.info("글 제목 : "+ article.getTitle() + "\t 글내용 : " + article.getContents() );
+		Map<String, String> resultMap = new HashMap<String, String>();
+		ArticleVO sessionBoard = (ArticleVO) session.getAttribute("articleInfo");
+		article.setIdx(sessionBoard.getIdx());
+		System.out.println("===========>>>"+sessionBoard.getTitle());
+		try {
+			articleService.editArticle(article);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String result = "success";
+		resultMap.put("result", result);
+		ModelAndView mav = new ModelAndView("redirect:/board/viewList.bim?id="+article.getBoardId());
+		return mav;
+	}
 	/***
 	 * 사용자의 글삭제 요청을 받아 DB에 처리
 	 * @param model

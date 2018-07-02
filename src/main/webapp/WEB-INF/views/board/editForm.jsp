@@ -7,7 +7,7 @@
 <%@ include file="/WEB-INF/include/mainHeader.jsp" %>
 <%@ include file="/WEB-INF/include/include.jsp" %>
 
-<title>Home</title>
+<title>브리지 임팩트 - 글수정</title>
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -49,10 +49,9 @@ $(function(){
 
 	$("#edit").on("click", function(e) {
 
-/* 
 		e.preventDefault();
 		$("form").submit();
- */
+	/* 	
 		var	 paramIdValue = getParameters('id');
 		var	 paramTitleValue = $("#title").val();
 		var	 paramContentsValue = $("#contents").val();
@@ -70,6 +69,7 @@ $(function(){
 				}
 		        }
 		    });
+	 */	 
 	});
 	
 	
@@ -114,6 +114,13 @@ $(function(){
 		                // instance, using default configuration.
 		                CKEDITOR.replace( 'contents' );
 		            </script>
+        		</div>
+			<div class="mt-2">
+        			<input type="file" name="files1" class="form-control">
+        			<input type="file" name="files2" class="form-control">
+        			<input type="file" name="files3" class="form-control">
+        			<input type="file" name="files4" class="form-control">
+        			
         		</div>
         		<div class="mt-2">
 			 <input type="button" id="cancel" value="목록" class="btn btn-default"/>

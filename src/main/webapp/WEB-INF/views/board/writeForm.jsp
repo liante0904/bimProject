@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <%@ include file="/WEB-INF/include/mainHeader.jsp" %>
 <%@ include file="/WEB-INF/include/include.jsp" %>
-<title>Home</title>
+<title>브리지 임팩트 - 글쓰기</title>
 <script type="text/javascript">
 
 $(document).ready(function(){
