@@ -79,7 +79,7 @@
     ]]>
     </select>
     
-   	<insert id="insertMember" parameterType="memberVO">
+   	<insert id="insertMember" useGeneratedKeys="true" keyProperty="idx" parameterType="memberVO">
 	<![CDATA[
 	
 	

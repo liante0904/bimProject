@@ -5,13 +5,14 @@
  
 <mapper namespace="com.bridgeimpact.renewal.emailAuthSQL">
    	<resultMap type="emailAuthVO"  id="EmailAuthResultMap">
-    	<result property="idx" column="IDX" />
+    		<result property="idx" column="IDX" />
 		<result property="userId" column="USER_ID" />
+		<result property="userIdx" column="USER_IDX" />
 		<result property="emailAuthKey" column="EMAIL_AUTH_KEY" />
 		<result property="authFl" column="AUTH_FL" />
 	</resultMap>
 
-   	<insert id="insertFile" parameterType="fileVO">
+   	<insert id="insertEmailAuth" parameterType="emailAuthVO">
 		INSERT INTO BIM_EMAIL_AUTH
 		(
 		IDX,
@@ -23,10 +24,10 @@
 		VALUES
 		(
 		NULL,
-		#{USER_IDX },
-		#{USER_ID },
-		#{EMAIL_AUTH_KEY },
-		#{AUTH_FL }
+		#{userIdx},
+		#{userId},
+		#{emailAuthKey},
+		'N'
 		)
 	</insert>
 

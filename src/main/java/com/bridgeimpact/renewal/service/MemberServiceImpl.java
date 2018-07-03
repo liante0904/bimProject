@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.bridgeimpact.renewal.dao.EmailAuthDAO;
 import com.bridgeimpact.renewal.dao.MemberDAO;
+import com.bridgeimpact.renewal.dto.EmailAuthVO;
 import com.bridgeimpact.renewal.dto.MemberVO;;
  
 @Service
@@ -29,6 +30,9 @@ public class MemberServiceImpl implements MemberService {
 	private EmailAuthDAO emailAuthDAO;
 	
     @Autowired
+    private EmailAuthService emailAuthService;
+    
+	@Autowired
     BCryptPasswordEncoder passwordEncoder;
     
     
@@ -61,10 +65,26 @@ public class MemberServiceImpl implements MemberService {
 		logger.info("encryptPassword: " + encryptPassword);
 		System.out.println(passwordEncoder.matches(password, encryptPassword));
 		System.out.println(inputMember.getId());
+		
 		inputMember.setPassword(encryptPassword);
 		memberDAO.insertMember(inputMember);
-		emailAuthDAO.insertEmail(inputMember.getEmail());
-		return 1;
+		System.out.println("가입한 회원의 idx : "+inputMember.getIdx());
+		
+		/***
+		 * Eamil 인증 데이터 DB반영 로직
+		 */
+		EmailAuthVO emailAuthVO = new EmailAuthVO(inputMember);
+		System.out.println("객체 생성 값 : "+ emailAuthVO.getUserId());
+		
+		emailAuthDAO.insertEmailAuth(emailAuthVO);
+		
+		int emailAuthResult = emailAuthService.sendEmailByEmailAuthVO(emailAuthVO);
+		if (emailAuthResult == 0) {
+			//TODO 이메일 전송 실패시 에러 처리
+			return 10;
+		}
+		
+		return emailAuthResult;
 	}
 
 	@Override
@@ -97,11 +117,15 @@ public class MemberServiceImpl implements MemberService {
 		int loginResult;
 		MemberVO dbMember = 
 				memberDAO.getMemberById(UserRequest.getId());
+		String userStatus = dbMember.getType();
 		if (dbMember == null) {
 			loginResult = 0;
 			return loginResult;
-		}else if ("Y".equals(dbMember.getType())) {
+		}else if ("Y".equals(userStatus)) { // 탈퇴회원
 			loginResult = 2;
+		}else if ("2".equals(userStatus)) {
+			loginResult = 3;
+			return loginResult;
 		}
 		logger.info("TypePassword : " + UserRequest.getPassword() + "\t dbPassword : " + dbMember.getPassword());
 		System.out.println("passwordCheck : " +passwordEncoder.matches(UserRequest.getPassword(), dbMember.getPassword()));

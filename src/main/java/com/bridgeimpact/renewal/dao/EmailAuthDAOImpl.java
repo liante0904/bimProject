@@ -5,6 +5,8 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.bridgeimpact.renewal.dto.EmailAuthVO;
+
 @Repository
 public class EmailAuthDAOImpl implements EmailAuthDAO {
     @Inject
@@ -13,9 +15,8 @@ public class EmailAuthDAOImpl implements EmailAuthDAO {
     private static final String Namespace = "com.bridgeimpact.renewal.emailAuthSQL";
 
 	@Override
-	public void insertEmail(String email) throws Exception {
-		// TODO Auto-generated method stub
-		sqlSession.insert(Namespace+".insertEmail");
+	public int insertEmailAuth(EmailAuthVO emailAuth) throws Exception {
+		return sqlSession.insert(Namespace+".insertEmailAuth", emailAuth);
 	}
     
 }

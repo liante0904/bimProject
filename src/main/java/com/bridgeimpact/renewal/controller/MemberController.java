@@ -80,19 +80,22 @@ public class MemberController {
 	@RequestMapping(value="member/joinSubmit.bim")
 	public String joinSubmit(MemberVO inputMember){
 		int result = 0;
+		String url = "";
 		try {
 			result = memberService.insertMember(inputMember);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return "error";
-		}finally {
-			if (result == 0) {
-				return "error";
-			}
+			result = 0;
+			url = "error";
+			return url;
 		}
 		
-		return "redirect:/main/loginForm.bim";
+		if (result == 1) {
+			
+			url = "redirect:/main/loginForm.bim";
+		}
+		return url;
 	}
 	
 	/***

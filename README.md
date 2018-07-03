@@ -39,7 +39,6 @@ http://liante0904.asuscomm.com:9090/bimProject/
 - Bootstrap 적용(메인 헤더, 게시글 조회 한정)
 
 ### Testing & Working
-- 회원가입시 이메일 인증 시스템
 - 레이아웃 변경(Table 태그 제거)
 - Front-end 데이터 제한처리(회원가입 페이지 처리 완료, 게시판 영역 적용중)
 - 관리자 인터셉터 구현(구체화), 게시판 공개여부 토글처리(메소드 통합)
@@ -48,6 +47,7 @@ http://liante0904.asuscomm.com:9090/bimProject/
 
 ## TODOList
 - SSL적용
+- 회원가입시 이메일 인증 시스템(토큰키 인증로직 생성)
 - 글 작성, 수정시 첨부파일 로직변경
 - 회원 정보 수정 페이지 재 작성
 - 스프링 트랜잭션 적용하기(for 이메일 인증, 소셜회원가입) + 회원가입 로직 개선 및 기능 추가
@@ -56,3 +56,4 @@ http://liante0904.asuscomm.com:9090/bimProject/
 
 ## TODO Bugfix
 - 글 수정페이지 접근 후, 세션 만료시 NullPoint처리 
+- 회원가입 후 이메일 인증처리 메일 발송 실패시 에러처리(재발송 혹은 알림) 

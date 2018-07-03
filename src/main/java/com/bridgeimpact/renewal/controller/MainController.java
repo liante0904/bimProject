@@ -126,6 +126,7 @@ public class MainController {
 		/***
 		 * 사용자의 로그인 정보를 db 회원정보와 비교
 		 * @return loginResult 0 = 아이디 없음, 1 = 로그인 성공 , 2 = 패스워드 불일치 (아이디 존재, 탈퇴) 
+		 * 			           3 = 이메일 미인증 회원(패스워드 일치) 
 		 * 
 		 */
 		try {
@@ -152,6 +153,9 @@ public class MainController {
 					url = "main/loginForm";
 				}else if(loginResult == 0){//아이디가 존재하지 않는 경우
 					model.addAttribute("msg", "아이디가 존재하지 않음");
+					url = "main/loginForm";
+				}else if (loginResult == 3) { // 이메일 미인증 회원(패스워드 일치)
+					model.addAttribute("msg", "이메일 인증이 되지 않은 회원");
 					url = "main/loginForm";
 				}
 		}

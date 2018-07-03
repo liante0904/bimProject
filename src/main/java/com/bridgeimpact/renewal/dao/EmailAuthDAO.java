@@ -1,7 +1,9 @@
 package com.bridgeimpact.renewal.dao;
 
+import com.bridgeimpact.renewal.dto.EmailAuthVO;
+
 public interface EmailAuthDAO {
 
-	public void insertEmail(String email) throws Exception;
+	public int insertEmailAuth(EmailAuthVO emailAuth) throws Exception;
 
 }

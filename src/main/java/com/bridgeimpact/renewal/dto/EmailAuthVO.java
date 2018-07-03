@@ -1,7 +1,10 @@
 package com.bridgeimpact.renewal.dto;
 
+import com.bridgeimpact.renewal.common.TempKey;
+
 public class EmailAuthVO {
 	private int idx;  
+	private int userIdx;
 	private String userId;
 	private String emailAuthKey; 
 	private String authFl;
@@ -13,13 +16,23 @@ public class EmailAuthVO {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public EmailAuthVO(MemberVO inputMember) {
+        String key = new TempKey().getKey(50, false);
+		this.setUserId(inputMember.getId());
+		this.setUserIdx(inputMember.getIdx());
+		this.setEmailAuthKey(key);
+	}
+
+	
 	@Override
 	public String toString() {
-		return "EmailAuthVO [idx=" + idx + ", userId=" + userId + ", emailAuthKey=" + emailAuthKey + ", authFl="
-				+ authFl + ", getIdx()=" + getIdx() + ", getUserId()=" + getUserId() + ", getEmailAuthKey()="
-				+ getEmailAuthKey() + ", getAuthFl()=" + getAuthFl() + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + ", toString()=" + super.toString() + "]";
+		return "EmailAuthVO [idx=" + idx + ", userId=" + userId + ", userIdx=" + userIdx + ", emailAuthKey="
+				+ emailAuthKey + ", authFl=" + authFl + ", getIdx()=" + getIdx() + ", getUserId()=" + getUserId()
+				+ ", getEmailAuthKey()=" + getEmailAuthKey() + ", getAuthFl()=" + getAuthFl() + ", getUserIdx()="
+				+ getUserIdx() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+				+ super.toString() + "]";
 	}
+
 	public int getIdx() {
 		return idx;
 	}
@@ -43,6 +56,14 @@ public class EmailAuthVO {
 	}
 	public void setAuthFl(String authFl) {
 		this.authFl = authFl;
+	}
+
+	public int getUserIdx() {
+		return userIdx;
+	}
+
+	public void setUserIdx(int userIdx) {
+		this.userIdx = userIdx;
 	} 
 
 	
