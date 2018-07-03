@@ -15,7 +15,6 @@
 	</properties>
 
 	<dependencies>
-
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -224,7 +223,18 @@
 		<artifactId>spring-security-config</artifactId>
 		<version>4.2.1.RELEASE</version>
 	</dependency>
-
+        <!-- mail 인증을  위한 설정-->
+        <!-- mail -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
 
 	</dependencies>
 

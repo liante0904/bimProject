@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="/WEB-INF/include/mainHeader.jsp" %>
-<title>Home</title>
+<title>브리지 임팩트 - ${article.boardName}</title>
 <script type="text/javascript">
 $(document).ready(function(){
 	getCommentList();

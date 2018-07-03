@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.bridgeimpact.renewal.dao.EmailAuthDAO;
 import com.bridgeimpact.renewal.dao.MemberDAO;
 import com.bridgeimpact.renewal.dto.MemberVO;;
  
@@ -23,6 +24,9 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
     private MemberDAO memberDAO;
+	
+	@Autowired
+	private EmailAuthDAO emailAuthDAO;
 	
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
@@ -49,8 +53,6 @@ public class MemberServiceImpl implements MemberService {
 			  return 0;
 			  } 
 
-		
-		
 		/***
 		 * DB반영전 패스워드 암호화 로직
 		 */
@@ -61,6 +63,7 @@ public class MemberServiceImpl implements MemberService {
 		System.out.println(inputMember.getId());
 		inputMember.setPassword(encryptPassword);
 		memberDAO.insertMember(inputMember);
+		emailAuthDAO.insertEmail(inputMember.getEmail());
 		return 1;
 	}
 
