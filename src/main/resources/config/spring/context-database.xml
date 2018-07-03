@@ -39,10 +39,10 @@
 	</bean>
  -->
 
-	<!-- jdbc properties 파일 로드 -->
-	<!-- src/resources/config/spring/jdbc.properties 파일을 생성하여 이용 -->
+	<!-- jdbc, email properties 파일 로드 -->
+	<!-- src/resources/config/spring/email, jdbc.properties 파일을 생성하여 이용 -->
 		
- 	<context:property-placeholder location="classpath:config/spring/jdbc.properties" />
+ 	<context:property-placeholder location="classpath:config/spring/email.properties, classpath:config/spring/jdbc.properties" />
 
 
 	<!-- MySQL dataSource -->

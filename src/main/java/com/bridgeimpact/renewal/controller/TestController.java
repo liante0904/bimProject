@@ -1,21 +1,31 @@
 package com.bridgeimpact.renewal.controller;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
+import java.util.List;
 
+import javax.inject.Inject;
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bridgeimpact.renewal.common.MailHandler;
+import com.bridgeimpact.renewal.common.TempKey;
+import com.bridgeimpact.renewal.dto.ArticleVO;
 import com.bridgeimpact.renewal.service.ArticleService;
 import com.bridgeimpact.renewal.service.BoardService;
 import com.bridgeimpact.renewal.service.CommentService;
@@ -43,9 +53,59 @@ public class TestController {
 	@Autowired
 	private BoardService boardService;
 
+    @Inject
+    private JavaMailSender mailSender;
+
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+
+	@RequestMapping(value="/email")
+	public String email(Model model, HttpServletRequest request){
+        String os = System.getProperty("os.name");
+        System.out.println("Using System Property: " + os);
+        try {
+			signUp();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "/test/writeForm";
+	}
+
+
+    public void signUp() throws MessagingException, UnsupportedEncodingException {
+        String key = new TempKey().getKey(50, false);
+        MailHandler sendMail = new MailHandler(mailSender);
+        sendMail.setSubject("[이메일 인증]");
+        sendMail.setText(new StringBuffer().append("<h1>메일인증</h1>")
+                .append("<a href='http://localhost:8080/spring/emailConfirm?key=")
+                .append(key)
+                .append("' target='_blenk'>이메일 인증 확인</a>")
+                .toString());
+        sendMail.setFrom("kimgoja.com", "김고자");
+        String email = "liante0905@naver.com";
+        String name = "신승훈";
+        sendMail.setTo(email);
+        sendMail.send();
+    }
+
+    @RequestMapping(value="emailConfirm", method=RequestMethod.GET)
+    public String emailConfirm(String key, Model model){
+    	System.out.println("인증 도착했음");
+        try {
+           // emailService.emailConfirm(emailConfirmVO);
+            model.addAttribute("check", true);
+        } catch (Exception e) {
+            model.addAttribute("check", false);
+        }
+        return "emailConfirm";
+    }
+
 
 
 	@RequestMapping(value="/page")
@@ -56,6 +116,17 @@ public class TestController {
 	}
 
 
+	@RequestMapping(value="/page1")
+	public String writeForm1(Model model, HttpServletRequest request){
+        String os = System.getProperty("os.name");
+        System.out.println("Using System Property: " + os);
+		return "/test/writeForm1";
+	}
+
+	@RequestMapping(value="/sidebar")
+	public String sidebar(Model model, HttpServletRequest request){
+		return "/test/sidebar";
+	}
 	/**
 	 * 파일 업로드 요청 처리(단일 파일 업로드)
 	 * @param multipartHttpServletRequest
@@ -207,6 +278,24 @@ public class TestController {
 		}
 		return new ModelAndView("downloadView", "downloadFile", downloadFile);
 		// 첫번째 인자 : beanName(id), 두번쨰 인자 :  File Object,
+	}
+	
+	@RequestMapping(value="/list",method = RequestMethod.GET,produces = "application/json; charset=utf8")
+	@ResponseBody
+	public List<ArticleVO> memberIdCheck(Model model,String id, HttpServletRequest request,HttpServletResponse response){
+		List<ArticleVO> resultMap = null;
+		try {
+			resultMap = articleService.selectAllArticle();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			System.out.println(resultMap);
+		}
+
+		    response.setContentType("text/plain");
+		    response.setCharacterEncoding("UTF-8");
+		  return resultMap;
 	}
 
 

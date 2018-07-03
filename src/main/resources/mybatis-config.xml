@@ -16,6 +16,7 @@
             <typeAlias type="com.bridgeimpact.renewal.dto.BoardVO" alias="boardVO"/>
             <typeAlias type="com.bridgeimpact.renewal.dto.FileVO" alias="fileVO"/>
             <typeAlias type="com.bridgeimpact.renewal.common.PageUtil" alias="pageUtil"/>
+            <typeAlias type="com.bridgeimpact.renewal.dto.EmailAuthVO" alias="emailAuthVO"/>
         
         </typeAliases>
         

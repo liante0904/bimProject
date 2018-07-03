@@ -4,9 +4,11 @@
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -33,5 +35,26 @@
 	<!-- Resource 접근 설정 -->
 	<resources mapping="/**" location="/resources/" />
 
+	<!-- properties 파일 로드 -->	
+ 	<context:property-placeholder location="classpath:config/spring/email.properties, classpath:config/spring/jdbc.properties" />
+	
+	    <!-- 메일 보내기 (SEND) -->
+   <beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+      <beans:property name="host" value="smtp.gmail.com" />
+      <beans:property name="port" value="587" />
+      <beans:property name="username" value="${email.username}" />
+      <beans:property name="password" value="${email.password}" />
+    
+
+      <!-- email 요청시는 SMTP -->
+      <beans:property name="javaMailProperties">
+         <beans:props>
+            <beans:prop key="mail.transport.protocol">smtp</beans:prop>
+            <beans:prop key="mail.smtp.auth">true</beans:prop>
+            <beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+            <beans:prop key="mail.debug">true</beans:prop>
+         </beans:props>
+      </beans:property>
+   </beans:bean>
 
 </beans:beans>
