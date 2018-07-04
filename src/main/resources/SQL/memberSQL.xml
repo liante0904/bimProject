@@ -94,7 +94,7 @@
 		#{address},
 		#{phone},
 		#{church},
-		'N'
+		'2'
 		)
 		]]>
 	</insert>

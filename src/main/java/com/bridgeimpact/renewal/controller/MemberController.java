@@ -104,18 +104,19 @@ public class MemberController {
 	 * @return 
 	 */
 	@RequestMapping(value="member/deleteSubmit.bim")
-	public String deleteSubmit(HttpSession session){
+	public ModelAndView deleteSubmit(Model model, HttpSession session){
 		
 		MemberVO sessionMember = (MemberVO) session.getAttribute("loginInfo");
+			// TODO 아이디 패스워드 일치여부 로직추가
 		
 			try {
 				memberService.deleteMember(sessionMember);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		
-		return "index";
+			session.invalidate();
+			model.addAttribute("success", "회원탈퇴 성공");
+		return new ModelAndView("redirect:/");
 	}
 	
 	

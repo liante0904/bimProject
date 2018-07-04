@@ -86,20 +86,21 @@ $(document).ready(function(){
 	});
 
 	$("#edit").click(function() {
-		location.href="../member/editSubmit.bim";
+		document.editForm.action = "../member/editSubmit.bim"; 
 	})
 	
 	 
 	$("#delete").click(function() {
-		location.href="../member/deleteSubmit.bim";
+		document.editForm.action = "../member/deleteSubmit.bim";
 	})
 
-	
 }); 
 
-
-
-
+function cancel() {
+	if (confirm("취소 하시겠습니까?")) {
+		history.back();
+	}
+}
 </script>
 
 </head>
@@ -109,7 +110,7 @@ $(document).ready(function(){
 
 <div class="container">
 	<h1>회원 정보 수정</h1>
-	 <form action="../member/editSubmit.bim"  method="POST" >
+	 <form name="editForm" method="POST" >
 	  <div class="form-group">
 	  	<label for="id">ID</label>
 		<input type="text" name="id" readonly="readonly" value="${sessionScope.loginInfo.id}" class="form-control" placeholder="아이디"> 
@@ -152,9 +153,9 @@ $(document).ready(function(){
 	  </div>
 	
 	   <div class="form-group">
-		   <input type="button" value="취소" onclick="javascript:window.close()" style="align:center" class="btn btn-lg btn-primary btn-block"/>
-		   <input type="button" value="수정" id="edit" class="btn btn-lg btn-primary btn-block"/>
-		   <input type="button" value="탈퇴" id="delete" class="btn btn-lg btn-primary btn-block"/>
+		   <input type="button" value="취소" onclick="cancel();" style="align:center" class="btn btn-lg btn-primary btn-block"/>
+		   <input type="submit" value="수정" id="edit" class="btn btn-lg btn-primary btn-block"/>
+		   <input type="submit" value="탈퇴" id="delete" class="btn btn-lg btn-primary btn-block"/>
 	  </div>
 	 </form>
  </div>

@@ -12,13 +12,20 @@ $(document).ready(function() {
 
 $(function(){
 	$("#writeComment").on('click',function() {
+		var writeCommentContentsForm = $("#writeCommentContents");
+		var commentContents = writeCommentContentsForm.val();
+		if (commentContents.length < 2) {
+			alert("댓글의 내용이 너무 짧습니다. (3글자 이상)");
+			writeCommentContentsForm.focus();
+			return false;
+		}
 		 $.ajax({
 		        url : "../comment/writeCommentAjax.bim",
 		        type: "POST",
 		        data: 
 		        		{ 
 		        		"parentIdx" : "${sessionScope.articleInfo.idx}",
-						"contents" : $("#writeCommentContents").val(),
+						"contents" : commentContents,
 						"writeId" : "${sessionScope.loginInfo.id}"
 						},
 		        success : function(data){
@@ -47,12 +54,11 @@ $(function(){
 						"writeId" : "${sessionScope.loginInfo.id}"
 						},
 		        success : function(data){
-		         if ( data.result == "success") {
-					console.log("댓글 삭제 완료");
-				}else {
-					alert("댓글 삭제 실패");
-				}
-		         
+			         if ( data.result == "success") {
+						console.log("댓글 삭제 완료");
+					}else {
+						alert("댓글 삭제 실패");
+					}
 		        },
 		        error : function(error){
 		        	alert("댓글 삭제 실패");
@@ -71,12 +77,19 @@ $(function(){
 	});
 	$(".editComment_submit").on('click', function() {
 		var idx = $(this).attr('data-idx');
-		 $.ajax({
+		var editCommentContentsForm = $("#editCommentContents");
+		var editCommentContents = editCommentContentsForm.val();
+		if (editCommentContents.length < 2) {
+			alert("댓글의 내용이 너무 짧습니다. (3글자 이상)");
+			editCommentContentsForm.focus();
+			return false;
+		}
+		$.ajax({
 		        url : "../comment/editCommentAjax.bim",
 		        type: "post",
 		        data: { 
 		        		"idx" : idx, 
-		        		"contents" : $("#editCommentContents").val(),
+		        		"contents" : editCommentContents,
 						"writeId" : "${sessionScope.loginInfo.id}"
 						},
 		        success : function(data){
