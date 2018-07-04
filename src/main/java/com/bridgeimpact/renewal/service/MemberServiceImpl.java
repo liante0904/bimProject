@@ -113,28 +113,38 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int loginMember(MemberVO UserRequest) throws Exception {
-		// TODO Auto-generated method stub
-		int loginResult;
-		MemberVO dbMember = 
-				memberDAO.getMemberById(UserRequest.getId());
-		String userStatus = dbMember.getType();
-		if (dbMember == null) {
-			loginResult = 0;
-			return loginResult;
-		}else if ("Y".equals(userStatus)) { // 탈퇴회원
-			loginResult = 2;
-		}else if ("2".equals(userStatus)) {
-			loginResult = 3;
-			return loginResult;
+		int loginResult = 3; 
+		String userStatus = null;
+		MemberVO dbMember  = new MemberVO();
+		dbMember = 	memberDAO.getMemberById(UserRequest.getId());
+		if (dbMember != null) {
+			userStatus = dbMember.getType();
 		}
+		
+		if (userStatus == null) { // 아이디가 존재하지 않음
+			return loginResult = -1;
+		}else if ("0".equals(userStatus)) { // 탈퇴회원
+			return loginResult = 0;
+		}else if ("2".equals(userStatus)) { // 이메일 미인증 회원(로그인 성공)
+			return loginResult = 2;
+		}
+		/***
+		 * 아이디 비밀번호 판단 로직(암호화)
+		 */
 		logger.info("TypePassword : " + UserRequest.getPassword() + "\t dbPassword : " + dbMember.getPassword());
-		System.out.println("passwordCheck : " +passwordEncoder.matches(UserRequest.getPassword(), dbMember.getPassword()));
+		logger.info("passwordCheck : " +passwordEncoder.matches(UserRequest.getPassword(), dbMember.getPassword()));
 		Boolean passwordMatchResult = passwordEncoder.matches(UserRequest.getPassword(), dbMember.getPassword());
 		logger.info("login Result : " + passwordMatchResult.toString() );
-		if (passwordMatchResult) {
-			loginResult = 1;
-		} else {
-			loginResult = 2;
+		if (passwordMatchResult) { // 아이디 패스워드 일치후 로직구간
+			if ("9".equals(userStatus)) { // 로그인에 성공한 관리자
+				return loginResult = 9;
+			}else if ("2".equals(userStatus)) { // 로그인에 성공 후 이메일 인증 여부
+					return loginResult = 2;
+				}else if("1".equals(userStatus)){ // 로그인 성공(아이디 패스워드 일치, 이메일 인증 성공 유저)
+					return loginResult = 1;
+				}
+		} else {		// 로그인 실패
+			return loginResult = 3;
 		}
 		return loginResult;
 	}

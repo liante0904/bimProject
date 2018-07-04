@@ -9,7 +9,7 @@
         mybatis-config.xml의 typeAlias에 등록해두지 않았다면 
         
         <select id="selectMember" resultType="com.example.dto.MemberVO" >
-            SELECT ID, PW ,NAME FROM TEST
+            SELECT ID, PW,NAME FROM TEST
         </select>
         
         이렇게 해야 한다.
@@ -20,33 +20,32 @@
 	    	<result property="idx" column="IDX" />
 	    	<result property="boardId" column="BOARD_ID" />
 	    	<result property="boardName" column="BOARD_NAME" />
-			<result property="title" column="TITLE" />
-			<result property="contents" column="CONTENTS" />
-			<result property="hitCnt" column="HIT_CNT" />
-			<result property="delGb" column="DEL_GB" />
-			<result property="writeDt" column="WRITE_DT" />
-			<result property="writeId" column="WRITE_ID" />
-			<result property="boardDelGb" column="BOARD_DEL_GB" />
-		</resultMap>
+		<result property="title" column="TITLE" />
+		<result property="contents" column="CONTENTS" />
+		<result property="hitCnt" column="HIT_CNT" />
+		<result property="delGb" column="DEL_GB" />
+		<result property="writeDt" column="WRITE_DT" />
+		<result property="writeId" column="WRITE_ID" />
+		<result property="boardDelGb" column="BOARD_DEL_GB" />
+	</resultMap>
 		
-        <resultMap type="pageUtil"  id="PageUtilResultMap">
-	   	 	<result property="currentPage" column="CURRENTPAGE" />
-    		<result property="displayArticleCnt" column="DISPLAYARTICLECNT" />
-			<result property="totalPageCnt" column="TOTALPAGECNT" />
-		</resultMap>
-     
+	<resultMap type="pageUtil"  id="PageUtilResultMap">
+   	 	<result property="currentPage" column="CURRENTPAGE" />
+		<result property="displayArticleCnt" column="DISPLAYARTICLECNT" />
+		<result property="totalPageCnt" column="TOTALPAGECNT" />
+	</resultMap>
      
     <select id="selectAllArticle" resultType="articleVO">
 		<![CDATA[
 		SELECT   
-		IDX  ,   
-		BOARD_ID  ,   
-		TITLE  ,   
-		CONTENTS  ,   
-		HIT_CNT  ,   
-		DEL_GB  ,   
-		DATE_FORMAT(WRITE_DT, "%Y-%m-%d") AS 'WRITE_DT'  , 
-		DATE_FORMAT(WRITE_DT, "%T") AS 'WRITE_TIME'  ,   
+		IDX,   
+		BOARD_ID,   
+		TITLE,   
+		CONTENTS,   
+		HIT_CNT,   
+		DEL_GB,   
+		DATE_FORMAT(WRITE_DT, "%Y-%m-%d") AS 'WRITE_DT', 
+		DATE_FORMAT(WRITE_DT, "%T") AS 'WRITE_TIME',   
 		WRITE_ID   
 		FROM   BIM_ARTICLE_TB   
 		ORDER BY IDX DESC
@@ -61,7 +60,7 @@
 		WHERE BOARD_ID = #{boardId}
 		AND	DEL_GB = 'N'
 		<if test="searchKeyword != null">
-		AND	${searchType}  LIKE CONCAT(#{searchKeyword} ,'%')
+		AND	${searchType}  LIKE CONCAT(#{searchKeyword},'%')
 		</if>
 		ORDER BY IDX DESC
     </select>
@@ -76,7 +75,7 @@
 		DEL_GB = 'N'		
 		AND		BOARD_ID = #{boardId}
 		<if test="searchType != null">
-		AND 		#{searchType} LIKE CONCAT('%', #{searchKeyword} ,'%');
+		AND 		#{searchType} LIKE CONCAT('%', #{searchKeyword},'%');
 		</if>
    		 ]]>
     </select>
@@ -84,19 +83,19 @@
 	    
 	<select id="selectArticleByKeyword" parameterType="Map" resultType="articleVO">
 		SELECT   
-		IDX  ,   
-		BOARD_ID  ,   
-		TITLE  ,   
-		CONTENTS  ,   
-		HIT_CNT  ,   
-		DEL_GB  ,   
-		DATE_FORMAT(WRITE_DT, "%Y-%m-%d") AS 'WRITE_DT'  , 
-		DATE_FORMAT(WRITE_DT, "%T") AS 'WRITE_TIME'  ,   
+		IDX,   
+		BOARD_ID,   
+		TITLE,   
+		CONTENTS,   
+		HIT_CNT,   
+		DEL_GB,   
+		DATE_FORMAT(WRITE_DT, "%Y-%m-%d") AS 'WRITE_DT', 
+		DATE_FORMAT(WRITE_DT, "%T") AS 'WRITE_TIME',   
 		WRITE_ID   
 		FROM   BIM_ARTICLE_TB   
 		WHERE BOARD_ID = #{boardId}
 		AND	DEL_GB = 'N'
-		AND	${searchType}  LIKE CONCAT(#{searchKeyword} ,'%')
+		AND	${searchType}  LIKE CONCAT(#{searchKeyword},'%')
 		ORDER BY IDX DESC
 	</select>
  
@@ -104,14 +103,14 @@
     <select id="selectArticleByIndex" parameterType="int" resultType="articleVO">
 		<![CDATA[
 		SELECT   
-		article.IDX  ,   
-		article.BOARD_ID  ,   
-		board.NAME AS 'BOARD_NAME' ,   
-		board.DEL_GB AS 'BOARD_DEL_GB' ,
-		article.TITLE  ,   
-		article.CONTENTS  ,   
-		article.HIT_CNT  ,   
-		article.DEL_GB  ,   
+		article.IDX,   
+		article.BOARD_ID,   
+		board.NAME AS 'BOARD_NAME',   
+		board.DEL_GB AS 'BOARD_DEL_GB',
+		article.TITLE,   
+		article.CONTENTS,   
+		article.HIT_CNT,   
+		article.DEL_GB,   
 		DATE_FORMAT(WRITE_DT, "%Y-%m-%d %T") AS 'WRITE_DT',
 		article.WRITE_ID   
 		FROM
@@ -123,13 +122,13 @@
 	<select id="selectArticleByboardId" parameterType="String" resultType="articleVO">
 		<![CDATA[
 		SELECT   
-		IDX  ,   
-		BOARD_ID  ,   
-		TITLE  ,   
-		CONTENTS  ,   
-		HIT_CNT  ,   
-		DEL_GB  ,   
-		DATE_FORMAT(WRITE_DT, "%Y-%m-%d %T") AS 'WRITE_DT'   ,   
+		IDX,   
+		BOARD_ID,   
+		TITLE,   
+		CONTENTS,   
+		HIT_CNT,   
+		DEL_GB,   
+		DATE_FORMAT(WRITE_DT, "%Y-%m-%d %T") AS 'WRITE_DT',   
 		WRITE_ID   
 		FROM   BIM_ARTICLE_TB   
 		WHERE BOARD_ID = #{id} AND DEL_GB = 'N'
@@ -140,88 +139,83 @@
     
 	 <select id="selectArticleByPage" parameterType="Map" resultType="articleVO">
 		SELECT   
-		article.IDX  ,   
-		article.BOARD_ID  ,   
-		board.NAME AS 'BOARD_NAME' , 
-		article.TITLE  ,   
-		article.CONTENTS  ,   
-		article.HIT_CNT  ,   
-		article.DEL_GB  ,  
-		DATE_FORMAT(WRITE_DT, "%Y-%m-%d") AS 'WRITE_DT'  , 
-		DATE_FORMAT(WRITE_DT, "%T") AS 'WRITE_TIME'  ,    
-		article.WRITE_ID  , 
+		article.IDX,   
+		article.BOARD_ID,   
+		board.NAME AS 'BOARD_NAME', 
+		article.TITLE,   
+		article.CONTENTS,   
+		article.HIT_CNT,   
+		article.DEL_GB,  
+		DATE_FORMAT(WRITE_DT, "%Y-%m-%d") AS 'WRITE_DT', 
+		DATE_FORMAT(WRITE_DT, "%T") AS 'WRITE_TIME',    
+		article.WRITE_ID, 
 		(SELECT COUNT(*) FROM BIM_ARTICLE_COMMENT_TB comment WHERE comment.PARENT_IDX = article.IDX AND DEL_GB = 'N') as COMMENT_CNT 
 		FROM   BIM_BOARD_TB  board,  BIM_ARTICLE_TB article  WHERE  board.id =  article.BOARD_ID
 		AND article.BOARD_ID = #{boardId} 
 		AND article.DEL_GB = 'N'
 <!--  
 		<if test="searchKeyword != null">
-		AND	${searchType}  LIKE CONCAT('%',#{searchKeyword} ,'%')
+		AND	${searchType}  LIKE CONCAT('%',#{searchKeyword},'%')
 		</if>
 		 -->
-
  		<choose>
  			<when test="searchKeyword == null">
  			</when>
  		
 			<when test="searchKeyword != null and searchType.equals('title')">
-			AND	article.TITLE  LIKE CONCAT('%',#{searchKeyword} ,'%')
+			AND	article.TITLE  LIKE CONCAT('%',#{searchKeyword},'%')
 			</when>
 
 			<when test="searchKeyword != null and searchType.equals('contents')">
-			AND	article.CONTENTS  LIKE CONCAT('%',#{searchKeyword} ,'%')
+			AND	article.CONTENTS  LIKE CONCAT('%',#{searchKeyword},'%')
 			</when>
 
 			<when test="searchKeyword != null and searchType.equals('title+contents')">
-			AND	article.TITLE LIKE CONCAT('%', #{searchKeyword}  ,'%')
-			OR	article.CONTENTS  LIKE CONCAT('%', #{searchKeyword}  ,'%')
+			AND	article.TITLE LIKE CONCAT('%', #{searchKeyword},'%')
+			OR	article.CONTENTS  LIKE CONCAT('%', #{searchKeyword},'%')
 			</when>
 
-
 			<when test="searchKeyword != null and searchType.equals('write_id')">
-			AND	article.WRITE_ID  LIKE CONCAT('%',#{searchKeyword} ,'%')
+			AND	article.WRITE_ID  LIKE CONCAT('%',#{searchKeyword},'%')
 			</when>
 
 			<otherwise>
 			</otherwise>
 			
 		</choose>
-
-		
 		ORDER BY article.IDX DESC
 		LIMIT  
-		#{startArticleCnt} , #{displayArticleCnt}
-		
+		#{startArticleCnt}, #{displayArticleCnt}
     </select>
     
     <select id="selectArticleByRecent" parameterType="map" resultType="articleVO">
 		SELECT   
-		article.IDX  ,   
-		article.BOARD_ID  ,  
+		article.IDX,   
+		article.BOARD_ID,  
 		board.NAME AS 'BOARD_NAME',
-		article.TITLE  ,   
-		article.CONTENTS  ,   
-		article.HIT_CNT  ,   
-		article.DEL_GB  ,   
-		DATE_FORMAT(WRITE_DT, "%Y-%m-%d %T") AS 'WRITE_DT'   ,   
+		article.TITLE,   
+		article.CONTENTS,   
+		article.HIT_CNT,   
+		article.DEL_GB,   
+		DATE_FORMAT(WRITE_DT, "%Y-%m-%d %T") AS 'WRITE_DT',   
 		article.WRITE_ID   
 		FROM   BIM_BOARD_TB  board,  BIM_ARTICLE_TB article  WHERE  board.id =  article.BOARD_ID 		
 		AND article.DEL_GB = 'N' 
 		AND article.BOARD_ID = #{boardId}
 		ORDER BY IDX DESC
-		LIMIT  	 0 , #{articleCnt}
+		LIMIT  	 0, #{articleCnt}
 	</select>
 	
   	<insert id="insertArticle" useGeneratedKeys="true" keyProperty="idx" parameterType="articleVO">
 		INSERT INTO BIM_ARTICLE_TB 
 		(
-		IDX  ,   
-		BOARD_ID  ,   
-		TITLE  ,   
-		CONTENTS  ,   
-		HIT_CNT  ,   
-		DEL_GB  ,   
-		WRITE_DT  ,   
+		IDX,   
+		BOARD_ID,   
+		TITLE,   
+		CONTENTS,   
+		HIT_CNT,   
+		DEL_GB,   
+		WRITE_DT,   
 		WRITE_ID  
 		) 
 		VALUES
@@ -257,7 +251,6 @@
 		IDX= #{idx} AND WRITE_ID = #{writeId} 
 		]]>
 	</update>
-	
 	
 	<update id="updateHitCntByIndex" parameterType="int">
 		<![CDATA[

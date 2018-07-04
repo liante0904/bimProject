@@ -29,10 +29,8 @@
 	</resultMap>
     
     <select id="selectAllMember" resultType="memberVO">
-	<![CDATA[
-	
-	
-      SELECT
+		<![CDATA[
+		SELECT
 		IDX,
 		ID,
 		PASSWORD,
@@ -43,15 +41,12 @@
 		CHURCH,
 		TYPE
 		FROM BIM_MEMBER_TB
-		
-    ]]>
+		]]>
     </select>
     
-        <select id="getMember" parameterType="String" resultType="memberVO">
-	<![CDATA[
-	
-	
-      SELECT
+	<select id="getMember" parameterType="String" resultType="memberVO">
+		<![CDATA[
+     	SELECT
 		IDX,
 		ID,
 		PASSWORD,
@@ -63,26 +58,20 @@
 		TYPE
 		FROM BIM_MEMBER_TB
 		WHERE ID = #{id}
-		
-    ]]>
+   		]]>
     </select>
     
-            <select id="selectMemberById" parameterType="String" resultType="int">
-	<![CDATA[
-	
-	
-      SELECT
+	<select id="selectMemberById" parameterType="String" resultType="int">
+		<![CDATA[
+      	SELECT
 		count(*)
 		FROM BIM_MEMBER_TB
 		WHERE ID = #{id}
-		
-    ]]>
+		]]>
     </select>
     
    	<insert id="insertMember" useGeneratedKeys="true" keyProperty="idx" parameterType="memberVO">
-	<![CDATA[
-	
-	
+		<![CDATA[
 		INSERT INTO BIM_MEMBER_TB 
 		(
 		IDX,
@@ -107,15 +96,11 @@
 		#{church},
 		'N'
 		)
-
-
-    ]]>
+		]]>
 	</insert>
 	
-	  	<update id="updateMember" parameterType="memberVO">
-   		<![CDATA[
-   		
-   		
+  	<update id="updateMember" parameterType="memberVO">
+		<![CDATA[
 		UPDATE BIM_MEMBER_TB
 		SET 
 		ID=#{id},
@@ -125,20 +110,16 @@
 		ADDRESS=#{address},
 		PHONE=#{phone},
 		CHURCH=#{church},
-		TYPE='Y' 
+		TYPE='1' 
 		WHERE 
 		IDX= #{idx}
 		AND
-		 1=1 
-		 
-		 
+		1=1 
 		]]>
 	</update>
 	
-		<update id="deleteMember" parameterType="memberVO">
+	<update id="deleteMember" parameterType="memberVO">
 		<![CDATA[
-		
-		
 		UPDATE BIM_MEMBER_TB
 		SET 
 		IDX=#{idx},
@@ -149,14 +130,11 @@
 		ADDRESS=#{address},
 		PHONE=#{phone},
 		CHURCH=#{church},
-		TYPE='Y'
+		TYPE='0'
 		WHERE 
 		IDX= #{idx} 
 		AND
-		 1=1 
-		 
-		 
+		1=1 
 		]]>
 	</update>
-     
 </mapper>

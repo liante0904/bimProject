@@ -4,9 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.bridgeimpact.renewal.fileSQL">
- 
-
- 
     	<resultMap type="fileVO"  id="fileResultMap">
    	 	<result property="idx" column="IDX" />
     		<result property="articleIdx" column="ARTICLE_IDX" />
@@ -17,34 +14,29 @@
 		<result property="creaId" column="CREA_ID" />
 		<result property="delGb" column="DELGB" />
 	</resultMap>
-     
-     
-     
     
    	<insert id="insertFile" parameterType="fileVO">
 	<![CDATA[
-
-	
 	INSERT INTO BIM_FILE_TB  
 	(
-	IDX ,
-	ARTICLE_IDX ,
-	ORIGINAL_FILE_NAME ,
-	STORED_FILE_NAME ,
-	FILE_SIZE ,
-	CREA_DTM ,
-	CREA_ID ,
+	IDX,
+	ARTICLE_IDX,
+	ORIGINAL_FILE_NAME,
+	STORED_FILE_NAME,
+	FILE_SIZE,
+	CREA_DTM,
+	CREA_ID,
 	DEL_GB
 	)
 	VALUES
 	(
-	NULL ,
-	#{articleIdx } ,
-	#{originalFileName } ,
-	#{storedFileName } ,
-	#{fileSize } ,
-	NULL ,
-	#{creaId } ,
+	NULL,
+	#{articleIdx },
+	#{originalFileName },
+	#{storedFileName },
+	#{fileSize },
+	NULL,
+	#{creaId },
 	'N'
 	)
 
@@ -60,9 +52,9 @@
 	<![CDATA[
 	
 		SELECT   
-		IDX  ,   
-		ID  ,   
-		NAME  ,   
+		IDX,   
+		ID,   
+		NAME,   
 		DEL_GB    
 		FROM   BIM_BOARD_TB 
     ]]>
@@ -125,74 +117,59 @@
 	<![CDATA[
 	
 		SELECT
-		IDX   ,
-		ARTICLE_IDX  ,   
-		ORIGINAL_FILE_NAME  ,   
-		STORED_FILE_NAME  ,   
-		FILE_SIZE  ,   
+		IDX,
+		ARTICLE_IDX,   
+		ORIGINAL_FILE_NAME,   
+		STORED_FILE_NAME,   
+		FILE_SIZE,   
 		DEL_GB 
 		FROM   BIM_FILE_TB   
 		WHERE ARTICLE_IDX = #{value}		
     ]]>
     </select>
     
-        <select id="selectFileByIndex" parameterType="int" resultType="fileVO">
+	<select id="selectFileByIndex" parameterType="int" resultType="fileVO">
 	<![CDATA[
-	
 		SELECT
-		IDX   ,
-		ARTICLE_IDX  ,   
-		ORIGINAL_FILE_NAME  ,   
-		STORED_FILE_NAME  ,   
-		FILE_SIZE  ,   
+		IDX,
+		ARTICLE_IDX,   
+		ORIGINAL_FILE_NAME,   
+		STORED_FILE_NAME,   
+		FILE_SIZE,   
 		DEL_GB  
 		FROM   BIM_FILE_TB   
 		WHERE IDX = #{value}	 
     ]]>
-		
     </select>
 	<!-- 
-	  	<update id="updateArticle" parameterType="articleVO">
+  	<update id="updateArticle" parameterType="articleVO">
    		<![CDATA[
-   		
-   		
 		UPDATE BIM_ARTICLE_TB
 		SET 
 		TITLE  = #{title},   
 		CONTENTS  = #{contents}  
 		WHERE 
 		IDX =  #{idx} 
-		 
-		 
 		]]>
 	</update>
 	
 		<update id="deleteArticle" parameterType="articleVO">
 		<![CDATA[
-		
-		
 		UPDATE BIM_ARTICLE_TB
 		SET 
 		DEL_GB = 'Y'
 		WHERE 
 		IDX= #{idx} AND WRITE_ID = #{writeId} 
-		 
-		 
 		]]>
 	</update>
 	
-	
 		<update id="updateHitCntByIndex" parameterType="int">
 		<![CDATA[
-		
-		
 		UPDATE BIM_ARTICLE_TB
 		SET 
 		HIT_CNT = COALESCE(HIT_CNT, 0) + 1
 		WHERE 
 		IDX= #{idx} 
-		 
-		 
 		]]>
 	</update>
       -->

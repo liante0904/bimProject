@@ -1,4 +1,6 @@
 package com.bridgeimpact.renewal.controller;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -125,8 +127,9 @@ public class MainController {
 		
 		/***
 		 * 사용자의 로그인 정보를 db 회원정보와 비교
-		 * @return loginResult 0 = 아이디 없음, 1 = 로그인 성공 , 2 = 패스워드 불일치 (아이디 존재, 탈퇴) 
-		 * 			           3 = 이메일 미인증 회원(패스워드 일치) 
+		 * @return loginResult  
+		 * -1 = 아이디 없음, 0 = 탈퇴된 아이디 , 1 = 로그인 성공 , 2 = 이메일 미인증 회원(패스워드 일치)   
+		 *  3 = 패스워드 불일치 (아이디 존재)
 		 * 
 		 */
 		try {
@@ -135,28 +138,41 @@ public class MainController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			
-			if (loginResult == 1) //	 로그인을 성공한 경우
+			logger.info("관리자 구출: " + loginResult);
+			if (loginResult == 1 || loginResult == 9) { // 로그인을 성공로직(일반, 관리자회원)
+				if (loginResult == 9) { // 관리자 로직
+					model.addAttribute("msg", "관리자 로그인 성공");
+				}else { // 일반회원 로직
+					model.addAttribute("msg", "로그인 성공");
+				}
+			} 
 				try {
-					{// 로그인 성공
-						model.addAttribute("msg", "로그인 성공");
+					{// 로그인에 성공한 사용자 정보 세션에 저장
 						MemberVO loginInfo = memberService.getMemberById(userInputMember.getId());
 						session.setAttribute("loginInfo", loginInfo);
+						logger.info("관리자 구출: " + loginInfo);
+
 						url = "main/mainForm";
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			else if(loginResult == 2){ // 패스워드가 일치하지 않는 경우
-					model.addAttribute("msg", "로그인 실패, 패스워드 불일치, 탈퇴회원");
+				if(loginResult == 2){ // 패스워드가 일치하지 않는 경우
+					model.addAttribute("msg", "로그인 실패, 패스워드 불일치");
 					url = "main/loginForm";
-				}else if(loginResult == 0){//아이디가 존재하지 않는 경우
+				}else if(loginResult == -1){//아이디가 존재하지 않는 경우
 					model.addAttribute("msg", "아이디가 존재하지 않음");
 					url = "main/loginForm";
 				}else if (loginResult == 3) { // 이메일 미인증 회원(패스워드 일치)
 					model.addAttribute("msg", "이메일 인증이 되지 않은 회원");
 					url = "main/loginForm";
+				}else if (loginResult == 0 ) { // 탈퇴된 회원
+					model.addAttribute("msg", "탈퇴된 회원");
+					url = "main/loginForm";
+				}else if (loginResult == 9) { // 관리자 회원
+					model.addAttribute("msg", "관리자 회원");
+					url = "main/mainForm";
 				}
 		}
 		

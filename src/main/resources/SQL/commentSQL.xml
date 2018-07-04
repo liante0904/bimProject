@@ -26,35 +26,27 @@
 		<result property="writeDt" column="WRITE_DT" />
 		<result property="writeId" column="WRITE_ID" />
 		</resultMap>
-    
      -->
     <select id="selectAllComment" resultType="commentVO">
 	<![CDATA[
-	
-	
-		SELECT   
-		IDX  ,   
-		PARENT_IDX  ,   
-		TITLE  ,   
-		CONTENTS  ,   
-		HIT_CNT  ,   
-		DEL_GB  ,   
-		DATE_FORMAT(WRITE_DT, "%Y-%m-%d ") AS 'WRITE_DT'  ,   
-		WRITE_ID   
+	SELECT   
+	IDX,   
+	PARENT_IDX,   
+	TITLE,   
+	CONTENTS,   
+	HIT_CNT,   
+	DEL_GB,   
+	DATE_FORMAT(WRITE_DT, "%Y-%m-%d ") AS 'WRITE_DT',   
+	WRITE_ID   
 	FROM   BIM_BOARD_TB   
-		WHERE 
-		DEL_GB = 'N'
+	WHERE 
+	DEL_GB = 'N'
 	ORDER BY IDX DESC
-
-
     ]]>
     </select>
     
-
-    
-        <select id="selectCommentByIndex" parameterType="int" resultType="commentVO">
+	<select id="selectCommentByIndex" parameterType="int" resultType="commentVO">
 	<![CDATA[
-		
 		SELECT  
 		IDX ,  
 		PARENT_IDX ,  
@@ -64,20 +56,18 @@
 		WRITE_ID  
 		FROM  BIM_ARTICLE_COMMENT_TB  
 		WHERE PARENT_IDX = #{index} AND DEL_GB = 'N'
-		
-			
     ]]>
     </select>
     
    	<insert id="insertComment" parameterType="commentVO">
-	<![CDATA[
+		<![CDATA[
 		INSERT INTO   BIM_ARTICLE_COMMENT_TB  
 		(  
-		IDX  ,   
-		PARENT_IDX  ,   
-		CONTENTS  ,   
-		DEL_GB  ,   
-		WRITE_DT  ,   
+		IDX,   
+		PARENT_IDX,   
+		CONTENTS,   
+		DEL_GB,   
+		WRITE_DT,   
 		WRITE_ID  
 		) 
 		VALUES 
@@ -89,55 +79,36 @@
 		NULL,
 		#{writeId}
 		)
-
-	
-
-
-    ]]>
+  		 ]]>
 	</insert>
 	
-	  	<update id="updateComment" parameterType="commentVO">
+  	<update id="updateComment" parameterType="commentVO">
    		<![CDATA[
-   		
-   		
 		UPDATE BIM_ARTICLE_COMMENT_TB
 		SET 
 		CONTENTS  = #{contents}  
 		WHERE 
 		IDX =  #{idx} 
-		 
-		 
 		]]>
 	</update>
 	
-		<update id="deleteComment" parameterType="commentVO">
+	<update id="deleteComment" parameterType="commentVO">
 		<![CDATA[
-
-		
 		UPDATE BIM_ARTICLE_COMMENT_TB
 		SET 
 		DEL_GB = 'Y'
 		WHERE 
 		IDX= #{idx} AND WRITE_ID = #{writeId} 
-		 
-		 
 		]]>
 	</update>
 	
-	
-		<update id="updateHitCntByIndex" parameterType="int">
+	<update id="updateHitCntByIndex" parameterType="int">
 		<![CDATA[
-
-		 
-		
 		UPDATE BIM_BOARD_TB
 		SET 
 		HIT_CNT = COALESCE(HIT_CNT, 0) + 1
 		WHERE 
 		IDX= #{idx} 
-		 
-		 
 		]]>
 	</update>
-     
 </mapper>

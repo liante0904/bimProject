@@ -16,21 +16,19 @@
      
      
     <select id="selectAllBoard" parameterType="String" resultType="boardVO">
-	<![CDATA[
-	
+		<![CDATA[
 		SELECT   
-		IDX  ,   
-		ID  ,   
-		NAME  ,   
+		IDX,   
+		ID,   
+		NAME,   
 		DEL_GB    
 		FROM   BIM_BOARD_TB 
-    ]]>
+   		 ]]>
     
 		<if test="value != null">
 		WHERE 
 		DEL_GB  = #{value}
 		</if>
-		
     </select>
 
     
@@ -38,113 +36,87 @@
     
    	<insert id="insertBoard" parameterType="boardVO">
 	<![CDATA[
-
-	
-		INSERT INTO BIM_BOARD_TB 
-		(
-		IDX ,
-		ID ,  
-		NAME ,  
-		DEL_GB   
-		) 
-		VALUES
-		(
-		NULL,
-		#{id},
-		#{name},
-		'N'
-		)
-
-
+	INSERT INTO BIM_BOARD_TB 
+	(
+	IDX ,
+	ID ,  
+	NAME ,  
+	DEL_GB   
+	) 
+	VALUES
+	(
+	NULL,
+	#{id},
+	#{name},
+	'N'
+	)
     ]]>
 	</insert>
 	
 	
-	 <select id="selectBoardCntById" parameterType="String" resultType="int">
+	<select id="selectBoardCntById" parameterType="String" resultType="int">
 	<![CDATA[
-	
-	
-		SELECT   
-		count(*)
-		FROM   BIM_BOARD_TB   
-		WHERE 
-		ID = #{value}		
+	SELECT   
+	count(*)
+	FROM   BIM_BOARD_TB   
+	WHERE 
+	ID = #{value}		
     ]]>
     </select>
     
     	 <select id="selectBoardDelgbById" parameterType="String" resultType="String">
 	<![CDATA[
-	
-	
-		SELECT   
-		DEL_GB   
-		FROM   BIM_BOARD_TB   
-		WHERE 
-		ID = #{value}		
+	SELECT   
+	DEL_GB   
+	FROM   BIM_BOARD_TB   
+	WHERE 
+	ID = #{value}		
     ]]>
     </select>
     
-    
     <update id="deleteBoardById" parameterType="String">
 		<![CDATA[
-		
-		
 		UPDATE BIM_BOARD_TB
 		SET 
 		DEL_GB = 'Y'
 		WHERE 
 		ID = #{id} 
-		 
-		 
 		]]>
 	</update>
 	
 	    <update id="unDeleteBoardById" parameterType="String">
 		<![CDATA[
-		
-		
 		UPDATE BIM_BOARD_TB
 		SET 
 		DEL_GB = 'N'
 		WHERE 
 		ID = #{id} 
-		 
-		 
 		]]>
 	</update>
-	
-	
-	
 		
-	 <select id="selectBoardById" parameterType="String" resultType="boardVO">
-	<![CDATA[
-	
-	
+	<select id="selectBoardById" parameterType="String" resultType="boardVO">
+		<![CDATA[
 		SELECT   
-		IDX  ,   
-		ID  ,   
-		NAME  ,   
+		IDX,   
+		ID,   
+		NAME,   
 		DEL_GB    
 		FROM   BIM_BOARD_TB  
 		WHERE 
 		ID = #{value}		
-    ]]>
+	    ]]>
     </select>
 <!-- 
-
-    
         <select id="selectArticleByIndex" parameterType="int" resultType="articleVO">
 	<![CDATA[
-	
-	
 		SELECT   
-		IDX  ,   
-		PARENT_IDX  ,   
-		TITLE  ,   
-		CONTENTS  ,   
-		HIT_CNT  ,   
-		DEL_GB  ,   
-		DATE_FORMAT(WRITE_DT, "%Y-%m-%d %H:%i:%s") AS 'WRITE_DT'   ,   
+		IDX,   
+		PARENT_IDX,   
+		TITLE,   
+		CONTENTS,   
+		HIT_CNT,   
+		DEL_GB,   
+		DATE_FORMAT(WRITE_DT, "%Y-%m-%d %H:%i:%s") AS 'WRITE_DT' ,   
 		WRITE_ID   
 		FROM   BIM_ARTICLE_TB   
 		WHERE IDX = #{index}		
@@ -153,45 +125,32 @@
 	
 	  	<update id="updateArticle" parameterType="articleVO">
    		<![CDATA[
-   		
-   		
 		UPDATE BIM_ARTICLE_TB
 		SET 
 		TITLE  = #{title},   
 		CONTENTS  = #{contents}  
 		WHERE 
 		IDX =  #{idx} 
-		 
-		 
 		]]>
 	</update>
 	
 		<update id="deleteArticle" parameterType="articleVO">
 		<![CDATA[
-		
-		
 		UPDATE BIM_ARTICLE_TB
 		SET 
 		DEL_GB = 'Y'
 		WHERE 
 		IDX= #{idx} AND WRITE_ID = #{writeId} 
-		 
-		 
 		]]>
 	</update>
 	
-	
 		<update id="updateHitCntByIndex" parameterType="int">
 		<![CDATA[
-		
-		
 		UPDATE BIM_ARTICLE_TB
 		SET 
 		HIT_CNT = COALESCE(HIT_CNT, 0) + 1
 		WHERE 
 		IDX= #{idx} 
-		 
-		 
 		]]>
 	</update>
       -->
