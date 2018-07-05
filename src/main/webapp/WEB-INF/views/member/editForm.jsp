@@ -91,7 +91,24 @@ $(document).ready(function(){
 	
 	 
 	$("#delete").click(function() {
-		document.editForm.action = "../member/deleteSubmit.bim";
+		var userInputPassword = $("#password").val();
+		var userIdx = ${sessionScope.loginInfo.idx}
+		
+		 $.ajax({
+		        url : "${pageContext.request.contextPath}/member/deleteSubmit.bim",
+		        type: "post",
+		        data : { "password" : userInputPassword },
+		        success : function(data) {
+		        	console.log("first :"+data.result);
+		        	if (data.result == "success") {
+			        	console.log("su :"+data.result);
+		        		window.location.href = '${pageContext.request.contextPath}/';
+					}else if(data.result == "error"){
+			        	console.log("er : "+data.result);
+			        	alert("회원 탈퇴시 올바른 패스워드를 입력해주세요.");
+					}
+				}
+		    });
 	})
 
 }); 
@@ -155,7 +172,7 @@ function cancel() {
 	   <div class="form-group">
 		   <input type="button" value="취소" onclick="cancel();" style="align:center" class="btn btn-lg btn-primary btn-block"/>
 		   <input type="submit" value="수정" id="edit" class="btn btn-lg btn-primary btn-block"/>
-		   <input type="submit" value="탈퇴" id="delete" class="btn btn-lg btn-primary btn-block"/>
+		   <input type="button" value="탈퇴" id="delete" class="btn btn-lg btn-primary btn-block"/>
 	  </div>
 	 </form>
  </div>

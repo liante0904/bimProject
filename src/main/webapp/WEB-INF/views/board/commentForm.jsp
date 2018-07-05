@@ -73,7 +73,9 @@ $(function(){
 	$(".editComment").on('click', function() {
 		var idx = $(this).attr('data-idx');
 		var editComment_div = $('div[class=comment_editForm_div][id='+idx+']');
+		var editComment_input_div = $('textarea[id=editCommentContents][data-idx='+idx+']');
 		editComment_div.show();
+		editComment_input_div.focus();
 	});
 	$(".editComment_submit").on('click', function() {
 		var idx = $(this).attr('data-idx');
@@ -270,7 +272,7 @@ function deleteComment(idx){
 					<c:if test="${!empty sessionScope.loginInfo}">
 						댓글 수정
 			<!-- 			<input type="text" class="form-control" id="writeCommentContents" placeholder="댓글을 입력하세요" > -->
-						<textarea rows="" cols="5px" class="form-control" id="editCommentContents" placeholder="댓글을 수정하세요" >${comment.contents}</textarea>
+						<textarea rows="" cols="5px" class="form-control" id="editCommentContents" data-idx="${comment.idx}" placeholder="댓글을 수정하세요" >${comment.contents}</textarea>
 						<input type="button" id="editComment_submit" value="댓글수정" class="editComment_submit btn btn-primary" data-idx="${comment.idx}">
 					</c:if>
 				</div>

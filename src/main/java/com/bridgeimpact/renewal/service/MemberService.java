@@ -22,6 +22,8 @@ public interface MemberService {
 	public Map<String, String> checkMemberById(String id) throws Exception;
 
 	public MemberVO getMemberById(String id) throws Exception;
+
+	public boolean checkDeleteMemberByPassword(MemberVO sessionMember, String password) throws Exception;
 }
 
 

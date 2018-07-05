@@ -72,13 +72,14 @@ public class MemberServiceImpl implements MemberService {
 		
 		/***
 		 * Eamil 인증 데이터 DB반영 로직
+		 * 로직 : 토큰키 생성 -> DB반영 -> 이메일 전송
 		 */
 		EmailAuthVO emailAuthVO = new EmailAuthVO(inputMember);
 		System.out.println("객체 생성 값 : "+ emailAuthVO.getUserId());
 		
 		emailAuthDAO.insertEmailAuth(emailAuthVO);
 		
-		int emailAuthResult = emailAuthService.sendEmailByEmailAuthVO(emailAuthVO);
+		int emailAuthResult = emailAuthService.sendEmailByEmailAuthVO(emailAuthVO, inputMember);
 		if (emailAuthResult == 0) {
 			//TODO 이메일 전송 실패시 에러 처리
 			return 10;
@@ -176,6 +177,13 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO getMemberById(String id) throws Exception {
 		// TODO Auto-generated method stub
 		return memberDAO.getMemberById(id);
+	}
+
+	@Override
+	public boolean checkDeleteMemberByPassword(MemberVO sessionMember, String password) throws Exception {
+		MemberVO dbMember = new MemberVO();
+		dbMember = memberDAO.getMemberById(sessionMember.getId());
+		return passwordEncoder.matches(password, dbMember.getPassword());
 	}
 
  
