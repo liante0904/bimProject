@@ -89,10 +89,8 @@ public class ArticleController {
 	/***
 	 * 게시판에서 사용자가 선택한 글을 조회 유효성 판별 후 - 조회수 증가 - 게시글의 댓글 가져오기 - 반환
 	 * 
-	 * @param num
-	 *            : 글번호 (idx)
-	 * @param id
-	 *            : 게시판 구분자
+	 * @param num : 글번호 (idx)
+	 * @param id : 게시판 구분자
 	 * @param model
 	 * @param session
 	 * @return

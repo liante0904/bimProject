@@ -29,6 +29,7 @@ import com.bridgeimpact.renewal.dto.ArticleVO;
 import com.bridgeimpact.renewal.service.ArticleService;
 import com.bridgeimpact.renewal.service.BoardService;
 import com.bridgeimpact.renewal.service.CommentService;
+import com.bridgeimpact.renewal.service.EmailAuthService;
 import com.bridgeimpact.renewal.service.MemberService;
 
 
@@ -53,6 +54,9 @@ public class TestController {
 	@Autowired
 	private BoardService boardService;
 
+    @Autowired
+    private EmailAuthService emailAuthService;
+    
     @Inject
     private JavaMailSender mailSender;
 
@@ -96,13 +100,15 @@ public class TestController {
 
     @RequestMapping(value="emailConfirm", method=RequestMethod.GET)
     public String emailConfirm(String key, Model model){
-    	System.out.println("인증 도착했음");
+    	boolean checkEmailAuthKeyResult;
+    	System.out.println("인증 도착했음" + key);
         try {
-           // emailService.emailConfirm(emailConfirmVO);
+        	checkEmailAuthKeyResult = emailAuthService.authEmailByTempKey(key);
             model.addAttribute("check", true);
         } catch (Exception e) {
             model.addAttribute("check", false);
         }
+        // TODO 이메일 인증후 로그 기록 로직
         return "emailConfirm";
     }
 

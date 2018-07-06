@@ -31,13 +31,27 @@
 		)
 	</insert>
 
-	<update id="updateEmail">
-		UPDATE BIM_EMAIL_AUTH
+	<update id="updateEmailAuthByKey" parameterType="String">
+
+		
+		UPDATE BIM_EMAIL_AUTH email INNER JOIN BIM_MEMBER_TB member
+		ON email.USER_IDX = member.IDX
 		SET
-		AUTH_FL = 'Y'
+		email.AUTH_FL= 'Y' , member.`TYPE` = '1' 
 		WHERE
-		USER_ID = #{userId }
-		AND 
-		EMAIL_AUTH_KEY = #{emailAuthKey }
+		email.EMAIL_AUTH_KEY =  #{key }
+		
+		
 	</update>
+	
+	<select id="selectEmailAuthByKey" resultType="emailAuthVO"  parameterType="String">
+		SELECT
+		member.IDX,
+		member.ID,
+		member.`TYPE`,
+		email.AUTH_FL,
+		member.EMAIL
+		FROM BIM_MEMBER_TB member, BIM_EMAIL_AUTH email WHERE member.IDX = email.USER_IDX
+		AND EMAIL_AUTH_KEY = #{key}
+	</select>
 </mapper>
