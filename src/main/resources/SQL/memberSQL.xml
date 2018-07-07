@@ -146,4 +146,13 @@
 		1=1 
 		]]>
 	</update>
+	
+    	<select id="selectMemberByEmail" parameterType="String" resultType="String">
+		<![CDATA[
+      	SELECT
+		id
+		FROM BIM_MEMBER_TB
+		WHERE email = #{email}
+		]]>
+    </select>
 </mapper>

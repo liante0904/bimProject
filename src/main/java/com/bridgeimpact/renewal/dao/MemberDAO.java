@@ -19,5 +19,9 @@ public interface MemberDAO {
 	public int selectMemberById(MemberVO member) throws Exception;
 
 	public int getMemberByEmail(String email) throws Exception;
+
+	public String selectMemberByEmail(MemberVO member) throws Exception;
+
+	public String updateMemberTempPasswordByMember(MemberVO member) throws Exception;
     
 }

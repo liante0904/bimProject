@@ -188,6 +188,31 @@ public class MemberController {
 		  return resultMap;
 	}
 
+	@RequestMapping(value="member/askAccountId.bim",method = RequestMethod.POST,produces = "application/json; charset=utf8")
+	@ResponseBody
+	public Map<String, String> askAccountId(MemberVO member){
+		Map<String, String> resultMap = new HashMap<String, String>();
+		try {
+			resultMap = memberService.findAccountId(member);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultMap;
+	}
+	
+	@RequestMapping(value="member/askAccountPassword.bim",method = RequestMethod.POST,produces = "application/json; charset=utf8")
+	@ResponseBody
+	public Map<String, String> askAccountPassword(MemberVO member){
+		Map<String, String> resultMap = new HashMap<String, String>();
+		try {
+			resultMap = memberService.findAccountPassword(member);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultMap;
+	}
 }
 
 

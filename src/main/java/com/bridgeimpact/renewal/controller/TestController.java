@@ -128,7 +128,11 @@ public class TestController {
         System.out.println("Using System Property: " + os);
 		return "/test/writeForm1";
 	}
-
+	@RequestMapping(value="/login")
+	public String login(Model model, HttpServletRequest request){
+		return "/test/loginForm";
+	}
+	
 	@RequestMapping(value="/sidebar")
 	public String sidebar(Model model, HttpServletRequest request){
 		return "/test/sidebar";

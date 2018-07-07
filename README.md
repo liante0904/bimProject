@@ -50,6 +50,7 @@ http://liante0904.asuscomm.com:9090/bimProject/
 
 ## TODOList
 - SSL적용
+- 데이터를 입력 받았을때 공백값에 대한 처리
 - 아이디 비밀번호 찾기 구현
 - 회원 이메일 주소 유니크 처리, 가입시 submit전 데이터 유효성 체크
 - 접속자의 아이피, 접속기록 저장 로직

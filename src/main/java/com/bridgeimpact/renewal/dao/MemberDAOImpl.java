@@ -52,5 +52,17 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne(Namespace+".getMemberByEmail", email);
 	}
 
+	@Override
+	public String selectMemberByEmail(MemberVO member) throws Exception {
+		String userId = sqlSession.selectOne(Namespace+".selectMemberByEmail", member.getEmail());
+		return userId;
+	}
+
+	@Override
+	public String updateMemberTempPasswordByMember(MemberVO member) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
  
 }

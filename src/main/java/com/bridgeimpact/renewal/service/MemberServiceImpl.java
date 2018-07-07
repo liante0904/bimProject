@@ -210,6 +210,29 @@ public class MemberServiceImpl implements MemberService {
 		return resultMap;
 	}
 
+	@Override
+	public Map<String, String> findAccountId(MemberVO member) throws Exception {
+		Map<String, String> resultMap = new HashMap<String, String>();
+		String result = "";
+		String resultMsg = "";
+		String id = memberDAO.selectMemberByEmail(member);
+		result = "success";
+		resultMsg = id;
+		resultMap.put("result", result);
+		resultMap.put("resultMsg", resultMsg);
+		return resultMap;
+	}
+
+	@Override
+	public Map<String, String> findAccountPassword(MemberVO member) throws Exception {
+		Map<String, String> resultMap = new HashMap<String, String>();
+		String result = "";
+		String resultMsg = "";
+		// TODO 임시 문자열 패스워드 update 후 해당 패스워드를 이메일로 발송 로직
+		String tempPassword = memberDAO.updateMemberTempPasswordByMember(member);
+		return resultMap;
+	}
+
  
 }
 
