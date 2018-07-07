@@ -12,7 +12,7 @@ $(document).ready(function(){
 	
 });
 </script>
-<title>Insert title here</title>
+<title>로그인 페이지</title>
 </head>
 <body>
 <div class="container">

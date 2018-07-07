@@ -159,7 +159,30 @@ public class MemberController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		    response.setContentType("text/plain");
+		    response.setCharacterEncoding("UTF-8");
+		  return resultMap;
+	}
+	
+	
+	/***
+	 * 회원가입 페이지에서 이메일 중복체크 ajax 요청
+	 * @param model
+	 * @param email
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="member/checkMemberEmailAjax.bim",method = RequestMethod.POST,produces = "application/json; charset=utf8")
+	@ResponseBody
+	public Map<String, String> checkMemberEmailAjax(Model model,String email, HttpServletRequest request,HttpServletResponse response){
+		  Map<String, String> resultMap = new HashMap<String, String>();
+		try {
+			resultMap = memberService.checkMemberEmail(email);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		    response.setContentType("text/plain");
 		    response.setCharacterEncoding("UTF-8");
 		  return resultMap;

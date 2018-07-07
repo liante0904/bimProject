@@ -61,8 +61,8 @@ $(document).ready(function(){
 				required : "필수 정보입니다.",
 			},
 			email: {
-				required : "필수 정보입니다.",		
-				email : "올바른 이메일 주소가 아닙니다."
+				required : "",		
+				email : ""
 			},
 			phone: {
 				required : "필수 정보입니다.",
@@ -85,19 +85,19 @@ $(document).ready(function(){
 	
 	$("#id").focusout(function(){
 
-		var id = $(this).val();
+		var userIdInput = $(this).val();
 		var idResult = $("#idResult");
 		
-		if($(this).val().length === 0){
+		if(userIdInput.length === 0){
 			idResult.html("아이디를 입력해주세요.");
-		}else if ($(this).val().length < 7) {
+		}else if (userIdInput.length < 7) {
 			idResult.html("아이디가 너무 짧습니다.");
 		}else{
-			
+
 			 $.ajax({
 			        url : "${pageContext.request.contextPath}/member/checkMemberIdAjax.bim",
 			        type: "get",
-			        data : { "id" : id },
+			        data : { "id" : userIdInput },
 			        success : function(data){
 			         if ( data.result == "success") {
 						idResult.css("color","green");
@@ -105,7 +105,7 @@ $(document).ready(function(){
 						idResult.css("color","red");
 					}
 
-						console.log(id);
+						console.log(userIdInput);
 						console.log(data.resultMsg);
 						idResult.html(data.resultMsg);
 			         
@@ -140,7 +140,44 @@ $('#password').focusout(function() {
 				
 		}
 		
-	})
+	});
+	 
+	 $('#email').focusout(function() {
+		var userEmailInput = $(this).val();
+		var emailResult = $('#emailResult');
+		
+		if (userEmailInput.length == 0) {
+			emailResult.css("color","red");
+			emailResult.html("이메일을 입력해주세요.");
+		}else {
+			if (userEmailInput.indexOf('@')  > 0 ) {
+			 $.ajax({
+			        url : "${pageContext.request.contextPath}/member/checkMemberEmailAjax.bim",
+			        type: "post",
+			        data : { "email" : userEmailInput },
+			        success : function(data){
+			         if ( data.result == "success") {
+				    		emailResult.css("color","green");
+					}else {
+						emailResult.css("color","red");
+					}
+				    		emailResult.html(data.resultMsg);
+			        	 console.log("asads: "+data.resultMsg);
+
+/* 						console.log(id);
+						console.log(data.resultMsg);
+						idResult.html(data.resultMsg); */
+			         
+			        }
+			    });
+		}else {
+			emailResult.css("color","red");
+			emailResult.html("올바른 이메일 형식을 입력해주세요.");
+		}
+			
+		} 
+
+	});
 	/* 
 	$('#join').on('click', function(e){
 		$('form').validate();
@@ -194,9 +231,9 @@ $('#password').focusout(function() {
 			</div>
 				
 				<div class="row">
-					<div class="col-xs-7">
+					<div class="col-xs-8">
 						<label for="email">E-Mail</label>
-						<input type="text" name="email" id="email" class="form-control" placeholder="E-MAIL" />
+						<input type="text" name="email" id="email" class="form-control" placeholder="E-MAIL" /> <span id="emailResult"> 이메일을 입력해주세요. </span>
 					</div>
 				</div>
 				<div class="row">

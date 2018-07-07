@@ -24,32 +24,32 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public void insertMember(MemberVO member) throws Exception {
-		// TODO Auto-generated method stub
 		sqlSession.insert(Namespace+".insertMember", member);
 	}
 
 	@Override
 	public void updateMember(MemberVO member) throws Exception {
-		// TODO Auto-generated method stub
 		sqlSession.update(Namespace+".updateMember", member);
 	}
 
 	@Override
 	public void deleteMember(MemberVO member) throws Exception {
-		// TODO Auto-generated method stub
 		sqlSession.update(Namespace+".deleteMember", member);
 	}
 	@Override
 	public MemberVO getMemberById(String id) throws Exception  {
-		// TODO Auto-generated method stub
 		return (MemberVO)sqlSession.selectOne(Namespace+".getMember", id);
 	}
 
 	@Override
 	public int selectMemberById(MemberVO member) throws Exception {
-		// TODO Auto-generated method stub
 		String id = member.getId();
 		return sqlSession.selectOne(Namespace+".selectMemberById", id);
+	}
+
+	@Override
+	public int getMemberByEmail(String email) throws Exception {
+		return sqlSession.selectOne(Namespace+".getMemberByEmail", email);
 	}
 
  

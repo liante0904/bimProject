@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.EmitUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -153,6 +154,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Map<String, String> checkMemberById(String id) throws Exception {
 		// TODO SQL param 변경 (object -> String)
+		Map<String, String> resultMap = new HashMap<String, String>();
 		MemberVO member = new MemberVO();
 		member.setId(id);
 		int resultCnt = memberDAO.selectMemberById(member);
@@ -163,11 +165,10 @@ public class MemberServiceImpl implements MemberService {
 			   result = "success";
 			   resultMsg = "사용 가능한 아이디입니다.";
 			  } else {
-			   result = "failure";
+			   result = "error";
 			   resultMsg = "이미 사용중인 아이디입니다.";
 			  }
 
-		  Map<String, String> resultMap = new HashMap<String, String>();
 		  resultMap.put("result", result);
 		  resultMap.put("resultMsg", resultMsg);
 		return resultMap;
@@ -184,6 +185,29 @@ public class MemberServiceImpl implements MemberService {
 		MemberVO dbMember = new MemberVO();
 		dbMember = memberDAO.getMemberById(sessionMember.getId());
 		return passwordEncoder.matches(password, dbMember.getPassword());
+	}
+
+	@Override
+	public Map<String, String> checkMemberEmail(String email) throws Exception {
+		Map<String, String> resultMap = new HashMap<String, String>();
+		String result = "";
+		String resultMsg = "";
+		if (!email.contains("@")) {
+		    result = "error";
+		    resultMsg = "올바르지 않은 이메일 주소 형식입니다.";
+		}else {
+			int emailCheckResult = memberDAO.getMemberByEmail(email);
+			if (emailCheckResult > 0 ) {
+				result = "error";
+				resultMsg = "이미 가입된 이메일 주소입니다.";
+			}else {
+				result = "success";
+				resultMsg = "사용 가능한 이메일 주소입니다.";
+			}
+			resultMap.put("result", result);
+			resultMap.put("resultMsg", resultMsg);
+		}
+		return resultMap;
 	}
 
  

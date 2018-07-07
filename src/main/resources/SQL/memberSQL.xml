@@ -70,6 +70,15 @@
 		]]>
     </select>
     
+    	<select id="getMemberByEmail" parameterType="String" resultType="int">
+		<![CDATA[
+      	SELECT
+		count(*)
+		FROM BIM_MEMBER_TB
+		WHERE email = #{email}
+		]]>
+    </select>
+    
    	<insert id="insertMember" useGeneratedKeys="true" keyProperty="idx" parameterType="memberVO">
 		<![CDATA[
 		INSERT INTO BIM_MEMBER_TB 
