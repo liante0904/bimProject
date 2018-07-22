@@ -47,7 +47,7 @@
 	<select id="selectEmailAuthByKey" resultType="emailAuthVO"  parameterType="String">
 		SELECT
 		member.IDX,
-		member.ID,
+		member.ID AS userId,
 		member.`TYPE`,
 		email.AUTH_FL,
 		member.EMAIL

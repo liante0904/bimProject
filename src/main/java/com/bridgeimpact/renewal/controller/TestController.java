@@ -135,7 +135,7 @@ public class TestController {
 	
 	@RequestMapping(value="/sidebar")
 	public String sidebar(Model model, HttpServletRequest request){
-		return "/test/sidebar";
+		return "/test/sidebar/page";
 	}
 	/**
 	 * 파일 업로드 요청 처리(단일 파일 업로드)

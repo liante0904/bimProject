@@ -23,6 +23,13 @@ http://liante0904.asuscomm.com:9090/bimProject/
 - ~~AWS (Expected)~~
 
 ## About
+### Complete Function
+- 모바일 대응(반응형 웹)
+- 회원 주요기능(CRUD)
+- 게시판 게시글 주요기능(CRUD) 검색, 페이징
+- 게시글 작성시 FileIO DB처리
+- 댓글 주요기능(CRUD) 비동기 단층형 구조 구현
+- 논리에 어긋나는 페이지 접근처리 제한(삭제 혹은 비공개된 게시글, 게시판 접근시, 임시 Admin 페이지 접근시)
 
 ### ChangeLog
 - 회원 탈퇴시 기존 패스워드 일치 여부 확인 추가(컨트롤러) 
@@ -50,6 +57,7 @@ http://liante0904.asuscomm.com:9090/bimProject/
 
 ## TODOList
 - SSL적용
+- 이메일 인증메일 수신하여 인증 승인처리 구체화(테스트중)
 - 데이터를 입력 받았을때 공백값에 대한 처리
 - 아이디 비밀번호 찾기 구현
 - 회원 이메일 주소 유니크 처리, 가입시 submit전 데이터 유효성 체크
