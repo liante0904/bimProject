@@ -77,6 +77,13 @@ $(function(){
 		editComment_div.show();
 		editComment_input_div.focus();
 	});
+	$(".reWriteComment").on('click', function() {
+		var idx = $(this).attr('data-idx');
+		var editComment_div = $('div[class=comment_editForm_div][id='+idx+']');
+		var editComment_input_div = $('textarea[id=editCommentContents][data-idx='+idx+']');
+		editComment_div.show();
+		editComment_input_div.focus();
+	});
 	$(".editComment_submit").on('click', function() {
 		var idx = $(this).attr('data-idx');
 		var editCommentContentsForm = $("#editCommentContents");
@@ -250,6 +257,7 @@ function deleteComment(idx){
 				<c:set var="sessionId" value="${sessionScope.loginInfo.id}" /> 
 					<c:if test="${writeCommentId == sessionId}">
 						<span>
+							<a class="reWriteComment" data-idx="${comment.idx}"><span>대댓글</span></a>
 							<a class="editComment" data-idx="${comment.idx}"><span>수정</span></a>
 							<a class="deleteComment_submit" data-idx="${comment.idx}"><span>삭제</span></a>
 						</span>
