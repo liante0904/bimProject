@@ -158,6 +158,36 @@ public class MainController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				switch (loginResult) {
+				case -1:	// 아이디가 존재 하지 않는 사용자
+					model.addAttribute("msg", "아이디가 존재하지 않음");
+					url = "main/loginForm";					
+					break;
+				case 0:	// 탈퇴된 회원
+					model.addAttribute("msg", "탈퇴된 회원");
+					url = "main/loginForm";
+					break;
+				case 2:	// 이메일 미인증 회원(로그인 성공)
+					model.addAttribute("msg", "이메일 인증이 되지 않은 회원");
+					url = "main/loginForm";
+					break;
+				case 3:	// 패스워드가 일치하지 않는 경우
+					model.addAttribute("msg", "로그인 실패, 패스워드 불일치");
+					url = "main/loginForm";
+					break;
+				
+				case 9:	// 탈퇴된 회원
+					model.addAttribute("msg", "관리자 회원");
+					url = "main/mainForm";
+					break;
+
+
+				default:
+					model.addAttribute("msg", "올바른 접근이 아닙니다.");
+					url = "main/loginForm";	
+					break;
+				}
+				/*
 				if(loginResult == 3){ // 패스워드가 일치하지 않는 경우
 					model.addAttribute("msg", "로그인 실패, 패스워드 불일치");
 					url = "main/loginForm";
@@ -174,15 +204,23 @@ public class MainController {
 					model.addAttribute("msg", "관리자 회원");
 					url = "main/mainForm";
 				}
+				*/
 		}
 		
 		logger.info(url);
 		return url;
 	}
 	
-
+	/***
+	 * 파일 다운로드 요청을 처리합니다.
+	 * @param request
+	 * @param response
+	 * @param num
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/download.bim")
-	public ModelAndView download(HttpServletRequest request,HttpServletResponse response, int num) throws Exception {
+	public ModelAndView download(HttpServletRequest request,HttpServletResponse response, int num)  {
 		FileVO fileVO = null;
 		try {
 			 fileVO = fileService.selectFileByIndex(num);
@@ -194,7 +232,7 @@ public class MainController {
 //		String vanillaPath = "C:\\upload\\";
 //		vanillaPath += "4e624c22518285.gif";
 		
-		
+		// TODO getRealPath("/") 부분 OS 인식가능한 함수로 변경?
 		String serverPath = request.getSession().getServletContext().getRealPath("/");
 		serverPath += fileVO.getOriginalFileName();
 		logger.info("callDownload : " + serverPath);
@@ -203,7 +241,7 @@ public class MainController {
 		File downloadFile = new File(serverPath);
 
 		if (!downloadFile.canRead()) {
-			throw new Exception("File can't read(파일을 찾을 수 없습니다)");
+			 new Exception("File can't read(파일을 찾을 수 없습니다)");
 		}
 		return new ModelAndView("downloadView", "downloadFile", downloadFile);
 		// 첫번째 인자 : beanName(id), 두번쨰 인자 :  File Object,
@@ -212,7 +250,7 @@ public class MainController {
 	
 	
 	/***
-	 * 메인 페이지의 게시판 정보를 요청
+	 * 메인 페이지 헤더의 게시판 정보 요청
 	 * @param model
 	 * @param id
 	 * @param request

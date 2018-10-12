@@ -39,7 +39,7 @@ public class CommentController {
     
     
     /***
-     * 이용자의 댓글 작성 ajax요청
+     * 게시판의 게시글의 댓글 리스트 요청
      * @param model
      * @param commentVO
      * @param request
@@ -58,18 +58,6 @@ public class CommentController {
 			e.printStackTrace();
 		}
 		mav.addObject("commentList", commentList);
-		/*
-		CommentVO selectCommentByIndex = null;
-		try {
-			commentService.increseHitCntByIndex(Integer.parseInt(request.getParameter("num")));
-			selectCommentByIndex = commentService.selectCommentByIndex(Integer.parseInt(request.getParameter("num")));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		mav.addObject("comment" , selectCommentByIndex);
-		session.setAttribute("commentInfo", selectCommentByIndex);
-		*/
 		return mav;
 	}
     
@@ -79,7 +67,7 @@ public class CommentController {
      * @param commentVO
      * @param request
      * @param response
-     * @return
+     * @return resultMap (json)
      */
 	@RequestMapping(value="/writeCommentAjax.bim")
 	@ResponseBody
@@ -119,7 +107,7 @@ public class CommentController {
 	 * @param commentVO
 	 * @param request
 	 * @param response
-	 * @return
+     * @return resultMap (json)
 	 */
 	@RequestMapping(value="/editCommentAjax.bim")
 	@ResponseBody
@@ -159,16 +147,13 @@ public class CommentController {
 	 * @param commentVO
 	 * @param request
 	 * @param response
-	 * @return
+     * @return resultMap (json)
 	 */
 	@RequestMapping(value="/deleteCommentAjax.bim")
 	@ResponseBody
 	public Map<String, String> deleteComment(Model model,CommentVO commentVO, HttpServletRequest request,HttpServletResponse response){
-		
-		
 		Map<String, String> resultMap = new HashMap<String, String>();
 		 int resultCnt = 0;
-		 
 		try {
 			resultCnt =  commentService.deleteComment(commentVO);
 		} catch (Exception e) {
@@ -188,8 +173,8 @@ public class CommentController {
 
 		  resultMap.put("result", result);
 		  resultMap.put("resultMsg", resultMsg);
-		    response.setContentType("text/plain");
-		    response.setCharacterEncoding("UTF-8");
+		  response.setContentType("text/plain");
+		  response.setCharacterEncoding("UTF-8");
 		  return resultMap;
 	}
 	
@@ -208,12 +193,12 @@ public class CommentController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	        
 	        model.addAttribute("commentList", commentList);
 	 
 		return "comment/commentList";
 	}
-
+	
+	// TODO 사용중인곳 확인 필요
 	@RequestMapping(value="/boardView.bim", method= RequestMethod.GET)
 	public ModelAndView boardView(Model model, HttpServletRequest request,HttpSession session){
 		ModelAndView mav = new ModelAndView("comment/viewForm");

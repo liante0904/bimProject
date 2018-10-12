@@ -58,7 +58,6 @@ public class ArticleController {
 
 	/***
 	 * 게시판 글 작성,편집 페이지 이동 맵핑
-	 * 
 	 * @param model
 	 * @param request
 	 * @return
@@ -88,7 +87,6 @@ public class ArticleController {
 
 	/***
 	 * 게시판에서 사용자가 선택한 글을 조회 유효성 판별 후 - 조회수 증가 - 게시글의 댓글 가져오기 - 반환
-	 * 
 	 * @param num : 글번호 (idx)
 	 * @param id : 게시판 구분자
 	 * @param model
@@ -167,7 +165,6 @@ public class ArticleController {
 
 	/***
 	 * 사용자의 글쓰기 요청을 받아 DB에 처리
-	 * 
 	 * @param model
 	 * @param article
 	 * @param request
@@ -312,7 +309,6 @@ public class ArticleController {
 
 	/***
 	 * 사용자의 글수정 요청을 받아 DB에 반영(submit)
-	 * 
 	 * @param model
 	 * @param article
 	 * @param request
@@ -340,7 +336,6 @@ public class ArticleController {
 
 	/***
 	 * 사용자의 글삭제 요청을 받아 DB에 처리
-	 * 
 	 * @param model
 	 * @param article
 	 * @param request
@@ -374,13 +369,9 @@ public class ArticleController {
 
 	/***
 	 * 사용자의 검색 요청을 처리합니다.
-	 * 
-	 * @param id
-	 *            : 게시판 구분
-	 * @param searchKeyword
-	 *            : 검색 키워드
-	 * @param searchType
-	 *            : 검색 타입
+	 * @param id 				 : 게시판 구분
+	 * @param searchKeyword 	 : 검색 키워드
+	 * @param searchType 		 : 검색 타입
 	 * @param model
 	 * @param request
 	 * @param session
@@ -429,12 +420,9 @@ public class ArticleController {
 		/***
 		 * 사용자의 게시판 검색 파라미터를 설정 합니다.
 		 * 
-		 * @param boardId
-		 *            : 검색 요청 게시판
-		 * @param searchType
-		 *            :검색 요청 타입
-		 * @param searchKeyword
-		 *            : 검색어
+		 * @param boardId 			 : 검색 요청 게시판
+		 * @param searchType 		 :검색 요청 타입
+		 * @param searchKeyword 	 : 검색어
 		 * @return paramMap : HashMap
 		 */
 
@@ -457,7 +445,6 @@ public class ArticleController {
 		}
 
 		System.out.println("출력될 게시글 수 : " + pageUtil.getDisplayArticleCnt());
-
 		model.addAttribute("articleList", articleList);
 		model.addAttribute("pageUtil", pageUtil);
 

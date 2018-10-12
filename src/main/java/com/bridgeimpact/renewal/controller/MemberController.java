@@ -171,7 +171,7 @@ public class MemberController {
 	 * @param email
 	 * @param request
 	 * @param response
-	 * @return
+	 * @return resultMap (json)
 	 */
 	@RequestMapping(value="member/checkMemberEmailAjax.bim",method = RequestMethod.POST,produces = "application/json; charset=utf8")
 	@ResponseBody
@@ -187,7 +187,12 @@ public class MemberController {
 		    response.setCharacterEncoding("UTF-8");
 		  return resultMap;
 	}
-
+	
+	/***
+	 * 아이디 찾기 (이메일 정보를 이용한) ajax요청
+	 * @param member
+	 * @return resultMap (json)
+	 */
 	@RequestMapping(value="member/askAccountId.bim",method = RequestMethod.POST,produces = "application/json; charset=utf8")
 	@ResponseBody
 	public Map<String, String> askAccountId(MemberVO member){
@@ -200,7 +205,14 @@ public class MemberController {
 		}
 		return resultMap;
 	}
-	
+
+	/***
+	 *
+	 * 패스워드 찾기 (이메일 정보를 이용한) ajax요청
+	 * @param member
+	 * @return resultMap (json)
+	 */
+	// TODO 미구현
 	@RequestMapping(value="member/askAccountPassword.bim",method = RequestMethod.POST,produces = "application/json; charset=utf8")
 	@ResponseBody
 	public Map<String, String> askAccountPassword(MemberVO member){
