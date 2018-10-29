@@ -36,7 +36,7 @@
 	<resources mapping="/**" location="/resources/" />
 
 	<!-- properties 파일 로드 -->	
- 	<context:property-placeholder location="classpath:config/spring/jdbc.properties, classpath:config/spring/jdbc.properties" />
+ 	<context:property-placeholder location="classpath:config/spring/env.properties"/>
 	
 	    <!-- 메일 보내기 (SEND) -->
    <beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
