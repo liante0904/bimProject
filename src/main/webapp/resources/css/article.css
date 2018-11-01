@@ -1,0 +1,79 @@
+/* Extra Small */
+@media(max-width:767px){
+	/* TODO 현재 모바일 외에 적용된 3가지륿 반대로 적용하기
+		-> 3가지 CSS를 기본으로 적용하고 모바일 일때 반대로 적용시킨다. */
+	li.articleList .list-item {
+		display: flex;
+		flex-direction: column;
+	}
+	li.articleList .list-title span.title {
+		max-width: 215px;
+	}
+}
+/* Small */
+@media(min-width:768px) and (max-width:991px){
+	li.articleList .list-title span.title {
+		max-width: 500px;
+	}
+}
+/* Medium */
+@media(min-width:992px) and (max-width:1199px){
+	li.articleList .list-title span.title {
+		max-width: 600px;
+	}
+}
+/* Large */
+@media(min-width:1200px){
+	li.articleList .list-title span.title {
+		max-width: 700px;
+	}
+}
+/* articleInfo */
+.articleList .articleInfo {
+		display: flex;
+		
+}
+/* articleList list-item list-title*/
+li.articleList .list-title span.title {
+	display: inline-block;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	font-size: 14px;
+	padding: 0px 5px 0px 5px;
+}
+li.articleList .list-item {
+		display: flex;
+		justify-content: space-between;
+}
+/* articleList */
+ .main_view div.articleList {
+ 	padding: 5px 0 0 5px;
+	border-top:	2px solid #516B82;
+	border-left: 1px solid #E2E2E2;
+	border-right: 1px solid #E2E2E2;
+}
+ul.articleList:hover {
+	background-color: #FAFAFA;
+}
+.articleList a {
+	text-decoration: none;
+}
+
+li.articleList .list-title {
+	display: flex;
+}
+
+.container.viewArticle h4 {
+	margin-bottom: 30px;
+	
+}
+
+.container.viewArticle .table td.title {
+	background-color: #fafafa;
+	
+}
+.container.viewArticle .table td.writer {
+	background-color: #f1f1f1;
+	
+}

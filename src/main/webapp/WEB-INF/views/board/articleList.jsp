@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="../resources/css/article.css">    <!-- article CSS -->
 <%@ include file="/WEB-INF/include/mainHeader.jsp" %>
 
 <title>${board.name}</title>
@@ -37,15 +38,17 @@ $(function(){
 			    	<c:forEach items="${articleList}" var="article" begin="0" end="${pageUtil.displayArticleCnt - 1}">
 			    		<ul class="articleList">
 			    			<li class="articleList">
-			    				<div>
-				    				<a href="../board/viewArticle.bim?id=${article.boardId}&num=${article.idx}">
-				    					<span class="title">${article.title}</span>
-			    					</a>
-			    					<c:if test="${article.commentCnt > 0}">
-			    						<div>
-			    							<a href=""><span class="comment">[${article.commentCnt}]</span></a>
-			    						</div>
-			    					</c:if>
+			    				<div class="list-item">
+			    					<div class="list-title">			    					
+					    				<a href="../board/viewArticle.bim?id=${article.boardId}&num=${article.idx}">
+					    					<span class="title">${article.title}</span>
+				    					</a>
+				    					<c:if test="${article.commentCnt > 0}">
+				    						<div class="list-reply">
+				    							<a href=""><span class="comment">[${article.commentCnt}]</span></a>
+				    						</div>
+				    					</c:if>
+			    					</div>
 			    					<div class="articleInfo">
 			    						<div class="writeId">${article.writeId}</div>
 			    						<div class="hitCnt">${article.hitCnt}</div>

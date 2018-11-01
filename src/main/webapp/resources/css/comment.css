@@ -1,0 +1,39 @@
+/*  comment  */
+.comment_writer {
+	float: left;
+}
+.comment_date {
+	float: right;
+}
+.comment_info {
+	text-align: center;
+	padding: 5px 10px 5px 10px;
+	background-color: #f1f1f1;
+	height: 35px;
+}
+.comment_contents {
+	padding: 10px 15px 10px 10px;
+}
+.comment_editForm_div {
+	display: none; 
+}
+.comment_depth_picker {
+	position: relative;
+	width: 17px;
+	height: 26px;
+	right: -7px;
+	top: 7px;
+	border: 1px solid #ccc;
+	border-width: 0 0 1.5px 1.5px;
+}
+.comment_editForm {
+	margin: -20px 0 5px 25px;
+	padding: 5px 15px 20px 15px;	
+	background: #f1f1f1;
+	border-left: 2px solid #ccc;
+}
+
+.comment-button {
+	display: flex;
+	justify-content: flex-end;
+}

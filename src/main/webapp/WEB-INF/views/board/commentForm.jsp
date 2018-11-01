@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ include file="/WEB-INF/include/include.jsp" %>
+<link rel="stylesheet" href="../resources/css/comment.css">    <!-- comment CSS -->
 <script type="text/javascript">
 $(document).ready(function() {
 
@@ -78,6 +79,8 @@ $(function(){
 		editComment_input_div.focus();
 	});
 	$(".reWriteComment").on('click', function() {
+		//TODO 대댓글
+		alert("TODO 대댓글 ");
 		var idx = $(this).attr('data-idx');
 		var editComment_div = $('div[class=comment_editForm_div][id='+idx+']');
 		var editComment_input_div = $('textarea[id=editCommentContents][data-idx='+idx+']');
@@ -256,11 +259,6 @@ function deleteComment(idx){
 				<c:set var="writeCommentId" value="${comment.writeId}" />
 				<c:set var="sessionId" value="${sessionScope.loginInfo.id}" /> 
 					<c:if test="${writeCommentId == sessionId}">
-						<span>
-							<a class="reWriteComment" data-idx="${comment.idx}"><span>대댓글</span></a>
-							<a class="editComment" data-idx="${comment.idx}"><span>수정</span></a>
-							<a class="deleteComment_submit" data-idx="${comment.idx}"><span>삭제</span></a>
-						</span>
 					</c:if>
 			</div>
 			<div class="comment_date">
@@ -269,6 +267,11 @@ function deleteComment(idx){
 		</div>
 		<div class="comment_contents">
 			<span class="comment_contents">${comment.contents}</span>
+		</div>
+		<div class="comment-button">
+			<a class="reWriteComment" data-idx="${comment.idx}"><span>대댓글</span></a>
+			<a class="editComment" data-idx="${comment.idx}"><span>수정</span></a>
+			<a class="deleteComment_submit" data-idx="${comment.idx}"><span>삭제</span></a>
 		</div>
 		<!-- 댓글 수정 영역 -->
 		<c:set var="writeCommentId" value="${comment.writeId}" />
