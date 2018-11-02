@@ -94,43 +94,8 @@ form#joinForm label.error {
   border-top-right-radius: 0;
 }
 
-.articleList li {
-	list-style: none;
-    padding: 5px 10px 5px 5px;
-    margin-bottom: 5px;
-    border-bottom: 1px solid #efefef;
-    font-size: 12px;
-}
 
-.articleList .writeDt, .articleList .hitCnt {
-	/*padding-left: 5px;
-	border-left: 1px solid #efefef;
-    */
-}
 
-.articleInfo .writeId {
-	display: inline-block;
-	padding-right: 5px;
-}
-.articleInfo .hitCnt {
-	display: inline-block;
-	width: 40px;
-	text-align: center;
-}
-
-div.mainArticle .boardName{
-	display: inline-block;
-	overflow: hidden;
-	background-color: #666;
-	color: #fff;
-}
-div.mainArticle .articleTitle{
-	display: inline-block;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
-	width: 350px;
-}
 /* 사용하는 곳을 찾을수 없음
  li.articleList .comment{
 	display: inline-block;
@@ -149,9 +114,7 @@ div.mainArticle .articleTitle{
     border-bottom: 1px solid #bebebe;
 }
 */
-.mainTitle a {
-	text-decoration: none;
-}
+
 .mb-1 {
 	margin-bottom: 1em;
 }
@@ -159,43 +122,5 @@ div.mainArticle .articleTitle{
 .mt-2 {
 	margin-top: 0.5em;
 }
-/* articleList */
-ul.articleList {
-	padding: 0;
-}
-/* articleView */
-.article_title {
-	border-top: 1px solid #ddd;
-}
-.article_info1 {
-	text-align: center;
-	padding: 5px 10px 5px 10px;
-	background-color: #f1f1f1;
-	height: 35px;
-	border-top:2px solid #516B82; 
-}
-.article_info2 {
-	padding: 5px 10px 5px 10px;
-	height: 20px;
-	margin-bottom: 10px;
-}
-
-.article_writer {
-	float: left;
-}
-.article_stat {
-	float: right;
-}
-.article_contents {
-	margin-top: 20px;
-	padding: 10px 15px 10px 15px;
-}
-.article_edit {
-	padding: 5px 10px 5px 10px;
-}
 
 
-/* board_paging */
-.board_paging {
-	margin-top: -40px;
-}

@@ -1,0 +1,18 @@
+@charset "UTF-8";
+div.mainArticle .boardName{
+	display: inline-block;
+	overflow: hidden;
+	background-color: #666;
+	color: #fff;
+}
+div.mainArticle .articleTitle{
+	display: inline-block;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	width: 350px;
+}
+.mainTitle a {
+	text-decoration: none;
+}
+

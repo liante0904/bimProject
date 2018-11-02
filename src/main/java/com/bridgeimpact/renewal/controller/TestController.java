@@ -61,10 +61,11 @@ public class TestController {
     private JavaMailSender mailSender;
 
 
+
+    
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-
 	@RequestMapping(value="/email")
 	public String email(Model model, HttpServletRequest request){
         String os = System.getProperty("os.name");
@@ -80,7 +81,6 @@ public class TestController {
 		}
 		return "/test/writeForm";
 	}
-
 
     public void signUp() throws MessagingException, UnsupportedEncodingException {
         String key = new TempKey().getKey(50, false);
@@ -111,8 +111,6 @@ public class TestController {
         // TODO 이메일 인증후 로그 기록 로직
         return "emailConfirm";
     }
-
-
 
 	@RequestMapping(value="/page")
 	public String writeForm(Model model, HttpServletRequest request){

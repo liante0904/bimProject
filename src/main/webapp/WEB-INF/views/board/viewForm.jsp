@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="../resources/css/article.css">    <!-- article CSS -->
 <%@ include file="/WEB-INF/include/mainHeader.jsp" %>
 <title>브리지 임팩트 - ${article.boardName}</title>
 <script type="text/javascript">

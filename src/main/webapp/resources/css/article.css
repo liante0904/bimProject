@@ -28,12 +28,11 @@
 		max-width: 700px;
 	}
 }
-/* articleInfo */
+
+/* articleList */
 .articleList .articleInfo {
-		display: flex;
-		
+	display: flex;
 }
-/* articleList list-item list-title*/
 li.articleList .list-title span.title {
 	display: inline-block;
 	text-overflow: ellipsis;
@@ -43,10 +42,9 @@ li.articleList .list-title span.title {
 	padding: 0px 5px 0px 5px;
 }
 li.articleList .list-item {
-		display: flex;
-		justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
-/* articleList */
  .main_view div.articleList {
  	padding: 5px 0 0 5px;
 	border-top:	2px solid #516B82;
@@ -59,21 +57,74 @@ ul.articleList:hover {
 .articleList a {
 	text-decoration: none;
 }
-
 li.articleList .list-title {
 	display: flex;
+}
+.articleList li {
+	list-style: none;
+    padding: 5px 10px 5px 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #efefef;
+    font-size: 12px;
+}
+ul.articleList {
+	padding: 0;
+}
+.articleList .writeDt, .articleList .hitCnt {
+	/*padding-left: 5px;
+	border-left: 1px solid #efefef;
+    */
+}
+
+.articleInfo .writeId {
+	display: inline-block;
+	padding-right: 5px;
+}
+.articleInfo .hitCnt {
+	display: inline-block;
+	width: 40px;
+	text-align: center;
 }
 
 .container.viewArticle h4 {
 	margin-bottom: 30px;
-	
 }
 
 .container.viewArticle .table td.title {
 	background-color: #fafafa;
-	
 }
 .container.viewArticle .table td.writer {
 	background-color: #f1f1f1;
-	
 }
+
+/* articleView */
+.article_title {
+	border-top: 1px solid #ddd;
+}
+.article_info1 {
+	text-align: center;
+	padding: 5px 10px 5px 10px;
+	background-color: #f1f1f1;
+	height: 35px;
+	border-top:2px solid #516B82; 
+}
+.article_info2 {
+	padding: 5px 10px 5px 10px;
+	height: 20px;
+	margin-bottom: 10px;
+}
+
+.article_writer {
+	float: left;
+}
+.article_stat {
+	float: right;
+}
+.article_contents {
+	margin-top: 20px;
+	padding: 10px 15px 10px 15px;
+}
+.article_edit {
+	padding: 5px 10px 5px 10px;
+}
+

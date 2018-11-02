@@ -71,7 +71,7 @@ $(function(){
 <body>
 <header class="navbar navbar-default navbar-fixed-top fix-navbar" role="navigation">
 			<div class="container">
-	 				<nav class="navbar navbar-fixed-top navbar-inverse">
+	 				<nav class="navbar navbar-fixed-top navbar-default">
 	<!-- 				<nav class="container navbar navbar-absolute-top navbar-dark hidden-md-down"> -->
 							<div class="container">
 								<div class="navbar-header">

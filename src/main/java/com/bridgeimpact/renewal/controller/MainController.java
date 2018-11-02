@@ -77,10 +77,13 @@ public class MainController {
 			e.printStackTrace();
 		}
 
-		
     	System.out.println("출력 테스트 : " + mainArticleList);
     	model.addAttribute("mainArticleList", mainArticleList);
         return new ModelAndView("index");
+    }
+    @RequestMapping(value = "/sidebar" , method = RequestMethod.GET)
+    public String sidebar() {
+        return "index1";
     }
 	@RequestMapping(value="main/loginForm.bim")
 	public String loginForm() {

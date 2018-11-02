@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="../resources/css/main/layout.css">    <!-- common CSS -->
 <%@ include file="/WEB-INF/include/mainHeader.jsp" %>
 <script type="text/javascript">
 $(document).ready(function(){
