@@ -1,40 +1,5 @@
-/* mainPage */
-html, body {
-	background-color: #eee;
-}
-.main_view {
-	background-color: #FFF;
-	padding: 15px 15px 45px 15px;
-}
-.jumbotron {
-	margin-top: 25px;
-	background-color: #FFF;
-}
-.main_page .recent_article {
-	background-color: #FFF;
-}
-.recent_article {
-	margin: 5px -8px 5px -8px;
-	padding: 5px 5px 5px 5px;
-}
-body {
-  padding-top: 40px;
-  padding-bottom: 40px;
-
-}
-
-form[action="../board/search.bim"] {
-	text-align: center;
-}
-
-.container.viewArticle, 
-.container.articleList,
-.container.writeForm,
-.container.editForm  {
-	margin-bottom: 30px;
-	margin-top: 20px;
-	/* padding-right: 10px; */
-}
+@charset "UTF-8";
+/* joinForm, editForm*/
 .container member joinForm, 
 .container member editForm {
 	display: block;
@@ -93,34 +58,3 @@ form#joinForm label.error {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-
-
-
-/* 사용하는 곳을 찾을수 없음
- li.articleList .comment{
-	display: inline-block;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
-	max-width: 350px;
-	font-size: 14px;
-	padding: 0px 5px 0px 5px;
-}
-*/
-/* 
-.mainTitle {
-    padding: 5px 10px 8px 5px;
-    margin-bottom: 12px;
-    border-bottom: 1px solid #bebebe;
-}
-*/
-
-.mb-1 {
-	margin-bottom: 1em;
-}
-
-.mt-2 {
-	margin-top: 0.5em;
-}
-
-

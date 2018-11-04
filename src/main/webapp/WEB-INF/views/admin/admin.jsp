@@ -3,9 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="/WEB-INF/include/mainHeader.jsp" %>
+<%@ include file="/WEB-INF/include/navbar-header.jsp" %>
 <%-- <%@ include file="/WEB-INF/include/adminHeader.jsp" %> --%>
-<%@ include file="/WEB-INF/include/include.jsp" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">

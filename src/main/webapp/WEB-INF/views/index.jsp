@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
-<%@ include file="/WEB-INF/include/include.jsp" %>
+    <%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../resources/css/main/layout.css">    <!-- common CSS -->
-<%@ include file="/WEB-INF/include/mainHeader.jsp" %>
+<title></title>
+<%@ include file="/WEB-INF/include/navbar-header.jsp" %>			<!-- navbar header -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/layout.css">    <!--main/layout CSS -->
 <script type="text/javascript">
 $(document).ready(function(){
 

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.bridgeimpact.renewal.common.FileioUtil;
+//import com.bridgeimpact.renewal.common.FileioUtil;
 import com.bridgeimpact.renewal.dao.FileDAO;
 import com.bridgeimpact.renewal.dto.ArticleVO;
 import com.bridgeimpact.renewal.dto.FileVO;
@@ -31,7 +31,7 @@ public class FileServiceImpl implements FileService {
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest)request;
 		java.util.Iterator<String> fileNames = multipartRequest.getFileNames();
 		FileVO fileVO = new FileVO();
-		FileioUtil.uploadFile(request, article);
+//		FileioUtil.uploadFile(request, article);
 		while(fileNames.hasNext())
 		{
 			// fileVO 세팅

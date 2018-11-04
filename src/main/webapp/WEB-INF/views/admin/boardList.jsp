@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%@ include file="/WEB-INF/include/mainHeader.jsp" %>
+<%@ include file="/WEB-INF/include/navbar-header.jsp" %>
 <%@ include file="/WEB-INF/include/adminHeader.jsp" %>
 
 <script type="text/javascript">

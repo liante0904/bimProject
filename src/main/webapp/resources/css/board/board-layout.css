@@ -1,0 +1,16 @@
+@charset "UTF-8";
+form[action="../board/search.bim"] {
+	text-align: center;
+}
+.container.viewArticle, 
+.container.articleList,
+.container.writeForm,
+.container.editForm  {
+	margin-bottom: 30px;
+	margin-top: 20px;
+	/* padding-right: 10px; */
+}
+.main_view {
+	background-color: #FFF;
+	padding: 15px 15px 45px 15px;
+}

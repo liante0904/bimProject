@@ -4,8 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%@ include file="/WEB-INF/include/mainHeader.jsp" %>
-<%@ include file="/WEB-INF/include/include.jsp" %>
+<%@ include file="/WEB-INF/include/navbar-header.jsp" %>
 <link rel="stylesheet" href="../resources/bootstrap/css/signin.css">    <!-- Custom styles for this template -->
 <script type="text/javascript">
 $(document).ready(function(){

@@ -1,4 +1,5 @@
 @charset "UTF-8";
+/* mainPage */
 div.mainArticle .boardName{
 	display: inline-block;
 	overflow: hidden;
@@ -15,4 +16,30 @@ div.mainArticle .articleTitle{
 .mainTitle a {
 	text-decoration: none;
 }
+.main_view {
+	background-color: #FFF;
+	padding: 15px 15px 45px 15px;
+}
 
+
+/* mainPage */
+.jumbotron {
+	margin-top: 25px;
+	background-color: #FFF;
+}
+.main_page .recent_article {
+	background-color: #FFF;
+}
+.recent_article {
+	margin: 5px -8px 5px -8px;
+	padding: 5px 5px 5px 5px;
+}
+
+
+.mb-1 {
+	margin-bottom: 1em;
+}
+
+.mt-2 {
+	margin-top: 0.5em;
+}

@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%@ include file="/WEB-INF/include/mainHeader.jsp" %>
-<%@ include file="/WEB-INF/include/include.jsp" %>
-
 <title>브리지 임팩트 - 글수정</title>
+<link rel="stylesheet" href="../resources/css/board/board-layout.css">    <!-- board-layout CSS -->
+<%@ include file="/WEB-INF/include/navbar-header.jsp" %>
+
 <script type="text/javascript">
 
 $(document).ready(function(){

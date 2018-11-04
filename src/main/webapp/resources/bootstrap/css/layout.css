@@ -2,3 +2,7 @@
 .navbar-header{
 	background:transparent;
 }
+.jumbotron {
+	margin-top: 25px;
+	background-color: #FFF;
+}

@@ -4,10 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../resources/css/article.css">    <!-- article CSS -->
-<%@ include file="/WEB-INF/include/mainHeader.jsp" %>
-
 <title>${board.name}</title>
+<%@ include file="/WEB-INF/include/navbar-header.jsp" %>
+<link rel="stylesheet" href="../resources/css/article.css">    <!-- article CSS -->
+<link rel="stylesheet" href="../resources/css/board/board-layout.css">    <!-- board-layout CSS -->
+
 <script type="text/javascript">
 
 $(document).ready(function(){ 

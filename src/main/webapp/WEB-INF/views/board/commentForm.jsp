@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@ include file="/WEB-INF/include/include.jsp" %>
 <link rel="stylesheet" href="../resources/css/comment.css">    <!-- comment CSS -->
 <script type="text/javascript">
 $(document).ready(function() {

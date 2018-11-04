@@ -1,0 +1,33 @@
+@charset "UTF-8";
+/* 기본 배경색, 여백*/
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+
+}
+html, body {
+	background-color: #eee;
+}
+
+
+
+/* 사용하는 곳을 찾을수 없음
+ li.articleList .comment{
+	display: inline-block;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	max-width: 350px;
+	font-size: 14px;
+	padding: 0px 5px 0px 5px;
+}
+*/
+/* 
+.mainTitle {
+    padding: 5px 10px 8px 5px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #bebebe;
+}
+*/
+
+
