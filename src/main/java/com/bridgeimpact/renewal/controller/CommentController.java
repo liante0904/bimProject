@@ -49,15 +49,16 @@ public class CommentController {
 	@RequestMapping(value="/getCommentList.bim", method= RequestMethod.POST)
 	public ModelAndView getCommentList(Model model, HttpServletRequest request,HttpSession session){
 		ModelAndView mav = new ModelAndView("board/commentForm");
-		int index = Integer.parseInt(request.getParameter("num"));
+		int parentIdx = Integer.parseInt(request.getParameter("num"));
 		List<CommentVO> commentList = null;
 		try {
-			commentList = commentService.selectCommentByIndex(index);
+			commentList = commentService.selectCommentByIndex(parentIdx);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		mav.addObject("commentList", commentList);
+		mav.addObject("parentIdx", parentIdx);
 		return mav;
 	}
     

@@ -12,7 +12,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap-theme.min.css">    <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bootstrap/css/carousel.css">    <!-- Custom styles for this template -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bootstrap/css/layout.css">    <!-- Bootstrap custom layout CSS -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bootstrap/css/common.css">    <!-- common CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bootstrap/css/sticky-footer.css">    <!-- bootstrap sticky-footer.css CSS -->
 
 <!-- common.css -->
@@ -76,7 +75,7 @@ $(function(){
 
 <body>
 <header class="navbar navbar-default navbar-fixed-top fix-navbar" role="navigation">
-			<div class="container">
+		<!-- 	<div class="container"> -->
 	 				<nav class="navbar navbar-fixed-top navbar-default">
 	<!-- 				<nav class="container navbar navbar-absolute-top navbar-dark hidden-md-down"> -->
 							<div class="container">
@@ -135,6 +134,6 @@ $(function(){
 						</div>
 					</div>
 				</nav>	<!-- navbar navbar-inverse navbar-static-top -->
-			</div>	<!-- container -->
+			 <!--  </div> -->	<!-- container -->
 </header>
 </body>

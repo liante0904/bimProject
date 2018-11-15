@@ -23,15 +23,11 @@ div.mainArticle .articleTitle{
 
 
 /* mainPage */
-.jumbotron {
-	margin-top: 25px;
-	background-color: #FFF;
-}
 .main_page .recent_article {
 	background-color: #FFF;
 }
 .recent_article {
-	margin: 5px -8px 5px -8px;
+	margin: 5px 0px 5px 0px;
 	padding: 5px 5px 5px 5px;
 }
 

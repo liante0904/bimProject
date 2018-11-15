@@ -8,53 +8,8 @@
 <link rel="stylesheet" href="../resources/css/article.css">    <!-- article CSS -->
 <link rel="stylesheet" href="../resources/css/board/board-layout.css">    <!-- board-layout CSS -->
 <%@ include file="/WEB-INF/include/navbar-header.jsp" %>
-<script type="text/javascript">
-$(document).ready(function(){
-	getCommentList();
-
-function getCommentList(){
-	var num = getParameters('num');
-	var data = { num : num };
-		$.ajax({
-	        type : "POST",
-	        url : "../comment/getCommentList.bim",
-	        data : data,
-	        dataType : "html",
-	        success : function(data){
-	           	$("#main_view").html(data);
-	        },
-	        error : function(data){
-	            alert(' 실패!!');
-	        }
-		});
-		
-	}
-}); 
-
-$(function(){
-	var idParam = "?" + "id=" + getParameters('id');
-	var param =  idParam +"&num=" + getParameters('num');
-	$("#edit").on('click',function() {
-		var sessionId = "${sessionScope.loginInfo.id}";
-		var writerId =  "${article.writeId}";
-	    if (sessionId == writerId) {
-	    	location.href="../board/editForm.bim"+param;
-	    }else{
-	    	alert("잘못된 접근 입니다.");
-	    	location.href="../board/viewArticle.bim"+param;
-	    }
-	});
-	$("#delete").on('click',function() {
-		if (confirm("정말로 게시물을 삭제 하시겠습니까?")) 
-		location.href="../board/deleteArticle.bim"+param;
-	});
-	
-
-	
-});
-
-
-</script>
+<script src="../resources/js/article.js"></script>
+<script src="../resources/js/comment.js"></script>
 </head>
 <body>
 	<form>
@@ -115,10 +70,11 @@ $(function(){
 					</c:if>
 					<input type="button" id="list" value="목록" class="btn btn-primary"/>
 				</div>
+		 		<div class="main_view" id="main_view">
+					<%@ include file="/WEB-INF/views/board/commentForm.jsp" %>
+		 		</div>
+				</div>
 			</div>
- 		<div class="main_view" id="main_view"></div>
-		<%-- <%@ include file="/WEB-INF/views/board/commentForm.jsp" %> --%>
-		</div>
 	</form>
 <%@ include file="/WEB-INF/views/main/footer.jsp" %>
 </body>

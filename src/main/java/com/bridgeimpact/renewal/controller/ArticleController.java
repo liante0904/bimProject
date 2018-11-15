@@ -135,16 +135,6 @@ public class ArticleController {
 		}
 
 		/***
-		 * 게시글의 댓글 가져오기
-		 */
-		try {
-			commentList = commentService.selectCommentByIndex(num);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		/***
 		 * 게시글의 첨부 파일 가져오기
 		 */
 
@@ -156,7 +146,6 @@ public class ArticleController {
 		}
 		System.out.println("컨트롤러:" + fileList);
 		model.addAttribute("article", article);
-		model.addAttribute("commentList", commentList);
 		model.addAttribute("fileList", fileList);
 		session.setAttribute("articleInfo", article);
 
