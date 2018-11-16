@@ -65,6 +65,7 @@ http://liante0904.asuscomm.com:9090/bimProject/
 - 회원 이메일 주소 유니크 처리, 가입시 submit전 데이터 유효성 체크
 - 글 작성, 수정시 첨부파일 저장 위치 로직변경(Test or Live)
 - 사용자에게 에러 페이지 및 알림처리
+- openJDK 전환
 
 ## holdingList
 - ~공동구매 기능(온라인 신청)~
