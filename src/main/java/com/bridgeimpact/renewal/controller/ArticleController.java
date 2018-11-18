@@ -68,13 +68,27 @@ public class ArticleController {
 	}
 
 	@RequestMapping(value = "/editForm.bim")
-	public String editForm(String id, Model model, HttpServletRequest request, HttpSession session) {
-		// session.setAttribute(name, value);
-		if (id == null) {
-			String userBeforeUrl = request.getHeader("referer");
-			return userBeforeUrl;
+	public String editForm(String id, int num, Model model, HttpServletRequest request, HttpSession session) {
+		
+		MemberVO loginMember = (MemberVO) session.getAttribute("loginInfo");
+		String beforeUserUrl = request.getHeader("referer");
+		// 파라미터 & 로그인 상태 체크
+		if (id == null || "".equals(loginMember.getId())) {
+			return beforeUserUrl;
 		}
+		ArticleVO articleVO = new ArticleVO();
 		BoardVO boardVO = new BoardVO();
+		try {
+			articleVO = articleService.selectArticleByIndex(num);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		// 수정 요청글과 로그인 사용자 비교
+		logger.info("ssss:"+ articleVO.getWriteId() + "ddddd"+loginMember.getId());
+		if (!articleVO.getWriteId().equals(loginMember.getId())) {
+			return beforeUserUrl;
+		}
 		try {
 			boardVO = boardService.getBoardByid(id);
 		} catch (Exception e) {

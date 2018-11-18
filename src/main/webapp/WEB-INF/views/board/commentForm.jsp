@@ -12,7 +12,7 @@
 
 	<div class="comment_title">
 					<c:set var="sessionId" value="${sessionScope.loginInfo.id}" />
-		<h4>댓글 ${sessionId} </h4>
+		<h4>댓글</h4>
 	</div>
 	<div class="comment_list">
 		<c:forEach items="${commentList}" var="comment" varStatus="status">
