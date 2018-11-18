@@ -11,7 +11,7 @@
 <body>
 
 	<div class="comment_title">
-					<c:set var="sessionId" value="${sessionScope.loginInfo.id}" />
+	<c:set var="sessionId" value="${sessionScope.loginInfo.id}" />
 		<h4>댓글</h4>
 	</div>
 	<div class="comment_list">

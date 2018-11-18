@@ -5,7 +5,6 @@
  
 <mapper namespace="com.bridgeimpact.renewal.fileSQL">
     	<resultMap type="fileVO"  id="fileResultMap">
-   	 	<result property="idx" column="IDX" />
     		<result property="articleIdx" column="ARTICLE_IDX" />
 		<result property="originalFileName" column="ORIGINAL_FILE_NAME" />
 		<result property="storedFileName" column="STORED_FILE_NAME" />
@@ -19,7 +18,6 @@
 	<![CDATA[
 	INSERT INTO BIM_FILE_TB  
 	(
-	IDX,
 	ARTICLE_IDX,
 	ORIGINAL_FILE_NAME,
 	STORED_FILE_NAME,
@@ -30,7 +28,6 @@
 	)
 	VALUES
 	(
-	NULL,
 	#{articleIdx },
 	#{originalFileName },
 	#{storedFileName },
@@ -39,85 +36,13 @@
 	#{creaId },
 	'N'
 	)
-
-
-
-
     ]]>
 	</insert>
-	
-     <!-- 
-     
-    <select id="selectAllBoard" parameterType="String" resultType="boardVO">
-	<![CDATA[
-	
-		SELECT   
-		IDX,   
-		ID,   
-		NAME,   
-		DEL_GB    
-		FROM   BIM_BOARD_TB 
-    ]]>
     
-		<if test="value != null">
-		WHERE 
-		DEL_GB  = #{value}
-		</if>
-		
-    </select>
-
-    
-    	
-	 <select id="selectBoardById" parameterType="String" resultType="int">
-	<![CDATA[
-	
-	
-		SELECT   
-		count(*)
-		FROM   BIM_BOARD_TB   
-		WHERE 
-		ID = #{id}		
-    ]]>
-    </select>
-    
-    
-    <update id="deleteBoardById" parameterType="String">
-		<![CDATA[
-		
-		
-		UPDATE BIM_BOARD_TB
-		SET 
-		DEL_GB = 'Y'
-		WHERE 
-		ID = #{id} 
-		 
-		 
-		]]>
-	</update>
-	
-	    <update id="unDeleteBoardById" parameterType="String">
-		<![CDATA[
-		
-		
-		UPDATE BIM_BOARD_TB
-		SET 
-		DEL_GB = 'N'
-		WHERE 
-		ID = #{id} 
-		 
-		 
-		]]>
-	</update>
-	
-
-
-     -->
-     
-        <select id="selectAllFileByIndex" parameterType="int" resultType="fileVO">
+    <select id="selectAllFileByIndex" parameterType="int" resultType="fileVO">
 	<![CDATA[
 	
 		SELECT
-		IDX,
 		ARTICLE_IDX,   
 		ORIGINAL_FILE_NAME,   
 		STORED_FILE_NAME,   
@@ -128,17 +53,16 @@
     ]]>
     </select>
     
-	<select id="selectFileByIndex" parameterType="int" resultType="fileVO">
+	<select id="selectFileByStoredName" parameterType="String" resultType="fileVO">
 	<![CDATA[
 		SELECT
-		IDX,
 		ARTICLE_IDX,   
 		ORIGINAL_FILE_NAME,   
 		STORED_FILE_NAME,   
 		FILE_SIZE,   
 		DEL_GB  
 		FROM   BIM_FILE_TB   
-		WHERE IDX = #{value}	 
+		WHERE STORED_FILE_NAME = #{value}	 
     ]]>
     </select>
 	<!-- 

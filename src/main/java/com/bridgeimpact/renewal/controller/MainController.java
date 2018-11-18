@@ -223,10 +223,10 @@ public class MainController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/download.bim")
-	public ModelAndView download(HttpServletRequest request,HttpServletResponse response, int num)  {
+	public ModelAndView download(HttpServletRequest request,HttpServletResponse response, int num, String storedNm)  {
 		FileVO fileVO = null;
 		try {
-			 fileVO = fileService.selectFileByIndex(num);
+			 fileVO = fileService.selectFileByStoredName(storedNm);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

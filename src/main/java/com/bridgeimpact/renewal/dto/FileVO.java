@@ -3,7 +3,6 @@ package com.bridgeimpact.renewal.dto;
 
 public class FileVO {
 
-	private int idx;
 	private int articleIdx;
 	private String originalFileName;
 	private String storedFileName;
@@ -19,25 +18,15 @@ public class FileVO {
 		// TODO Auto-generated constructor stub
 	}
 
-	
+
 
 	@Override
 	public String toString() {
-		return "FileVO [idx=" + idx + ", articleIdx=" + articleIdx + ", originalFileName=" + originalFileName
-				+ ", storedFileName=" + storedFileName + ", fileSize=" + fileSize + ", creaDtm=" + creaDtm + ", creaId="
-				+ creaId + ", delGb=" + delGb + "]";
+		return "FileVO [articleIdx=" + articleIdx + ", originalFileName=" + originalFileName + ", storedFileName="
+				+ storedFileName + ", fileSize=" + fileSize + ", creaDtm=" + creaDtm + ", creaId=" + creaId + ", delGb="
+				+ delGb + "]";
 	}
 
-
-
-	public int getIdx() {
-		return idx;
-	}
-
-
-	public void setIdx(int idx) {
-		this.idx = idx;
-	}
 
 
 	public int getArticleIdx() {
@@ -45,9 +34,11 @@ public class FileVO {
 	}
 
 
+
 	public void setArticleIdx(int articleIdx) {
 		this.articleIdx = articleIdx;
 	}
+
 
 
 	public String getOriginalFileName() {
@@ -55,9 +46,11 @@ public class FileVO {
 	}
 
 
+
 	public void setOriginalFileName(String originalFileName) {
 		this.originalFileName = originalFileName;
 	}
+
 
 
 	public String getStoredFileName() {
@@ -65,9 +58,11 @@ public class FileVO {
 	}
 
 
+
 	public void setStoredFileName(String storedFileName) {
 		this.storedFileName = storedFileName;
 	}
+
 
 
 	public int getFileSize() {
@@ -75,9 +70,11 @@ public class FileVO {
 	}
 
 
+
 	public void setFileSize(int fileSize) {
 		this.fileSize = fileSize;
 	}
+
 
 
 	public String getCreaDtm() {
@@ -85,9 +82,11 @@ public class FileVO {
 	}
 
 
+
 	public void setCreaDtm(String creaDtm) {
 		this.creaDtm = creaDtm;
 	}
+
 
 
 	public String getCreaId() {
@@ -95,9 +94,11 @@ public class FileVO {
 	}
 
 
+
 	public void setCreaId(String creaId) {
 		this.creaId = creaId;
 	}
+
 
 
 	public String getDelGb() {
@@ -105,11 +106,11 @@ public class FileVO {
 	}
 
 
+
 	public void setDelGb(String delGb) {
 		this.delGb = delGb;
 	}
 
-	
 	
 	
 }

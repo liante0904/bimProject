@@ -71,6 +71,7 @@ public class ArticleController {
 	public String editForm(String id, int num, Model model, HttpServletRequest request, HttpSession session) {
 		
 		MemberVO loginMember = (MemberVO) session.getAttribute("loginInfo");
+		List<FileVO> fileList = null;
 		String beforeUserUrl = request.getHeader("referer");
 		// 파라미터 & 로그인 상태 체크
 		if (id == null || "".equals(loginMember.getId())) {
@@ -85,7 +86,6 @@ public class ArticleController {
 			e1.printStackTrace();
 		}
 		// 수정 요청글과 로그인 사용자 비교
-		logger.info("ssss:"+ articleVO.getWriteId() + "ddddd"+loginMember.getId());
 		if (!articleVO.getWriteId().equals(loginMember.getId())) {
 			return beforeUserUrl;
 		}
@@ -95,7 +95,19 @@ public class ArticleController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		/***
+		 * 게시글의 첨부 파일 가져오기
+		 */
+		try {
+			fileList = fileService.selectAllFileByIndex(num);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		model.addAttribute("article", articleVO);
 		model.addAttribute("board", boardVO);
+		model.addAttribute("fileList", fileList);
 		return "/board/editForm";
 	}
 
@@ -151,7 +163,6 @@ public class ArticleController {
 		/***
 		 * 게시글의 첨부 파일 가져오기
 		 */
-
 		try {
 			fileList = fileService.selectAllFileByIndex(num);
 		} catch (Exception e) {

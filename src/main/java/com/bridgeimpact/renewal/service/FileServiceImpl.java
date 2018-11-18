@@ -31,7 +31,6 @@ public class FileServiceImpl implements FileService {
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest)request;
 		java.util.Iterator<String> fileNames = multipartRequest.getFileNames();
 		FileVO fileVO = new FileVO();
-//		FileioUtil.uploadFile(request, article);
 		while(fileNames.hasNext())
 		{
 			// fileVO 세팅
@@ -105,9 +104,9 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
-	public FileVO selectFileByIndex(int num) throws Exception {
+	public FileVO selectFileByStoredName(String storedNm) throws Exception {
 		// TODO Auto-generated method stub
-		return fileDAO.selectFileByIndex(num);
+		return fileDAO.selectFileByStoredName(storedNm);
 	}
 
 }

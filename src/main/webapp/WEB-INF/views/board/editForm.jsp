@@ -7,7 +7,7 @@
 <title>브리지 임팩트 - 글수정</title>
 <link rel="stylesheet" href="../resources/css/board/board-layout.css">    <!-- board-layout CSS -->
 <%@ include file="/WEB-INF/include/navbar-header.jsp" %>
-
+<script src="../resources/js/article.js"></script>
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -46,69 +46,20 @@ $(function(){
 	var	 paramTitleValue = $("#title").val();
 	var	 paramContentsValue = $("#contents").val();
 	
-
-	$("#edit").on("click", function(e) {
-
-		e.preventDefault();
-		$("form").submit();
-	/* 	
-		var	 paramIdValue = getParameters('id');
-		var	 paramTitleValue = $("#title").val();
-		var	 paramContentsValue = $("#contents").val();
-		 $.ajax({
-		        url : "../board/editArticleAjax.bim",
-		        type: "post",
-		        data : { 
-		        	"boardId" : paramIdValue,
-		        	"title" : paramTitleValue,
-		        	"contents" : paramContentsValue
-		        },
-		        success : function(data){
-		         if ( data.result == "success") {
-					location.href =  document.referrer; 
-				}
-		        }
-		    });
-	 */	 
-	});
-	
-	
 	
 });
-
-
-
 </script>
 </head>
 <body>
 <div class="container editForm">
     <h1 class="mb-1">글수정</h1>
      <form action="../board/editArticle.bim" method="post">
-<!--         <table class="table">
-            <tbody>
-                <tr>
-                    <th>제목</th>
-                    <td><input type="text" id="title" name="title" class="form-control" size="98" /></td>
-                </tr>
-                
-                <tr>
-					<th>내용</th>                   
-  						<td> <textarea id="contents" name="contents" class="form-control"></textarea>
-								<script>
-					                // Replace the <textarea id="editor1"> with a CKEditor
-					                // instance, using default configuration.
-					                CKEDITOR.replace( 'contents' );
-					            </script>
-			            </td>
-                </tr>
-            </tbody>
-        </table> -->
         <div class="container">
         		<div class="mt-2">
-        			<input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력하세요." />
+        			<input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력하세요." value="${article.title}"/>
         		</div>
         		<div class="mt-2">
-        			<textarea id="contents" name="contents" class="form-control"></textarea>
+        			<textarea id="contents" name="contents" class="form-control">${article.contents}</textarea>
 					<script>
 		                // Replace the <textarea id="editor1"> with a CKEditor
 		                // instance, using default configuration.
@@ -116,7 +67,12 @@ $(function(){
 		            </script>
         		</div>
 			<div class="mt-2">
-        			<input type="file" name="files1" class="form-control">
+				<c:forEach items="${fileList}" var="file">
+				<div id="fileList"><span>첨부파일 : </span>
+					<a href="../download.bim?num=${file.articleIdx }&storedNm=${file.storedFileName}">${file.originalFileName }</a>				
+				</div>
+				</c:forEach>
+        			<input type="file" name="files1" class="form-control" value="ㅁㄴㅇ">
         			<input type="file" name="files2" class="form-control">
         			<input type="file" name="files3" class="form-control">
         			<input type="file" name="files4" class="form-control">
@@ -124,7 +80,7 @@ $(function(){
         		</div>
         		<div class="mt-2">
 			 <input type="button" id="cancel" value="목록" class="btn btn-default"/>
-			 <input type="button" id="edit" value="수정" class="btn btn-primary pull-right"/>
+			 <input type="button" id="edit-submit" value="수정" class="btn btn-primary pull-right"/>
         			
         		</div>
         </div>

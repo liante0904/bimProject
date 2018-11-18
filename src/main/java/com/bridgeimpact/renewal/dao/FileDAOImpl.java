@@ -43,9 +43,9 @@ public class FileDAOImpl implements FileDAO{
 	}
 
 	@Override
-	public FileVO selectFileByIndex(int num) throws Exception {
+	public FileVO selectFileByStoredName(String storedNm) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(Namespace+".selectFileByIndex", num);
+		return sqlSession.selectOne(Namespace+".selectFileByStoredName", storedNm);
 	}
 
 }

@@ -17,6 +17,6 @@ public interface FileService {
 
 	public List<FileVO> selectAllFileByIndex(int num) throws Exception;
 
-	public FileVO selectFileByIndex(int num) throws Exception;
+	public FileVO selectFileByStoredName(String storedNm) throws Exception;
 
 }
