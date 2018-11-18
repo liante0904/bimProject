@@ -26,16 +26,6 @@ $(function(){
 	var param =  idParam +"&num=" + getParameters('num');
 	$("#edit").on('click',function() {
     		location.href="../board/editForm.bim"+param;
-    		/*
-		var sessionId = "${sessionScope.loginInfo.id}";
-		var writerId =  "${article.writeId}";
-	    if (sessionId == writerId) {
-	    	location.href="../board/editForm.bim"+param;
-	    }else{
-	    	alert("잘못된 접근 입니다.");
-	    	location.href="../board/viewArticle.bim"+param;
-	    }
-	*/
 	});
 
 	$("#delete").on('click',function() {

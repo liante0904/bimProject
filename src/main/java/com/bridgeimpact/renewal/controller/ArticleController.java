@@ -125,7 +125,7 @@ public class ArticleController {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} finally {
-			if (!articleResult) {
+			if (!articleResult || "".equals(articleResult) || articleResult == null) {
 				logger.info("★★★★★>>> 게시판 비공개 혹은 게시글 삭제시 ");
 				return new ModelAndView("main/mainForm");
 			}
