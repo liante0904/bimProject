@@ -8,6 +8,7 @@
 <%@ include file="/WEB-INF/include/navbar-header.jsp" %>
 <link rel="stylesheet" href="../resources/css/article.css">    <!-- article CSS -->
 <link rel="stylesheet" href="../resources/css/board/board-layout.css">    <!-- board-layout CSS -->
+<link rel="stylesheet" href="../resources/bootstrap/css/simple-sidebar.css">
 
 <script type="text/javascript">
 
@@ -29,7 +30,8 @@ $(function(){
 </script>
 </head>
 <body>
- 
+<div id="wrapper">
+		<%@ include file="/WEB-INF/include/sidebar.jsp" %>
  <div class="container center articleList">
  	<div class="main_view">
 	   <h4 class="mb-1">	<a href="../board/viewList.bim?id=${board.id }">${board.name}</a></h4>
@@ -78,6 +80,7 @@ $(function(){
 	   	 <input type="button" id="write" class="btn btn-primary pull-right" value="글쓰기"/>
 		</div>
  	</div>
+</div>
 </div>
  
 <%@ include file="/WEB-INF/views/common/pageUtil.jsp" %>

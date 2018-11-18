@@ -86,19 +86,7 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
 
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
 
-    $(document).mouseup(function (e){
-	    	var container = $("#wrapper");
-	    		if( container.hasClass("toggled"))
-	            $("#wrapper").toggleClass("toggled");
-    	});
-    </script>
 
 </body>
 

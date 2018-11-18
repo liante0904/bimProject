@@ -1,5 +1,4 @@
 package com.bridgeimpact.renewal.controller;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -83,7 +82,7 @@ public class MainController {
     }
     @RequestMapping(value = "/sidebar" , method = RequestMethod.GET)
     public String sidebar() {
-        return "index1";
+        return "test/sidebar/sidebar";
     }
 	@RequestMapping(value="main/loginForm.bim")
 	public String loginForm() {
@@ -296,7 +295,7 @@ public class MainController {
 	public String logout(Model model, HttpSession session){
 		session.invalidate();
 		model.addAttribute("success", "로그아웃 성공");
-		  return "index";
+		  return "/";
 	}
 	
 }
