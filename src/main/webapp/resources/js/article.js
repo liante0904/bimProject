@@ -25,14 +25,14 @@ $(function(){
 	var idParam = "?" + "id=" + getParameters('id');
 	var param =  idParam +"&num=" + getParameters('num');
 	$("#edit").on('click',function() {
+		location.href="../board/editForm.bim"+param;
 		var sessionId = "${sessionScope.loginInfo.id}";
 		var writerId =  "${article.writeId}";
-	    if (sessionId == writerId) {
-	    	location.href="../board/editForm.bim"+param;
+	    /*if (sessionId == writerId) {
 	    }else{
 	    	alert("잘못된 접근 입니다.");
 	    	location.href="../board/viewArticle.bim"+param;
-	    }
+	    }*/
 	});
 	$("#delete").on('click',function() {
 		if (confirm("정말로 게시물을 삭제 하시겠습니까?")) 
