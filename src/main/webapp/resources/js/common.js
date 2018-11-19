@@ -52,24 +52,7 @@ $(document).ready(function(){
 	    		if( container.hasClass("toggled"))
 	            $("#wrapper").toggleClass("toggled");
 	});
-    /* menu in sidebar*/
-	$("#logout").click(function(){
-		var url = window.location.href;
-		$.ajax({
-	        type : "GET",
-	        url : url + "logout.bim",
-	        dataType : "text",
-	        error : function(){
-	            alert('로그아웃 실패!!');
-	        },
-	        success : function(data){
-	            if(confirm("로그아웃 하시겠습니까?") == true)
-	             location.href= url + "logout.bim";
-	        }
 
-		});
-	});
-	
 }); 
 var getParameters = function (paramName) {
     // 리턴값을 위한 변수 선언
@@ -87,3 +70,8 @@ var getParameters = function (paramName) {
         }
     }
 };
+
+var logout = function () {
+    if(confirm("로그아웃 하시겠습니까?") == true)
+        location.href= "/logout.bim";
+}

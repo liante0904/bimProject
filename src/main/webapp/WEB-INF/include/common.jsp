@@ -29,7 +29,6 @@ var localhost = '${pageContext.request.contextPath }';
             location.href="../board/viewList.bim"+idParam;
         });
 
-        
         $("#cancel").click(function() {
             if (confirm("정말로 취소 하시겠습니까?")) {
                 location.href="../board/viewList.bim"+idParam;
@@ -37,40 +36,18 @@ var localhost = '${pageContext.request.contextPath }';
                 }
         });
 
-        
-        
         $("#writelist").click(function() {
             if (confirm("정말로 글쓰기를 취소 하시겠습니까?")) {
                 location.href="../board/viewList.bim"+idParam;
-                    
                 }
         });
         
         $("#joinFormCancel").click(function() {
             if (confirm("정말로 회원가입을 취소 하시겠습니까?")) {
                 location.href="../";
-                    
                 }
         });
 
-    	$("#logout").click(function(){
-    		var url = window.location.href;
-    		$.ajax({
-    	        type : "GET",
-    	        url : url + "logout.bim",
-    	        dataType : "text",
-    	        error : function(){
-    	            alert('로그아웃 실패!!');
-    	        },
-    	        success : function(data){
-    	            if(confirm("로그아웃 하시겠습니까?") == true)
-    	             location.href= "${pageContext.request.contextPath }/logout.bim";
-    	        }
-
-    		});
-    	});
 }); 
-
-    
 
 </script>

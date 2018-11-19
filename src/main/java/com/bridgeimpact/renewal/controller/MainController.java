@@ -67,7 +67,6 @@ public class MainController {
     	 * 최근 게시글 세팅 로직
     	 */
     	List<BoardVO> boardList =  (List<BoardVO>) session.getAttribute("boardList");
-    	System.out.println("boardList 확인 : " + boardList);
     	List<ArticleVO> mainArticleList = new ArrayList<ArticleVO>();
     	try {
     		mainArticleList = articleService.selectMainArticleList(boardList);
@@ -76,8 +75,8 @@ public class MainController {
 			e.printStackTrace();
 		}
 
-    	System.out.println("출력 테스트 : " + mainArticleList);
     	model.addAttribute("mainArticleList", mainArticleList);
+        model.addAttribute("boardList", boardList);
         return new ModelAndView("index");
     }
     @RequestMapping(value = "/sidebar" , method = RequestMethod.GET)
@@ -291,11 +290,11 @@ public class MainController {
 	 * @return
 	 */
 	@RequestMapping(value="/logout.bim",method = RequestMethod.GET,produces = "application/json; charset=utf8")
-	@ResponseBody
 	public String logout(Model model, HttpSession session){
 		session.invalidate();
+		//TODO 로그인 성공시 사용자가 modal로 알림을 받을수 있게 한다.
 		model.addAttribute("success", "로그아웃 성공");
-		  return "/";
+		  return "redirect:/";
 	}
 	
 }
