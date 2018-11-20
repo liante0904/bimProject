@@ -13,6 +13,9 @@ import com.bridgeimpact.renewal.common.MailHandler;
 import com.bridgeimpact.renewal.dao.EmailAuthDAO;
 import com.bridgeimpact.renewal.dto.EmailAuthVO;
 import com.bridgeimpact.renewal.dto.MemberVO;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @Service
 public class EmailAuthServiceImpl implements EmailAuthService {
@@ -32,10 +35,9 @@ public class EmailAuthServiceImpl implements EmailAuthService {
 	}
 
 	@Override
-	public boolean authEmailByTempKey(String key) throws Exception {
-		EmailAuthVO emailAuthVO =  emailAuthDAO.selectEmailAuthByKey(key);
+	public boolean authEmailByTokenKey(String key) throws Exception {
 		boolean emailAuthResult = emailAuthDAO.updateEmailAuthByKey(key);
-		logger.info("인증한 유저 아이디: "+emailAuthVO.getUserId());
+		emailAuthDAO.updateEmailAuthByKey(key);
 		return emailAuthResult;
 	}
 
@@ -43,14 +45,20 @@ public class EmailAuthServiceImpl implements EmailAuthService {
 	public int deleteEmailAuth(String idx) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
-	}
+	}/**/
 
 	@Override
 	public int sendEmailByEmailAuthVO(EmailAuthVO emailAuthVO, MemberVO inputMember) throws Exception {
+		ServletUriComponentsBuilder builder = ServletUriComponentsBuilder.fromCurrentContextPath();
+		builder.scheme("https");
+		URI newUri = builder.build().toUri();
+		System.out.println(newUri);
         MailHandler sendMail = new MailHandler(mailSender);
         sendMail.setSubject("[이메일 인증]");
         sendMail.setText(new StringBuffer().append("<h1>메일인증</h1>")
-                .append("<a href='http://liante0904.asuscomm.com:9090/bimProject/emailConfirm?key=")
+                .append("<a href='")
+				.append(newUri)
+				.append("/emailAuth?key=")
                 .append(emailAuthVO.getEmailAuthKey())
                 .append("' target='_blenk'>이메일 인증 확인</a>")
                 .toString());

@@ -73,13 +73,22 @@ public class MemberServiceImpl implements MemberService {
 		
 		/***
 		 * Eamil 인증 데이터 DB반영 로직
-		 * 로직 : 토큰키 생성 -> DB반영 -> 이메일 전송
+		 * 로직 : 토큰키 생성 -> DB반영 -> 이메일 전송W
 		 */
 		EmailAuthVO emailAuthVO = new EmailAuthVO(inputMember);
 		System.out.println("객체 생성 값 : "+ emailAuthVO.getUserId());
-		
-		emailAuthDAO.insertEmailAuth(emailAuthVO);
-		
+
+		try {
+			emailAuthDAO.insertEmailAuth(emailAuthVO);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+
+		/***
+		 * Email 인증 이메일 발송
+		 */
+		//TODO Email 인증 데이터 DB 반영 실패시
 		int emailAuthResult = emailAuthService.sendEmailByEmailAuthVO(emailAuthVO, inputMember);
 		if (emailAuthResult == 0) {
 			//TODO 이메일 전송 실패시 에러 처리

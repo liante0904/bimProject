@@ -28,7 +28,7 @@ $(document).ready(function(){
 <title>브리지 임팩트 사역원입니다.</title>
 </head>
 <body>
-<div class="container">
+<div class="container" id="main_page">
     <div class="jumbotron">
         <h2> 브리지 임팩트에 오신 것을 환영합니다!</h2>
         <p> 청소년들이 하나님의 은혜를 체험하고 그 은혜 안에서 자라갈수 있기를 원합니다. </p>

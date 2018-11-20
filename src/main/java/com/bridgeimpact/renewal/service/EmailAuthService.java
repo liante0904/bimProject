@@ -9,7 +9,7 @@ public interface EmailAuthService {
 	
 	public int insertEmailAuth(HttpServletRequest request, MemberVO member) throws Exception;
 
-	public boolean authEmailByTempKey(String key) throws Exception;
+	public boolean authEmailByTokenKey(String key) throws Exception;
 
 	public int sendEmailByEmailAuthVO(EmailAuthVO emailAuthVO, MemberVO inputMember) throws Exception;
 

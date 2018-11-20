@@ -2,6 +2,7 @@ package com.bridgeimpact.renewal.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.util.Iterator;
 import java.util.List;
 
@@ -31,6 +32,7 @@ import com.bridgeimpact.renewal.service.BoardService;
 import com.bridgeimpact.renewal.service.CommentService;
 import com.bridgeimpact.renewal.service.EmailAuthService;
 import com.bridgeimpact.renewal.service.MemberService;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
 /**
@@ -98,23 +100,28 @@ public class TestController {
         sendMail.send();
     }
 
-    @RequestMapping(value="emailConfirm", method=RequestMethod.GET)
+    @RequestMapping(value="/emailAuth", method=RequestMethod.GET)
     public String emailConfirm(String key, Model model){
-    	boolean checkEmailAuthKeyResult;
+    	boolean checkEmailAuthKeyResult = false;
     	System.out.println("인증 도착했음" + key);
         try {
-        	checkEmailAuthKeyResult = emailAuthService.authEmailByTempKey(key);
+        	checkEmailAuthKeyResult = emailAuthService.authEmailByTokenKey(key);
             model.addAttribute("check", true);
         } catch (Exception e) {
             model.addAttribute("check", false);
         }
-        // TODO 이메일 인증후 로그 기록 로직
-        return "emailConfirm";
+        model.addAttribute("result",checkEmailAuthKeyResult);
+        return "/test/emailAuth";
     }
 
 	@RequestMapping(value="/page")
 	public String writeForm(Model model, HttpServletRequest request){
         String os = System.getProperty("os.name");
+		ServletUriComponentsBuilder builder = ServletUriComponentsBuilder.fromCurrentContextPath();
+		builder.scheme("https");
+//		builder.replaceQueryParam("someBoolean", false);
+		URI newUri = builder.build().toUri();
+		System.out.println(newUri);
         System.out.println("Using System Property: " + os);
 		return "/test/writeForm";
 	}

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.bridgeimpact.renewal.service.EmailAuthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,8 @@ public class MemberController {
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
 
+	@Autowired
+	private EmailAuthService emailAuthService;
 	/***
 	 * 회원가입, 회원수정 페이지 이동 맵핑
 	 * @return 반환 페이지
@@ -224,6 +227,21 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		return resultMap;
+	}
+
+
+	@RequestMapping(value="/emailAuth", method=RequestMethod.GET)
+	public String emailConfirm(String key, Model model){
+		boolean checkEmailAuthKeyResult = false;
+		System.out.println("인증 도착했음" + key);
+		try {
+			checkEmailAuthKeyResult = emailAuthService.authEmailByTokenKey(key);
+			model.addAttribute("check", true);
+		} catch (Exception e) {
+			model.addAttribute("check", false);
+		}
+		model.addAttribute("result",checkEmailAuthKeyResult);
+		return "/test/emailAuth";
 	}
 }
 
