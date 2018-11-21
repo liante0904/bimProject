@@ -68,8 +68,6 @@ $(function(){
 		
 	});
 
-
-
 });
 
 </script>
@@ -78,43 +76,10 @@ $(function(){
 <div class="container writeForm">
     <h1 class="mb-1">글쓰기</h1>
      <form id="writeForm" action="../board/writeArticle.bim" method="post" enctype="multipart/form-data">
-<!--         <table class="table">
-            <tbody>
-                <tr>
-                    <th>제목</th>
-                    <td><input type="text" id="title" name="title"  class="form-control"/></td>
-                </tr>
-                
-                <tr>
-					<th>내용</th>                   
-                       <td> <textarea id="contents" name="contents" class="form-control"></textarea>
-								<script>
-					                // Replace the <textarea id="editor1"> with a CKEditor
-					                // instance, using default configuration.
-					                CKEDITOR.replace( 'contents' );
-					            </script>
-			            </td>
-                </tr>
-                <tr>
-                <th rowspan="5">첨부파일</th>
-                <td><input type="file" name="files1" class="form-control"></td>
-                </tr>
-                <tr>
-                		<td><input type="file" name="files2" class="form-control"></td>
-                </tr>
-                <tr>
-                		<td><input type="file" name="files3" class="form-control"></td>
-                </tr>
-                <tr>
-                		<td><input type="file" name="files4" class="form-control"></td>
-                </tr>
-            </tbody>
-        </table> -->
         <div class="container">
      		<div class="mt-2">
-    		    		<input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력해주세요."/>
+				<input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력해주세요."/>
      		</div>
-        		
         		<div class="mt-2">
         			<textarea id="contents" name="contents" class="form-control"></textarea>
 					<script>
@@ -123,13 +88,11 @@ $(function(){
 		                CKEDITOR.replace( 'contents' );
 		            </script>
         		</div>
-        		
         		<div class="mt-2">
         			<input type="file" name="files1" class="form-control">
         			<input type="file" name="files2" class="form-control">
         			<input type="file" name="files3" class="form-control">
         			<input type="file" name="files4" class="form-control">
-        			
         		</div>
 			<div class="mt-2">
 				 <input type="button" id="cancel" value="목록"  class="btn  btn-default"/>
@@ -140,7 +103,6 @@ $(function(){
     </form>
 </div>
 <%@ include file="/WEB-INF/views/main/footer.jsp" %>
- 
 </body>
 </html>
 

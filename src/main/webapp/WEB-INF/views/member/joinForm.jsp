@@ -7,7 +7,6 @@
 <title>회원가입</title>
 <link rel="stylesheet" href="../resources/css/member/member.css">    <!-- member CSS -->
 <%@ include file="/WEB-INF/include/navbar-header.jsp" %>
-<!-- header 영역 작성중 -->
 <script type="text/javascript"></script>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <script type="text/javascript">
@@ -205,59 +204,56 @@ $('#password').focusout(function() {
 
 </head>
 <body>
-
-
-
 <div class="container joinForm">
 	<h2>회원가입 페이지</h2>
-		 <form action="../member/joinSubmit.bim"  name="joinForm" id="joinForm" method="POST">
-			<div class="form-group">
-				<label for="id">ID</label>
-				<input type="text" id="id" name="id" class="form-control" placeholder="아이디"  /> <span id="idResult">아이디를 입력해주세요.</span> 
-			</div>
-			<div class="form-group">
-				<label for="password">Password</label>
-				<input type="password" name="password" id="password" class="form-control" placeholder="패스워드" />
-				<input type="password" name="repassword" id="repassword" class="form-control" placeholder="패스워드 확인" /> <span id="passwordResult">패스워드를 입력해주세요.</span>  
-			</div>
-			
-			<div class="form-group">
-				<div class="row">
-					<div class="col-xs-4">
-						<label for="name">Name</label>
-						<input type="text" name="name"  id="name" class="form-control" placeholder="이름" />
-					</div>
+	<form action="../member/joinSubmit.bim"  name="joinForm" id="joinForm" method="POST">
+		<div class="form-group">
+			<label for="id">ID</label>
+			<input type="text" id="id" name="id" class="form-control" placeholder="아이디"  /> <span id="idResult">아이디를 입력해주세요.</span>
+		</div>
+		<div class="form-group">
+			<label for="password">Password</label>
+			<input type="password" name="password" id="password" class="form-control" placeholder="패스워드" />
+			<input type="password" name="repassword" id="repassword" class="form-control" placeholder="패스워드 확인" /> <span id="passwordResult">패스워드를 입력해주세요.</span>
+		</div>
+
+		<div class="form-group">
+			<div class="row">
+				<div class="col-xs-4">
+					<label for="name">Name</label>
+					<input type="text" name="name"  id="name" class="form-control" placeholder="이름" />
 				</div>
 			</div>
-				
-				<div class="row">
-					<div class="col-xs-8">
-						<label for="email">E-Mail</label>
-						<input type="text" name="email" id="email" class="form-control" placeholder="E-MAIL" /> <span id="emailResult"> 이메일을 입력해주세요. </span>
-					</div>
+		</div>
+
+			<div class="row">
+				<div class="col-xs-8">
+					<label for="email">E-Mail</label>
+					<input type="text" name="email" id="email" class="form-control" placeholder="E-MAIL" /> <span id="emailResult"> 이메일을 입력해주세요. </span>
 				</div>
-				<div class="row">
-					<div class="col-xs-7">
-						<label for="phone">Phone</label>
-						<input type="text" name="phone" id="phone" class="form-control" placeholder="휴대전화" />
-					</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-7">
+					<label for="phone">Phone</label>
+					<input type="text" name="phone" id="phone" class="form-control" placeholder="휴대전화" />
 				</div>
-					
-				<div class="form-group">
-					<label for="address">Address</label>
-					<input type="text" name="address" id="address" class="form-control"  placeholder="주소" />
-				</div>
-				
-				<div class="form-group">
-					<label for="church">Church</label>
-					<input type="text" name="church" id="church" class="form-control"  placeholder="출석교회" />
-				</div>
-				
-			   <div class="form-group">
-				   <input type="submit" value="가입" id="join"  class="btn btn-lg btn-primary btn-block"   />
-				   <input type="button" value="취소" id="joinFormCancel" style="align:center" class="btn btn-lg btn-primary btn-block" >
-			  </div>
-		 </form>
+			</div>
+
+			<div class="form-group">
+				<label for="address">Address</label>
+				<input type="text" name="address" id="address" class="form-control"  placeholder="주소" />
+			</div>
+
+			<div class="form-group">
+				<label for="church">Church</label>
+				<input type="text" name="church" id="church" class="form-control"  placeholder="출석교회" />
+			</div>
+
+		   <div class="form-group">
+			   <input type="submit" value="가입" id="join"  class="btn btn-lg btn-primary btn-block"   />
+			   <input type="button" value="취소" id="joinFormCancel" style="align:center" class="btn btn-lg btn-primary btn-block" >
+		  </div>
+	 </form>
 </div>
 </body>
 </html>

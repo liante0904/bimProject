@@ -41,54 +41,47 @@ $(function(){
 		},
 	});
 	
-	
 	var	 paramIdValue = getParameters('id');
 	var	 paramTitleValue = $("#title").val();
 	var	 paramContentsValue = $("#contents").val();
-	
 	
 });
 </script>
 </head>
 <body>
-<div class="container editForm">
-    <h1 class="mb-1">글수정</h1>
-     <form action="../board/editArticle.bim" method="post">
-        <div class="container">
-        		<div class="mt-2">
-        			<input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력하세요." value="${article.title}"/>
-        		</div>
-        		<div class="mt-2">
-        			<textarea id="contents" name="contents" class="form-control">${article.contents}</textarea>
-					<script>
-		                // Replace the <textarea id="editor1"> with a CKEditor
-		                // instance, using default configuration.
-		                CKEDITOR.replace( 'contents' );
-		            </script>
-        		</div>
-			<div class="mt-2">
-				<c:forEach items="${fileList}" var="file">
-				<div id="fileList"><span>첨부파일 : </span>
-					<a href="../download.bim?num=${file.articleIdx }&storedNm=${file.storedFileName}">${file.originalFileName }</a>				
+	<div class="container editForm">
+		<h1 class="mb-1">글수정</h1>
+		<form action="../board/editArticle.bim" method="post">
+			<div class="container">
+				<div class="mt-2">
+					<input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력하세요." value="${article.title}"/>
 				</div>
-				</c:forEach>
-        			<input type="file" name="files1" class="form-control" value="ㅁㄴㅇ">
-        			<input type="file" name="files2" class="form-control">
-        			<input type="file" name="files3" class="form-control">
-        			<input type="file" name="files4" class="form-control">
-        			
-        		</div>
-        		<div class="mt-2">
-			 <input type="button" id="cancel" value="목록" class="btn btn-default"/>
-			 <input type="button" id="edit-submit" value="수정" class="btn btn-primary pull-right"/>
-        			
-        		</div>
-        </div>
- 
-    </form>
-</div>
-
- 
+				<div class="mt-2">
+					<textarea id="contents" name="contents" class="form-control">${article.contents}</textarea>
+					<script>
+						// Replace the <textarea id="editor1"> with a CKEditor
+						// instance, using default configuration.
+						CKEDITOR.replace( 'contents' );
+					</script>
+				</div>
+				<div class="mt-2">
+					<c:forEach items="${fileList}" var="file">
+					<div id="fileList"><span>첨부파일 : </span>
+						<a href="../download.bim?num=${file.articleIdx }&storedNm=${file.storedFileName}">${file.originalFileName }</a>
+					</div>
+					</c:forEach>
+					<input type="file" name="files1" class="form-control">
+					<input type="file" name="files2" class="form-control">
+					<input type="file" name="files3" class="form-control">
+					<input type="file" name="files4" class="form-control">
+				</div>
+				<div class="mt-2">
+					<input type="button" id="cancel" value="목록" class="btn btn-default"/>
+					<input type="button" id="edit-submit" value="수정" class="btn btn-primary pull-right"/>
+				</div>
+			</div>
+		</form>
+	</div>
 </body>
 </html>
 

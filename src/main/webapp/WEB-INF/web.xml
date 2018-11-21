@@ -41,4 +41,13 @@
     <trim-directive-whitespaces>true</trim-directive-whitespaces>
   </jsp-property-group>
 </jsp-config>
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>securedapp</web-resource-name>
+      <url-pattern>/*</url-pattern>
+    </web-resource-collection>
+    <user-data-constraint>
+      <transport-guarantee>NONE</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
 </web-app>

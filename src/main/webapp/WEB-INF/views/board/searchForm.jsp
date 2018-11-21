@@ -17,8 +17,7 @@ $(document).ready(function(){
 <div class="container">
 	<form action="../board/search.bim" method="get" class="navbar-form" id="searchForm">
 		<div class="form-group">
-			<input type="hidden" id="id" name="id"> 
-
+			<input type="hidden" id="id" name="id">
 			<select name="searchType" id="searchType" class="form-control">
 				<option value="title" <c:if test="${param.searchType == 'title' }">selected="selected"</c:if>>제목	검색</option>
 				<option value="contents" <c:if test="${param.searchType == 'contents' }">selected="selected"</c:if>>본문	검색</option>
@@ -30,10 +29,9 @@ $(document).ready(function(){
 			<input type="text" name="searchKeyword" id="searchKeyword" value="${param.searchKeyword }" class="form-control">  
 		</div>
 		<input type="submit" value="검색" class="btn btn-default">
-	
 	</form>
 </div>
-	<div class="input-group input-group-sm">
-	</div>
+<div class="input-group input-group-sm">
+</div>
 </body>
 </html>

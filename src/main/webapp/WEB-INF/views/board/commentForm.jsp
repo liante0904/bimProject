@@ -8,7 +8,6 @@
 <script src="../resources/js/comment.js"></script>
 </head>
 <body>
-
 	<div class="comment_title">
 	<c:set var="sessionId" value="${sessionScope.loginInfo.id}" />
 		<h4>댓글</h4>

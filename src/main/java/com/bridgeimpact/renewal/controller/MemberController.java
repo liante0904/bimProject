@@ -77,7 +77,6 @@ public class MemberController {
 
 	/***
 	 * 회원가입 페이지에서 작성된 데이터 DB반영 요청
-	 * @param member
 	 * @return 로그인 페이지 반환
 	 */
 	@RequestMapping(value="member/joinSubmit.bim")
