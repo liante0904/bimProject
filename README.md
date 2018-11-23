@@ -48,7 +48,6 @@ http://liante0904.asuscomm.com:9090/bimProject/
 - [x] 이메일 인증메일 수신하여 인증 승인처리 구체화
 ### Testing & Working
 - [x] 관리자 인터셉터 구현(구체화)
-    - 일반 회원 로그인시 modal 추가 고려
 - [x] 컨트롤러, 서비스(비즈니스)로직 분리 & 정리
 - 게시판 공개여부 토글 버튼 처리(메소드 통합)
 - SSL 적용 테스트 중
@@ -57,23 +56,36 @@ http://liante0904.asuscomm.com:9090/bimProject/
     - TODO Let's Encrypt 인증서 적용
 
 ## TODOList
+### Layout and content 
 - 컨텐츠 채우기
     - 현재 위지윅 작성시 본문에 사진 및 태그 기능 미작동 수정예정
 	- 게시판 변경(기존의 사이트)
 - 디자인 색깔톤 대폭 변경
+### File
+- 게시글 수정시 첨부파일 추가 & 수정 & 삭제 구현
+   - writeArticle Mapper에서 insertArticle재구현
+   - 현행: Article과 File 객체를 각각 insert 처리
+   - 수정안: Service Method명을 writeArticle로 변경하고 Service에서 각각의 DAO를 호출하는 방향
+   - 혹은 insert를 1번의 db Access로 처리 
+	
+- 글 작성, 수정시 첨부파일 저장 위치 로직변경(Test or Live)
 - 데이터를 반영시 무결성 처리
     - 필요한 controller, URL mapper 확인 후 추가 예정
+### Function & minor bug
 - 아이디 비밀번호 찾기 구현
     - 아이디 찾기 => 이름, 이메일 일치 여부 확인 후 모자이크 아이디 반환
     - 비밀번호 찾기 => 가입시 이메일 정보로 비밀번호 변경 페이지 반환 
-- [x] 회원 이메일 주소 유니크 처리, 가입시 submit전 데이터 유효성 체크
-- 글 작성, 수정시 첨부파일 저장 위치 로직변경(Test or Live)
 - 사용자에게 에러 페이지 및 알림처리
-- openJDK 전환
+    - 인터셉터단에서 일반 회원 로그인시 modal 알림 추가 고려
+- [x] 회원 이메일 주소 유니크 처리, 가입시 submit전 데이터 유효성 체크
 - 회원가입 후 이메일 인증처리 메일 발송 실패시 에러처리(재발송 혹은 알림) 
     - 재발송 자체는 어렵지 않으나.. 일정 시간이 지났을 때 인증 만료(트랜잭션) 추가 고려
+### etc
+- openJDK 전환
+- Todo get start jenkins and AWS
+
 ## TODO Bugfix(긴급)
-### 구조 변경에 따른 동작 버그 확인 및 재구현
+### 구조 변경(DB, 혹은 IDE 변경)에 따른 동작 버그 확인 및 재구현
 - 게시글
 	- 게시글 조회
 		- 작성되지 않은 게시글 번호로 접근시 Exception처리
@@ -85,12 +97,10 @@ http://liante0904.asuscomm.com:9090/bimProject/
 		- [x] 수정 페이지 진입시 기존에 작성된 글 제목과 내용 표시
 - 파일
 	-  [x] File테이블 index 컬럼삭제로 인한 로직변경
-		- 업로드, 다운로드시 로직 수정
-	- 게시글 수정시 첨부파일 삭제기능 및 수정 구현 
+
 - 회원정보
-	- 회원수정
-		- 회원정보 수정 페이지 대폭수정
-		- 회원가입 페이지 이용
+	- 회원정보 수정 페이지 대폭수정
+	- 회원가입 페이지 이용
 
 ## holdingList
 - ~공동구매 기능(온라인 신청)~
