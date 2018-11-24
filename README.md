@@ -62,14 +62,15 @@ http://liante0904.asuscomm.com:9090/bimProject/
 	- 게시판 변경(기존의 사이트)
 - 디자인 색깔톤 대폭 변경
 ### File
-- 게시글 수정시 첨부파일 추가 & 수정 & 삭제 구현
-   - writeArticle Mapper에서 insertArticle재구현
-   - 현행: Article과 File 객체를 각각 insert 처리
-   - 수정안: Service Method명을 writeArticle로 변경하고 Service에서 각각의 DAO를 호출하는 방향
-   - 혹은 insert를 1번의 db Access로 처리 
+- 게시글 수정시 첨부파일 추가 & 수정 & 삭제 구현(삭제 구현완료, 추가 및 수정 구현중)
+   - [x] writeArticle Mapper에서 insertArticle재구현
+        - 현행: Article과 File 객체를 각각 insert 처리
+        - 수정안: Service Method명을 writeArticle로 변경하고 Service에서 각각의 DAO를 호출하는 방향
+        - 혹은 insert를 1번의 db Access로 처리 
 	
 - 글 작성, 수정시 첨부파일 저장 위치 로직변경(Test or Live)
-- 데이터를 반영시 무결성 처리
+    - Docker 배포시 첨부파일 영역 구분 확인 필요
+- 데이터를 반영시 무결성 처리(부분부분 진행중)
     - 필요한 controller, URL mapper 확인 후 추가 예정
 ### Function & minor bug
 - 아이디 비밀번호 찾기 구현
