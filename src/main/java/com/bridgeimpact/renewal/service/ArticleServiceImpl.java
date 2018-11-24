@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +14,16 @@ import com.bridgeimpact.renewal.dao.BoardDAO;
 import com.bridgeimpact.renewal.dto.ArticleVO;
 import com.bridgeimpact.renewal.dto.BoardVO;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
+
+	private static final Logger logger = LoggerFactory.getLogger(ArticleServiceImpl.class);
+
+	@Autowired
+	private FileService fileService;
 
     @Autowired
     private ArticleDAO articleDAO;
@@ -42,8 +51,22 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 	
 	@Override
-	public int insertArticle(ArticleVO board) throws Exception {
-		return  articleDAO.insertArticle(board);
+	public int writeArticle(HttpServletRequest request, ArticleVO article) throws Exception {
+		/* 게시글 제목, 내용, 작성자 값 판별*/
+		if ("".equals(article.getTitle()) ||
+			"".equals(article.getContents()) ||
+			"".equals(article.getWriteId())){
+			return 0;
+		}
+		/* 게시글 db insert */
+		int insertArticleResult = articleDAO.insertArticle(article);
+		if (insertArticleResult < 1){	// 글 작성 실패시
+			return 0;
+		}
+
+		fileService.insertFile(request, article);
+
+		return insertArticleResult ;
 	}
 
 	@Override
@@ -59,7 +82,7 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public void increseHitCntByIndex(int index) throws Exception {
+	public void increaseHitCntByIndex(int index) throws Exception {
 		// TODO Auto-generated method stub
 		articleDAO.updateHitCntByIndex(index);
 	}
@@ -74,12 +97,6 @@ public class ArticleServiceImpl implements ArticleService {
 	public List<ArticleVO> selectArticleByPage(HashMap<String, Object> paramMap) throws Exception {
 		// TODO Auto-generated method stub
 		return articleDAO.selectArticleByPage(paramMap);
-	}
-
-	@Override
-	public List<ArticleVO> selectArticleByKeyword(HashMap<String, Object> paramMap)  throws Exception {
-		// TODO Auto-generated method stub
-		return articleDAO.selectArticleByKeyword(paramMap);
 	}
 
 	@Override

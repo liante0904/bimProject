@@ -25,8 +25,6 @@ public interface ArticleDAO {
 
 	public List<ArticleVO> selectArticleByPage(HashMap<String, Object> paramMap)throws Exception;
 
-	public List<ArticleVO> selectArticleByKeyword(HashMap<String, Object> paramMap) throws Exception ;
-
 	public List<ArticleVO> selectArticleByRecent(int articleCnt, String boardId) throws Exception ;
 
 }

@@ -5,7 +5,7 @@
  
 <mapper namespace="com.bridgeimpact.renewal.fileSQL">
     	<resultMap type="fileVO"  id="fileResultMap">
-    		<result property="articleIdx" column="ARTICLE_IDX" />
+		<result property="articleIdx" column="ARTICLE_IDX" />
 		<result property="originalFileName" column="ORIGINAL_FILE_NAME" />
 		<result property="storedFileName" column="STORED_FILE_NAME" />
 		<result property="fileSize" column="FILE_SIZE" />
@@ -60,12 +60,19 @@
 		ORIGINAL_FILE_NAME,   
 		STORED_FILE_NAME,   
 		FILE_SIZE,   
-		DEL_GB  
+		CREA_ID,
+		DEL_GB
 		FROM   BIM_FILE_TB   
 		WHERE STORED_FILE_NAME = #{value}	 
     ]]>
     </select>
-	<!-- 
+
+	<delete id="deleteFile" parameterType="fileVO" >
+		DELETE FROM bridgeimpact.BIM_FILE_TB
+			WHERE 	ARTICLE_IDX = #{articleIdx } AND
+			STORED_FILE_NAME = #{storedFileName }
+	</delete>
+	<!-- deleteFile
   	<update id="updateArticle" parameterType="articleVO">
    		<![CDATA[
 		UPDATE BIM_ARTICLE_TB

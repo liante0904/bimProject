@@ -19,6 +19,36 @@ $(function(){
 		e.preventDefault();
 		$("form").submit();
 	});
-	
 });
+
+
+function deleteFile(articleIdx, storedFileName, sessionLoginId) {
+    console.log(articleIdx);
+    console.log(storedFileName);
+    console.log(sessionLoginId);
+    var FileVO = {
+        'articleIdx': articleIdx,
+        'storedFileName': storedFileName,
+        'creaId': sessionLoginId
+    }
+
+    $.ajax({
+        url : "../file/deleteFile.bim",
+        type: "POST",
+        data:
+            FileVO,
+        success : function(data){
+            if ( data.result == "success") {
+                console.log("첨부파일 삭제 완료");
+            }
+        },
+        error : function(error){
+            alert("첨부파일 삭제 실패");
+        },
+        complete : function(){
+            //getArticleFileList();
+        }
+    });
+
+}
 

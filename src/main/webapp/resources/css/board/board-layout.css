@@ -14,3 +14,6 @@ form[action="../board/search.bim"] {
 	background-color: #FFF;
 	padding: 15px 15px 45px 15px;
 }
+span.glyphicon {
+	cursor: pointer;
+}

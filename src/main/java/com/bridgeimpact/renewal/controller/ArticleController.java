@@ -154,7 +154,7 @@ public class ArticleController {
 		 * 게시글 조회수 증가
 		 */
 		try {
-			articleService.increseHitCntByIndex(num);
+			articleService.increaseHitCntByIndex(num);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -200,7 +200,8 @@ public class ArticleController {
 		article.setWriteId(loginMember.getId());
 		int insertArticleResult = 0;
 		try {
-			insertArticleResult = articleService.insertArticle(article);
+			insertArticleResult = articleService.writeArticle(request,article);
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -243,15 +244,6 @@ public class ArticleController {
 		 * try { mFile.transferTo(new File(path+newFileName)); } catch (Exception e) {
 		 * e.printStackTrace(); } }
 		 */
-
-		// 다중파일 로직구간
-
-		try {
-			fileService.insertFile(request, article);
-		} catch (Exception e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
 
 		/*
 		 * MultipartHttpServletRequest multipartRequest =
@@ -451,7 +443,6 @@ public class ArticleController {
 		List<ArticleVO> articleList = null;
 
 		try {
-			// articleList = articleService.selectArticleByKeyword(paramMap);
 			articleList = articleService.selectArticleByPage(pageUtil.getParamMap());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

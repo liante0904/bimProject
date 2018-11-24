@@ -10,7 +10,7 @@ public interface FileDAO {
 
 	public void editFile(FileVO file) throws Exception;
 
-	public void deleteFile(FileVO file) throws Exception;
+	public boolean deleteFile(FileVO file) throws Exception;
 
 	public List<FileVO> selectAllFileByIndex(int num) throws Exception;
 

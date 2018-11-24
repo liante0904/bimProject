@@ -80,25 +80,6 @@
    		 ]]>
     </select>
 
-	    
-	<select id="selectArticleByKeyword" parameterType="Map" resultType="articleVO">
-		SELECT   
-		IDX,   
-		BOARD_ID,   
-		TITLE,   
-		CONTENTS,   
-		HIT_CNT,   
-		DEL_GB,   
-		DATE_FORMAT(WRITE_DT, "%Y-%m-%d") AS 'WRITE_DT', 
-		DATE_FORMAT(WRITE_DT, "%T") AS 'WRITE_TIME',   
-		WRITE_ID   
-		FROM   BIM_ARTICLE_TB   
-		WHERE BOARD_ID = #{boardId}
-		AND	DEL_GB = 'N'
-		AND	${searchType}  LIKE CONCAT(#{searchKeyword},'%')
-		ORDER BY IDX DESC
-	</select>
- 
  
     <select id="selectArticleByIndex" parameterType="int" resultType="articleVO">
 		<![CDATA[

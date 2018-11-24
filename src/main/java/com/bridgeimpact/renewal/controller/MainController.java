@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -202,12 +203,12 @@ public class MainController {
 	 * 파일 다운로드 요청을 처리합니다.
 	 * @param request
 	 * @param response
-	 * @param num
 	 * @return
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/download.bim")
-	public ModelAndView download(HttpServletRequest request,HttpServletResponse response, int num, String storedNm)  {
+	public ModelAndView download(HttpServletRequest request,HttpServletResponse response, String storedNm)  {
+		ModelAndView mav = new ModelAndView();
 		FileVO fileVO = null;
 		try {
 			 fileVO = fileService.selectFileByStoredName(storedNm);
@@ -221,7 +222,7 @@ public class MainController {
 		
 		// TODO getRealPath("/") 부분 OS 인식가능한 함수로 변경?
 		String serverPath = request.getSession().getServletContext().getRealPath("/");
-		serverPath += fileVO.getOriginalFileName();
+		serverPath += fileVO.getStoredFileName();
 		logger.info("callDownload : " + serverPath);
 
 		System.out.println(serverPath);
@@ -230,7 +231,14 @@ public class MainController {
 		if (!downloadFile.canRead()) {
 			 new Exception("File can't read(파일을 찾을 수 없습니다)");
 		}
-		return new ModelAndView("downloadView", "downloadFile", downloadFile);
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + fileVO.getOriginalFileName() + "\";");
+		response.setHeader("Content-Transfer-Encoding", "binary");
+
+		mav.setViewName("downloadView");
+		mav.addObject("OriginalFileName", fileVO.getOriginalFileName());
+		mav.addObject("downloadFile", downloadFile);
+		//return new ModelAndView("downloadView", "downloadFile", downloadFile);
+		return mav;
 		// 첫번째 인자 : beanName(id), 두번쨰 인자 :  File Object,
 	}
 

@@ -31,9 +31,12 @@ public class FileDAOImpl implements FileDAO{
 	}
 
 	@Override
-	public void deleteFile(FileVO file) throws Exception {
-		// TODO Auto-generated method stub
-		sqlSession.delete(Namespace+".deleteFile", file);
+	public boolean deleteFile(FileVO file) throws Exception {
+		boolean result = false;
+		int resultCnt = sqlSession.delete(Namespace+".deleteFile", file);
+		if (resultCnt == 1)
+			result = true;
+		return result;
 	}
 
 	@Override

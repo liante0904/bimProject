@@ -74,9 +74,8 @@ public class CommentController {
 	@ResponseBody
 	public Map<String, String> writeComment(Model model,CommentVO commentVO, HttpServletRequest request,HttpServletResponse response){
 		
-		
 		Map<String, String> resultMap = new HashMap<String, String>();
-		 int resultCnt = 0;
+		int resultCnt = 0;
 		 
 		try {
 			 commentService.insertComment(commentVO);
@@ -84,22 +83,22 @@ public class CommentController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		  String result = "";
-		  String resultMsg = "";
 
-		  if ( resultCnt == 0 ){
-			   result = "success";
-			   resultMsg = "댓글 작성이 완료 되었습니다.";
-			  } else {
-			   result = "failure";
-			   resultMsg = "댓글 작성이 실패 하였습니다.";
-			  }
+		String result = "";
+		String resultMsg = "";
 
-		  resultMap.put("result", result);
-		  resultMap.put("resultMsg", resultMsg);
-		    response.setContentType("text/plain");
-		    response.setCharacterEncoding("UTF-8");
-		  return resultMap;
+		if (resultCnt == 0){
+			result = "success";
+			resultMsg = "댓글 작성이 완료 되었습니다.";
+		}else{
+			result = "failure";
+			resultMsg = "댓글 작성이 실패 하였습니다.";
+		}
+		resultMap.put("result", result);
+	  	resultMap.put("resultMsg", resultMsg);
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
+		return resultMap;
 	}
 	
 	/**
@@ -113,8 +112,7 @@ public class CommentController {
 	@RequestMapping(value="/editCommentAjax.bim")
 	@ResponseBody
 	public Map<String, String> editComment(Model model,CommentVO commentVO, HttpServletRequest request,HttpServletResponse response){
-		
-		
+
 		Map<String, String> resultMap = new HashMap<String, String>();
 		 int resultCnt = 0;
 		 

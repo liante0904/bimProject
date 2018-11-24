@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.bridgeimpact.renewal.dto.ArticleVO;
 import com.bridgeimpact.renewal.dto.FileVO;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 public interface FileService {
 	
@@ -13,7 +14,7 @@ public interface FileService {
 
 	public void editFile(FileVO file) throws Exception;
 
-	public void deleteFile(FileVO file) throws Exception;
+	public boolean deleteFile(HttpServletRequest request, FileVO file) throws Exception;
 
 	public List<FileVO> selectAllFileByIndex(int num) throws Exception;
 

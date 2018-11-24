@@ -20,6 +20,7 @@ public class FileDownloadView extends AbstractView {
 
         setContentType("apllication/download; charset=utf-8");
 
+
     }
 
 
@@ -33,12 +34,12 @@ public class FileDownloadView extends AbstractView {
 
 
         File file = (File) model.get("downloadFile");
-
-
+        String OriginalFileName = (String) model.get("OriginalFileName");
+        logger.info("OriginalFileName : " + OriginalFileName );
         res.setContentType(getContentType());
         res.setContentLength((int) file.length());
         res.setHeader("Content-Disposition", "attachment; filename=\"" +
-                java.net.URLEncoder.encode(file.getName(), "utf-8") + "\";");
+                java.net.URLEncoder.encode(OriginalFileName, "utf-8") + "\";");
         res.setHeader("Content-Transfer-Encoding", "binary");
 
 
