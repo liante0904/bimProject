@@ -20,8 +20,18 @@ $(document).ready(function(){
 	<form action="${pageContext.request.contextPath}/main/login.bim" method="POST">
 		<pre>
 ID:	<input type="text" id="id" name="id" class="form-control">
-PASSWORD: <input type="password" id="password" name="password" class="form-control"> <input type="submit" value="로그인" class="btn btn-lg btn-primary btn-block"> 
+PASSWORD: <input type="password" id="password" name="password" class="form-control">
 		</pre>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6"><button type="button" class="btn btn-default btn-block">아이디 찾기</button></div>
+				<div class="col-md-6"><button type="button" class="btn btn-default btn-block">비밀번호 찾기</button></div>
+			</div>
+			<div class="row">
+				<button type="submit" value="로그인" class="btn btn-lg btn-primary btn-block">로그인</button>
+			</div>
+		</div>
+
 	</form>
 </div>
 </body>

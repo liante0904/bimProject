@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +19,7 @@
 		<c:forEach items="${commentList}" var="comment" varStatus="status">
 		<div class="comment_info">
 			<div class="comment_writer">
-				<span>${comment.writeId}님</span>
+				<span>${comment.writeId} 님</span>
 				<c:set var="writeCommentId" value="${comment.writeId}" />
 				<c:set var="sessionId" value="${sessionScope.loginInfo.id}" /> 
 					<c:if test="${writeCommentId == sessionId}">
@@ -29,12 +32,15 @@
 		<div class="comment_contents">
 			<span class="comment_contents">${comment.contents}</span>
 		</div>
+		<!-- 로그인 상태이고 작성자와 로그인 사용자가 같을 때-->
+		<c:if test="${!empty sessionScope.loginInfo && writeCommentId == sessionId}">
 		<div class="comment-button">
 			<a class="reWriteComment" data-idx="${comment.idx}"><span>대댓글</span></a>
 			<a class="editComment" data-idx="${comment.idx}"><span>수정</span></a>
 			<a class="deleteComment_submit" data-idx="${comment.idx}"><span>삭제</span></a>
 		</div>
-		<!-- 댓글 수정 영역 -->
+		</c:if>
+		<!-- 댓글 수정 && 대댓글 레이아웃 -->
 		<c:set var="writeCommentId" value="${comment.writeId}" />
 		<c:set var="sessionId" value="${sessionScope.loginInfo.id}" /> 
 		<c:if test="${writeCommentId == sessionId}">

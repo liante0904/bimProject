@@ -1,7 +1,3 @@
-$(document).ready(function() {
-	
-});
-
 $(function(){
 	$("#writeComment").on('click',function() {
 		var writeCommentContentsForm = $("#writeCommentContents");
@@ -117,11 +113,11 @@ $(function(){
 
 
 function getCommentList(){
-	
+
 	var num = getParameters('num');
 	var data = { num : num };
 		$.ajax({
-	        type : "POST",
+	        type : "GET",
 	        url : "../comment/getCommentList.bim",
 	        data : data,
 	        dataType : "html",

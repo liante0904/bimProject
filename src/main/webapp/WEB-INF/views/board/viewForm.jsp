@@ -9,29 +9,30 @@
 <link rel="stylesheet" href="../resources/css/board/board-layout.css">    <!-- board-layout CSS -->
 <%@ include file="/WEB-INF/include/navbar-header.jsp" %>
 <script src="../resources/js/article.js"></script>
-<script src="../resources/js/comment.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	getCommentList();
 
-}); 
-function getCommentList(){
-	var num = getParameters('num');
-	var data = { num : num };
-		$.ajax({
-	        type : "POST",
-	        url : "../comment/getCommentList.bim",
-	        data : data,
-	        dataType : "html",
-	        success : function(data){
-	           	$("#main_view").html(data);
-	        },
-	        error : function(data){
-	            alert(' 실패!!');
-	        }
-		});
-		
-	}
+});
+// function getCommentList(){
+//
+//     alert('getCommentList');
+// 	var num = getParameters('num');
+// 	var data = { num : num };
+// 		$.ajax({
+// 	        type : "GET",
+// 	        url : "../comment/getCommentList.bim",
+// 	        data : data,
+// 	        dataType : "html",
+// 	        success : function(data){
+// 	           	$("#main_view").html(data);
+// 	        },
+// 	        error : function(data){
+// 	            alert(' 실패!!');
+// 	        }
+// 		});
+//
+// 	}
 </script>
 </head>
 <body>

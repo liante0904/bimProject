@@ -1,8 +1,4 @@
 /*viewForm*/
-$(document).ready(function(){
-
-}); 
-
 $(function(){
 	var idParam = "?" + "id=" + getParameters('id');
 	var param =  idParam +"&num=" + getParameters('num');

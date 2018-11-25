@@ -40,14 +40,11 @@ public class CommentController {
     
     /***
      * 게시판의 게시글의 댓글 리스트 요청
-     * @param model
-     * @param commentVO
-     * @param request
-     * @param response
+     * @param num : 게시글 번호
      * @return
      */
-	@RequestMapping(value="/getCommentList.bim", method= RequestMethod.POST)
-	public ModelAndView getCommentList(Model model, HttpServletRequest request,HttpSession session){
+	@RequestMapping(value="/getCommentList.bim", method= RequestMethod.GET)
+	public ModelAndView getCommentList(int num,HttpServletRequest request,HttpSession session){
 		ModelAndView mav = new ModelAndView("board/commentForm");
 		int parentIdx = Integer.parseInt(request.getParameter("num"));
 		List<CommentVO> commentList = null;
