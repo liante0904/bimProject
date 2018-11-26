@@ -1,5 +1,8 @@
 @charset "UTF-8";
 /* mainPage */
+.main_page {
+	margin-top: -50px;
+}
 div.mainArticle .boardName{
 	display: inline-block;
 	overflow: hidden;
@@ -20,8 +23,6 @@ div.mainArticle .articleTitle{
 	background-color: #FFF;
 	padding: 15px 15px 45px 15px;
 }
-
-
 /* mainPage */
 .main_page .recent_article {
 	background-color: #FFF;
@@ -30,12 +31,9 @@ div.mainArticle .articleTitle{
 	margin: 5px 0px 5px 0px;
 	padding: 5px 5px 5px 5px;
 }
-
-
 .mb-1 {
 	margin-bottom: 1em;
 }
-
 .mt-2 {
 	margin-top: 0.5em;
 }

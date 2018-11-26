@@ -22,6 +22,13 @@ http://liante0904.asuscomm.com:9090/bimProject/
 - Docker
 - ~~AWS (Expected)~~
 
+### Library & Open Source
+
+- [Bootstrap 3](https://getbootstrap.com/)
+- [Ckeditor 4](https://ckeditor.com/)
+- [DownloadView BoilerPlate Code](http://jwgye.tistory.com/4)
+- [~~Startbootstrap's simple-sidebar~~](https://startbootstrap.com/template-overviews/simple-sidebar/)
+
 ## About
 ### Complete Function
 - 모바일 대응(반응형 웹)
@@ -49,11 +56,11 @@ http://liante0904.asuscomm.com:9090/bimProject/
 ### Testing & Working
 - [x] 관리자 인터셉터 구현(구체화)
 - [x] 컨트롤러, 서비스(비즈니스)로직 분리 & 정리
-- 게시판 공개여부 토글 버튼 처리(메소드 통합)
 - SSL 적용 테스트 중
     - [자체 서명 가이드1](http://gdtbgl93.tistory.com/74)
     - [자체 서명 가이드2](https://dzone.com/articles/setting-ssl-tomcat-5-minutes)
     - TODO Let's Encrypt 인증서 적용
+- 게시판 공개여부 토글 버튼 처리(메소드 통합)
 
 ## TODOList
 ### Layout and content 
