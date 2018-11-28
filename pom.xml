@@ -288,15 +288,9 @@
 			</plugin>
 			<!-- spring-boot (springloaded Test) -->
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>org.springframework</groupId>
+				<artifactId>springloaded</artifactId>
 				<dependencies>
-					<!-- https://mvnrepository.com/artifact/org.springframework/springloaded -->
-					<dependency>
-						<groupId>org.springframework</groupId>
-						<artifactId>springloaded</artifactId>
-						<version>1.2.8.RELEASE</version>
-					</dependency>
 				</dependencies>
 			</plugin>
 			
