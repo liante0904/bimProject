@@ -92,7 +92,15 @@ public class MainController {
     public String main() {
         return "main";
     }
-	@RequestMapping(value="/boardList.bim")
+    @RequestMapping(value = "/findId.bim" , method = RequestMethod.GET)
+    public String findId() {
+        return "member/findIdForm";
+    }
+    @RequestMapping(value = "/findPassword.bim" , method = RequestMethod.GET)
+    public String findPassword() {
+        return "member/findPasswordForm";
+    }
+    @RequestMapping(value="/boardList.bim")
 	public ModelAndView writeForm(Model model, HttpServletRequest request){
 		List<BoardVO> boardList = null;
 		try {

@@ -5,7 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="/WEB-INF/include/navbar-header.jsp" %>
-<link rel="stylesheet" href="../resources/bootstrap/css/signin.css">    <!-- Custom styles for this template -->
+<script src="../resources/js/member.js"></script>
+<script src="../resources/js/common.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	
@@ -24,8 +25,8 @@ PASSWORD: <input type="password" id="password" name="password" class="form-contr
 		</pre>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6"><button type="button" class="btn btn-default btn-block">아이디 찾기</button></div>
-				<div class="col-md-6"><button type="button" class="btn btn-default btn-block">비밀번호 찾기</button></div>
+				<div class="col-md-6"><button type="button" class="btn btn-default btn-block" onclick="handleTo('findId')">아이디 찾기</button></div>
+				<div class="col-md-6"><button type="button" class="btn btn-default btn-block" onclick="handleTo('findPassword')">비밀번호 찾기</button></div>
 			</div>
 			<div class="row">
 				<button type="submit" value="로그인" class="btn btn-lg btn-primary btn-block">로그인</button>

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" isELIgnored="false" isELIgnored="false"%>
+    pageEncoding="UTF-8" isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +7,6 @@
 <title>회원가입</title>
 <link rel="stylesheet" href="../resources/css/member/member.css">    <!-- member CSS -->
 <%@ include file="/WEB-INF/include/navbar-header.jsp" %>
-<script type="text/javascript"></script>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -207,14 +206,18 @@ $('#password').focusout(function() {
 <div class="container joinForm">
 	<h2>회원가입 페이지</h2>
 	<form action="../member/joinSubmit.bim"  name="joinForm" id="joinForm" method="POST">
-		<div class="form-group">
-			<label for="id">ID</label>
-			<input type="text" id="id" name="id" class="form-control" placeholder="아이디"  /> <span id="idResult">아이디를 입력해주세요.</span>
+		<div class="row">
+            <div class="col-xs-8">
+                <label for="id">ID</label>
+                <input type="text" id="id" name="id" class="form-control" placeholder="아이디"  /> <span id="idResult">아이디를 입력해주세요.</span>
+            </div>
 		</div>
-		<div class="form-group">
-			<label for="password">Password</label>
-			<input type="password" name="password" id="password" class="form-control" placeholder="패스워드" />
-			<input type="password" name="repassword" id="repassword" class="form-control" placeholder="패스워드 확인" /> <span id="passwordResult">패스워드를 입력해주세요.</span>
+		<div class="row">
+            <div class="col-xs-8">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="form-control" placeholder="패스워드" />
+                <input type="password" name="repassword" id="repassword" class="form-control" placeholder="패스워드 확인" /> <span id="passwordResult">패스워드를 입력해주세요.</span>
+            </div>
 		</div>
 
 		<div class="form-group">
