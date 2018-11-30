@@ -29,7 +29,7 @@ http://liante0904.asuscomm.com:9090/bimProject/
 - [DownloadView BoilerPlate Code](http://jwgye.tistory.com/4)
 - [~~Startbootstrap's simple-sidebar~~](https://startbootstrap.com/template-overviews/simple-sidebar/)
 
-### [Reference Documents](https://github.com/liante0904/bimProject/blob/master/Reference.md)
+## [Reference Documents](https://github.com/liante0904/bimProject/blob/master/Reference.md)
 
 ## About
 ### Complete Function
@@ -62,7 +62,6 @@ http://liante0904.asuscomm.com:9090/bimProject/
     - [자체 서명 가이드1](http://gdtbgl93.tistory.com/74)
     - [자체 서명 가이드2](https://dzone.com/articles/setting-ssl-tomcat-5-minutes)
     - TODO Let's Encrypt 인증서 적용
-- 게시판 공개여부 토글 버튼 처리(메소드 통합)
 
 ## TODOList
 ### Layout and content 

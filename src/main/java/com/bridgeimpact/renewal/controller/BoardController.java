@@ -55,7 +55,7 @@ public class BoardController {
      */
 	@RequestMapping(value="/viewList.bim", method= RequestMethod.GET)
 	public String boardView(String id,Model model, HttpServletRequest request,HttpSession session){
-		
+
 		/***
 		 * 게시판 유효성 판별
 		 * @param id : 게시판 구분자
@@ -73,7 +73,6 @@ public class BoardController {
 				return "main/mainForm";
 			}
 		}
-
 		
 		/***
 		 * 게시판의 페이징 세팅 
@@ -81,8 +80,7 @@ public class BoardController {
 		
 		// 이용자의 요청 페이지 세팅
 		PageUtil pageUtil = new PageUtil(request,articleService);
-		
-		
+
 		if (pageUtil.getCurrentPage() > pageUtil.getTotalPageCnt()) {
 			//TODO 유효하지 않은 페이지 범위 접근시
 		String url = "redirect:/board/viewList.bim?id=" + id + "&page=" + pageUtil.getTotalPageCnt();
@@ -148,12 +146,12 @@ public class BoardController {
 			result = "failure";
 			resultMsg = "게시판 생성이 실패 하였습니다.";
 		}
-		   result = "success";
-		   resultMsg = "게시판 생성이 완료 되었습니다.";
-		   
-		   resultMap.put("result", result);
-		   resultMap.put("resultMsg", resultMsg);
-		   return resultMap;
+		result = "success";
+		resultMsg = "게시판 생성이 완료 되었습니다.";
+
+		resultMap.put("result", result);
+		resultMap.put("resultMsg", resultMsg);
+		return resultMap;
 	}
 	
 	
@@ -169,8 +167,8 @@ public class BoardController {
 	@RequestMapping(value="/checkBoardIdAjax.bim",method = RequestMethod.GET,produces = "application/json; charset=utf8")
 	@ResponseBody
 	public Map<String, String> checkBoardId(Model model,String id, HttpServletRequest request,HttpServletResponse response){
-		 Map<String, String> resultMap = new HashMap<String, String>();
-		 int resultCnt = 0;
+ 		Map<String, String> resultMap = new HashMap<String, String>();
+ 		int resultCnt = 0;
 		try {
 			resultCnt = boardService.checkBoardId(id);
 		} catch (Exception e) {
@@ -180,19 +178,19 @@ public class BoardController {
 		  String result = "";
 		  String resultMsg = "";
 
-		  if ( resultCnt == 0 ){
-			   result = "success";
-			   resultMsg = "사용가능한 URL입니다.";
-			  } else {
-			   result = "failure";
-			   resultMsg = "이미 사용중인 URL입니다.";
-			  }
+	  	if ( resultCnt == 0 ){
+		  	result = "success";
+		  	resultMsg = "사용가능한 URL입니다.";
+	  	} else {
+			result = "failure";
+			resultMsg = "이미 사용중인 URL입니다.";
+	  	}
 
-		  resultMap.put("result", result);
-		  resultMap.put("resultMsg", resultMsg);
-		    response.setContentType("text/plain");
-		    response.setCharacterEncoding("UTF-8");
-		  return resultMap;
+  		resultMap.put("result", result);
+ 		resultMap.put("resultMsg", resultMsg);
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
+		return resultMap;
 	}
 	
 	
@@ -208,8 +206,8 @@ public class BoardController {
 	@RequestMapping(value="/closeBoardAjax.bim",method = RequestMethod.GET,produces = "application/json; charset=utf8")
 	@ResponseBody
 	public Map<String, String> closeBoardAjax(Model model,String id, HttpServletRequest request,HttpServletResponse response){
-		 Map<String, String> resultMap = new HashMap<String, String>();
-		 int resultCnt = 0;
+		Map<String, String> resultMap = new HashMap<String, String>();
+		int resultCnt = 0;
 		try {
 			resultCnt = boardService.closeBoard(id);
 			logger.info(">>>>>>>>>>>>>"+String.valueOf(resultCnt));
@@ -217,22 +215,23 @@ public class BoardController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		  String result = "";
-		  String resultMsg = "";
+		String result = "";
+		String resultMsg = "";
 
-		  if ( resultCnt == 1 ){
-			   result = "success";
-			   resultMsg = "게시판이 비공개 되었습니다..";
-			  } else {
-			   result = "failure";
-			   resultMsg = "게시판 비공개 요청이 실패하였습니다..";
-			  }
+		if ( resultCnt == 1 ){
+			result = "success";
+			resultMsg = "게시판이 비공개 되었습니다..";
+		} else {
+			result = "failure";
+			resultMsg = "게시판 비공개 요청이 실패하였습니다..";
+		}
 
-		  resultMap.put("result", result);
-		  resultMap.put("resultMsg", resultMsg);
-		    response.setContentType("text/plain");
-		    response.setCharacterEncoding("UTF-8");
-		  return resultMap;
+
+		resultMap.put("result", result);
+		resultMap.put("resultMsg", resultMsg);
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
+		return resultMap;
 	}
 	
 	
@@ -247,31 +246,31 @@ public class BoardController {
 	@RequestMapping(value="/openBoardAjax.bim",method = RequestMethod.GET,produces = "application/json; charset=utf8")
 	@ResponseBody
 	public Map<String, String> openBoardAjax(Model model,String id, HttpServletRequest request,HttpServletResponse response){
-		 Map<String, String> resultMap = new HashMap<String, String>();
-		 int resultCnt = 0;
-		try {
+		Map<String, String> resultMap = new HashMap<String, String>();
+		int resultCnt = 0;
+	 	try {
 			resultCnt = boardService.openBoard(id);
 			logger.info(">>>>>>>>>>>>>"+String.valueOf(resultCnt));
-		} catch (Exception e) {
+	 	} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		  String result = "";
-		  String resultMsg = "";
+	 	String result = "";
+	 	String resultMsg = "";
 
-		  if ( resultCnt == 1 ){
-			   result = "success";
-			   resultMsg = "게시판이 공개 되었습니다..";
-			  } else {
-			   result = "failure";
-			   resultMsg = "게시판 공개 요청이 실패하였습니다..";
-			  }
+	 	if ( resultCnt == 1 ){
+ 			result = "success";
+  			resultMsg = "게시판이 공개 되었습니다..";
+	  	} else {
+		  	result = "failure";
+		 	resultMsg = "게시판 공개 요청이 실패하였습니다..";
+	 	}
 
-		  resultMap.put("result", result);
-		  resultMap.put("resultMsg", resultMsg);
-		    response.setContentType("text/plain");
-		    response.setCharacterEncoding("UTF-8");
-		  return resultMap;
+	 	resultMap.put("result", result);
+  		resultMap.put("resultMsg", resultMsg);
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
+  		return resultMap;
 	}
 }
 

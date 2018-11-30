@@ -158,7 +158,9 @@
 
             });
         });
+function findPassword() {
 
+}
 
     </script>
 
@@ -180,22 +182,30 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-xs-8">
-                <label for="email">E-Mail</label>
-                <input type="text" name="email" id="email" class="form-control" placeholder="E-MAIL"/>
-                <span id="emailResult"> 이메일을 입력해주세요. </span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-7">
-                <label for="phone">Phone</label>
-                <input type="text" name="phone" id="phone" class="form-control" placeholder="휴대전화"/>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-8">
+                    <label for="email">E-Mail</label>
+                    <input type="text" name="email" id="email" class="form-control" placeholder="E-MAIL"/>
+                    <span id="emailResult"> 이메일을 입력해주세요. </span>
+                </div>
             </div>
         </div>
         <div class="form-group">
-            <input type="submit" value="가입" id="join" class="btn btn-lg btn-primary btn-block"/>
-            <input type="button" value="취소" id="joinFormCancel" style="align:center" class="btn btn-lg btn-primary btn-block">
+            <div class="row">
+                <div class="col-xs-7">
+                    <label for="phone">Phone</label>
+                    <input type="text" name="phone" id="phone" class="form-control" placeholder="휴대전화"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button id="join" class="btn btn-lg btn-primary btn-block" onclick="findPassword()">
+                비밀번호 찾기
+            </button>
+            <button id="joinFormCancel" style="align:center" class="btn btn-lg btn-primary btn-block">
+                취소
+            </button>
         </div>
     </form>
 </div>
