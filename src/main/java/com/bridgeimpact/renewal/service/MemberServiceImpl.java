@@ -122,42 +122,46 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.deleteMember(member);
 	}
 
+	/***
+	 *
+	 * @param UserRequest
+	 * @return loginCheckState
+	 * @throws Exception
+	 */
 	@Override
 	public int loginMember(MemberVO UserRequest) throws Exception {
-		int loginResult = 3; 
-		String userStatus = null;
+		int userType = -1;
 		MemberVO dbMember  = new MemberVO();
-		dbMember = 	memberDAO.getMemberById(UserRequest.getId());
-		if (dbMember != null) {
-			userStatus = dbMember.getType();
-		}
-		
-		if (userStatus == null) { // 아이디가 존재하지 않음
-			return loginResult = -1;
-		}else if ("0".equals(userStatus)) { // 탈퇴회원
-			return loginResult = 0;
-		}else if ("2".equals(userStatus)) { // 이메일 미인증 회원(로그인 성공)
-			return loginResult = 2;
+		/* 사용자의 입력받은 아이디를 이용해 DB회원 정보 조회*/
+		dbMember = memberDAO.getMemberById(UserRequest.getId());
+
+		/* 조회된 회원의 회원상태(Member.type)를 이용하여 핸들링
+		* -1 = 존재하지 않는 회원
+		* 0 = 탈퇴된 회원
+		* 1 = 일반 회원(이메일 인증 완료)
+		* 2 = 이메일 미인증 회원
+		* 9 = 관리자 회원
+		* */
+		/* 아이디, 패스워드 일치와 상관없이 로그인 불가능 회원 */
+		if (dbMember == null)  return -1;
+		userType = Integer.parseInt(dbMember.getType());
+		if (userType != 1 && userType != 9) {
+			return userType;
 		}
 		/***
-		 * 아이디 비밀번호 판단 로직(암호화)
+		 * 아이디 비밀번호 일치여부 판별 로직(암호화)
 		 */
-		logger.info("TypePassword : " + UserRequest.getPassword() + "\t dbPassword : " + dbMember.getPassword());
-		logger.info("passwordCheck : " +passwordEncoder.matches(UserRequest.getPassword(), dbMember.getPassword()));
-		Boolean passwordMatchResult = passwordEncoder.matches(UserRequest.getPassword(), dbMember.getPassword());
-		logger.info("login Result : " + passwordMatchResult.toString() );
-		if (passwordMatchResult) { // 아이디 패스워드 일치후 로직구간
-			if ("9".equals(userStatus)) { // 로그인에 성공한 관리자
-				return loginResult = 9;
-			}else if ("2".equals(userStatus)) { // 로그인에 성공 후 이메일 인증 여부
-					return loginResult = 2;
-				}else if("1".equals(userStatus)){ // 로그인 성공(아이디 패스워드 일치, 이메일 인증 성공 유저)
-					return loginResult = 1;
-				}
-		} else {		// 로그인 실패
-			return loginResult = 3;
+		logger.info( "TypePassword : " + UserRequest.getPassword() + "\t dbPassword : " + dbMember.getPassword());
+		logger.info( "passwordCheck : " + passwordEncoder.matches( UserRequest.getPassword(), dbMember.getPassword() ) );
+		Boolean passwordMatchResult = passwordEncoder.matches( UserRequest.getPassword(), dbMember.getPassword() );
+		logger.info( "login Result : " + passwordMatchResult.toString() );
+		/* 로그인 시도한 아이디 패스워드 판별 핸들링*/
+		if (passwordMatchResult) {		// 아이디 패스워드 일치
+			return userType;
+		} else if (!passwordMatchResult){		// 아이디, 패스워드 불일치
+			userType = 3;
 		}
-		return loginResult;
+		return userType;
 	}
 
 	@Override

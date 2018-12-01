@@ -138,72 +138,73 @@ public class MainController {
 		/***
 		 * 사용자의 로그인 정보를 db 회원정보와 비교
 		 * @return loginResult  
-		 * -1 = 아이디 없음, 0 = 탈퇴된 아이디 , 1 = 로그인 성공 , 2 = 이메일 미인증 회원(패스워드 일치)   
+		 * -1 = 아이디 없음
+		 *  0 = 탈퇴된 아이디
+		 *  1 = 로그인 성공
+		 *  2 = 이메일 미인증 회원(패스워드 일치)
 		 *  3 = 패스워드 불일치 (아이디 존재)
-		 * 
+		 *  9 = 관리자 회원
+		 *
+		 *  => 1 or 9 일 경우 로그인 성공
 		 */
 		try {
 			loginResult = memberService.loginMember(userInputMember);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
-			logger.info("관리자 구출: " + loginResult);
-			if (loginResult == 1 || loginResult == 9) { // 로그인을 성공로직(일반, 관리자회원)
-				if (loginResult == 9) { // 관리자 로직
-					model.addAttribute("msg", "관리자 로그인 성공");
-				}else { // 일반회원 로직
-					model.addAttribute("msg", "로그인 성공");
-				}
-			} 
-				try {
-					{// 로그인에 성공한 사용자 정보 세션에 저장
-						MemberVO loginInfo = memberService.getMemberById(userInputMember.getId());
-						session.setAttribute("loginInfo", loginInfo);
-						logger.info("관리자 구출: " + loginInfo);
-
-						url = "main/mainForm";
-					}
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				switch (loginResult) {
-				case -1:	// 아이디가 존재 하지 않는 사용자
-					model.addAttribute("msg", "아이디가 존재하지 않음");
-					url = "main/loginForm";					
-					break;
-				case 0:		// 탈퇴된 회원
-					model.addAttribute("msg", "탈퇴된 회원");
-					url = "main/loginForm";
-					break;
-				case 2:		// 이메일 미인증 회원(로그인 성공)
-					model.addAttribute("msg", "이메일 인증이 되지 않은 회원");
-					url = "main/loginForm";
-					break;
-
-				case 1: 	// 이메일 인증 & 로그인 성공 회원
-					model.addAttribute("msg", "관리자 회원");
-					url = "main/mainForm";
-				case 3:		// 패스워드가 일치하지 않는 경우
-					model.addAttribute("msg", "로그인 실패, 패스워드 불일치");
-					url = "main/loginForm";
-					break;
-				
-				case 9:		// 탈퇴된 회원
-					model.addAttribute("msg", "관리자 회원");
-					url = "main/mainForm";
-					break;
-
-				default:
-					model.addAttribute("msg", "올바른 접근이 아닙니다.");
-					url = "main/loginForm";	
-					break;
-				}
-
 		}
-		
-		logger.info(url);
+
+		if (loginResult == 1 || loginResult == 9) { // 로그인을 성공로직(일반, 관리자회원)
+			if (loginResult == 9) { // 관리자 로직
+				model.addAttribute("msg", "관리자 로그인 성공");
+			}else { // 일반회원 로직
+				model.addAttribute("msg", "로그인 성공");
+			}
+		}
+		try {
+			{// 로그인에 성공한 사용자 정보 세션에 저장
+				MemberVO loginInfo = memberService.getMemberById(userInputMember.getId());
+				session.setAttribute("loginInfo", loginInfo);
+				logger.info("관리자 구출: " + loginInfo);
+
+				url = "main/mainForm";
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		switch (loginResult) {
+			case -1:	// 아이디가 존재 하지 않는 사용자
+				model.addAttribute("msg", "아이디가 존재하지 않음");
+				url = "main/loginForm";
+				break;
+			case 0:		// 탈퇴된 회원
+				model.addAttribute("msg", "탈퇴된 회원");
+				url = "main/loginForm";
+				break;
+			case 1: 	// 이메일 인증 & 로그인 성공 회원
+				model.addAttribute("msg", "로그인 성공, 일반 회원");
+				url = "main/mainForm";
+				break;
+			case 2:		// 이메일 미인증 회원(로그인 성공)
+				model.addAttribute("msg", "이메일 인증이 되지 않은 회원");
+				url = "main/loginForm";
+				break;
+			case 3:		// 패스워드가 일치하지 않는 경우
+				model.addAttribute("msg", "로그인 실패, 패스워드 불일치");
+				url = "main/loginForm";
+				break;
+			case 9:		// 관리자 회원
+				model.addAttribute("msg", "관리자 회원");
+				url = "main/mainForm";
+				break;
+			default:
+				model.addAttribute("msg", "올바른 접근이 아닙니다.");
+				url = "main/loginForm";
+				break;
+		}
+		logger.info("finally landing URL : " + url);
 		return url;
 	}
 	
@@ -250,8 +251,6 @@ public class MainController {
 		// 첫번째 인자 : beanName(id), 두번쨰 인자 :  File Object,
 	}
 
-	
-	
 	/***
 	 * 메인 페이지 헤더의 게시판 정보 요청
 	 * @param model

@@ -12,7 +12,6 @@
         $(document).ready(function () {
             $('form').validate({
                 rules: {
-
                     name: {
                         required: true,
                     },
@@ -22,6 +21,7 @@
                     },
                     phone: {
                         required: true,
+                        number: true
                     }
                 },
                 messages: {
@@ -29,29 +29,16 @@
                         required: "",
                         minlength: ""
                     },
-                    password: {
-                        required: "",
-                        minlength: ""
-                    },
-                    repassword: {
-                        required: "",
-                        equalTo: ""
-                    },
                     name: {
                         required: "필수 정보입니다.",
                     },
                     email: {
                         required: "",
-                        email: ""
+                        email: "이메일 형식이 아닙니다."
                     },
                     phone: {
                         required: "필수 정보입니다.",
-                    },
-                    address: {
-                        required: "필수 정보입니다.",
-                    },
-                    church: {
-                        required: "필수 정보입니다.",
+                        number: "숫자만 입력해야 합니다."
                     }
                 },
                 /*
@@ -61,18 +48,14 @@
                          */
             });
 
-
             $("#id").focusout(function () {
-
                 var userIdInput = $(this).val();
                 var idResult = $("#idResult");
-
                 if (userIdInput.length === 0) {
                     idResult.html("아이디를 입력해주세요.");
                 } else if (userIdInput.length < 7) {
                     idResult.html("아이디가 너무 짧습니다.");
                 } else {
-
                     $.ajax({
                         url: "${pageContext.request.contextPath}/member/checkMemberIdAjax.bim",
                         type: "get",
@@ -83,48 +66,17 @@
                             } else {
                                 idResult.css("color", "red");
                             }
-
                             console.log(userIdInput);
                             console.log(data.resultMsg);
                             idResult.html(data.resultMsg);
-
                         }
                     });
                 }
             });
 
-            $('#password').focusout(function () {
-
-                passwordCheck = $(this).val();
-                if (passwordCheck.length < 8) {
-                    $('#passwordResult').html("패스워드가 너무짧습니다.");
-                }
-            });
-
-            $('#repassword').focusout(function () {
-                passwordCheck = $('#password').val();
-                repasswordCheck = $(this).val();
-                var passwordResult = $('#passwordResult');
-                if (passwordCheck === repasswordCheck && passwordCheck != "") {
-                    if (repasswordCheck.length < 8) {
-                        passwordResult.css("color", "orange");
-                        passwordResult.html("패스워드가 일치하지만, 너무 짧습니다.");
-
-                    } else {
-                        passwordResult.css("color", "green");
-                        passwordResult.html("패스워드가 일치합니다.");
-                    }
-                } else {
-                    passwordResult.html("패스워드가 일치하지 않습니다.");
-
-                }
-
-            });
-
             $('#email').focusout(function () {
                 var userEmailInput = $(this).val();
                 var emailResult = $('#emailResult');
-
                 if (userEmailInput.length == 0) {
                     emailResult.css("color", "red");
 //                    emailResult.html("이메일을 입력해주세요.");
@@ -146,16 +98,13 @@
                                 /* 						console.log(id);
                                                         console.log(data.resultMsg);
                                                         idResult.html(data.resultMsg); */
-
                             }
                         });
                     } else {
                         emailResult.css("color", "red");
                         emailResult.html("올바른 이메일 형식을 입력해주세요.");
                     }
-
                 }
-
             });
         });
 function findPassword() {
@@ -195,7 +144,7 @@ function findPassword() {
             <div class="row">
                 <div class="col-xs-7">
                     <label for="phone">Phone</label>
-                    <input type="text" name="phone" id="phone" class="form-control" placeholder="휴대전화"/>
+                    <input type="text" name="phone" id="phone" class="form-control" placeholder="휴대전화(숫자만 입력하세요)"/>
                 </div>
             </div>
         </div>
