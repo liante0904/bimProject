@@ -1,0 +1,6 @@
+@charset "UTF-8";
+/* mainPage */
+footer > .container.item1, .item2 {
+	text-align: center;
+	background-color: #ffffff;
+}
