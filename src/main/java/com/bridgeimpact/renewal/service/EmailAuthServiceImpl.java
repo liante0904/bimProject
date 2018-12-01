@@ -69,5 +69,28 @@ public class EmailAuthServiceImpl implements EmailAuthService {
         sendMail.send();;
 		return 1;
 	}
-	
+
+	@Override
+	public int sendEmailByAskId(MemberVO member) throws Exception {
+		MailHandler sendMail = new MailHandler(mailSender);
+		String email = member.getEmail();
+		String name = member.getName();
+		logger.info("사용자 아이디 : "+member.getId());
+		sendMail.setSubject("[브리지 임팩트 관리자 아이디 찾기 결과]");
+		sendMail.setText(new StringBuffer().append("<h1>아이디 찾기 결과</h1>")
+				.append("안녕하세요. " + name + "님!")
+				.append("<br>")
+				.append("요청하신 사용자의 아이디는 ")
+				.append("<strong>")
+				.append(member.getId())
+				.append("</strong>")
+				.append(" 입니다.")
+				.toString());
+		sendMail.setFrom("bimProject.com/", "브리지 임팩트 관리자");
+		sendMail.setTo(email);
+		sendMail.send();;
+
+		return 0;
+	}
+
 }

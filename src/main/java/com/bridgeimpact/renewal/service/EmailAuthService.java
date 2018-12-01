@@ -13,6 +13,8 @@ public interface EmailAuthService {
 
 	public int sendEmailByEmailAuthVO(EmailAuthVO emailAuthVO, MemberVO inputMember) throws Exception;
 
+	public int sendEmailByAskId(MemberVO member) throws Exception;
+
 	public int deleteEmailAuth(String idx) throws Exception;
 
 }

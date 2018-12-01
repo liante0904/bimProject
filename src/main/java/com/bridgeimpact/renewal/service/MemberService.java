@@ -27,7 +27,7 @@ public interface MemberService {
 
 	public Map<String, String> checkMemberEmail(String email) throws Exception;
 
-	public Map<String, String> findAccountId(MemberVO member) throws Exception;
+	public boolean findAccountId(MemberVO member) throws Exception;
 
 	public Map<String, String> findAccountPassword(MemberVO member) throws Exception;
 

@@ -53,9 +53,8 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public String selectMemberByEmail(MemberVO member) throws Exception {
-		String userId = sqlSession.selectOne(Namespace+".selectMemberByEmail", member.getEmail());
-		return userId;
+	public MemberVO selectMemberByEmail(MemberVO member) throws Exception {
+		return  sqlSession.selectOne(Namespace+".selectMemberByEmail", member.getEmail());
 	}
 
 	@Override

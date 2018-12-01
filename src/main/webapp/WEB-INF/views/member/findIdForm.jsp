@@ -47,21 +47,24 @@
         });
 
 function findId() {
-    var inputName = document.getElementById('name');
-    var inputEmail = document.getElementById('email');
-    var inputPhone = document.getElementById('phone');
+    var inputName = document.getElementById('name').value;
+    var inputEmail = document.getElementById('email').value;
+    var inputPhone = document.getElementById('phone').value;
 
     console.log(inputName);
     console.log(inputEmail);
     console.log(inputPhone);
+
     var MemberVO = {
-        'name': inputName,
-        'email': inputEmail,
-        'phone': inputPhone
+        name: inputName,
+        email: inputEmail,
+        phone: inputPhone
+    };
+    for (var key in MemberVO) {
+        console.log("Key : " + key + ", value : " + MemberVO[key]);
     }
-    console.log("Objecet : " + MemberVO);
     $.ajax({
-        url :   "../file/deleteFile.bim",
+        url :   "../member/askAccountId.bim",
         type:   "POST",
         data:   MemberVO,
         success : function(data){
@@ -112,10 +115,10 @@ function findId() {
     </div>
 
         <div class="form-group">
-            <button  class="btn btn-lg btn-primary btn-block" onclick="findId()">
+            <button type="button" class="btn btn-lg btn-primary btn-block" onclick="findId()">
                 아이디 찾기
             </button>
-            <button  style="align:center" class="btn btn-lg btn-primary btn-block">
+            <button type="button" style="align:center" class="btn btn-lg btn-primary btn-block">
                 취소
             </button>
         </div>

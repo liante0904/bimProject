@@ -220,16 +220,22 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Map<String, String> findAccountId(MemberVO member) throws Exception {
+	public boolean findAccountId(MemberVO member) throws Exception {
 		Map<String, String> resultMap = new HashMap<String, String>();
-		String result = "";
-		String resultMsg = "";
-		String id = memberDAO.selectMemberByEmail(member);
-		result = "success";
-		resultMsg = id;
-		resultMap.put("result", result);
-		resultMap.put("resultMsg", resultMsg);
-		return resultMap;
+		boolean nameCheck, phoneCheck, emailCheck = false;
+
+		MemberVO dbMember = new MemberVO();
+		dbMember = memberDAO.selectMemberByEmail(member);
+		logger.info("조회된 Member ID : " + dbMember.getId() + " Name : " + dbMember.getName()
+				+ "Phone : " + dbMember.getPhone() + "Email : " + dbMember.getEmail() );
+		nameCheck = dbMember.getName().equals(member.getName().trim());
+		phoneCheck = dbMember.getPhone().equals(member.getPhone().trim());
+		emailCheck = dbMember.getEmail().equals(member.getEmail().trim());
+
+		if ( nameCheck && phoneCheck && emailCheck)
+			emailAuthService.sendEmailByAskId(dbMember);
+
+		return true;
 	}
 
 	@Override

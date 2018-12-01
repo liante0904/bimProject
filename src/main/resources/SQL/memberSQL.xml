@@ -147,10 +147,13 @@
 		]]>
 	</update>
 	
-    	<select id="selectMemberByEmail" parameterType="String" resultType="String">
+    	<select id="selectMemberByEmail" parameterType="String" resultType="memberVO">
 		<![CDATA[
       	SELECT
-		id
+		ID,
+		NAME,
+		EMAIL,
+		PHONE
 		FROM BIM_MEMBER_TB
 		WHERE email = #{email}
 		]]>
