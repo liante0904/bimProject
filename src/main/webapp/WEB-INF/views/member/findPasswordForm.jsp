@@ -41,11 +41,7 @@
                         number: "숫자만 입력해야 합니다."
                     }
                 },
-                /*
-                        submitHandler : function() {
-
-                        }
-                         */
+                
             });
 
             $("#id").focusout(function () {
@@ -55,22 +51,6 @@
                     idResult.html("아이디를 입력해주세요.");
                 } else if (userIdInput.length < 7) {
                     idResult.html("아이디가 너무 짧습니다.");
-                } else {
-                    $.ajax({
-                        url: "${pageContext.request.contextPath}/member/checkMemberIdAjax.bim",
-                        type: "get",
-                        data: {"id": userIdInput},
-                        success: function (data) {
-                            if (data.result == "success") {
-                                idResult.css("color", "green");
-                            } else {
-                                idResult.css("color", "red");
-                            }
-                            console.log(userIdInput);
-                            console.log(data.resultMsg);
-                            idResult.html(data.resultMsg);
-                        }
-                    });
                 }
             });
 
@@ -80,44 +60,54 @@
                 if (userEmailInput.length == 0) {
                     emailResult.css("color", "red");
 //                    emailResult.html("이메일을 입력해주세요.");
-                } else {
-                    if (userEmailInput.indexOf('@') > 0) {
-                        $.ajax({
-                            url: "${pageContext.request.contextPath}/member/checkMemberEmailAjax.bim",
-                            type: "post",
-                            data: {"email": userEmailInput},
-                            success: function (data) {
-                                if (data.result == "success") {
-                                    emailResult.css("color", "green");
-                                } else {
-                                    emailResult.css("color", "red");
-                                }
-                                emailResult.html(data.resultMsg);
-                                console.log("asads: " + data.resultMsg);
-
-                                /* 						console.log(id);
-                                                        console.log(data.resultMsg);
-                                                        idResult.html(data.resultMsg); */
-                            }
-                        });
-                    } else {
-                        emailResult.css("color", "red");
-                        emailResult.html("올바른 이메일 형식을 입력해주세요.");
-                    }
                 }
             });
         });
 function findPassword() {
+    var inputId = document.getElementById('id').value;
+    var inputName = document.getElementById('name').value;
+    var inputEmail = document.getElementById('email').value;
+    var inputPhone = document.getElementById('phone').value;
 
+    console.log(inputId);
+    console.log(inputName);
+    console.log(inputEmail);
+    console.log(inputPhone);
+
+    var MemberVO = {
+        id: inputId,
+        name: inputName,
+        email: inputEmail,
+        phone: inputPhone
+    };
+    for (var key in MemberVO) {
+        console.log("Key : " + key + ", value : " + MemberVO[key]);
+    }
+    $.ajax({
+        url :   "../member/askAccountPassword.bim",
+        type:   "POST",
+        data:   MemberVO,
+        success : function(data){
+            if ( data.result == "success") {
+                alert("인증 메일을 발송하였습니다. \n  인증 메일을 받지 못했다면 입력정보를 확인 후 다시 시도하세요.");
+            }
+        },
+        error : function(error){
+            alert("인증 메일 발신을 실패하였습니다. 다시 시도 해주세요.");
+        },
+        complete : function(){
+            //getArticleFileList();
+        }
+
+    })
 }
-
     </script>
 
 </head>
 <body>
 <div class="container joinForm">
     <h2>비밀번호 찾기</h2>
-    <form action="../member/joinSubmit.bim" name="joinForm" id="joinForm" method="POST">
+    <form name="joinForm" id="joinForm" method="POST">
         <div class="form-group">
             <label for="id">ID</label>
             <input type="text" id="id" name="id" class="form-control" placeholder="아이디"/>
@@ -149,10 +139,10 @@ function findPassword() {
             </div>
         </div>
         <div class="form-group">
-            <button id="join" class="btn btn-lg btn-primary btn-block" onclick="findPassword()">
+            <button class="btn btn-lg btn-primary btn-block" onclick="findPassword()">
                 비밀번호 찾기
             </button>
-            <button id="joinFormCancel" style="align:center" class="btn btn-lg btn-primary btn-block">
+            <button style="align:center" class="btn btn-lg btn-primary btn-block">
                 취소
             </button>
         </div>

@@ -15,6 +15,8 @@ public interface EmailAuthService {
 
 	public int sendEmailByAskId(MemberVO member) throws Exception;
 
+	public int sendEmailByAskPassword(MemberVO member, EmailAuthVO emailAuthVO) throws Exception;
+
 	public int deleteEmailAuth(String idx) throws Exception;
 
 }

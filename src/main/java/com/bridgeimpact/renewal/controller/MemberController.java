@@ -197,7 +197,7 @@ public class MemberController {
 	 */
 	@RequestMapping(value="member/askAccountId.bim",method = RequestMethod.POST,produces = "application/json; charset=utf8")
 	@ResponseBody
-	public Map<String, String> askAccountId(MemberVO member){
+	public Map<String, String> askAccountId(MemberVO member,HttpServletResponse response){
 		boolean sendResult = false;
 		String result = "";
 		Map<String, String> resultMap = new HashMap<String, String>();
@@ -207,7 +207,8 @@ public class MemberController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
 		resultMap.put(result, "success");
 		
 		return resultMap;
@@ -219,33 +220,78 @@ public class MemberController {
 	 * @param member
 	 * @return resultMap (json)
 	 */
-	// TODO 미구현
 	@RequestMapping(value="member/askAccountPassword.bim",method = RequestMethod.POST,produces = "application/json; charset=utf8")
 	@ResponseBody
-	public Map<String, String> askAccountPassword(MemberVO member){
+	public Map<String, String> askAccountPassword(MemberVO member,HttpServletResponse response){
 		Map<String, String> resultMap = new HashMap<String, String>();
+		String result = "";
 		try {
 			resultMap = memberService.findAccountPassword(member);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
+		resultMap.put(result, "success");
+
 		return resultMap;
 	}
 
-
+	/***
+	 * 회원가입 후 이메일 인증 요청 URL
+	 * @param key : Email Token Key
+	 * @return
+	 */
 	@RequestMapping(value="/emailAuth", method=RequestMethod.GET)
-	public String emailConfirm(String key, Model model){
+	public ModelAndView emailConfirm(String key){
+		ModelAndView mav = new ModelAndView("/test/emailAuth");
 		boolean checkEmailAuthKeyResult = false;
 		System.out.println("인증 도착했음" + key);
 		try {
 			checkEmailAuthKeyResult = emailAuthService.authEmailByTokenKey(key);
-			model.addAttribute("check", true);
+			mav.addObject("check", true);
 		} catch (Exception e) {
-			model.addAttribute("check", false);
+			mav.addObject("check", false);
 		}
-		model.addAttribute("result",checkEmailAuthKeyResult);
-		return "/test/emailAuth";
+		mav.addObject("result",checkEmailAuthKeyResult);
+		return mav;
+	}
+
+	/***
+	 * 비밀번호 찾기 폼 진입 요청 URL
+	 * @param key : Email Token Key
+	 * @return
+	 */
+	@RequestMapping(value="/updatePasswordForm", method=RequestMethod.GET)
+	public ModelAndView updatePasswordForm(String key){
+		ModelAndView mav = new ModelAndView("member/updatePasswordForm");
+		boolean checkEmailAuthKeyResult = false;
+		System.out.println("인증 도착했음" + key);
+		try {
+			checkEmailAuthKeyResult = emailAuthService.authEmailByTokenKey(key);
+			mav.addObject("check", true);
+		} catch (Exception e) {
+			mav.addObject("check", false);
+		}
+		mav.addObject("result",checkEmailAuthKeyResult);
+		return mav;
+	}
+
+
+	/***
+	 * 비밀번호 찾기 DB반영 요청 ajax
+	 * @param key : Email Token Key
+	 * @return
+	 */
+	//TODO
+	@RequestMapping(value="/updatePassword", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,String> updatePassword(String key){
+		Map<String, String> resultMap = new HashMap<String, String>();
+		boolean checkEmailAuthKeyResult = false;
+		System.out.println("인증 도착 했음" + key);
+		return resultMap;
 	}
 }
 

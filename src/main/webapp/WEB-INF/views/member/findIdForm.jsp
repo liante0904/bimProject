@@ -68,6 +68,7 @@ function findId() {
         type:   "POST",
         data:   MemberVO,
         success : function(data){
+            console.log(data+ " data.result : " + data.result);
             if ( data.result == "success") {
                 alert("인증 메일을 발송하였습니다. \n  인증 메일을 받지 못했다면 입력정보를 확인 후 다시 시도하세요.");
             }

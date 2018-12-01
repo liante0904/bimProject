@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.EmitUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -72,14 +71,14 @@ public class MemberServiceImpl implements MemberService {
 		System.out.println("가입한 회원의 idx : "+inputMember.getIdx());
 		
 		/***
-		 * Eamil 인증 데이터 DB반영 로직
-		 * 로직 : 토큰키 생성 -> DB반영 -> 이메일 전송W
+		 * Email 인증 데이터 DB반영 로직
+		 * 로직 : 토큰키 생성 -> DB반영 -> 이메일 전송
 		 */
 		EmailAuthVO emailAuthVO = new EmailAuthVO(inputMember);
 		System.out.println("객체 생성 값 : "+ emailAuthVO.getUserId());
 
 		try {
-			emailAuthDAO.insertEmailAuth(emailAuthVO);
+			emailAuthDAO.insertEmailAuth(inputMember, emailAuthVO);
 		}catch (Exception e) {
 			e.printStackTrace();
 			return 0;
@@ -242,9 +241,41 @@ public class MemberServiceImpl implements MemberService {
 		return true;
 	}
 
+	/***
+	 * 비밀번호 찾기 로직
+	 * 입력한 회원 정보 조회 및 검증 -> Email 토큰키 생성 및 DB반영-> 회원 정보의 이메일로 비밀번호 변경 URL 발송
+	 */
 	@Override
 	public Map<String, String> findAccountPassword(MemberVO member) throws Exception {
+		/* 입력한 회원 정보 조회 */
 		Map<String, String> resultMap = new HashMap<String, String>();
+		boolean idCheck, nameCheck, phoneCheck, emailCheck = false;
+		MemberVO dbMember = new MemberVO();
+		dbMember = memberDAO.selectMemberByEmail(member);
+
+		/* */
+
+		/***
+		 * 조회한 정보와 입력한 정보 체크 후
+		 * Email 토큰키 생성 -> DB반영 -> 비밀번호 변경 이메일 전송
+		 */
+
+
+		idCheck = dbMember.getId().equals(member.getId().trim());
+		nameCheck = dbMember.getName().equals(member.getName().trim());
+		phoneCheck = dbMember.getPhone().equals(member.getPhone().trim());
+		emailCheck = dbMember.getEmail().equals(member.getEmail().trim());
+		/* 조회한 정보와 입력한 회원 정보 검증 */
+		if ( idCheck && nameCheck && phoneCheck && emailCheck){
+			/* Email 토큰키 생성 후 DB 반영*/
+			EmailAuthVO emailAuthVO = new EmailAuthVO(dbMember);
+			System.out.println("객체 생성 값 : "+ emailAuthVO.getUserId());
+			emailAuthVO = emailAuthDAO.insertEmailAuth(dbMember, emailAuthVO);
+			/* */
+			emailAuthService.sendEmailByAskPassword(dbMember, emailAuthVO);
+
+		}
+
 		String result = "";
 		String resultMsg = "";
 		// TODO 임시 문자열 패스워드 update 후 해당 패스워드를 이메일로 발송 로직
