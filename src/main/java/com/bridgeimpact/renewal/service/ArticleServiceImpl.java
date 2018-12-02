@@ -101,10 +101,8 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	public Boolean checkValidateArticleByIdx(int num) throws Exception {
-		// TODO Auto-generated method stub
 		ArticleVO article = articleDAO.selectArticleByIndex(num);
-		String boardDelgb = boardDAO.selectBoardDelgbById(article.getBoardId());
-		if ("Y".equals(article.getDelGb()) || "Y".equals(boardDelgb)) {
+		if (article == null || "Y".equals(article.getDelGb())) {
 			return false;
 		}
 		return true;

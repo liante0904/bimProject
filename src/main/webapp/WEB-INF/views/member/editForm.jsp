@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" isELIgnored="false"%>
+    pageEncoding="UTF-8" isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +7,6 @@
 <title>회원 정보 수정</title>
 <link rel="stylesheet" href="../resources/css/member/member.css">    <!-- member CSS -->
 <%@ include file="/WEB-INF/include/navbar-header.jsp" %>
-<script type="text/javascript"></script>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <script type="text/javascript">
 $(document).ready(function(){ 
@@ -119,10 +118,10 @@ function cancel() {
 <body>
 <div class="container">
 	<h1>회원 정보 수정</h1>
-	<form name="editForm" method="POST" >
+	<form action="../member/editSubmit.bim" id="editForm" name="editForm" method="POST" >
 		<div class="form-group">
 	  		<label for="id">ID</label>
-			<input type="text" name="id" readonly="readonly" value="${sessionScope.loginInfo.id}" class="form-control" placeholder="아이디">
+			<input type="text" id="id" name="id" readonly="readonly" value="${sessionScope.loginInfo.id}" class="form-control" placeholder="아이디">
 		</div>
 		<div class="form-group">
 			<label for="password">Password</label>
@@ -133,33 +132,33 @@ function cancel() {
 			<div class="row">
 				<div class="col-xs-4">
 					<label for="name">Name</label>
-					<input type="text" name="name" readonly="readonly" value="${sessionScope.loginInfo.name}" class="form-control" placeholder="이름">
+					<input type="text" id="name" name="name" readonly="readonly" value="${sessionScope.loginInfo.name}" class="form-control" placeholder="이름">
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-xs-7">
 				<label for="email">E-Mail</label>
-				<input type="text" name="email" value="${sessionScope.loginInfo.email}" class="form-control" placeholder="E-MAIL">
+				<input type="text" id="email" name="email" value="${sessionScope.loginInfo.email}" class="form-control" placeholder="E-MAIL">
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-xs-7">
 				<label for="phone">Phone</label>
-				<input type="text" name="phone" value="${sessionScope.loginInfo.phone}" class="form-control" placeholder="휴대전화" />
+				<input type="text" id="phone" name="phone" value="${sessionScope.loginInfo.phone}" class="form-control" placeholder="휴대전화" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="address">Address</label>
-			<input type="text" name="address" value="${sessionScope.loginInfo.address}" class="form-control" placeholder="주소" />
+			<input type="text" id="address" name="address" value="${sessionScope.loginInfo.address}" class="form-control" placeholder="주소" />
 		</div>
 		<div class="form-group">
 			<label for="church">Church</label>
-			<input type="text" name="church" value="${sessionScope.loginInfo.church}" class="form-control"/>
+			<input type="text" id="church" name="church" value="${sessionScope.loginInfo.church}" class="form-control"/>
 		</div>
 		<div class="form-group">
-			<input type="button" value="취소" onclick="cancel();" style="align:center" class="btn btn-lg btn-primary btn-block"/>
 			<input type="submit" value="수정" id="edit" class="btn btn-lg btn-primary btn-block"/>
+			<input type="button" value="취소" onclick="cancel();" style="align:center" class="btn btn-lg btn-primary btn-block"/>
 			<input type="button" value="탈퇴" id="delete" class="btn btn-lg btn-primary btn-block"/>
  		</div>
 	</form>
