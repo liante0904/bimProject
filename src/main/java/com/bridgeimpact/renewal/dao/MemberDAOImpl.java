@@ -3,7 +3,8 @@ package com.bridgeimpact.renewal.dao;
 import java.util.List;
 
 import javax.inject.Inject;
- 
+
+import com.bridgeimpact.renewal.dto.EmailAuthVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
  
@@ -58,10 +59,14 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public String updateMemberTempPasswordByMember(MemberVO member) throws Exception {
-		// TODO Auto-generated method stub
+	public void updateMemberPasswordByEmailAuth(EmailAuthVO emailAuthVO) throws Exception {
+		 sqlSession.update(Namespace+".updateMemberPasswordByEmailAuth", emailAuthVO);
+	}
+
+	@Override
+	public String updateMemberTempPasswordByMember(MemberVO member) {
 		return null;
 	}
 
- 
+
 }

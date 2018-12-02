@@ -75,17 +75,17 @@ function updatePassword() {
     console.log(key);
 
 
-    var MemberVO = {
-        key: key,
-        password: inputPassword
+    var EmailAuthVO = {
+        emailAuthKey: key,
+        userPassword: inputPassword
     };
-    for (var key in MemberVO) {
-        console.log("Key : " + key + ", value : " + MemberVO[key]);
+    for (var key in EmailAuthVO) {
+        console.log("Key : " + key + ", value : " + EmailAuthVO[key]);
     }
     $.ajax({
-        url :   "../member/updatePassword.bim",
+        url :   "../updatePassword.bim",
         type:   "POST",
-        data:   MemberVO,
+        data:   EmailAuthVO,
         success : function(data){
             if ( data.result == "success") {
                 alert("인증 메일을 발송하였습니다. \n  인증 메일을 받지 못했다면 입력정보를 확인 후 다시 시도하세요.");

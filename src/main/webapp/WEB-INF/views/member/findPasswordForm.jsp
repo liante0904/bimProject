@@ -41,25 +41,27 @@
                         number: "숫자만 입력해야 합니다."
                     }
                 },
-                
+
             });
 
             $("#id").focusout(function () {
                 var userIdInput = $(this).val();
                 var idResult = $("#idResult");
-                if (userIdInput.length === 0) {
+                if (userIdInput.length <= 0) {
                     idResult.html("아이디를 입력해주세요.");
-                } else if (userIdInput.length < 7) {
-                    idResult.html("아이디가 너무 짧습니다.");
+                }else {
+                    idResult.html("");
                 }
             });
 
             $('#email').focusout(function () {
                 var userEmailInput = $(this).val();
                 var emailResult = $('#emailResult');
-                if (userEmailInput.length == 0) {
+                if (userEmailInput.length <= 0) {
                     emailResult.css("color", "red");
-//                    emailResult.html("이메일을 입력해주세요.");
+                    emailResult.html("이메일을 입력해주세요.");
+                }else {
+                    emailResult.html("");
                 }
             });
         });

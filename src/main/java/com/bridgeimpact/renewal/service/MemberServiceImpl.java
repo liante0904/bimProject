@@ -283,7 +283,24 @@ public class MemberServiceImpl implements MemberService {
 		return resultMap;
 	}
 
- 
+	@Override
+	public boolean ChangePasswordByTokenKey(EmailAuthVO emailAuthVO) throws Exception {
+		/***
+		 * 회원수정 DB반영전 로직
+		 * 입력받은 회원정보에 idx, id값 반영
+		 */
+		String password = emailAuthVO.getUserPassword();
+		String encryptPassword = passwordEncoder.encode(password);
+		logger.info("encryptPassword: " + encryptPassword);
+		System.out.println(passwordEncoder.matches(password, encryptPassword));
+		System.out.println(emailAuthVO.getUserPassword());
+		emailAuthVO.setUserPassword(encryptPassword);
+		memberDAO.updateMemberPasswordByEmailAuth(emailAuthVO);
+		//memberDAO.updateMember(inputMember);
+		return false;
+	}
+
+
 }
 
 

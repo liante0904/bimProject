@@ -40,7 +40,7 @@
 		email.AUTH_FL= 'Y' , member.`TYPE` = '1' 
 		WHERE
 		email.EMAIL_AUTH_KEY =  #{key }
-		
+		updateMemberPasswordByEmailAuth
 		
 	</update>
 	
@@ -54,4 +54,6 @@
 		FROM BIM_MEMBER_TB member, BIM_EMAIL_AUTH email WHERE member.IDX = email.USER_IDX
 		AND EMAIL_AUTH_KEY = #{key}
 	</select>
+
+
 </mapper>

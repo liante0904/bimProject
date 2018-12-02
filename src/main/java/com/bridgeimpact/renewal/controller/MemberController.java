@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.bridgeimpact.renewal.dto.EmailAuthVO;
 import com.bridgeimpact.renewal.service.EmailAuthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -281,18 +284,26 @@ public class MemberController {
 
 	/***
 	 * 비밀번호 찾기 DB반영 요청 ajax
-	 * @param key : Email Token Key
+	 * @param emailAuthVO : Email Token Key
 	 * @return
 	 */
 	//TODO
-	@RequestMapping(value="/updatePassword", method=RequestMethod.POST)
+	@RequestMapping(value="/updatePassword.bim", method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,String> updatePassword(String key){
+	public Map<String,String> updatePassword(EmailAuthVO emailAuthVO){
 		Map<String, String> resultMap = new HashMap<String, String>();
 		boolean checkEmailAuthKeyResult = false;
-		System.out.println("인증 도착 했음" + key);
+		System.out.println("인증 도착 했음" + emailAuthVO);
+		try {
+			checkEmailAuthKeyResult = memberService.ChangePasswordByTokenKey(emailAuthVO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return resultMap;
 	}
+
+
+
 }
 
 

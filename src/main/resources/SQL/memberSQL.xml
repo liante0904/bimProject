@@ -2,10 +2,9 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
+
 <mapper namespace="com.bridgeimpact.renewal.memberSQL">
- 
-    <!-- 
+	 <!--
         mybatis-config.xml의 typeAlias에 등록해두지 않았다면 
         
         <select id="selectMember" resultType="com.example.dto.MemberVO" >
@@ -27,7 +26,15 @@
 		<result property="church" column="CHURCH" />
 		<result property="type" column="TYPE" />
 	</resultMap>
-    
+
+	<resultMap type="emailAuthVO"  id="EmailAuthResultMap">
+		<result property="idx" column="IDX" />
+		<result property="userId" column="USER_ID" />
+		<result property="userIdx" column="USER_IDX" />
+		<result property="emailAuthKey" column="EMAIL_AUTH_KEY" />
+		<result property="authFl" column="AUTH_FL" />
+	</resultMap>
+
     <select id="selectAllMember" resultType="memberVO">
 		<![CDATA[
 		SELECT
@@ -147,7 +154,7 @@
 		]]>
 	</update>
 	
-    	<select id="selectMemberByEmail" parameterType="String" resultType="memberVO">
+	<select id="selectMemberByEmail" parameterType="String" resultType="memberVO">
 		<![CDATA[
       	SELECT
 		ID,
@@ -158,4 +165,15 @@
 		WHERE email = #{email}
 		]]>
     </select>
+
+	<update id="updateMemberPasswordByEmailAuth" parameterType="emailAuthVO" >
+
+		UPDATE BIM_EMAIL_AUTH email INNER JOIN BIM_MEMBER_TB member
+		ON email.USER_ID = member.ID
+		SET
+		email.AUTH_FL= 'Y' , member.PASSWORD = #{userPassword }
+		WHERE
+		email.EMAIL_AUTH_KEY =  #{emailAuthKey }
+
+	</update>
 </mapper>

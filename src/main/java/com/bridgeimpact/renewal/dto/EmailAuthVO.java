@@ -6,31 +6,36 @@ public class EmailAuthVO {
 	private int idx;  
 	private int userIdx;
 	private String userId;
+	private String userPassword;
 	private String emailAuthKey; 
 	private String authFl;
-	
-	
-	
+
+
+
 	public EmailAuthVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public EmailAuthVO(MemberVO inputMember) {
         String key = new TempKey().getKey(50, false);
 		this.setUserId(inputMember.getId());
+		this.setUserPassword(inputMember.getPassword());
 		this.setUserIdx(inputMember.getIdx());
 		this.setEmailAuthKey(key);
 	}
 
-	
+
 	@Override
 	public String toString() {
-		return "EmailAuthVO [idx=" + idx + ", userId=" + userId + ", userIdx=" + userIdx + ", emailAuthKey="
-				+ emailAuthKey + ", authFl=" + authFl + ", getIdx()=" + getIdx() + ", getUserId()=" + getUserId()
-				+ ", getEmailAuthKey()=" + getEmailAuthKey() + ", getAuthFl()=" + getAuthFl() + ", getUserIdx()="
-				+ getUserIdx() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
-				+ super.toString() + "]";
+		return "EmailAuthVO{" +
+				"idx=" + idx +
+				", userIdx=" + userIdx +
+				", userId='" + userId + '\'' +
+				", userPassword='" + userPassword + '\'' +
+				", emailAuthKey='" + emailAuthKey + '\'' +
+				", authFl='" + authFl + '\'' +
+				'}';
 	}
 
 	public int getIdx() {
@@ -64,8 +69,13 @@ public class EmailAuthVO {
 
 	public void setUserIdx(int userIdx) {
 		this.userIdx = userIdx;
-	} 
+	}
 
-	
+	public String getUserPassword() {
+		return userPassword;
+	}
 
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
+	}
 }

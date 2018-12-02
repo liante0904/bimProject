@@ -2,6 +2,7 @@ package com.bridgeimpact.renewal.dao;
 
 import java.util.List;
 
+import com.bridgeimpact.renewal.dto.EmailAuthVO;
 import com.bridgeimpact.renewal.dto.MemberVO;
  
 public interface MemberDAO {
@@ -22,6 +23,7 @@ public interface MemberDAO {
 
 	public MemberVO selectMemberByEmail(MemberVO member) throws Exception;
 
-	public String updateMemberTempPasswordByMember(MemberVO member) throws Exception;
-    
+	public void updateMemberPasswordByEmailAuth(EmailAuthVO emailAuthVO) throws Exception;
+
+	String updateMemberTempPasswordByMember(MemberVO member);
 }

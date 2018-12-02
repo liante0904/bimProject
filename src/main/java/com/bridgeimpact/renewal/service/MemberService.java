@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import com.bridgeimpact.renewal.dto.EmailAuthVO;
 import com.bridgeimpact.renewal.dto.MemberVO;
 
 public interface MemberService {
@@ -31,6 +32,7 @@ public interface MemberService {
 
 	public Map<String, String> findAccountPassword(MemberVO member) throws Exception;
 
+	boolean ChangePasswordByTokenKey(EmailAuthVO emailAuthVO) throws Exception;
 }
 
 
