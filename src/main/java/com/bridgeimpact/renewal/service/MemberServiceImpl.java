@@ -105,9 +105,11 @@ public class MemberServiceImpl implements MemberService {
 		 * 입력받은 회원정보에 idx, id값 반영
 		 */
 		MemberVO sessionMember = (MemberVO) session.getAttribute("loginInfo");
+		logger.info(String.valueOf(sessionMember.getIdx()));
 		inputMember.setIdx(sessionMember.getIdx());
 		inputMember.setId(sessionMember.getId());
 		String password = inputMember.getPassword();
+		System.out.println("***editMember***");
 		String encryptPassword = passwordEncoder.encode(password);
 		logger.info("encryptPassword: " + encryptPassword);
 		System.out.println(passwordEncoder.matches(password, encryptPassword));

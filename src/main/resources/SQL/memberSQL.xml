@@ -54,15 +54,15 @@
 	<select id="getMember" parameterType="String" resultType="memberVO">
 		<![CDATA[
      	SELECT
-		IDX,
-		ID,
-		PASSWORD,
-		NAME,
-		EMAIL,
-		ADDRESS,
-		PHONE,
-		CHURCH,
-		TYPE
+			IDX,
+			ID,
+			PASSWORD,
+			NAME,
+			EMAIL,
+			ADDRESS,
+			PHONE,
+			CHURCH,
+			TYPE
 		FROM BIM_MEMBER_TB
 		WHERE ID = #{id}
    		]]>
@@ -71,7 +71,7 @@
 	<select id="selectMemberById" parameterType="String" resultType="int">
 		<![CDATA[
       	SELECT
-		count(*)
+			count(*)
 		FROM BIM_MEMBER_TB
 		WHERE ID = #{id}
 		]]>
@@ -80,7 +80,7 @@
     	<select id="getMemberByEmail" parameterType="String" resultType="int">
 		<![CDATA[
       	SELECT
-		count(*)
+			count(*)
 		FROM BIM_MEMBER_TB
 		WHERE email = #{email}
 		]]>
@@ -90,27 +90,27 @@
 		<![CDATA[
 		INSERT INTO BIM_MEMBER_TB 
 		(
-		IDX,
-		ID,
-		PASSWORD,
-		NAME,
-		EMAIL,
-		ADDRESS,
-		PHONE,
-		CHURCH,
-		TYPE
+			IDX,
+			ID,
+			PASSWORD,
+			NAME,
+			EMAIL,
+			ADDRESS,
+			PHONE,
+			CHURCH,
+			TYPE
 		) 
 		VALUES
 		(
-		NULL,
-		#{id},
-		#{password},
-		#{name},
-		#{email},
-		#{address},
-		#{phone},
-		#{church},
-		'2'
+			NULL,
+			#{id},
+			#{password},
+			#{name},
+			#{email},
+			#{address},
+			#{phone},
+			#{church},
+			'2'
 		)
 		]]>
 	</insert>
@@ -118,19 +118,18 @@
   	<update id="updateMember" parameterType="memberVO">
 		<![CDATA[
 		UPDATE BIM_MEMBER_TB
-		SET 
-		ID=#{id},
-		PASSWORD=#{password},
-		NAME=#{name},
-		EMAIL=#{email},
-		ADDRESS=#{address},
-		PHONE=#{phone},
-		CHURCH=#{church},
-		TYPE='1' 
-		WHERE 
-		IDX= #{idx}
+		SET
+			PASSWORD=#{password},
+			NAME=#{name},
+			EMAIL=#{email},
+			ADDRESS=#{address},
+			PHONE=#{phone},
+			CHURCH=#{church},
+			TYPE=#{type}
+		WHERE
+			IDX= #{idx}
 		AND
-		1=1 
+			ID=#{id}
 		]]>
 	</update>
 	
@@ -138,29 +137,28 @@
 		<![CDATA[
 		UPDATE BIM_MEMBER_TB
 		SET 
-		IDX=#{idx},
-		ID=#{id},
-		PASSWORD=#{password},
-		NAME=#{name},
-		EMAIL=#{email},
-		ADDRESS=#{address},
-		PHONE=#{phone},
-		CHURCH=#{church},
-		TYPE='0'
-		WHERE 
-		IDX= #{idx} 
+			IDX=#{idx},
+			PASSWORD=#{password},
+			NAME=#{name},
+			EMAIL=#{email},
+			ADDRESS=#{address},
+			PHONE=#{phone},
+			CHURCH=#{church},
+			TYPE='0'
+		WHERE
+			IDX= #{idx}
 		AND
-		1=1 
+			ID=#{id}
 		]]>
 	</update>
 	
 	<select id="selectMemberByEmail" parameterType="String" resultType="memberVO">
 		<![CDATA[
       	SELECT
-		ID,
-		NAME,
-		EMAIL,
-		PHONE
+			ID,
+			NAME,
+			EMAIL,
+			PHONE
 		FROM BIM_MEMBER_TB
 		WHERE email = #{email}
 		]]>
@@ -171,9 +169,9 @@
 		UPDATE BIM_EMAIL_AUTH email INNER JOIN BIM_MEMBER_TB member
 		ON email.USER_ID = member.ID
 		SET
-		email.AUTH_FL= 'Y' , member.PASSWORD = #{userPassword }
+			email.AUTH_FL= 'Y' , member.PASSWORD = #{userPassword }
 		WHERE
-		email.EMAIL_AUTH_KEY =  #{emailAuthKey }
+			email.EMAIL_AUTH_KEY =  #{emailAuthKey }
 
 	</update>
 </mapper>
