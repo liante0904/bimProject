@@ -29,6 +29,7 @@ http://liante0904.asuscomm.com:9090/bimProject/
 - [DownloadView BoilerPlate Code](http://jwgye.tistory.com/4)
 - [~~Startbootstrap's simple-sidebar~~](https://startbootstrap.com/template-overviews/simple-sidebar/)
 
+## [How to use this Project](https://github.com/liante0904/bimProject/blob/master/HOWTOUSE.md)
 ## [Reference Documents](https://github.com/liante0904/bimProject/blob/master/Reference.md)
 
 ## About
@@ -90,7 +91,7 @@ http://liante0904.asuscomm.com:9090/bimProject/
 - 회원가입 후 이메일 인증처리 메일 발송 실패시 에러처리(재발송 혹은 알림) 
     - 재발송 자체는 어렵지 않으나.. 일정 시간이 지났을 때 인증 만료(트랜잭션) 추가 고려
 ### etc
-- openJDK 전환
+- 개발 환경 openJDK 전환
 - Todo get start jenkins and AWS
 
 ## TODO Bugfix(긴급)

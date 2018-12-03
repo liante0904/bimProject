@@ -334,7 +334,8 @@ public class ArticleController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String result = "success";
+		// TODO 글 수정시 파일 업로드 구현..
+		String result =  "success";
 		resultMap.put("result", result);
 		ModelAndView mav = new ModelAndView("redirect:/board/viewList.bim?id=" + article.getBoardId());
 		return mav;

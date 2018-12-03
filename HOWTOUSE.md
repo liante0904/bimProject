@@ -1,8 +1,17 @@
-# bimProject-reference
+# bimProject-How to use Project
 
-> The referenced documents of [bimProject](https://github.com/liante0904/bimProject). During the development process......
-## Complete
-- IDE Encoding Setting
+> explain how to use this [project](https://github.com/liante0904/bimProject).
+## How to import this project
+### IDE
+  - [IntelliJ](https://liante0904.tistory.com/191)
+  - [Eclipse(STS)](https://liante0904.tistory.com/121)
+
+
+
+
+
+
+
     - [Eclipse(STS)](https://liante0904.tistory.com/108)
     - [IntelliJ](http://subcase.net/2017/02/%EC%9D%B8%ED%85%94%EB%A6%AC%EC%A0%9C%EC%9D%B4-%ED%95%9C%EA%B8%80-%EC%84%A4%EC%A0%95/)
 - Git(elementary)

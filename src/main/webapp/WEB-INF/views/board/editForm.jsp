@@ -40,11 +40,7 @@ $(function(){
 			}
 		},
 	});
-	
-	var	 paramIdValue = getParameters('id');
-	var	 paramTitleValue = $("#title").val();
-	var	 paramContentsValue = $("#contents").val();
-	
+
 });
 </script>
 </head>

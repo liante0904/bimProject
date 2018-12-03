@@ -116,7 +116,9 @@ public class TestController {
 
 	@RequestMapping(value="/page")
 	public String writeForm(Model model, HttpServletRequest request){
-        String os = System.getProperty("os.name");
+		String path = request.getSession().getServletContext().getRealPath("/");
+		logger.info("경로 테스트 : " + path);
+		String os = System.getProperty("os.name");
 		ServletUriComponentsBuilder builder = ServletUriComponentsBuilder.fromCurrentContextPath();
 		builder.scheme("https");
 //		builder.replaceQueryParam("someBoolean", false);
