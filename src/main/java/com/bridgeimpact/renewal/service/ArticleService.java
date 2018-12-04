@@ -20,7 +20,7 @@ public interface ArticleService {
 
     public int writeArticle(HttpServletRequest request, ArticleVO board) throws Exception;
 
-	public void editArticle(ArticleVO board)throws Exception;
+	public int editArticle(HttpServletRequest request, ArticleVO article)throws Exception;
 
 	public void deleteArticle(ArticleVO board) throws Exception;
 

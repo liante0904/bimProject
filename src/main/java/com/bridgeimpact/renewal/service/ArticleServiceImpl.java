@@ -70,20 +70,30 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public void editArticle(ArticleVO board) throws Exception {
-		// TODO Auto-generated method stub
-		articleDAO.updateArticle(board);
+	public int editArticle(HttpServletRequest request, ArticleVO article) throws Exception {
+		//this.validateArticleVO(article);
+		/* 게시글 제목, 내용, 작성자 값 판별*/
+		if ("".equals(article.getTitle()) ||
+				"".equals(article.getContents()) ||
+				"".equals(article.getWriteId())){
+			return 0;
+		}
+		int insertArticleResult = articleDAO.updateArticle(article);
+		fileService.insertFile(request, article);
+		return insertArticleResult;
+	}
+
+	private void validateArticleVO(ArticleVO article) {
+		// TODO Article의 작성자, 글제목, 본문 유효성을 체크합니다.
 	}
 
 	@Override
 	public void deleteArticle(ArticleVO board) throws Exception {
-		// TODO Auto-generated method stub
 		articleDAO.deleteArticle(board);
 	}
 
 	@Override
 	public void increaseHitCntByIndex(int index) throws Exception {
-		// TODO Auto-generated method stub
 		articleDAO.updateHitCntByIndex(index);
 	}
 

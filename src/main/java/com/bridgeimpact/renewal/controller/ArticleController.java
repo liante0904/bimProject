@@ -190,9 +190,10 @@ public class ArticleController {
 	public ModelAndView boardWrite(Model model, ArticleVO article, HttpServletRequest request, HttpSession session,
 			MultipartHttpServletRequest multipartHttpServletRequest) {
 		String boardId = article.getBoardId();
+        String result = "";
 		Map<String, String> resultMap = new HashMap<String, String>();
 		logger.info("글 제목 : " + article.getTitle() + "\t 글내용 : " + article.getContents());
-		String result = "";
+
 		/*
 		 * Article DB반영전 로직
 		 */
@@ -303,7 +304,7 @@ public class ArticleController {
 		article.setIdx(sessionBoard.getIdx());
 		System.out.println("===========>>>" + sessionBoard.getTitle());
 		try {
-			articleService.editArticle(article);
+			articleService.editArticle(request, article);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -322,14 +323,17 @@ public class ArticleController {
 	 * @return
 	 */
 	@RequestMapping(value = "/editArticle.bim")
-	public ModelAndView editArticle(Model model, ArticleVO article, HttpServletRequest request, HttpSession session) {
+	public ModelAndView editArticle(Model model, ArticleVO article, HttpServletRequest request, HttpSession session,
+                                    MultipartHttpServletRequest multipartHttpServletRequest) {
 		logger.info("글 제목 : " + article.getTitle() + "\t 글내용 : " + article.getContents());
+		logger.info("글 작성 : " + article.getWriteId() + "\t 글내용 : ");
+
 		Map<String, String> resultMap = new HashMap<String, String>();
 		ArticleVO sessionBoard = (ArticleVO) session.getAttribute("articleInfo");
 		article.setIdx(sessionBoard.getIdx());
 		System.out.println("===========>>>" + sessionBoard.getTitle());
 		try {
-			articleService.editArticle(article);
+			articleService.editArticle(request, article);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

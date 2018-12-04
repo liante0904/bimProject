@@ -15,7 +15,7 @@ public interface ArticleDAO {
 	
 	public int insertArticle(ArticleVO board) throws Exception;
 
-	public void updateArticle(ArticleVO board) throws Exception;
+	public int updateArticle(ArticleVO board) throws Exception;
 
 	public void deleteArticle(ArticleVO board) throws Exception;
 

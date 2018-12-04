@@ -47,7 +47,7 @@ $(function(){
 <body>
 	<div class="container editForm">
 		<h1 class="mb-1">글수정</h1>
-		<form action="../board/editArticle.bim" method="post">
+		<form action="../board/editArticle.bim" method="post"  enctype="multipart/form-data">
 			<div class="container">
 				<div class="mt-2">
 					<input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력하세요." value="${article.title}"/>

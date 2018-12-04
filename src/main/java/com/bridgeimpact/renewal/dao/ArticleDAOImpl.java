@@ -44,9 +44,8 @@ public class ArticleDAOImpl implements ArticleDAO {
 	}
 
 	@Override
-	public void updateArticle(ArticleVO board) throws Exception {
-		// TODO Auto-generated method stub
-		sqlSession.update(Namespace+".updateArticle", board);
+	public int updateArticle(ArticleVO board) throws Exception {
+		return sqlSession.update(Namespace+".updateArticle", board);
 	}
 
 	@Override

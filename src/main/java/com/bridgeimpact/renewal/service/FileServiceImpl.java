@@ -28,14 +28,24 @@ public class FileServiceImpl implements FileService {
 	
 	@Override
 	public void insertFile(HttpServletRequest request, ArticleVO article) throws Exception {
+		/*
+		*  파일 업로드 로직
+		*  1. MultipartHttpServletRequest 전체 파일 Iterator로 형변환
+		*  2. Iterator의 파일 갯수만큼 반복 -> 저장할 실제 위치 경로 확인 및 파일 최종 체크
+		*  3. File객체는 실제 파일을 경로에 저장, FileVO는 DB에 저장할 파일 데이터
+		*  4. 파일 업로드시 밀리세컨드 단위로 변환한 현재 시간으로 변환후 저장(다운로드시 실제 파일로 다시 변경하여 전송)
+		*  5. 해당 정보 DB저장 (fileVO)
+		 * */
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest)request;
 		java.util.Iterator<String> fileNames = multipartRequest.getFileNames();
+		int i = 0;
 		FileVO fileVO = new FileVO();
 		while(fileNames.hasNext())
 		{
 			// fileVO 세팅
 			String fileName = fileNames.next();
 			MultipartFile mFile = multipartRequest.getFile(fileName);
+			logger.info(i + "번째 : " + mFile.getOriginalFilename());
 			if (!mFile.isEmpty())
 			{
 				String newFileName = "";
@@ -57,7 +67,6 @@ public class FileServiceImpl implements FileService {
 				{
 					if (!file.exists()) // 경로상에 파일이 존재하지 않을 경우
 					{
-						System.out.println("최종 저장전 경로 ?? : "+file.getAbsolutePath());
 						logger.info("최종 저장전 경로 ?? : "+file.getAbsolutePath());
 						if (file.getParentFile().mkdirs()) // 경로에 해당하는 디렉토리들을 생성
 						{
@@ -72,7 +81,6 @@ public class FileServiceImpl implements FileService {
 
 					try {
 						mFile.transferTo(file); //임시로 저장된 multipartFile을 실제 파일로 전송
-
 					} catch (IllegalStateException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
