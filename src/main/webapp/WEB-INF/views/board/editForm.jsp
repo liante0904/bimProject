@@ -61,13 +61,15 @@ $(function(){
 					</script>
 				</div>
 				<div class="mt-2">
-					<c:forEach items="${fileList}" var="file">
 					<div id="fileList">
-						<span class="glyphicon glyphicon-remove" aria-hidden="true" onclick="deleteFile('${file.articleIdx }', '${file.storedFileName}', '${sessionScope.loginInfo.id}')"></span>
-						<span>첨부파일 : </span>
-						<a href="../download.bim?num=${file.articleIdx }&storedNm=${file.storedFileName}">${file.originalFileName }</a>
-					</div>
+					<c:forEach items="${fileList}" var="file" varStatus="status">
+						<div id="fileList${status.index }">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true" onclick="deleteFile('${file.articleIdx }', '${file.storedFileName}', '${sessionScope.loginInfo.id}', '${status.index }')"></span>
+							<span>첨부파일 : </span>
+							<a href="../download.bim?num=${file.articleIdx }&storedNm=${file.storedFileName}">${file.originalFileName }</a>
+						</div>
 					</c:forEach>
+					</div>
 					<input type="file" name="files1" class="form-control">
 					<input type="file" name="files2" class="form-control">
 					<input type="file" name="files3" class="form-control">

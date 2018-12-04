@@ -17,7 +17,7 @@ $(function(){
 	});
 });
 
-
+/*
 function deleteFile(articleIdx, storedFileName, sessionLoginId) {
     console.log(articleIdx);
     console.log(storedFileName);
@@ -47,4 +47,4 @@ function deleteFile(articleIdx, storedFileName, sessionLoginId) {
     });
 
 }
-
+*/
