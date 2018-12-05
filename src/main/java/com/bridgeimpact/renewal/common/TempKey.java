@@ -2,13 +2,8 @@ package com.bridgeimpact.renewal.common;
 
 import java.util.Random;
 
-/*
-* 
- * 인증키를 생성
- * 
- * 
- * 
- * 
+/**
+ * 이메일 토큰 키 생성
  * */
 
 public class TempKey {
@@ -19,10 +14,10 @@ public class TempKey {
     public String getKey(int size, boolean lowerCheck) {
         this.size = size;
         this.lowerCheck = lowerCheck;
-        return init();
+        return initTokenKey();
     }
     
-    private String init() {
+    private String initTokenKey() {
         Random ran = new Random();
         StringBuffer sb = new StringBuffer();
         int num = 0;

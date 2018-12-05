@@ -1,6 +1,7 @@
 package com.bridgeimpact.renewal.intercepter;
 
 
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,39 +16,42 @@ import com.bridgeimpact.renewal.dto.BoardVO;
 
 
 public class IncomingIntercepter extends HandlerInterceptorAdapter {
-	
-    
+
 	@Autowired
     private BoardDAO boardDAO;
-	/*
-	1. preHandle - controller 이벤트 호출전
-	2. postHandle - controller 호출 후 view 페이지 출력전
-	3. afterCompletion - controller + view 페이지 모두 출력 후
-	
-	 * */
-	
-	
+	/***
+     * 1. preHandle - controller 이벤트 호출 전 이벤트
+     * 2. postHandle - controller 호출 후 view 페이지 출력 전 이벤트
+     * 3. afterCompletion - controller + view 페이지가 완전히 출력 된 후 이벤트
+     */
    @Override
    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+       Enumeration params = request.getParameterNames();
+       System.out.println("----------------------------");
+       while (params.hasMoreElements()){
+           String name = (String)params.nextElement();
+           System.out.println(name + " : " +request.getParameter(name));
+       }
+       System.out.println("----------------------------");
+
+
        /***
         * 게시판 정보를 가져오는 인터셉터
         */
-	   
 	   List<BoardVO> boardList =  (List<BoardVO>) request.getSession().getAttribute("boardList");
-	   //List<ArticleVO> articleList =  (List<ArticleVO>) request.getSession().getAttribute("articleList");
-
-   		try {
-   			String delGb = "N";
-   			boardList = boardDAO.selectAllBoard(delGb);
-   		} catch (Exception e) {
-   			// TODO Auto-generated catch block
-   			e.printStackTrace();
-   		}finally {
-   				request.getSession().setAttribute("boardList", boardList);
-			
-		}
-   		
-	   
+	   if (boardList == null){
+           //List<ArticleVO> articleList =  (List<ArticleVO>) request.getSession().getAttribute("articleList");
+           try {
+               String delGb = "N";
+               boardList = boardDAO.selectAllBoard(delGb);
+           } catch (Exception e) {
+               // TODO Auto-generated catch block
+               e.printStackTrace();
+               return false;
+           }finally {
+               request.getSession().setAttribute("boardList", boardList);
+           }
+       }
        return true;
    }
 

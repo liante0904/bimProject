@@ -24,20 +24,10 @@ import java.util.Map;
 public class FileController {
     
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
-    
-	@Autowired
-	private ArticleService articleService;
-
-	@Autowired
-	private CommentService commentService;
-
-	@Autowired
-	private MemberService memberService;
 
 	@Autowired
 	private FileService fileService;
 
-    
     /**
      * Simply selects the home view to render by returning its name.
      */
@@ -54,7 +44,6 @@ public class FileController {
 			e.printStackTrace();
 		}
 
-
 		/* file 처리 결과 핸들링 */
 		if (!result){
 			resultMap.put("result", "error");
@@ -64,7 +53,6 @@ public class FileController {
 		return resultMap;
 	}
 
-	
 
 }
 

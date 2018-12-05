@@ -36,9 +36,6 @@ public class AdminController {
 	private ArticleService articleService;
 
 	@Autowired
-	private CommentService commentService;
-
-	@Autowired
 	private MemberService memberService;
 
 	@Autowired
@@ -71,10 +68,9 @@ public class AdminController {
 	 */
 	@RequestMapping(value="/board/addBoard.bim", method= RequestMethod.GET)
 	public ModelAndView addBoard(Model model,String id, HttpServletRequest request,HttpSession session){
-		ModelAndView mv = new ModelAndView("admin/board/addBoard");
-		return mv;
+		ModelAndView mav = new ModelAndView("admin/board/addBoard");
+		return mav;
 	}
-
 
 	/***
 	 * 관리자 페이지에서 회원 관리 페이지 이동 맵핑
@@ -127,6 +123,5 @@ public class AdminController {
 		model.addAttribute("boardList", boardList);
 		return "admin/boardList";
 	}
-
 
 }

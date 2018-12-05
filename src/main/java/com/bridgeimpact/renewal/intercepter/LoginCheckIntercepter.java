@@ -26,15 +26,9 @@ public class LoginCheckIntercepter extends HandlerInterceptorAdapter {
         * 로그인 여부를 체크하는 인터셉터
         * 세션의 loginInfo 객체 판별
         */
-	   try {
-           //loginInfo이라는 세션key를 가진 정보가 널일경우 로그인 페이지로 이동
-
-           if(request.getSession().getAttribute("loginInfo") == null ){
-                   response.sendRedirect(request.getContextPath() + "/main/loginForm.bim");
-                   return false;
-           }
-       } catch (Exception e) {
-           e.printStackTrace();
+       if(request.getSession().getAttribute("loginInfo") == null ){
+           response.sendRedirect(request.getContextPath() + "/main/loginForm.bim");
+           return false;
        }
        return true;
    }
