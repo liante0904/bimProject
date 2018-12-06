@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>브리지 임팩트 사역원 입니다.</title>
+<title>브리지 임팩트 사역원입니다.</title>
 <%@ include file="/WEB-INF/include/navbar-header.jsp" %>			<!-- navbar header -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/layout.css">    <!--main/layout CSS -->
 <script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
@@ -15,7 +15,6 @@ $(document).ready(function(){
 
 });
 </script>
-<title>브리지 임팩트 사역원입니다.</title>
 </head>
 <body>
 <div class="container" id="main_page">

@@ -364,7 +364,6 @@ public class ArticleController {
 	@RequestMapping(value = "/search.bim", method = RequestMethod.GET)
 	public String searchView(String id, String searchKeyword, String searchType, Model model,
 			HttpServletRequest request, HttpSession session) {
-		logger.info(request.getRequestURI().toString());
 		logger.info(request.getRequestURL().toString());
 		/***
 		 * 파라미터 체크 구간

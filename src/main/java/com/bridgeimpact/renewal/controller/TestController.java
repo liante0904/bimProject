@@ -128,6 +128,7 @@ public class TestController {
 		URI newUri = builder.build().toUri();
 		System.out.println(newUri);
         System.out.println("Using System Property: " + os);
+		model.addAttribute("serverTime", "TestTime");
 		return "/test/writeForm";
 	}
 
