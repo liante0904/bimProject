@@ -173,7 +173,7 @@ public class ArticleController {
 		model.addAttribute("article", article);
 		model.addAttribute("fileList", fileList);
 		session.setAttribute("articleInfo", article);
-
+		logger.info("article 확인 : " + article.getWriteId());
 		return new ModelAndView("/board/viewForm");
 	}
 
@@ -322,9 +322,18 @@ public class ArticleController {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping(value = "/editArticle.bim")
+	@RequestMapping(value = "/editArticle.bim", method= RequestMethod.POST)
 	public ModelAndView editArticle(Model model, ArticleVO article, HttpServletRequest request, HttpSession session,
                                     MultipartHttpServletRequest multipartHttpServletRequest) {
+		// TODO 로직 개선
+		int articleIdx  = article.getIdx();
+		ArticleVO dbArticle = new ArticleVO();
+		try {
+			dbArticle = articleService.selectArticleByIndex(articleIdx);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		article.setWriteId(dbArticle.getWriteId());
 		logger.info("글 제목 : " + article.getTitle() + "\t 글내용 : " + article.getContents());
 		logger.info("글 작성 : " + article.getWriteId() + "\t 글내용 : ");
 
