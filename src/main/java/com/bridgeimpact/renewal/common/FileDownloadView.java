@@ -13,26 +13,17 @@ import java.util.Map;
 
 public class FileDownloadView extends AbstractView {
 
-
     public FileDownloadView() {
-
         //content type을 지정.
-
-        setContentType("apllication/download; charset=utf-8");
-
-
+        setContentType("application/download; charset=utf-8");
     }
 
-
     @Override
-
     protected void renderMergedOutputModel(Map<String, Object> model,
-
                                            HttpServletRequest req, HttpServletResponse res) throws Exception {
-
-        // TODO Auto-generated method stub
-
-
+        /**
+         * 파일을 전송시 업로드 한 원래 파일명으로 변경하여 보냅니다.
+         **/
         File file = (File) model.get("downloadFile");
         String OriginalFileName = (String) model.get("OriginalFileName");
         logger.info("OriginalFileName : " + OriginalFileName );
@@ -42,33 +33,23 @@ public class FileDownloadView extends AbstractView {
                 java.net.URLEncoder.encode(OriginalFileName, "utf-8") + "\";");
         res.setHeader("Content-Transfer-Encoding", "binary");
 
-
         OutputStream out = res.getOutputStream();
         FileInputStream fis = null;
 
         try {
             fis = new FileInputStream(file);
             FileCopyUtils.copy(fis, out);
-
         } catch (Exception e) {
-
             e.printStackTrace();
-
         } finally {
-
             if (fis != null) {
                 try {
                     fis.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
             }
-
         }
-
-
         out.flush();
-
     }
 }

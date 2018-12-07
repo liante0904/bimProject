@@ -18,7 +18,8 @@ $(function(){
 });
 
 
-function deleteFile(articleIdx, storedFileName, sessionLoginId) {
+function deleteFile(articleIdx, storedFileName, sessionLoginId, fileListIdx) {
+    confirm("정말로 첨부파일을 삭제하시겠습니까? \n (게시글 수정과 별개로 즉시 삭제되며 복구 되지 않습니다.)");
     console.log(articleIdx);
     console.log(storedFileName);
     console.log(sessionLoginId);
@@ -36,6 +37,9 @@ function deleteFile(articleIdx, storedFileName, sessionLoginId) {
         success : function(data){
             if ( data.result == "success") {
                 console.log("첨부파일 삭제 완료");
+                var fileListParent = document.getElementById('fileList');
+                var fileListNode  = document.getElementById('fileList' + fileListIdx);
+                fileListParent.removeChild(fileListNode);
             }
         },
         error : function(error){

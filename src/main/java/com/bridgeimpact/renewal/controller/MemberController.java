@@ -77,7 +77,6 @@ public class MemberController {
 		return mav;
 	}
 
-
 	/***
 	 * 회원가입 페이지에서 작성된 데이터 DB반영 요청
 	 * @return 로그인 페이지 반환
@@ -97,7 +96,6 @@ public class MemberController {
 		}
 		
 		if (result == 1) {
-			
 			url = "redirect:/main/loginForm.bim";
 		}
 		return url;
@@ -114,16 +112,16 @@ public class MemberController {
 		Map<String, String> resultMap = new HashMap<String, String>();
 		String result, resultMsg = "";
 		
-		Boolean userPassworkCheckResult = null;
+		Boolean userPasswordCheckResult = null;
 		MemberVO sessionMember = (MemberVO) session.getAttribute("loginInfo");
 		try {
-			userPassworkCheckResult = memberService.checkDeleteMemberByPassword(sessionMember, password);
+			userPasswordCheckResult = memberService.checkDeleteMemberByPassword(sessionMember, password);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
-		if (!userPassworkCheckResult) {
+		if (!userPasswordCheckResult) {
 			result = "error";
 			resultMsg = "패스워드가 일치하지 않습니다.";
 			resultMap.put("result", result);
@@ -144,8 +142,7 @@ public class MemberController {
 		resultMap.put("resultMsg", resultMsg);
 		return resultMap;
 	}
-	
-	
+
 	/***
 	 * 회원가입 페이지에서 아이디 중복체크 ajax 요청
 	 * @param model
@@ -181,16 +178,16 @@ public class MemberController {
 	@RequestMapping(value="member/checkMemberEmailAjax.bim",method = RequestMethod.POST,produces = "application/json; charset=utf8")
 	@ResponseBody
 	public Map<String, String> checkMemberEmailAjax(Model model,String email, HttpServletRequest request,HttpServletResponse response){
-		  Map<String, String> resultMap = new HashMap<String, String>();
+		Map<String, String> resultMap = new HashMap<String, String>();
 		try {
 			resultMap = memberService.checkMemberEmail(email);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		    response.setContentType("text/plain");
-		    response.setCharacterEncoding("UTF-8");
-		  return resultMap;
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
+		return resultMap;
 	}
 	
 	/***

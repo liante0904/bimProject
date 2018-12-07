@@ -284,35 +284,6 @@ public class ArticleController {
 		return mav;
 	}
 
-	/***
-	 * 사용자의 글수정 요청을 받아 DB에 반영(ajax)
-	 * 
-	 * @param model
-	 * @param article
-	 * @param request
-	 * @param session
-	 * @return
-	 */
-
-	@RequestMapping(value = "/editArticleAjax.bim")
-	@ResponseBody
-	public Map<String, String> boardEdit(Model model, ArticleVO article, HttpServletRequest request,
-			HttpSession session) {
-		logger.info("글 제목 : " + article.getTitle() + "\t 글내용 : " + article.getContents());
-		Map<String, String> resultMap = new HashMap<String, String>();
-		ArticleVO sessionBoard = (ArticleVO) session.getAttribute("articleInfo");
-		article.setIdx(sessionBoard.getIdx());
-		System.out.println("===========>>>" + sessionBoard.getTitle());
-		try {
-			articleService.editArticle(request, article);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String result = "success";
-		resultMap.put("result", result);
-		return resultMap;
-	}
 
 	/***
 	 * 사용자의 글수정 요청을 받아 DB에 반영(submit)
@@ -322,24 +293,18 @@ public class ArticleController {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping(value = "/editArticle.bim", method= RequestMethod.POST)
-	public ModelAndView editArticle(Model model, ArticleVO article, HttpServletRequest request, HttpSession session,
-                                    MultipartHttpServletRequest multipartHttpServletRequest) {
-		// TODO 로직 개선
-		int articleIdx  = article.getIdx();
-		ArticleVO dbArticle = new ArticleVO();
-		try {
-			dbArticle = articleService.selectArticleByIndex(articleIdx);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		article.setWriteId(dbArticle.getWriteId());
+	@RequestMapping(value = "/editArticle.bim")
+	public ModelAndView editArticle(Model model, ArticleVO article, HttpServletRequest request, HttpSession session) {
+		ArticleVO sessionBoard = (ArticleVO) session.getAttribute("articleInfo");
+		article.setIdx(sessionBoard.getIdx());
+		article.setWriteId(sessionBoard.getWriteId());
+		article.setBoardId(sessionBoard.getBoardId());
+		System.out.println("sessionBoard.getBoardId() : " + sessionBoard.getBoardId());
+
 		logger.info("글 제목 : " + article.getTitle() + "\t 글내용 : " + article.getContents());
 		logger.info("글 작성 : " + article.getWriteId() + "\t 글내용 : ");
 
 		Map<String, String> resultMap = new HashMap<String, String>();
-		ArticleVO sessionBoard = (ArticleVO) session.getAttribute("articleInfo");
-		article.setIdx(sessionBoard.getIdx());
 		System.out.println("===========>>>" + sessionBoard.getTitle());
 		try {
 			articleService.editArticle(request, article);
@@ -347,7 +312,6 @@ public class ArticleController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// TODO 글 수정시 파일 업로드 구현..
 		String result =  "success";
 		resultMap.put("result", result);
 		ModelAndView mav = new ModelAndView("redirect:/board/viewList.bim?id=" + article.getBoardId());
@@ -400,7 +364,6 @@ public class ArticleController {
 	@RequestMapping(value = "/search.bim", method = RequestMethod.GET)
 	public String searchView(String id, String searchKeyword, String searchType, Model model,
 			HttpServletRequest request, HttpSession session) {
-		logger.info(request.getRequestURI().toString());
 		logger.info(request.getRequestURL().toString());
 		/***
 		 * 파라미터 체크 구간

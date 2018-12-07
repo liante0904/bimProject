@@ -298,7 +298,6 @@ public class MemberServiceImpl implements MemberService {
 		System.out.println(emailAuthVO.getUserPassword());
 		emailAuthVO.setUserPassword(encryptPassword);
 		memberDAO.updateMemberPasswordByEmailAuth(emailAuthVO);
-		//memberDAO.updateMember(inputMember);
 		return false;
 	}
 
