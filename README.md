@@ -26,7 +26,7 @@ http://liante0904.asuscomm.com:9090/bimProject/
 - [Bootstrap 3](https://getbootstrap.com/)
 - [Ckeditor 4](https://ckeditor.com/)
 - [DownloadView BoilerPlate Code](http://jwgye.tistory.com/4)
-- [~~Startbootstrap's simple-sidebar~~](https://startbootstrap.com/template-overviews/simple-sidebar/)
+
 
 ## [How to use this Project](https://github.com/liante0904/bimProject/blob/master/HOWTOUSE.md)
 ## [Reference Documents](https://github.com/liante0904/bimProject/blob/master/Reference.md)
