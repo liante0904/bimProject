@@ -14,7 +14,7 @@ http://liante0904.asuscomm.com:9090/bimProject/
 - Bootstrap 3
 
 ### Server
-- Java 8 & Spring Framework 3
+- Java 8 & Spring Framework (MVC)
 - Linux (Synology)
 - MySQL (MariaDB)
 - Tomcat 8
@@ -50,6 +50,7 @@ http://liante0904.asuscomm.com:9090/bimProject/
 - [x] 개인 정보 DB암호화(패스워드)
 - [x] 지속적 리팩토링
     - [x] 컨트롤러, 서비스(비즈니스)로직 분리 & 정리
+- [x]디자인 색깔톤 대폭 변경
 
 ## TODOList
 ### Testing
@@ -65,8 +66,7 @@ http://liante0904.asuscomm.com:9090/bimProject/
 ### Layout and content 
 - 컨텐츠 채우기
     - 현재 위지윅 작성시 본문에 사진 및 태그 기능 미작동 수정예정
-	- 게시판 변경(기존의 사이트)
-- 디자인 색깔톤 대폭 변경
+
 ### File
 - 글 작성, 수정시 첨부파일 저장 위치 로직변경(Test or Live)
     - Docker 배포시 첨부파일 영역 구분 확인 필요
