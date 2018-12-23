@@ -38,23 +38,23 @@
 	<!-- properties 파일 로드 -->	
  	<context:property-placeholder location="classpath:config/spring/env.properties"/>
 	
-	    <!-- 메일 보내기 (SEND) -->
-   <beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-      <beans:property name="host" value="smtp.gmail.com" />
-      <beans:property name="port" value="587" />
-      <beans:property name="username" value="${email.username}" />
-      <beans:property name="password" value="${email.password}" />
-    
+	<!-- Administrator Email Sender (SEND) -->
+	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<beans:property name="host" value="${email.host}" />
+		<beans:property name="port" value="${email.port}" />
+		<beans:property name="username" value="${email.username}" />
+		<beans:property name="password" value="${email.password}" />
 
-      <!-- email 요청시는 SMTP -->
-      <beans:property name="javaMailProperties">
-         <beans:props>
-            <beans:prop key="mail.transport.protocol">smtp</beans:prop>
-            <beans:prop key="mail.smtp.auth">true</beans:prop>
-            <beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
-            <beans:prop key="mail.debug">true</beans:prop>
-         </beans:props>
-      </beans:property>
-   </beans:bean>
+
+		<!-- Email properties (SMTP) -->
+		<beans:property name="javaMailProperties">
+		<beans:props>
+			<beans:prop key="mail.transport.protocol">smtp</beans:prop>
+			<beans:prop key="mail.smtp.auth">true</beans:prop>
+			<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+			<beans:prop key="mail.debug">true</beans:prop>
+		</beans:props>
+		</beans:property>
+	</beans:bean>
 
 </beans:beans>
