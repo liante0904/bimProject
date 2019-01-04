@@ -71,7 +71,6 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	public int editArticle(HttpServletRequest request, ArticleVO article) throws Exception {
-		//this.validateArticleVO(article);
 		/* 게시글 제목, 내용, 작성자 값 판별*/
 		if ("".equals(article.getTitle()) ||
 				"".equals(article.getContents()) ||
@@ -112,11 +111,8 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public Boolean checkValidateArticleByIdx(int num) throws Exception {
 		ArticleVO article = articleDAO.selectArticleByIndex(num);
-		if (article == null || "Y".equals(article.getDelGb())) {
-			return false;
-		}
-		return true;
-	}
+        return article != null && !"Y".equals(article.getDelGb());
+    }
 
 	@Override
 	public List<ArticleVO> selectMainArticleList(List<BoardVO> boardList) throws Exception {

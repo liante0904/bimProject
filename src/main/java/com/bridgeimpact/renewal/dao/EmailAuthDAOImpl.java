@@ -16,23 +16,20 @@ public class EmailAuthDAOImpl implements EmailAuthDAO {
     private static final String Namespace = "com.bridgeimpact.renewal.emailAuthSQL";
 
 	@Override
-	public EmailAuthVO insertEmailAuth(MemberVO dbMember, EmailAuthVO emailAuth) throws Exception {
+	public EmailAuthVO insertEmailAuth(MemberVO dbMember, EmailAuthVO emailAuth) {
 		sqlSession.insert(Namespace+".insertEmailAuth", emailAuth);
 		return emailAuth;
 	}
 
 	@Override
-	public EmailAuthVO selectEmailAuthByKey(String key) throws Exception {
+	public EmailAuthVO selectEmailAuthByKey(String key) {
 		return sqlSession.selectOne(Namespace+".selectEmailAuthByKey", key);
 	}
 
 	@Override
-	public boolean updateEmailAuthByKey(String key) throws Exception {
+	public boolean updateEmailAuthByKey(String key) {
 		int resultRow = sqlSession.update(Namespace+".updateEmailAuthByKey", key);
-		if (resultRow == 2) {
-			return true;
-		}
-		return false;
-	}
+        return resultRow == 2;
+    }
     
 }

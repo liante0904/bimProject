@@ -6,14 +6,14 @@ import com.bridgeimpact.renewal.dto.FileVO;
 
 public interface FileDAO {
 
-	public void insertFile(FileVO file) throws Exception;
+	void insertFile(FileVO file) throws Exception;
 
-	public void editFile(FileVO file) throws Exception;
+	void editFile(FileVO file) throws Exception;
 
-	public boolean deleteFile(FileVO file) throws Exception;
+	boolean deleteFile(FileVO file) throws Exception;
 
-	public List<FileVO> selectAllFileByIndex(int num) throws Exception;
+	List<FileVO> selectAllFileByIndex(int num) throws Exception;
 
-	public FileVO selectFileByStoredName(String storedNm) throws Exception;
+	FileVO selectFileByStoredName(String storedNm) throws Exception;
 	
 }

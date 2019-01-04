@@ -16,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -52,18 +51,12 @@ public class ArticleController {
 	@Autowired
 	private FileService fileService;
 
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-
 	/***
 	 * 게시판 글 작성,편집 페이지 이동 맵핑
-	 * @param model
-	 * @param request
 	 * @return
 	 */
 	@RequestMapping(value = "/writeForm.bim")
-	public String writeForm(Model model, HttpServletRequest request) {
+	public String writeForm() {
 		return "/board/writeForm";
 	}
 
@@ -179,7 +172,6 @@ public class ArticleController {
 
 	/***
 	 * 사용자의 글쓰기 요청을 받아 DB에 처리
-	 * @param model
 	 * @param article
 	 * @param request
 	 * @param session
@@ -187,15 +179,14 @@ public class ArticleController {
 	 */
 
 	@RequestMapping(value = "/writeArticle.bim")
-	public ModelAndView boardWrite(Model model, ArticleVO article, HttpServletRequest request, HttpSession session,
-			MultipartHttpServletRequest multipartHttpServletRequest) {
+	public ModelAndView boardWrite(ArticleVO article, HttpServletRequest request, HttpSession session) {
 		String boardId = article.getBoardId();
         String result = "";
 		Map<String, String> resultMap = new HashMap<String, String>();
 		logger.info("글 제목 : " + article.getTitle() + "\t 글내용 : " + article.getContents());
 
 		/*
-		 * Article DB반영전 로직
+		 * Article DB반영 전 로직
 		 */
 		MemberVO loginMember = (MemberVO) session.getAttribute("loginInfo");
 		article.setWriteId(loginMember.getId());
@@ -214,72 +205,6 @@ public class ArticleController {
 		}
 		result = "success";
 		resultMap.put("result", result);
-
-		/*
-		 * 파일 업로드 로직구간 (단일)
-		 * 
-		 * 
-		 * 
-		 * MultipartFile uploadFile = article.getFiles(); String fileName =
-		 * uploadFile.getOriginalFilename(); String path =
-		 * request.getSession().getServletContext().getRealPath("/");
-		 * 
-		 * System.out.println("UtilFile fileUpload uploadPath : " + path);
-		 * System.out.println("UtilFile fileUpload fileName : " + fileName);
-		 * 
-		 * 
-		 * 
-		 * if (article.getFiles().isEmpty()) { try { byte[] fileData =
-		 * article.getFiles().getBytes(); System.out.println("?????????"+fileData); }
-		 * catch (IOException e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); } }
-		 * 
-		 * 
-		 * Iterator<String> files = multipart.getFileNames(); while(files.hasNext()){
-		 * String uploadFile_ = files.next(); String newFileName = ""; MultipartFile
-		 * mFile = multipart.getFile(uploadFile_); String fileName_ =
-		 * mFile.getOriginalFilename(); System.out.println("실제 파일 이름 : " +fileName);
-		 * newFileName = System.currentTimeMillis()+"."
-		 * +fileName_.substring(fileName_.lastIndexOf(".")+1);
-		 * 
-		 * try { mFile.transferTo(new File(path+newFileName)); } catch (Exception e) {
-		 * e.printStackTrace(); } }
-		 */
-
-		/*
-		 * MultipartHttpServletRequest multipartRequest =
-		 * (MultipartHttpServletRequest)request; java.util.Iterator<String> fileNames =
-		 * multipartRequest.getFileNames(); while(fileNames.hasNext()) { // fileVO 세팅
-		 * String fileName = fileNames.next(); MultipartFile mFile =
-		 * multipartRequest.getFile(fileName); if (!mFile.isEmpty()) { String
-		 * newFileName = ""; String path =
-		 * request.getSession().getServletContext().getRealPath("/"); newFileName =
-		 * System.currentTimeMillis()+"."
-		 * +mFile.getOriginalFilename().substring(mFile.getOriginalFilename().
-		 * lastIndexOf(".")+1); logger.info(fileName); logger.info(path +
-		 * mFile.getOriginalFilename()); logger.info(newFileName); FileVO fileVO = new
-		 * FileVO(); fileVO.setOriginalFileName(mFile.getOriginalFilename());
-		 * fileVO.setStoredFileName(newFileName);
-		 * fileVO.setFileSize((int)mFile.getSize());
-		 * fileVO.setArticleIdx(article.getIdx());
-		 * fileVO.setCreaId(article.getWriteId()); try { //
-		 * fileService.insertFile(fileVO); } catch (Exception e1) { // TODO
-		 * Auto-generated catch block e1.printStackTrace(); }
-		 * 
-		 * File file = new File(path + mFile.getOriginalFilename());
-		 * 
-		 * if (mFile.getSize() != 0) // File Null Check { if (!file.exists()) // 경로상에
-		 * 파일이 존재하지 않을 경우 { if (file.getParentFile().mkdirs()) // 경로에 해당하는 디렉토리들을 생성 {
-		 * try { file.createNewFile(); // 이후 파일 생성 logger.info(file.getAbsolutePath() +
-		 * file.getName()); } catch (IOException e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); } } }
-		 * 
-		 * try { mFile.transferTo(file); //임시로 저장된 multipartFile을 실제 파일로 전송 } catch
-		 * (IllegalStateException e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); } catch (IOException e) { // TODO Auto-generated catch
-		 * block e.printStackTrace(); } } } }
-		 * 
-		 */
 		ModelAndView mav = new ModelAndView("redirect:/board/viewList.bim?id=" + boardId);
 		return mav;
 	}
@@ -287,14 +212,13 @@ public class ArticleController {
 
 	/***
 	 * 사용자의 글수정 요청을 받아 DB에 반영(submit)
-	 * @param model
 	 * @param article
 	 * @param request
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping(value = "/editArticle.bim")
-	public ModelAndView editArticle(Model model, ArticleVO article, HttpServletRequest request, HttpSession session) {
+	public ModelAndView editArticle(ArticleVO article, HttpServletRequest request, HttpSession session) {
 		ArticleVO sessionBoard = (ArticleVO) session.getAttribute("articleInfo");
 		article.setIdx(sessionBoard.getIdx());
 		article.setWriteId(sessionBoard.getWriteId());
@@ -354,16 +278,12 @@ public class ArticleController {
 	/***
 	 * 사용자의 검색 요청을 처리합니다.
 	 * @param id 				 : 게시판 구분
-	 * @param searchKeyword 	 : 검색 키워드
-	 * @param searchType 		 : 검색 타입
 	 * @param model
 	 * @param request
-	 * @param session
 	 * @return
 	 */
 	@RequestMapping(value = "/search.bim", method = RequestMethod.GET)
-	public String searchView(String id, String searchKeyword, String searchType, Model model,
-			HttpServletRequest request, HttpSession session) {
+	public String searchView(String id, Model model, HttpServletRequest request) {
 		logger.info(request.getRequestURL().toString());
 		/***
 		 * 파라미터 체크 구간
@@ -391,31 +311,15 @@ public class ArticleController {
 		}
 		/***
 		 * 게시판의 페이징 세팅
+		 * 사용자의 검색 요청 정보는 pageUtil 에서 처리합니다
 		 */
 
-		// 이용자의 요청 페이지 세팅
 		PageUtil pageUtil = new PageUtil(request, articleService);
+
 
 		/***
 		 * 검색할 게시판의 게시글 세팅
 		 */
-
-		/***
-		 * 사용자의 게시판 검색 파라미터를 설정 합니다.
-		 * 
-		 * @param boardId 			 : 검색 요청 게시판
-		 * @param searchType 		 :검색 요청 타입
-		 * @param searchKeyword 	 : 검색어
-		 * @return paramMap : HashMap
-		 */
-
-		//
-		// HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		// paramMap.put("boardId", id);
-		// paramMap.put("searchType", searchType);
-		// paramMap.put("searchKeyword", searchKeyword);
-		//
-		//
 
 		List<ArticleVO> articleList = null;
 

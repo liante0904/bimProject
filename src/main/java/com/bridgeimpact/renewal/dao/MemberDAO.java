@@ -7,23 +7,23 @@ import com.bridgeimpact.renewal.dto.MemberVO;
  
 public interface MemberDAO {
     
-    public List<MemberVO> selectAllMember() throws Exception;
+    List<MemberVO> selectAllMember() throws Exception;
 
-	public void insertMember(MemberVO member) throws Exception;
+	void insertMember(MemberVO member) throws Exception;
 
-	public void updateMember(MemberVO member) throws Exception;
+	void updateMember(MemberVO member) throws Exception;
 
-	public void deleteMember(MemberVO member) throws Exception;
+	void deleteMember(MemberVO member) throws Exception;
 
-	public MemberVO getMemberById(String id) throws Exception;
+	MemberVO getMemberById(String id) throws Exception;
 
-	public int selectMemberById(MemberVO member) throws Exception;
+	int selectMemberById(MemberVO member) throws Exception;
 
-	public int getMemberByEmail(String email) throws Exception;
+	int getMemberByEmail(String email) throws Exception;
 
-	public MemberVO selectMemberByEmail(MemberVO member) throws Exception;
+	MemberVO selectMemberByEmail(MemberVO member) throws Exception;
 
-	public void updateMemberPasswordByEmailAuth(EmailAuthVO emailAuthVO) throws Exception;
+	void updateMemberPasswordByEmailAuth(EmailAuthVO emailAuthVO) throws Exception;
 
 	String updateMemberTempPasswordByMember(MemberVO member);
 }

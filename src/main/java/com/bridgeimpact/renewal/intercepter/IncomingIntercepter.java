@@ -25,7 +25,7 @@ public class IncomingIntercepter extends HandlerInterceptorAdapter {
      * 3. afterCompletion - controller + view 페이지가 완전히 출력 된 후 이벤트
      */
    @Override
-   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
        Enumeration params = request.getParameterNames();
        System.out.println("----------------------------");
        while (params.hasMoreElements()){

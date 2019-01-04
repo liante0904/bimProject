@@ -27,7 +27,7 @@ function deleteFile(articleIdx, storedFileName, sessionLoginId, fileListIdx) {
         'articleIdx': articleIdx,
         'storedFileName': storedFileName,
         'creaId': sessionLoginId
-    }
+    };
 
     $.ajax({
         url : "../file/deleteFile.bim",

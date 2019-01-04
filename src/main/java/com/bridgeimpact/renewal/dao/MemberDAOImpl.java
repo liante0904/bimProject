@@ -19,47 +19,47 @@ public class MemberDAOImpl implements MemberDAO {
     private static final String Namespace = "com.bridgeimpact.renewal.memberSQL";
     
     @Override
-    public List<MemberVO> selectAllMember() throws Exception {
+    public List<MemberVO> selectAllMember() {
         return sqlSession.selectList(Namespace+".selectAllMember");
     }
 
 	@Override
-	public void insertMember(MemberVO member) throws Exception {
+	public void insertMember(MemberVO member) {
 		sqlSession.insert(Namespace+".insertMember", member);
 	}
 
 	@Override
-	public void updateMember(MemberVO member) throws Exception {
+	public void updateMember(MemberVO member) {
 		sqlSession.update(Namespace+".updateMember", member);
 	}
 
 	@Override
-	public void deleteMember(MemberVO member) throws Exception {
+	public void deleteMember(MemberVO member) {
 		sqlSession.update(Namespace+".deleteMember", member);
 	}
 	@Override
-	public MemberVO getMemberById(String id) throws Exception  {
+	public MemberVO getMemberById(String id) {
 		return (MemberVO)sqlSession.selectOne(Namespace+".getMember", id);
 	}
 
 	@Override
-	public int selectMemberById(MemberVO member) throws Exception {
+	public int selectMemberById(MemberVO member) {
 		String id = member.getId();
 		return sqlSession.selectOne(Namespace+".selectMemberById", id);
 	}
 
 	@Override
-	public int getMemberByEmail(String email) throws Exception {
+	public int getMemberByEmail(String email) {
 		return sqlSession.selectOne(Namespace+".getMemberByEmail", email);
 	}
 
 	@Override
-	public MemberVO selectMemberByEmail(MemberVO member) throws Exception {
+	public MemberVO selectMemberByEmail(MemberVO member) {
 		return  sqlSession.selectOne(Namespace+".selectMemberByEmail", member.getEmail());
 	}
 
 	@Override
-	public void updateMemberPasswordByEmailAuth(EmailAuthVO emailAuthVO) throws Exception {
+	public void updateMemberPasswordByEmailAuth(EmailAuthVO emailAuthVO) {
 		 sqlSession.update(Namespace+".updateMemberPasswordByEmailAuth", emailAuthVO);
 	}
 

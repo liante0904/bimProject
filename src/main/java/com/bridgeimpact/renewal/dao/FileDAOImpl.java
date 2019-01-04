@@ -19,19 +19,19 @@ public class FileDAOImpl implements FileDAO{
     
 	
 	@Override
-	public void insertFile(FileVO file) throws Exception {
+	public void insertFile(FileVO file) {
 		// TODO Auto-generated method stub
 		sqlSession.insert(Namespace+".insertFile", file);
 	}
 
 	@Override
-	public void editFile(FileVO file) throws Exception {
+	public void editFile(FileVO file) {
 		// TODO Auto-generated method stub
 		sqlSession.update(Namespace+".editFile", file);
 	}
 
 	@Override
-	public boolean deleteFile(FileVO file) throws Exception {
+	public boolean deleteFile(FileVO file) {
 		boolean result = false;
 		int resultCnt = sqlSession.delete(Namespace+".deleteFile", file);
 		if (resultCnt == 1)
@@ -40,13 +40,13 @@ public class FileDAOImpl implements FileDAO{
 	}
 
 	@Override
-	public List<FileVO> selectAllFileByIndex(int num) throws Exception {
+	public List<FileVO> selectAllFileByIndex(int num) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(Namespace+".selectAllFileByIndex", num);
 	}
 
 	@Override
-	public FileVO selectFileByStoredName(String storedNm) throws Exception {
+	public FileVO selectFileByStoredName(String storedNm) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(Namespace+".selectFileByStoredName", storedNm);
 	}

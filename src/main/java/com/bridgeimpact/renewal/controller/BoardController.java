@@ -37,24 +37,17 @@ public class BoardController {
     
     @Autowired
     private BoardService boardService;
-    
-    /**
-     * Simply selects the home view to render by returning its name.
-     */
-    
-	
-    
+
     /***
      * id(게시판) 파라미터를 이용해 게시판에 접근합니다.
      * 
      * @param model
      * @param id : 게시판 구분자 ID
      * @param request
-     * @param session
      * @return
      */
 	@RequestMapping(value="/viewList.bim", method= RequestMethod.GET)
-	public String boardView(String id,Model model, HttpServletRequest request,HttpSession session){
+	public String boardView(String id,Model model, HttpServletRequest request){
 
 		/***
 		 * 게시판 유효성 판별
@@ -83,16 +76,16 @@ public class BoardController {
 
 		if (pageUtil.getCurrentPage() > pageUtil.getTotalPageCnt()) {
 			//TODO 유효하지 않은 페이지 범위 접근시
-		String url = "redirect:/board/viewList.bim?id=" + id + "&page=" + pageUtil.getTotalPageCnt();
+			String url =
+					"redirect:/board/viewList.bim?id=" + id + "&page=" + pageUtil.getTotalPageCnt();
 			return 	url;
 		}
 		
 		/***
-		 * 요청 게시판의 게시글 세팅
+		 * 계산된 요청 게시판의 게시글 세팅
 		 */
 		List<ArticleVO> articleList = null;
 		
-		// 계산된 게시글 가져오기		
 		try {
 			articleList = articleService.selectArticleByPage(pageUtil.getParamMap());
 		} catch (Exception e) {
@@ -110,14 +103,13 @@ public class BoardController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		logger.info(id + "게시판 요청");
 		System.out.println("출력될 게시글 수 : " + pageUtil.getDisplayArticleCnt());
 		System.out.println("articleList:" + articleList);
 		model.addAttribute("board", board);
 		model.addAttribute("articleList", articleList);
 		model.addAttribute("pageUtil", pageUtil);
 
-		logger.info(id+"게시판 요청");
 		return "board/articleList";
 	}
 	
@@ -125,15 +117,12 @@ public class BoardController {
 	
 	/***
 	 * 게시판 생성 페이지에서 게시판 생성 요청
-	 * @param model
 	 * @param board
-	 * @param request
-	 * @param session
 	 * @return
 	 */
 	@RequestMapping(value="/insertBoardAjax.bim")
 	@ResponseBody
-	public Map<String, String> insertBoard(Model model,BoardVO board, HttpServletRequest request,HttpSession session){
+	public Map<String, String> insertBoard(BoardVO board){
 		Map<String, String>  resultMap = new HashMap<String, String>();
 		String result = "";
 		String resultMsg = "";
@@ -153,20 +142,15 @@ public class BoardController {
 		resultMap.put("resultMsg", resultMsg);
 		return resultMap;
 	}
-	
-	
-	
+
 	/***
 	 * 게시판 추가 페이지에서 게시판 URL 중복체크 ajax 요청
-	 * @param model
 	 * @param id : 중복확인을 하고자 하는 ID
-	 * @param request
-	 * @param response
 	 * @return
 	 */
 	@RequestMapping(value="/checkBoardIdAjax.bim",method = RequestMethod.GET,produces = "application/json; charset=utf8")
 	@ResponseBody
-	public Map<String, String> checkBoardId(Model model,String id, HttpServletRequest request,HttpServletResponse response){
+	public Map<String, String> checkBoardId(String id,HttpServletResponse response){
  		Map<String, String> resultMap = new HashMap<String, String>();
  		int resultCnt = 0;
 		try {
@@ -197,15 +181,12 @@ public class BoardController {
 	
 	/***
 	 * 게시판 관리 페이지에서 게시판 비공개 ajax 요청
-	 * @param model
 	 * @param id : 게시판 구분ID
-	 * @param request
-	 * @param response
 	 * @return
 	 */
 	@RequestMapping(value="/closeBoardAjax.bim",method = RequestMethod.GET,produces = "application/json; charset=utf8")
 	@ResponseBody
-	public Map<String, String> closeBoardAjax(Model model,String id, HttpServletRequest request,HttpServletResponse response){
+	public Map<String, String> closeBoardAjax(String id,HttpServletResponse response){
 		Map<String, String> resultMap = new HashMap<String, String>();
 		int resultCnt = 0;
 		try {

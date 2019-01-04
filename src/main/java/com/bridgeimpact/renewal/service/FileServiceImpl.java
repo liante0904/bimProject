@@ -157,10 +157,8 @@ public class FileServiceImpl implements FileService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if (requestId.equals(dbFile.getCreaId()))
-			return true;
+		return requestId.equals(dbFile.getCreaId());
 
-		return false;
 	}
 
 	@Override

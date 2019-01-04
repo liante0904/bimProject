@@ -21,37 +21,37 @@ public class CommentDAOImpl implements CommentDAO {
     
     
 	@Override
-	public List<CommentVO> selectAllComment() throws Exception {
+	public List<CommentVO> selectAllComment() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(Namespace+".selectAllComment");
 	}
 	
 	@Override
-	public List<CommentVO> selectCommentByIndex(int index) throws Exception {
+	public List<CommentVO> selectCommentByIndex(int index) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(Namespace+".selectCommentByIndex", index);
 	}
 
 	@Override
-	public void insertComment(CommentVO comment) throws Exception {
+	public void insertComment(CommentVO comment) {
 		// TODO Auto-generated method stub
 		sqlSession.insert(Namespace+".insertComment", comment);
 	}
 
 	@Override
-	public int updateComment(CommentVO comment) throws Exception {
+	public int updateComment(CommentVO comment) {
 		// TODO Auto-generated method stub
 		return sqlSession.update(Namespace+".updateComment", comment);
 	}
 
 	@Override
-	public int deleteComment(CommentVO comment) throws Exception {
+	public int deleteComment(CommentVO comment) {
 		// TODO Auto-generated method stub
 		return sqlSession.delete(Namespace+".deleteComment", comment);
 	}
 
 	@Override
-	public void updateHitCntByIndex(int index) throws Exception {
+	public void updateHitCntByIndex(int index) {
 		// TODO Auto-generated method stub
 		sqlSession.update(Namespace+".updateHitCntByIndex", index);
 		

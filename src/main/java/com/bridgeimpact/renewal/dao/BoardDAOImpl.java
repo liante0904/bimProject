@@ -26,13 +26,13 @@ public class BoardDAOImpl implements BoardDAO {
 
 	
 	@Override
-	public List<BoardVO> selectAllBoard() throws Exception {
+	public List<BoardVO> selectAllBoard() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(Namespace+".selectAllBoard");
 	}
 
 	@Override
-	public void insertBoard(BoardVO board) throws Exception {
+	public void insertBoard(BoardVO board) {
 		// TODO Auto-generated method stub
 		sqlSession.insert(Namespace+".insertBoard", board);
 	}
@@ -40,7 +40,7 @@ public class BoardDAOImpl implements BoardDAO {
 
 
 	@Override
-	public int selectBoardCntById(String id) throws Exception {
+	public int selectBoardCntById(String id) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(Namespace+".selectBoardCntById", id);
 	}
@@ -48,28 +48,28 @@ public class BoardDAOImpl implements BoardDAO {
 
 
 	@Override
-	public int deleteBoardById(String id) throws Exception {
+	public int deleteBoardById(String id) {
 		// TODO Auto-generated method stub
 		return sqlSession.update(Namespace+".deleteBoardById", id);
 	}
 
 
 	@Override
-	public int unDeleteBoardById(String id) throws Exception {
+	public int unDeleteBoardById(String id) {
 		// TODO Auto-generated method stub
 		return sqlSession.update(Namespace+".unDeleteBoardById", id);
 	}
 
 
 	@Override
-	public String selectBoardDelgbById(String id) throws Exception {
+	public String selectBoardDelgbById(String id) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(Namespace+".selectBoardDelgbById", id);
 	}
 
 
 	@Override
-	public BoardVO selectBoardById(String id) throws Exception {
+	public BoardVO selectBoardById(String id) {
 		return (BoardVO)sqlSession.selectOne(Namespace+".selectBoardById", id);
 		
 	}

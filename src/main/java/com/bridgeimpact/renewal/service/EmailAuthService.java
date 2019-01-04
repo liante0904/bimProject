@@ -7,16 +7,16 @@ import com.bridgeimpact.renewal.dto.MemberVO;
 
 public interface EmailAuthService {
 	
-	public int insertEmailAuth(HttpServletRequest request, MemberVO member) throws Exception;
+	int insertEmailAuth(HttpServletRequest request, MemberVO member) throws Exception;
 
-	public boolean authEmailByTokenKey(String key) throws Exception;
+	boolean authEmailByTokenKey(String key) throws Exception;
 
-	public int sendEmailByEmailAuthVO(EmailAuthVO emailAuthVO, MemberVO inputMember) throws Exception;
+	int sendEmailByEmailAuthVO(EmailAuthVO emailAuthVO, MemberVO inputMember) throws Exception;
 
-	public int sendEmailByAskId(MemberVO member) throws Exception;
+	int sendEmailByAskId(MemberVO member) throws Exception;
 
-	public int sendEmailByAskPassword(MemberVO member, EmailAuthVO emailAuthVO) throws Exception;
+	int sendEmailByAskPassword(MemberVO member, EmailAuthVO emailAuthVO) throws Exception;
 
-	public int deleteEmailAuth(String idx) throws Exception;
+	int deleteEmailAuth(String idx) throws Exception;
 
 }

@@ -48,12 +48,10 @@ public class AdminController {
 	
 	/***
 	 * 관리자 페이지로 이동 맵핑
-	 * @param model
-	 * @param locale
 	 * @return
 	 */
 	@RequestMapping(value = "/admin.bim")
-	public ModelAndView admin(Model model, Object locale) {
+	public ModelAndView admin() {
 		ModelAndView mv = new ModelAndView("admin/admin");
 		return mv;
 	}
@@ -96,12 +94,11 @@ public class AdminController {
 
 	/***
 	 * 관리자 페이지에서 게시판 관리 페이지 이동 맵핑(현재 게시판과, 게시글을 함께 표시)
-	 * @param locale
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping(value = "/boardList.bim", method = RequestMethod.GET)
-	public String boardList(Locale locale, Model model) {
+	public String boardList(Model model) {
 
 		List<BoardVO> boardList = null;
 		List<ArticleVO> articleList = null;

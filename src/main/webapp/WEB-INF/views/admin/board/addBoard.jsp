@@ -38,7 +38,7 @@ $(document).ready(function(){
 $(function(){
 	
 	$('#insert').click(function(){
-		var obj = new Object();
+		var obj = {};
 		
 		
 		obj.id = $("#id").val();
@@ -91,7 +91,7 @@ $(function(){
   </div>
 
    <div>
-   <input type="button" value="취소" onclick="javascript:window.close()" style="align:center">
+   <input type="button" value="취소" onclick="window.close()" style="align:center">
    <input type="button" value="가입" id="insert" />
 
   </div>

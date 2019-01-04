@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
 import com.bridgeimpact.renewal.dao.EmailAuthDAO;
 import com.bridgeimpact.renewal.dao.MemberDAO;
 import com.bridgeimpact.renewal.dto.EmailAuthVO;
-import com.bridgeimpact.renewal.dto.MemberVO;;
- 
+import com.bridgeimpact.renewal.dto.MemberVO;
+
 @Service
 public class MemberServiceImpl implements MemberService {
  

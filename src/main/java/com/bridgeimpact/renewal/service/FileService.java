@@ -10,14 +10,14 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 public interface FileService {
 	
-	public void insertFile(HttpServletRequest request, ArticleVO article) throws Exception;
+	void insertFile(HttpServletRequest request, ArticleVO article) throws Exception;
 
-	public void editFile(FileVO file) throws Exception;
+	void editFile(FileVO file) throws Exception;
 
-	public boolean deleteFile(HttpServletRequest request, FileVO file) throws Exception;
+	boolean deleteFile(HttpServletRequest request, FileVO file) throws Exception;
 
-	public List<FileVO> selectAllFileByIndex(int num) throws Exception;
+	List<FileVO> selectAllFileByIndex(int num) throws Exception;
 
-	public FileVO selectFileByStoredName(String storedNm) throws Exception;
+	FileVO selectFileByStoredName(String storedNm) throws Exception;
 
 }

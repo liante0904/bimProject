@@ -20,62 +20,62 @@ public class ArticleDAOImpl implements ArticleDAO {
     
     
 	@Override
-	public List<ArticleVO> selectAllArticle() throws Exception {
+	public List<ArticleVO> selectAllArticle() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(Namespace+".selectAllArticle");
 	}
 	
 	@Override
-	public ArticleVO selectArticleByIndex(int index) throws Exception {
+	public ArticleVO selectArticleByIndex(int index) {
 		// TODO Auto-generated method stub
 		return (ArticleVO)sqlSession.selectOne(Namespace+".selectArticleByIndex", index);
 	}
 
 	@Override
-	public List<ArticleVO> selectArticleByboardId(String id) throws Exception {
+	public List<ArticleVO> selectArticleByboardId(String id) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(Namespace+".selectArticleByboardId", id);
 	}
 
 	@Override
-	public int insertArticle(ArticleVO board) throws Exception {
+	public int insertArticle(ArticleVO board) {
 		// TODO Auto-generated method stub
 		return sqlSession.insert(Namespace+".insertArticle", board);
 	}
 
 	@Override
-	public int updateArticle(ArticleVO board) throws Exception {
+	public int updateArticle(ArticleVO board) {
 		return sqlSession.update(Namespace+".updateArticle", board);
 	}
 
 	@Override
-	public void deleteArticle(ArticleVO board) throws Exception {
+	public void deleteArticle(ArticleVO board) {
 		// TODO Auto-generated method stub
 		sqlSession.delete(Namespace+".deleteArticle", board);
 	}
 
 	@Override
-	public void updateHitCntByIndex(int index) throws Exception {
+	public void updateHitCntByIndex(int index) {
 		// TODO Auto-generated method stub
 		sqlSession.update(Namespace+".updateHitCntByIndex", index);
 		
 	}
 
 	@Override
-	public int selectTotalCntByArticle(HashMap<String, Object> paramMap) throws Exception {
+	public int selectTotalCntByArticle(HashMap<String, Object> paramMap) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(Namespace+".selectTotalCntByArticle", paramMap);
 	}
 
 	@Override
-	public List<ArticleVO> selectArticleByPage(HashMap<String, Object> paramMap) throws Exception {
+	public List<ArticleVO> selectArticleByPage(HashMap<String, Object> paramMap) {
 		// TODO Auto-generated method stub
 		
 		return sqlSession.selectList(Namespace+".selectArticleByPage",paramMap);
 	}
 
 	@Override
-	public List<ArticleVO> selectArticleByRecent(int articleCnt, String boardId) throws Exception {
+	public List<ArticleVO> selectArticleByRecent(int articleCnt, String boardId) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("articleCnt", 5);

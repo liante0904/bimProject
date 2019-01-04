@@ -26,7 +26,7 @@ $(function(){
 		}else{// 체크를 풀었을때
 			$("input[name=checkBox]").prop("checked",false);
 		}
-	})
+	});
 	
 	$(".deleteBoard").click(function(e) {
 		var eventCheckId = $(this).attr('id');

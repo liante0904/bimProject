@@ -29,7 +29,7 @@ public class EmailAuthServiceImpl implements EmailAuthService {
     private JavaMailSender mailSender;
     
 	@Override
-	public int insertEmailAuth(HttpServletRequest request, MemberVO member) throws Exception {
+	public int insertEmailAuth(HttpServletRequest request, MemberVO member) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -42,7 +42,7 @@ public class EmailAuthServiceImpl implements EmailAuthService {
 	}
 
 	@Override
-	public int deleteEmailAuth(String idx) throws Exception {
+	public int deleteEmailAuth(String idx) {
 		// TODO Auto-generated method stub
 		return 0;
 	}/**/
@@ -67,8 +67,8 @@ public class EmailAuthServiceImpl implements EmailAuthService {
         String email = inputMember.getEmail();
         String name = inputMember.getName();
         sendMail.setTo(email);
-        sendMail.send();;
-		return 1;
+        sendMail.send();
+        return 1;
 	}
 
 	@Override
@@ -89,9 +89,9 @@ public class EmailAuthServiceImpl implements EmailAuthService {
 				.toString());
 		sendMail.setFrom("bimProject.com/", "브리지 임팩트 관리자");
 		sendMail.setTo(email);
-		sendMail.send();;
+		sendMail.send();
 
-		return 0;
+        return 0;
 	}
 
 	@Override
@@ -128,9 +128,9 @@ public class EmailAuthServiceImpl implements EmailAuthService {
 				.toString());
 		sendMail.setFrom("bimProject.com/", "브리지 임팩트 관리자");
 		sendMail.setTo(email);
-		sendMail.send();;
+		sendMail.send();
 
-		return 0;
+        return 0;
 	}
 
 }

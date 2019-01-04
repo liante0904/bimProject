@@ -72,18 +72,15 @@ public class TestController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value="/email")
-	public String email(Model model, HttpServletRequest request){
+	public String email(Model model, final HttpServletRequest request){
         String os = System.getProperty("os.name");
-        System.out.println("Using System Property: " + os);
-        try {
-			signUp();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        logger.info("Using System Property: " + os);
+		//signUp();
+		String referrer = request.getHeader("referer");
+		String getRequestURL = String.valueOf(request.getRequestURL());
+		logger.info("user referer : " + referrer);
+		logger.info("user getRequestURL : " + getRequestURL);
+		System.out.println("this is last referer : " + request.getHeader("referer"));
 		return "/test/writeForm";
 	}
 
