@@ -31,7 +31,7 @@ public class PageUtil {
 	 * pageUtil 생성자
 	 * 게시판 요청시 페이지 처리를 합니다.
 	 * 사용자의 request를 이용해 요청타입을 구분 (검색, 글 조회)를 판별한 뒤
-	 * 조건에 맞는 글을 쿼리하여 페이징 처리합니다. 
+	 * 조건에 맞는 글을 쿼리하여 페이징 처리합니다.
 	 * @param request
 	 * @param articleService
 	 */
@@ -40,8 +40,8 @@ public class PageUtil {
 		/***
 		 * 사용자의 요청 페이지수 계산
 		 */
-		this.setCurrentPage(request);
 		
+		this.setCurrentPage(request, articleService);
 		/***
 		 * 사용자의 요청 (조회 & 검색) Map 으로 추상화
 		 */
@@ -51,7 +51,7 @@ public class PageUtil {
 		paramMap.put("searchKeyword", request.getParameter("searchKeyword"));
 
 		/***
-		 * 페이징을 위한 초기화 세팅 
+		 * 페이징을 위한 초기화 세팅
 		 * 1. 요청 게시판 ID
 		 * 2. 해당 게시판의 게시글 갯수
 		 * 3. 해당 게시판의 총 페이지 수
@@ -186,7 +186,7 @@ public class PageUtil {
 	 * page 파라미터를 이용해 현재 페이지 수를 판단합니다.
 	 * TODO 파라미터 로직은 인터셉터에서 판별하는 것으로 옮겨질 예정입니다.
 	 * */
-	private void setCurrentPage(HttpServletRequest request) {
+	private void setCurrentPage(HttpServletRequest request, ArticleService articleService) {
 		// page 파라미터를 판별합니다.
 		if (request.getParameter("page") == null || "".equals(request.getParameter("page"))) {
 			// 페이지 파리미터가 없을때
