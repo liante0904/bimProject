@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>브리지 임팩트 사역원 입니다.</title>
-    <link rel="stylesheet" href="../resources/css/member/member.css">    <!-- member CSS -->
+    <link rel="stylesheet" href="resources/css/member/member.css">    <!-- member CSS -->
     <%@ include file="/WEB-INF/include/navbar-header.jsp" %>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <script type="text/javascript">
@@ -86,7 +86,7 @@ function findPassword() {
         console.log("Key : " + key + ", value : " + MemberVO[key]);
     }
     $.ajax({
-        url :   "../member/askAccountPassword.bim",
+        url :   "member/askAccountPassword.bim",
         type:   "POST",
         data:   MemberVO,
         success : function(data){
@@ -144,7 +144,7 @@ function findPassword() {
             <button class="btn btn-lg btn-primary btn-block" onclick="findPassword()">
                 비밀번호 찾기
             </button>
-            <button style="align:center" class="btn btn-lg btn-primary btn-block">
+            <button style="align:center" class="btn btn-lg btn-primary btn-block" id="findPasswordCancel">
                 취소
             </button>
         </div>

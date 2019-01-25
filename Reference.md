@@ -14,6 +14,8 @@
     - flux
         - [WEB-Document](https://www.vobour.com/1-flexbox-%EC%9D%B4%ED%95%B4-%EB%8B%B9%EC%8B%A0%EC%9D%B4-%EC%95%8C%EC%95%84%EC%95%BC-%ED%95%A0-%EB%AA%A8%EB%93%A0-%EA%B2%83-understa)
         - [Korean VIDEO](https://opentutorials.org/course/2418/13526)
+- HTML
+    - [Absolute path, Relative path](https://m.blog.naver.com/hyejungs88/220341143711)
 - Java
     - [EmailHandler BoilerPlate Code](https://shj7242.github.io/2017/12/04/Spring28/)
 - Spring 
@@ -26,6 +28,8 @@
     - Properties 
         - <https://docs.spring.io/spring-boot/docs/current/reference/html/howto-properties-and-configuration.html>
         - <https://stackoverflow.com/questions/5483756/setting-properties-in-spring>
+- Javascript
+    - [jQuery ajax URL](https://stackoverflow.com/questions/24627075/jquery-ajax-url-path-issue)
 - TDD(UnitTest)
     - [Example](https://jdm.kr/blog/165)
 ## Proceeding

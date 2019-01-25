@@ -27,6 +27,18 @@ $(document).ready(function(){
 			location.href="../";
 			}
 	});
+    $("#findIdCancel").click(function() {
+        if (confirm("정말로 아이디 찾기를 취소 하시겠습니까?")) {
+            location.href="../";
+        }
+    });
+
+    $("#findPasswordCancel").click(function() {
+        if (confirm("정말로 비밀번호 찾기를 취소 하시겠습니까?")) {
+            location.href="../";
+        }
+    });
+
 	$("#edit-form").on('click',function() {
     		location.href="../board/editForm.bim"+param;
 	});
@@ -77,5 +89,5 @@ var logout = function () {
 };
 
 function handleTo(param){
-	location.href = "/" + param + ".bim";
+	location.href = "../" + param + ".bim";
 }

@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>브리지 임팩트 사역원 입니다.</title>
-    <link rel="stylesheet" href="../resources/css/member/member.css">    <!-- member CSS -->
+    <link rel="stylesheet" href="resources/css/member/member.css">    <!-- member CSS -->
     <%@ include file="/WEB-INF/include/navbar-header.jsp" %>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <script type="text/javascript">
@@ -64,7 +64,7 @@ function findId() {
         console.log("Key : " + key + ", value : " + MemberVO[key]);
     }
     $.ajax({
-        url :   "../member/askAccountId.bim",
+        url :   "member/askAccountId.bim",
         type:   "POST",
         data:   MemberVO,
         success : function(data){
@@ -119,7 +119,7 @@ function findId() {
             <button type="button" class="btn btn-lg btn-primary btn-block" onclick="findId()">
                 아이디 찾기
             </button>
-            <button type="button" style="align:center" class="btn btn-lg btn-primary btn-block">
+            <button type="button" style="align:center" class="btn btn-lg btn-primary btn-block" id="findIdCancel">
                 취소
             </button>
         </div>
